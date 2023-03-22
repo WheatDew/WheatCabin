@@ -45,4 +45,10 @@ public class DragStorePage : MonoBehaviour
         CreateElement();
     }
 
+    //МгдизЪдД
+    public void LoadResource()
+    {
+
+    }
+
 }
