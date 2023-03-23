@@ -1,0 +1,5 @@
+If you have a problem with a lot of Drawcall on the demo scene you can do three things:
+1. Select terrain, check the terrains settings and setup the "Detail Distance" and "Detail Density". 
+Details such as grass in large quantities can decrease a performance
+2. Remove the water from the scene (or use simple shader). Reflections on the water double the number of objects to render
+3. Select the camera and turn off some image effects (for example, SSAO, Vignetting, or other)
