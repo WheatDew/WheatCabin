@@ -77,10 +77,10 @@ public class SMapEditor : MonoBehaviour
 
     public void InitMapEditorAsset()
     {
-        AssetBundle ab = AssetBundle.LoadFromFile("AssetBundles/StandaloneWindows/mapeditor.normal");
-        var go = ab.LoadAsset<GameObject>("Terrain");
+        AssetBundle ab = AssetBundle.LoadFromFile("Core/AssetBundles/StandaloneWindows/skywhale.editor");
+        var go = ab.LoadAsset<GameObject>("TestTerrain");
         Instantiate(go, childLayerList["Terrain"]);
-        var go1 = ab.LoadAsset<GameObject>("Water");
+        var go1 = ab.LoadAsset<GameObject>("TestWater");
         Instantiate(go1, childLayerList["Water"]);
     }
 }
