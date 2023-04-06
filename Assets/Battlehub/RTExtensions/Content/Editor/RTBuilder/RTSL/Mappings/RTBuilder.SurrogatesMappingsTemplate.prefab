@@ -1,0 +1,411 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &850588112108268547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113235030125050645}
+  - component: {fileID: 9123698946893335102}
+  m_Layer: 0
+  m_Name: RTBuilder.SurrogatesMappingsTemplate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1113235030125050645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850588112108268547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1816982878839665431}
+  - {fileID: 3311285752389799184}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9123698946893335102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850588112108268547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1231a511ac909f64eb91de5a7253a6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  PatchCounter: 4
+--- !u!1 &970053424083040403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1816982878839665431}
+  - component: {fileID: 1111925837283226038}
+  m_Layer: 0
+  m_Name: Battlehub.ProBuilderIntegration.PBAutoUnwrapSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1816982878839665431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970053424083040403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1113235030125050645}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111925837283226038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970053424083040403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 1
+  IsLocked: 1
+  PersistentPropertyTag: 11
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.ProBuilderIntegration
+  MappedTypeName: PBAutoUnwrapSettings
+  MappedTypeGUID: 3dafd06a-06d6-41c1-bdfb-425a7e593e51
+  PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+  PersistentTypeName: PersistentPBAutoUnwrapSettings
+  PersistentTypeGUID: 7d0931fa-835e-4540-9437-65f7d7aee975
+  PersistentBaseNamespace: Battlehub.RTSL
+  PersistentBaseTypeName: PersistentSurrogate
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 0
+    IsProperty: 0
+    PersistentTag: 1
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Action
+    PersistentName: Changed
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Action
+    MappedName: Changed
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 1
+    HasPropertyInTemplate: 0
+  - IsEnabled: 0
+    IsProperty: 0
+    PersistentTag: 2
+    PersistentNamespace: UnityEngine.ProBuilder.Battlehub.SL2
+    PersistentTypeName: AutoUnwrapSettings
+    PersistentName: m_settings
+    MappedAssemblyName: Unity.ProBuilder
+    MappedNamespace: UnityEngine.ProBuilder
+    MappedTypeName: AutoUnwrapSettings
+    MappedName: m_settings
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 1
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 3
+    PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+    PersistentTypeName: PBAutoUnwrapSettings+Anchor
+    PersistentName: anchor
+    MappedAssemblyName: Battlehub.RTEditor
+    MappedNamespace: Battlehub.ProBuilderIntegration
+    MappedTypeName: PBAutoUnwrapSettings+Anchor
+    MappedName: anchor
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 4
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single
+    PersistentName: rotation
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single
+    MappedName: rotation
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 5
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Vector2
+    PersistentName: offset
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Vector2
+    MappedName: offset
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 6
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Vector2
+    PersistentName: scale
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Vector2
+    MappedName: scale
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 7
+    PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+    PersistentTypeName: PBAutoUnwrapSettings+Fill
+    PersistentName: fill
+    MappedAssemblyName: Battlehub.RTEditor
+    MappedNamespace: Battlehub.ProBuilderIntegration
+    MappedTypeName: PBAutoUnwrapSettings+Fill
+    MappedName: fill
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 8
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Boolean
+    PersistentName: swapUV
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Boolean
+    MappedName: swapUV
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 9
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Boolean
+    PersistentName: flipV
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Boolean
+    MappedName: flipV
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 10
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Boolean
+    PersistentName: flipU
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Boolean
+    MappedName: flipU
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 11
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Boolean
+    PersistentName: useWorldSpace
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Boolean
+    MappedName: useWorldSpace
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+--- !u!1 &4867785161476056957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3311285752389799184}
+  - component: {fileID: 2371038793406565654}
+  m_Layer: 0
+  m_Name: Battlehub.ProBuilderIntegration.PBFace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3311285752389799184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867785161476056957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1113235030125050645}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2371038793406565654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867785161476056957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 0
+  IsLocked: 1
+  PersistentPropertyTag: 5
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.ProBuilderIntegration
+  MappedTypeName: PBFace
+  MappedTypeGUID: 352c8ecd-a131-47af-b05d-3579388b5dd4
+  PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+  PersistentTypeName: PersistentPBFace
+  PersistentTypeGUID: 909e71db-af22-4453-b68d-1fd6bc5b547a
+  PersistentBaseNamespace: Battlehub.RTSL
+  PersistentBaseTypeName: PersistentSurrogate
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 1
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32[]
+    PersistentName: Indexes
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32[]
+    MappedName: Indexes
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 2
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32
+    PersistentName: SubmeshIndex
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32
+    MappedName: SubmeshIndex
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 3
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32
+    PersistentName: TextureGroup
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32
+    MappedName: TextureGroup
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 4
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Boolean
+    PersistentName: IsManualUV
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Boolean
+    MappedName: IsManualUV
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 5
+    PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+    PersistentTypeName: PBAutoUnwrapSettings
+    PersistentName: UnwrapSettings
+    MappedAssemblyName: Battlehub.RTEditor
+    MappedNamespace: Battlehub.ProBuilderIntegration
+    MappedTypeName: PBAutoUnwrapSettings
+    MappedName: UnwrapSettings
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0

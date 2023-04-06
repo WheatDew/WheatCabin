@@ -1,0 +1,4572 @@
+id: cs.temp.dll
+language: CSharp
+name:
+  Default: cs.temp.dll
+qualifiedName:
+  Default: cs.temp.dll
+type: Assembly
+modifiers: {}
+items:
+- id: Battlehub.RTEditor
+  commentId: N:Battlehub.RTEditor
+  language: CSharp
+  name:
+    CSharp: Battlehub.RTEditor
+    VB: Battlehub.RTEditor
+  nameWithType:
+    CSharp: Battlehub.RTEditor
+    VB: Battlehub.RTEditor
+  qualifiedName:
+    CSharp: Battlehub.RTEditor
+    VB: Battlehub.RTEditor
+  type: Namespace
+  assemblies:
+  - cs.temp.dll
+  modifiers: {}
+  items:
+  - id: Battlehub.RTEditor.IWindowManager
+    commentId: T:Battlehub.RTEditor.IWindowManager
+    language: CSharp
+    name:
+      CSharp: IWindowManager
+      VB: IWindowManager
+    nameWithType:
+      CSharp: IWindowManager
+      VB: IWindowManager
+    qualifiedName:
+      CSharp: Battlehub.RTEditor.IWindowManager
+      VB: Battlehub.RTEditor.IWindowManager
+    type: Interface
+    assemblies:
+    - cs.temp.dll
+    namespace: Battlehub.RTEditor
+    source:
+      id: IWindowManager
+      path: ''
+      startLine: 34259
+    summary: "\nThe window manager allows you to create complex windows, such as an inspector or scene, and simple dialogs, such as a message or confirmation window.\nThe difference between a dialog and a window is quite subtle.The content of a dialog can be anything and it cannot be docked. \nTo be considered a window or dialog box, a RuntimeWindow component must be attached to the game object. \nWhen RuntimeWindow is activated, other windows are deactivated. A dialog cannot deactivate a window.\n"
+    example: []
+    syntax:
+      content:
+        CSharp: public interface IWindowManager
+        VB: Public Interface IWindowManager
+    modifiers:
+      CSharp:
+      - public
+      - interface
+      VB:
+      - Public
+      - Interface
+    items:
+    - id: Battlehub.RTEditor.IWindowManager.IsDialogOpened
+      commentId: P:Battlehub.RTEditor.IWindowManager.IsDialogOpened
+      language: CSharp
+      name:
+        CSharp: IsDialogOpened
+        VB: IsDialogOpened
+      nameWithType:
+        CSharp: IWindowManager.IsDialogOpened
+        VB: IWindowManager.IsDialogOpened
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.IsDialogOpened
+        VB: Battlehub.RTEditor.IWindowManager.IsDialogOpened
+      type: Property
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: IsDialogOpened
+        path: ''
+        startLine: 34264
+      summary: "\nReturns true if dialog opened\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool IsDialogOpened { get; }
+          VB: ReadOnly Property IsDialogOpened As Boolean
+        parameters: []
+        return:
+          type: System.Boolean
+      overload: Battlehub.RTEditor.IWindowManager.IsDialogOpened*
+      modifiers:
+        CSharp:
+        - get
+        VB:
+        - ReadOnly
+    - id: Battlehub.RTEditor.IWindowManager.PopupRoot
+      commentId: P:Battlehub.RTEditor.IWindowManager.PopupRoot
+      language: CSharp
+      name:
+        CSharp: PopupRoot
+        VB: PopupRoot
+      nameWithType:
+        CSharp: IWindowManager.PopupRoot
+        VB: IWindowManager.PopupRoot
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.PopupRoot
+        VB: Battlehub.RTEditor.IWindowManager.PopupRoot
+      type: Property
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: PopupRoot
+        path: ''
+        startLine: 34272
+      summary: "\nRoot panel for popups and floating windows\n"
+      example: []
+      syntax:
+        content:
+          CSharp: RectTransform PopupRoot { get; }
+          VB: ReadOnly Property PopupRoot As RectTransform
+        parameters: []
+        return:
+          type: Global.RectTransform
+      overload: Battlehub.RTEditor.IWindowManager.PopupRoot*
+      modifiers:
+        CSharp:
+        - get
+        VB:
+        - ReadOnly
+    - id: Battlehub.RTEditor.IWindowManager.ComponentsRoot
+      commentId: P:Battlehub.RTEditor.IWindowManager.ComponentsRoot
+      language: CSharp
+      name:
+        CSharp: ComponentsRoot
+        VB: ComponentsRoot
+      nameWithType:
+        CSharp: IWindowManager.ComponentsRoot
+        VB: IWindowManager.ComponentsRoot
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ComponentsRoot
+        VB: Battlehub.RTEditor.IWindowManager.ComponentsRoot
+      type: Property
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ComponentsRoot
+        path: ''
+        startLine: 34280
+      summary: "\nThe root transform for additional window components. Each window can have one or more additional components that must not have UI Canvas as a parent. \n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform ComponentsRoot { get; }
+          VB: ReadOnly Property ComponentsRoot As Transform
+        parameters: []
+        return:
+          type: Global.Transform
+      overload: Battlehub.RTEditor.IWindowManager.ComponentsRoot*
+      modifiers:
+        CSharp:
+        - get
+        VB:
+        - ReadOnly
+    - id: Battlehub.RTEditor.IWindowManager.AfterLayout
+      commentId: E:Battlehub.RTEditor.IWindowManager.AfterLayout
+      language: CSharp
+      name:
+        CSharp: AfterLayout
+        VB: AfterLayout
+      nameWithType:
+        CSharp: IWindowManager.AfterLayout
+        VB: IWindowManager.AfterLayout
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.AfterLayout
+        VB: Battlehub.RTEditor.IWindowManager.AfterLayout
+      type: Event
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: AfterLayout
+        path: ''
+        startLine: 34288
+      summary: "\nTriggers when the layout stage is complete, when all the windows are positioned and ready to use\n"
+      example: []
+      syntax:
+        content:
+          CSharp: event Action<IWindowManager> AfterLayout
+          VB: Event AfterLayout As Action(Of IWindowManager)
+        return:
+          type: Global.Action{Battlehub.RTEditor.IWindowManager}
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.WindowCreated
+      commentId: E:Battlehub.RTEditor.IWindowManager.WindowCreated
+      language: CSharp
+      name:
+        CSharp: WindowCreated
+        VB: WindowCreated
+      nameWithType:
+        CSharp: IWindowManager.WindowCreated
+        VB: IWindowManager.WindowCreated
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.WindowCreated
+        VB: Battlehub.RTEditor.IWindowManager.WindowCreated
+      type: Event
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: WindowCreated
+        path: ''
+        startLine: 34293
+      summary: "\nTriggers after creating a new window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: event Action<Transform> WindowCreated
+          VB: Event WindowCreated As Action(Of Transform)
+        return:
+          type: Global.Action{Transform}
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.WindowDestroyed
+      commentId: E:Battlehub.RTEditor.IWindowManager.WindowDestroyed
+      language: CSharp
+      name:
+        CSharp: WindowDestroyed
+        VB: WindowDestroyed
+      nameWithType:
+        CSharp: IWindowManager.WindowDestroyed
+        VB: IWindowManager.WindowDestroyed
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.WindowDestroyed
+        VB: Battlehub.RTEditor.IWindowManager.WindowDestroyed
+      type: Event
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: WindowDestroyed
+        path: ''
+        startLine: 34298
+      summary: "\nTriggers after the window is destroyed\n"
+      example: []
+      syntax:
+        content:
+          CSharp: event Action<Transform> WindowDestroyed
+          VB: Event WindowDestroyed As Action(Of Transform)
+        return:
+          type: Global.Action{Transform}
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+      commentId: P:Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+      language: CSharp
+      name:
+        CSharp: ActiveWorkspace
+        VB: ActiveWorkspace
+      nameWithType:
+        CSharp: IWindowManager.ActiveWorkspace
+        VB: IWindowManager.ActiveWorkspace
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+        VB: Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+      type: Property
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ActiveWorkspace
+        path: ''
+        startLine: 34303
+      summary: "\nIWindowManager can be used to work with multiple workspaces\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Workspace ActiveWorkspace { get; set; }
+          VB: Property ActiveWorkspace As Workspace
+        parameters: []
+        return:
+          type: Battlehub.RTEditor.Workspace
+      overload: Battlehub.RTEditor.IWindowManager.ActiveWorkspace*
+      modifiers:
+        CSharp:
+        - get
+        - set
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String)
+      language: CSharp
+      name:
+        CSharp: CreateLayoutInfo(String)
+        VB: CreateLayoutInfo(String)
+      nameWithType:
+        CSharp: IWindowManager.CreateLayoutInfo(String)
+        VB: IWindowManager.CreateLayoutInfo(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateLayoutInfo
+        path: ''
+        startLine: 34315
+      summary: "\nCreates a LayoutInfo object for the window of <code data-dev-comment-type=\"paramref\" class=\"paramref\">windowTypeName</code> \\n (creates a window as a side effect)\nThis function and its overrides should be used when creating different &quot;layouts&quot;. See BuiltInWindowNames for common window type names.\n"
+      example: []
+      syntax:
+        content:
+          CSharp: LayoutInfo CreateLayoutInfo(string windowTypeName)
+          VB: Function CreateLayoutInfo(windowTypeName As String) As LayoutInfo
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Type of window to be created
+        return:
+          type: Global.LayoutInfo
+          description: LayoutInfo
+      overload: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: CreateLayoutInfo(String, String)
+        VB: CreateLayoutInfo(String, String)
+      nameWithType:
+        CSharp: IWindowManager.CreateLayoutInfo(String, String)
+        VB: IWindowManager.CreateLayoutInfo(String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateLayoutInfo
+        path: ''
+        startLine: 34323
+      summary: "\nCreates a LayoutInfo object for the window of <code data-dev-comment-type=\"paramref\" class=\"paramref\">windowTypeName</code> (creates a window as a side effect)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: LayoutInfo CreateLayoutInfo(string windowTypeName, string args)
+          VB: Function CreateLayoutInfo(windowTypeName As String, args As String) As LayoutInfo
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Type of window to be created
+        - id: args
+          type: System.String
+          description: Optional arguments can be obtained using the RuntimeWindow.Args property
+        return:
+          type: Global.LayoutInfo
+          description: LayoutInfo
+      overload: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform,Battlehub.RTEditor.WindowDescriptor)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform,Battlehub.RTEditor.WindowDescriptor)
+      language: CSharp
+      name:
+        CSharp: CreateLayoutInfo(Transform, WindowDescriptor)
+        VB: CreateLayoutInfo(Transform, WindowDescriptor)
+      nameWithType:
+        CSharp: IWindowManager.CreateLayoutInfo(Transform, WindowDescriptor)
+        VB: IWindowManager.CreateLayoutInfo(Transform, WindowDescriptor)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform, Battlehub.RTEditor.WindowDescriptor)
+        VB: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform, Battlehub.RTEditor.WindowDescriptor)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateLayoutInfo
+        path: ''
+        startLine: 34331
+      summary: "\nCreates a LayoutInfo object for the window (creates a window as a side effect)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: LayoutInfo CreateLayoutInfo(Transform content, WindowDescriptor desc)
+          VB: Function CreateLayoutInfo(content As Transform, desc As WindowDescriptor) As LayoutInfo
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Transform of the window
+        - id: desc
+          type: Battlehub.RTEditor.WindowDescriptor
+          description: Object that describes an icon, a header, a tab and provides information about how many windows of that type can be created
+        return:
+          type: Global.LayoutInfo
+          description: LayoutInfo
+      overload: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform,System.String,Sprite)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform,System.String,Sprite)
+      language: CSharp
+      name:
+        CSharp: CreateLayoutInfo(Transform, String, Sprite)
+        VB: CreateLayoutInfo(Transform, String, Sprite)
+      nameWithType:
+        CSharp: IWindowManager.CreateLayoutInfo(Transform, String, Sprite)
+        VB: IWindowManager.CreateLayoutInfo(Transform, String, Sprite)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform, System.String, Sprite)
+        VB: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo(Transform, System.String, Sprite)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateLayoutInfo
+        path: ''
+        startLine: 34340
+      summary: "\nCreates a LayoutInfo object for the window (creates a window as a side effect)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: LayoutInfo CreateLayoutInfo(Transform content, string header, Sprite icon)
+          VB: Function CreateLayoutInfo(content As Transform, header As String, icon As Sprite) As LayoutInfo
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Transform of the window
+        - id: header
+          type: System.String
+          description: Header text
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+        return:
+          type: Global.LayoutInfo
+          description: LayoutInfo
+      overload: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.ValidateLayout(LayoutInfo)
+      commentId: M:Battlehub.RTEditor.IWindowManager.ValidateLayout(LayoutInfo)
+      language: CSharp
+      name:
+        CSharp: ValidateLayout(LayoutInfo)
+        VB: ValidateLayout(LayoutInfo)
+      nameWithType:
+        CSharp: IWindowManager.ValidateLayout(LayoutInfo)
+        VB: IWindowManager.ValidateLayout(LayoutInfo)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ValidateLayout(LayoutInfo)
+        VB: Battlehub.RTEditor.IWindowManager.ValidateLayout(LayoutInfo)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ValidateLayout
+        path: ''
+        startLine: 34347
+      summary: "\nValidates layout\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool ValidateLayout(LayoutInfo layout)
+          VB: Function ValidateLayout(layout As LayoutInfo) As Boolean
+        parameters:
+        - id: layout
+          type: Global.LayoutInfo
+          description: LayoutInfo object
+        return:
+          type: System.Boolean
+          description: True if layout is valid
+      overload: Battlehub.RTEditor.IWindowManager.ValidateLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout(Func{Battlehub.RTEditor.IWindowManager,LayoutInfo},System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout(Func{Battlehub.RTEditor.IWindowManager,LayoutInfo},System.String)
+      language: CSharp
+      name:
+        CSharp: OverrideDefaultLayout(Func<IWindowManager, LayoutInfo>, String)
+        VB: OverrideDefaultLayout(Func(Of IWindowManager, LayoutInfo), String)
+      nameWithType:
+        CSharp: IWindowManager.OverrideDefaultLayout(Func<IWindowManager, LayoutInfo>, String)
+        VB: IWindowManager.OverrideDefaultLayout(Func(Of IWindowManager, LayoutInfo), String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout(Func<Battlehub.RTEditor.IWindowManager, LayoutInfo>, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout(Func(Of Battlehub.RTEditor.IWindowManager, LayoutInfo), System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: OverrideDefaultLayout
+        path: ''
+        startLine: 34354
+      summary: "\nOverrides default layout builder function\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void OverrideDefaultLayout(Func<IWindowManager, LayoutInfo> layoutBuilderFunc, string activateWindowOfType = null)
+          VB: Sub OverrideDefaultLayout(layoutBuilderFunc As Func(Of IWindowManager, LayoutInfo), activateWindowOfType As String = Nothing)
+        parameters:
+        - id: layoutBuilderFunc
+          type: Global.Func{Battlehub.RTEditor.IWindowManager,LayoutInfo}
+          description: Layout builder function
+        - id: activateWindowOfType
+          type: System.String
+          description: Type of the window to activate after building layout
+      overload: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetDefaultLayout
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetDefaultLayout
+      language: CSharp
+      name:
+        CSharp: SetDefaultLayout()
+        VB: SetDefaultLayout()
+      nameWithType:
+        CSharp: IWindowManager.SetDefaultLayout()
+        VB: IWindowManager.SetDefaultLayout()
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetDefaultLayout()
+        VB: Battlehub.RTEditor.IWindowManager.SetDefaultLayout()
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetDefaultLayout
+        path: ''
+        startLine: 34359
+      summary: "\nRebuilds the layout using the default layout builder function\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetDefaultLayout()
+          VB: Sub SetDefaultLayout
+      overload: Battlehub.RTEditor.IWindowManager.SetDefaultLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetLayout(Func{LayoutInfo},System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetLayout(Func{LayoutInfo},System.String)
+      language: CSharp
+      name:
+        CSharp: SetLayout(Func<LayoutInfo>, String)
+        VB: SetLayout(Func(Of LayoutInfo), String)
+      nameWithType:
+        CSharp: IWindowManager.SetLayout(Func<LayoutInfo>, String)
+        VB: IWindowManager.SetLayout(Func(Of LayoutInfo), String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetLayout(Func<LayoutInfo>, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.SetLayout(Func(Of LayoutInfo), System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetLayout
+        path: ''
+        startLine: 34366
+      summary: "\nBuilds layout using layout builder function\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetLayout(Func<LayoutInfo> layoutBuilderFunc, string activateWindowOfType = null)
+          VB: Sub SetLayout(layoutBuilderFunc As Func(Of LayoutInfo), activateWindowOfType As String = Nothing)
+        parameters:
+        - id: layoutBuilderFunc
+          type: Global.Func{LayoutInfo}
+          description: Layout builder function
+        - id: activateWindowOfType
+          type: System.String
+          description: Type of the window to activate after building layout
+      overload: Battlehub.RTEditor.IWindowManager.SetLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetLayout(Func{Battlehub.RTEditor.IWindowManager,LayoutInfo},System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetLayout(Func{Battlehub.RTEditor.IWindowManager,LayoutInfo},System.String)
+      language: CSharp
+      name:
+        CSharp: SetLayout(Func<IWindowManager, LayoutInfo>, String)
+        VB: SetLayout(Func(Of IWindowManager, LayoutInfo), String)
+      nameWithType:
+        CSharp: IWindowManager.SetLayout(Func<IWindowManager, LayoutInfo>, String)
+        VB: IWindowManager.SetLayout(Func(Of IWindowManager, LayoutInfo), String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetLayout(Func<Battlehub.RTEditor.IWindowManager, LayoutInfo>, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.SetLayout(Func(Of Battlehub.RTEditor.IWindowManager, LayoutInfo), System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetLayout
+        path: ''
+        startLine: 34373
+      summary: "\nBuilds layout using layout builder function\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetLayout(Func<IWindowManager, LayoutInfo> layoutBuilderFunc, string activateWindowOfType = null)
+          VB: Sub SetLayout(layoutBuilderFunc As Func(Of IWindowManager, LayoutInfo), activateWindowOfType As String = Nothing)
+        parameters:
+        - id: layoutBuilderFunc
+          type: Global.Func{Battlehub.RTEditor.IWindowManager,LayoutInfo}
+          description: Layout builder function
+        - id: activateWindowOfType
+          type: System.String
+          description: Type of the window to activate after building layout
+      overload: Battlehub.RTEditor.IWindowManager.SetLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetLayout
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetLayout
+      language: CSharp
+      name:
+        CSharp: GetLayout()
+        VB: GetLayout()
+      nameWithType:
+        CSharp: IWindowManager.GetLayout()
+        VB: IWindowManager.GetLayout()
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetLayout()
+        VB: Battlehub.RTEditor.IWindowManager.GetLayout()
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetLayout
+        path: ''
+        startLine: 34379
+      summary: "\nCreates LayoutInfo object describing current layout\n"
+      example: []
+      syntax:
+        content:
+          CSharp: LayoutInfo GetLayout()
+          VB: Function GetLayout As LayoutInfo
+        return:
+          type: Global.LayoutInfo
+          description: ''
+      overload: Battlehub.RTEditor.IWindowManager.GetLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String,Battlehub.RTEditor.WindowDescriptor)
+      commentId: M:Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String,Battlehub.RTEditor.WindowDescriptor)
+      language: CSharp
+      name:
+        CSharp: OverrideWindow(String, WindowDescriptor)
+        VB: OverrideWindow(String, WindowDescriptor)
+      nameWithType:
+        CSharp: IWindowManager.OverrideWindow(String, WindowDescriptor)
+        VB: IWindowManager.OverrideWindow(String, WindowDescriptor)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String, Battlehub.RTEditor.WindowDescriptor)
+        VB: Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String, Battlehub.RTEditor.WindowDescriptor)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: OverrideWindow
+        path: ''
+        startLine: 34386
+      summary: "\nOverrides the WindowDescriptor of a registered window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void OverrideWindow(string windowTypeName, WindowDescriptor descriptor)
+          VB: Sub OverrideWindow(windowTypeName As String, descriptor As WindowDescriptor)
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: descriptor
+          type: Battlehub.RTEditor.WindowDescriptor
+          description: Window descriptor
+      overload: Battlehub.RTEditor.IWindowManager.OverrideWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String,GameObject)
+      commentId: M:Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String,GameObject)
+      language: CSharp
+      name:
+        CSharp: OverrideWindow(String, GameObject)
+        VB: OverrideWindow(String, GameObject)
+      nameWithType:
+        CSharp: IWindowManager.OverrideWindow(String, GameObject)
+        VB: IWindowManager.OverrideWindow(String, GameObject)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String, GameObject)
+        VB: Battlehub.RTEditor.IWindowManager.OverrideWindow(System.String, GameObject)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: OverrideWindow
+        path: ''
+        startLine: 34393
+      summary: "\nOverrides the prefab of a registered window \n"
+      example: []
+      syntax:
+        content:
+          CSharp: void OverrideWindow(string windowTypeName, GameObject prefab)
+          VB: Sub OverrideWindow(windowTypeName As String, prefab As GameObject)
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: prefab
+          type: Global.GameObject
+      overload: Battlehub.RTEditor.IWindowManager.OverrideWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.OverrideTools(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.OverrideTools(Transform)
+      language: CSharp
+      name:
+        CSharp: OverrideTools(Transform)
+        VB: OverrideTools(Transform)
+      nameWithType:
+        CSharp: IWindowManager.OverrideTools(Transform)
+        VB: IWindowManager.OverrideTools(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.OverrideTools(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.OverrideTools(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: OverrideTools
+        path: ''
+        startLine: 34399
+      summary: "\nOverrides header tools (play, pause, pivot mode and various toggles)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void OverrideTools(Transform toolsPrefab)
+          VB: Sub OverrideTools(toolsPrefab As Transform)
+        parameters:
+        - id: toolsPrefab
+          type: Global.Transform
+          description: Tools prefab transform
+      overload: Battlehub.RTEditor.IWindowManager.OverrideTools*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetTools(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetTools(Transform)
+      language: CSharp
+      name:
+        CSharp: SetTools(Transform)
+        VB: SetTools(Transform)
+      nameWithType:
+        CSharp: IWindowManager.SetTools(Transform)
+        VB: IWindowManager.SetTools(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetTools(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.SetTools(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetTools
+        path: ''
+        startLine: 34405
+      summary: "\nSets header tools\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetTools(Transform tools)
+          VB: Sub SetTools(tools As Transform)
+        parameters:
+        - id: tools
+          type: Global.Transform
+          description: Content transform
+      overload: Battlehub.RTEditor.IWindowManager.SetTools*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetLeftBar(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetLeftBar(Transform)
+      language: CSharp
+      name:
+        CSharp: SetLeftBar(Transform)
+        VB: SetLeftBar(Transform)
+      nameWithType:
+        CSharp: IWindowManager.SetLeftBar(Transform)
+        VB: IWindowManager.SetLeftBar(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetLeftBar(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.SetLeftBar(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetLeftBar
+        path: ''
+        startLine: 34411
+      summary: "\nSets left bar\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetLeftBar(Transform leftBar)
+          VB: Sub SetLeftBar(leftBar As Transform)
+        parameters:
+        - id: leftBar
+          type: Global.Transform
+          description: Left bar transform
+      overload: Battlehub.RTEditor.IWindowManager.SetLeftBar*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetRightBar(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetRightBar(Transform)
+      language: CSharp
+      name:
+        CSharp: SetRightBar(Transform)
+        VB: SetRightBar(Transform)
+      nameWithType:
+        CSharp: IWindowManager.SetRightBar(Transform)
+        VB: IWindowManager.SetRightBar(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetRightBar(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.SetRightBar(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetRightBar
+        path: ''
+        startLine: 34417
+      summary: "\nSets right bar\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetRightBar(Transform rightBar)
+          VB: Sub SetRightBar(rightBar As Transform)
+        parameters:
+        - id: rightBar
+          type: Global.Transform
+          description: Right bar transform
+      overload: Battlehub.RTEditor.IWindowManager.SetRightBar*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetTopBar(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetTopBar(Transform)
+      language: CSharp
+      name:
+        CSharp: SetTopBar(Transform)
+        VB: SetTopBar(Transform)
+      nameWithType:
+        CSharp: IWindowManager.SetTopBar(Transform)
+        VB: IWindowManager.SetTopBar(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetTopBar(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.SetTopBar(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetTopBar
+        path: ''
+        startLine: 34423
+      summary: "\nSets top bar\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetTopBar(Transform topBar)
+          VB: Sub SetTopBar(topBar As Transform)
+        parameters:
+        - id: topBar
+          type: Global.Transform
+          description: Top bar transform
+      overload: Battlehub.RTEditor.IWindowManager.SetTopBar*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetBottomBar(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetBottomBar(Transform)
+      language: CSharp
+      name:
+        CSharp: SetBottomBar(Transform)
+        VB: SetBottomBar(Transform)
+      nameWithType:
+        CSharp: IWindowManager.SetBottomBar(Transform)
+        VB: IWindowManager.SetBottomBar(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetBottomBar(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.SetBottomBar(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetBottomBar
+        path: ''
+        startLine: 34429
+      summary: "\nSets bottom bar\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetBottomBar(Transform bottomBar)
+          VB: Sub SetBottomBar(bottomBar As Transform)
+        parameters:
+        - id: bottomBar
+          type: Global.Transform
+          description: Bottom bar transform
+      overload: Battlehub.RTEditor.IWindowManager.SetBottomBar*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.IsWindowRegistered(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.IsWindowRegistered(System.String)
+      language: CSharp
+      name:
+        CSharp: IsWindowRegistered(String)
+        VB: IsWindowRegistered(String)
+      nameWithType:
+        CSharp: IWindowManager.IsWindowRegistered(String)
+        VB: IWindowManager.IsWindowRegistered(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.IsWindowRegistered(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.IsWindowRegistered(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: IsWindowRegistered
+        path: ''
+        startLine: 34436
+      summary: "\nDetermines whether a window of the type registered\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool IsWindowRegistered(string windowTypeName)
+          VB: Function IsWindowRegistered(windowTypeName As String) As Boolean
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        return:
+          type: System.Boolean
+          description: True if window of type registered
+      overload: Battlehub.RTEditor.IWindowManager.IsWindowRegistered*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.RegisterWindow(Battlehub.RTEditor.CustomWindowDescriptor)
+      commentId: M:Battlehub.RTEditor.IWindowManager.RegisterWindow(Battlehub.RTEditor.CustomWindowDescriptor)
+      language: CSharp
+      name:
+        CSharp: RegisterWindow(CustomWindowDescriptor)
+        VB: RegisterWindow(CustomWindowDescriptor)
+      nameWithType:
+        CSharp: IWindowManager.RegisterWindow(CustomWindowDescriptor)
+        VB: IWindowManager.RegisterWindow(CustomWindowDescriptor)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.RegisterWindow(Battlehub.RTEditor.CustomWindowDescriptor)
+        VB: Battlehub.RTEditor.IWindowManager.RegisterWindow(Battlehub.RTEditor.CustomWindowDescriptor)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: RegisterWindow
+        path: ''
+        startLine: 34443
+      summary: "\nRegisters window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool RegisterWindow(CustomWindowDescriptor desc)
+          VB: Function RegisterWindow(desc As CustomWindowDescriptor) As Boolean
+        parameters:
+        - id: desc
+          type: Battlehub.RTEditor.CustomWindowDescriptor
+          description: Window descriptor
+        return:
+          type: System.Boolean
+          description: True if registration succeeded
+      overload: Battlehub.RTEditor.IWindowManager.RegisterWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor(System.String,System.Boolean@)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetWindowDescriptor(System.String,System.Boolean@)
+      language: CSharp
+      name:
+        CSharp: GetWindowDescriptor(String, out Boolean)
+        VB: GetWindowDescriptor(String, ByRef Boolean)
+      nameWithType:
+        CSharp: IWindowManager.GetWindowDescriptor(String, out Boolean)
+        VB: IWindowManager.GetWindowDescriptor(String, ByRef Boolean)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor(System.String, out System.Boolean)
+        VB: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor(System.String, ByRef System.Boolean)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetWindowDescriptor
+        path: ''
+        startLine: 34451
+      summary: "\nGets window descriptor\n"
+      example: []
+      syntax:
+        content:
+          CSharp: WindowDescriptor GetWindowDescriptor(string windowTypeName, out bool isDialog)
+          VB: Function GetWindowDescriptor(windowTypeName As String, ByRef isDialog As Boolean) As WindowDescriptor
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: isDialog
+          type: System.Boolean
+          description: Is true if the window is a dialog
+        return:
+          type: Battlehub.RTEditor.WindowDescriptor
+          description: Window descriptor
+      overload: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetWindowTypeName(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetWindowTypeName(Transform)
+      language: CSharp
+      name:
+        CSharp: GetWindowTypeName(Transform)
+        VB: GetWindowTypeName(Transform)
+      nameWithType:
+        CSharp: IWindowManager.GetWindowTypeName(Transform)
+        VB: IWindowManager.GetWindowTypeName(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetWindowTypeName(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.GetWindowTypeName(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetWindowTypeName
+        path: ''
+        startLine: 34458
+      summary: "\nGets window type name\n"
+      example: []
+      syntax:
+        content:
+          CSharp: string GetWindowTypeName(Transform content)
+          VB: Function GetWindowTypeName(content As Transform) As String
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Transform of the window
+        return:
+          type: System.String
+          description: Window type name
+      overload: Battlehub.RTEditor.IWindowManager.GetWindowTypeName*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetWindow(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetWindow(System.String)
+      language: CSharp
+      name:
+        CSharp: GetWindow(String)
+        VB: GetWindow(String)
+      nameWithType:
+        CSharp: IWindowManager.GetWindow(String)
+        VB: IWindowManager.GetWindow(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetWindow(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.GetWindow(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetWindow
+        path: ''
+        startLine: 34465
+      summary: "\nGets window transform by type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform GetWindow(string windowTypeName)
+          VB: Function GetWindow(windowTypeName As String) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        return:
+          type: Global.Transform
+          description: Window transform
+      overload: Battlehub.RTEditor.IWindowManager.GetWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetWindows
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetWindows
+      language: CSharp
+      name:
+        CSharp: GetWindows()
+        VB: GetWindows()
+      nameWithType:
+        CSharp: IWindowManager.GetWindows()
+        VB: IWindowManager.GetWindows()
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetWindows()
+        VB: Battlehub.RTEditor.IWindowManager.GetWindows()
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetWindows
+        path: ''
+        startLine: 34471
+      summary: "\nGets transforms of all windows \n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform[] GetWindows()
+          VB: Function GetWindows As Transform()
+        return:
+          type: Global.Transform[]
+          description: Array of transforms
+      overload: Battlehub.RTEditor.IWindowManager.GetWindows*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetWindows(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetWindows(System.String)
+      language: CSharp
+      name:
+        CSharp: GetWindows(String)
+        VB: GetWindows(String)
+      nameWithType:
+        CSharp: IWindowManager.GetWindows(String)
+        VB: IWindowManager.GetWindows(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetWindows(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.GetWindows(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetWindows
+        path: ''
+        startLine: 34478
+      summary: "\nGets transfroms of windows of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform[] GetWindows(string windowTypeName)
+          VB: Function GetWindows(windowTypeName As String) As Transform()
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        return:
+          type: Global.Transform[]
+          description: Array of transforms
+      overload: Battlehub.RTEditor.IWindowManager.GetWindows*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetComponents(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetComponents(Transform)
+      language: CSharp
+      name:
+        CSharp: GetComponents(Transform)
+        VB: GetComponents(Transform)
+      nameWithType:
+        CSharp: IWindowManager.GetComponents(Transform)
+        VB: IWindowManager.GetComponents(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetComponents(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.GetComponents(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetComponents
+        path: ''
+        startLine: 34485
+      summary: "\nGets extra components associated with the window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform[] GetComponents(Transform content)
+          VB: Function GetComponents(content As Transform) As Transform()
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Transform of the window
+        return:
+          type: Global.Transform[]
+          description: Array of extra components
+      overload: Battlehub.RTEditor.IWindowManager.GetComponents*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Exists(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Exists(System.String)
+      language: CSharp
+      name:
+        CSharp: Exists(String)
+        VB: Exists(String)
+      nameWithType:
+        CSharp: IWindowManager.Exists(String)
+        VB: IWindowManager.Exists(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Exists(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Exists(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Exists
+        path: ''
+        startLine: 34492
+      summary: "\nChecks if window of type exists\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool Exists(string windowTypeName)
+          VB: Function Exists(windowTypeName As String) As Boolean
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        return:
+          type: System.Boolean
+          description: True if window exists
+      overload: Battlehub.RTEditor.IWindowManager.Exists*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.IsActive(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.IsActive(System.String)
+      language: CSharp
+      name:
+        CSharp: IsActive(String)
+        VB: IsActive(String)
+      nameWithType:
+        CSharp: IWindowManager.IsActive(String)
+        VB: IWindowManager.IsActive(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.IsActive(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.IsActive(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: IsActive
+        path: ''
+        startLine: 34499
+      summary: "\nChecks if the window of this type is in an active state (e.g., if it can receive input)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool IsActive(string windowTypeName)
+          VB: Function IsActive(windowTypeName As String) As Boolean
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        return:
+          type: System.Boolean
+          description: True if window is active
+      overload: Battlehub.RTEditor.IWindowManager.IsActive*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.IsActive(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.IsActive(Transform)
+      language: CSharp
+      name:
+        CSharp: IsActive(Transform)
+        VB: IsActive(Transform)
+      nameWithType:
+        CSharp: IWindowManager.IsActive(Transform)
+        VB: IWindowManager.IsActive(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.IsActive(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.IsActive(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: IsActive
+        path: ''
+        startLine: 34506
+      summary: "\nChecks if the window in in active state (e.g., if it can receive input)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool IsActive(Transform content)
+          VB: Function IsActive(content As Transform) As Boolean
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Transform of the window
+        return:
+          type: System.Boolean
+          description: True if window is active
+      overload: Battlehub.RTEditor.IWindowManager.IsActive*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow(RuntimeWindow)
+      commentId: M:Battlehub.RTEditor.IWindowManager.FindPointerOverWindow(RuntimeWindow)
+      language: CSharp
+      name:
+        CSharp: FindPointerOverWindow(RuntimeWindow)
+        VB: FindPointerOverWindow(RuntimeWindow)
+      nameWithType:
+        CSharp: IWindowManager.FindPointerOverWindow(RuntimeWindow)
+        VB: IWindowManager.FindPointerOverWindow(RuntimeWindow)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow(RuntimeWindow)
+        VB: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow(RuntimeWindow)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: FindPointerOverWindow
+        path: ''
+        startLine: 34513
+      summary: "\nFinds the uppermost window to which pointer is pointing\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform FindPointerOverWindow(RuntimeWindow exceptWindow)
+          VB: Function FindPointerOverWindow(exceptWindow As RuntimeWindow) As Transform
+        parameters:
+        - id: exceptWindow
+          type: Global.RuntimeWindow
+          description: Except window
+        return:
+          type: Global.Transform
+          description: Transform of the uppermost window to which pointer is pointing
+      overload: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.ActivateWindow(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.ActivateWindow(System.String)
+      language: CSharp
+      name:
+        CSharp: ActivateWindow(String)
+        VB: ActivateWindow(String)
+      nameWithType:
+        CSharp: IWindowManager.ActivateWindow(String)
+        VB: IWindowManager.ActivateWindow(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ActivateWindow(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.ActivateWindow(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ActivateWindow
+        path: ''
+        startLine: 34520
+      summary: "\nActivates window of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool ActivateWindow(string windowTypeName)
+          VB: Function ActivateWindow(windowTypeName As String) As Boolean
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        return:
+          type: System.Boolean
+          description: True if the window is activated
+      overload: Battlehub.RTEditor.IWindowManager.ActivateWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.ActivateWindow(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.ActivateWindow(Transform)
+      language: CSharp
+      name:
+        CSharp: ActivateWindow(Transform)
+        VB: ActivateWindow(Transform)
+      nameWithType:
+        CSharp: IWindowManager.ActivateWindow(Transform)
+        VB: IWindowManager.ActivateWindow(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ActivateWindow(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.ActivateWindow(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ActivateWindow
+        path: ''
+        startLine: 34527
+      summary: "\nActivates window of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool ActivateWindow(Transform content)
+          VB: Function ActivateWindow(content As Transform) As Boolean
+        parameters:
+        - id: content
+          type: Global.Transform
+        return:
+          type: System.Boolean
+          description: True if the window is activated
+      overload: Battlehub.RTEditor.IWindowManager.ActivateWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,Battlehub.RTEditor.WindowDescriptor@)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,Battlehub.RTEditor.WindowDescriptor@)
+      language: CSharp
+      name:
+        CSharp: CreateWindow(String, out WindowDescriptor)
+        VB: CreateWindow(String, ByRef WindowDescriptor)
+      nameWithType:
+        CSharp: IWindowManager.CreateWindow(String, out WindowDescriptor)
+        VB: IWindowManager.CreateWindow(String, ByRef WindowDescriptor)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, out Battlehub.RTEditor.WindowDescriptor)
+        VB: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, ByRef Battlehub.RTEditor.WindowDescriptor)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateWindow
+        path: ''
+        startLine: 34535
+      summary: "\nCreates window of type (this function is mainly used when creating layouts)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreateWindow(string windowTypeName, out WindowDescriptor wd)
+          VB: Function CreateWindow(windowTypeName As String, ByRef wd As WindowDescriptor) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name. See BuiltInWindowNames for common window type names.
+        - id: wd
+          type: Battlehub.RTEditor.WindowDescriptor
+          description: The descriptor of the created window
+        return:
+          type: Global.Transform
+          description: Transform of the created window
+      overload: Battlehub.RTEditor.IWindowManager.CreateWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,Battlehub.RTEditor.WindowDescriptor@,System.Boolean@)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,Battlehub.RTEditor.WindowDescriptor@,System.Boolean@)
+      language: CSharp
+      name:
+        CSharp: CreateWindow(String, out WindowDescriptor, out Boolean)
+        VB: CreateWindow(String, ByRef WindowDescriptor, ByRef Boolean)
+      nameWithType:
+        CSharp: IWindowManager.CreateWindow(String, out WindowDescriptor, out Boolean)
+        VB: IWindowManager.CreateWindow(String, ByRef WindowDescriptor, ByRef Boolean)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, out Battlehub.RTEditor.WindowDescriptor, out System.Boolean)
+        VB: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, ByRef Battlehub.RTEditor.WindowDescriptor, ByRef System.Boolean)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateWindow
+        path: ''
+        startLine: 34544
+      summary: "\nCreates window of type (this function is mainly used when creating layouts)\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreateWindow(string windowTypeName, out WindowDescriptor wd, out bool isDialog)
+          VB: Function CreateWindow(windowTypeName As String, ByRef wd As WindowDescriptor, ByRef isDialog As Boolean) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name. See BuiltInWindowNames for common window type names.
+        - id: wd
+          type: Battlehub.RTEditor.WindowDescriptor
+          description: The descriptor of the created window
+        - id: isDialog
+          type: System.Boolean
+          description: True if created window is dialog
+        return:
+          type: Global.Transform
+          description: Transform of the created window
+      overload: Battlehub.RTEditor.IWindowManager.CreateWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,Battlehub.RTEditor.WindowDescriptor@,GameObject@,System.Boolean@)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,Battlehub.RTEditor.WindowDescriptor@,GameObject@,System.Boolean@)
+      language: CSharp
+      name:
+        CSharp: CreateWindow(String, out WindowDescriptor, out GameObject, out Boolean)
+        VB: CreateWindow(String, ByRef WindowDescriptor, ByRef GameObject, ByRef Boolean)
+      nameWithType:
+        CSharp: IWindowManager.CreateWindow(String, out WindowDescriptor, out GameObject, out Boolean)
+        VB: IWindowManager.CreateWindow(String, ByRef WindowDescriptor, ByRef GameObject, ByRef Boolean)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, out Battlehub.RTEditor.WindowDescriptor, out GameObject, out System.Boolean)
+        VB: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, ByRef Battlehub.RTEditor.WindowDescriptor, ByRef GameObject, ByRef System.Boolean)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateWindow
+        path: ''
+        startLine: 34546
+      syntax:
+        content:
+          CSharp: Transform CreateWindow(string windowTypeName, out WindowDescriptor wd, out GameObject content, out bool isDialog)
+          VB: Function CreateWindow(windowTypeName As String, ByRef wd As WindowDescriptor, ByRef content As GameObject, ByRef isDialog As Boolean) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+        - id: wd
+          type: Battlehub.RTEditor.WindowDescriptor
+        - id: content
+          type: Global.GameObject
+        - id: isDialog
+          type: System.Boolean
+        return:
+          type: Global.Transform
+      overload: Battlehub.RTEditor.IWindowManager.CreateWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,System.Boolean,RegionSplitType,System.Single,Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateWindow(System.String,System.Boolean,RegionSplitType,System.Single,Transform)
+      language: CSharp
+      name:
+        CSharp: CreateWindow(String, Boolean, RegionSplitType, Single, Transform)
+        VB: CreateWindow(String, Boolean, RegionSplitType, Single, Transform)
+      nameWithType:
+        CSharp: IWindowManager.CreateWindow(String, Boolean, RegionSplitType, Single, Transform)
+        VB: IWindowManager.CreateWindow(String, Boolean, RegionSplitType, Single, Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, System.Boolean, RegionSplitType, System.Single, Transform)
+        VB: Battlehub.RTEditor.IWindowManager.CreateWindow(System.String, System.Boolean, RegionSplitType, System.Single, Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateWindow
+        path: ''
+        startLine: 34557
+      summary: "\nCreates window of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreateWindow(string windowTypeName, bool isFree = true, RegionSplitType splitType = null, float flexibleSize = 0.3F, Transform parentWindow = null)
+          VB: Function CreateWindow(windowTypeName As String, isFree As Boolean = True, splitType As RegionSplitType = Nothing, flexibleSize As Single = 0.3F, parentWindow As Transform = Nothing) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: isFree
+          type: System.Boolean
+          description: True if windows are to be created in the floating state, and false if in the docked state
+        - id: splitType
+          type: Global.RegionSplitType
+          description: Determines how to dock the window
+        - id: flexibleSize
+          type: System.Single
+          description: Window size relative to the docked neighbor [0, 1]
+        - id: parentWindow
+          type: Global.Transform
+          description: Transform of the window with which a group of tabs will be formed or which will be the neighbor of the created window
+        return:
+          type: Global.Transform
+          description: Transform of the created window
+      overload: Battlehub.RTEditor.IWindowManager.CreateWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreatePopup(System.String,System.Boolean,System.Single,System.Single)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreatePopup(System.String,System.Boolean,System.Single,System.Single)
+      language: CSharp
+      name:
+        CSharp: CreatePopup(String, Boolean, Single, Single)
+        VB: CreatePopup(String, Boolean, Single, Single)
+      nameWithType:
+        CSharp: IWindowManager.CreatePopup(String, Boolean, Single, Single)
+        VB: IWindowManager.CreatePopup(String, Boolean, Single, Single)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreatePopup(System.String, System.Boolean, System.Single, System.Single)
+        VB: Battlehub.RTEditor.IWindowManager.CreatePopup(System.String, System.Boolean, System.Single, System.Single)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreatePopup
+        path: ''
+        startLine: 34567
+      summary: "\nCreates popup window of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreatePopup(string windowTypeName, bool canResize = false, float minWidth = 10F, float minHeight = 10F)
+          VB: Function CreatePopup(windowTypeName As String, canResize As Boolean = False, minWidth As Single = 10F, minHeight As Single = 10F) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the popup
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the pop-up window
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the pop-up window
+        return:
+          type: Global.Transform
+          description: Transform of the created popup window
+      overload: Battlehub.RTEditor.IWindowManager.CreatePopup*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle(RectTransform,Vector3,Vector2@)
+      commentId: M:Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle(RectTransform,Vector3,Vector2@)
+      language: CSharp
+      name:
+        CSharp: ScreenPointToLocalPointInRectangle(RectTransform, Vector3, out Vector2)
+        VB: ScreenPointToLocalPointInRectangle(RectTransform, Vector3, ByRef Vector2)
+      nameWithType:
+        CSharp: IWindowManager.ScreenPointToLocalPointInRectangle(RectTransform, Vector3, out Vector2)
+        VB: IWindowManager.ScreenPointToLocalPointInRectangle(RectTransform, Vector3, ByRef Vector2)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle(RectTransform, Vector3, out Vector2)
+        VB: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle(RectTransform, Vector3, ByRef Vector2)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ScreenPointToLocalPointInRectangle
+        path: ''
+        startLine: 34576
+      summary: "\nTransform a screen space point to a position in the local space of a RectTransform that is on the plane of its rectangle.\n"
+      example: []
+      syntax:
+        content:
+          CSharp: bool ScreenPointToLocalPointInRectangle(RectTransform rectTransform, Vector3 screenPoint, out Vector2 position)
+          VB: Function ScreenPointToLocalPointInRectangle(rectTransform As RectTransform, screenPoint As Vector3, ByRef position As Vector2) As Boolean
+        parameters:
+        - id: rectTransform
+          type: Global.RectTransform
+          description: The RectTransform to find a point inside.
+        - id: screenPoint
+          type: Global.Vector3
+          description: Screen space position
+        - id: position
+          type: Global.Vector2
+          description: Point in local space of the rect transform
+        return:
+          type: System.Boolean
+          description: true if the plane of the RectTransform is hit, regardless of whether the point is inside the rectangle.
+      overload: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreatePopup(System.String,Vector2,System.Boolean,System.Single,System.Single)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreatePopup(System.String,Vector2,System.Boolean,System.Single,System.Single)
+      language: CSharp
+      name:
+        CSharp: CreatePopup(String, Vector2, Boolean, Single, Single)
+        VB: CreatePopup(String, Vector2, Boolean, Single, Single)
+      nameWithType:
+        CSharp: IWindowManager.CreatePopup(String, Vector2, Boolean, Single, Single)
+        VB: IWindowManager.CreatePopup(String, Vector2, Boolean, Single, Single)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreatePopup(System.String, Vector2, System.Boolean, System.Single, System.Single)
+        VB: Battlehub.RTEditor.IWindowManager.CreatePopup(System.String, Vector2, System.Boolean, System.Single, System.Single)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreatePopup
+        path: ''
+        startLine: 34587
+      summary: "\nCreates popup window of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreatePopup(string windowTypeName, Vector2 position, bool canResize = false, float minWidth = 10F, float minHeight = 10F)
+          VB: Function CreatePopup(windowTypeName As String, position As Vector2, canResize As Boolean = False, minWidth As Single = 10F, minHeight As Single = 10F) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: position
+          type: Global.Vector2
+          description: Position in IWindowManager.PopupRoot coordinates
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the popup
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the pop-up window
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the pop-up window
+        return:
+          type: Global.Transform
+          description: Transform of the created popup window
+      overload: Battlehub.RTEditor.IWindowManager.CreatePopup*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateDropdown(System.String,RectTransform,System.Boolean,System.Single,System.Single)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateDropdown(System.String,RectTransform,System.Boolean,System.Single,System.Single)
+      language: CSharp
+      name:
+        CSharp: CreateDropdown(String, RectTransform, Boolean, Single, Single)
+        VB: CreateDropdown(String, RectTransform, Boolean, Single, Single)
+      nameWithType:
+        CSharp: IWindowManager.CreateDropdown(String, RectTransform, Boolean, Single, Single)
+        VB: IWindowManager.CreateDropdown(String, RectTransform, Boolean, Single, Single)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateDropdown(System.String, RectTransform, System.Boolean, System.Single, System.Single)
+        VB: Battlehub.RTEditor.IWindowManager.CreateDropdown(System.String, RectTransform, System.Boolean, System.Single, System.Single)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateDropdown
+        path: ''
+        startLine: 34598
+      summary: "\nCreates dropdown window of type\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreateDropdown(string windowTypeName, RectTransform anchor, bool canResize = false, float minWidth = 10F, float minHeight = 10F)
+          VB: Function CreateDropdown(windowTypeName As String, anchor As RectTransform, canResize As Boolean = False, minWidth As Single = 10F, minHeight As Single = 10F) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: anchor
+          type: Global.RectTransform
+          description: The RectTransform of dropdown anchor
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the dropdown
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the pop-up window
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the pop-up window
+        return:
+          type: Global.Transform
+          description: ''
+      overload: Battlehub.RTEditor.IWindowManager.CreateDropdown*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetWindowArgs(Transform,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetWindowArgs(Transform,System.String)
+      language: CSharp
+      name:
+        CSharp: SetWindowArgs(Transform, String)
+        VB: SetWindowArgs(Transform, String)
+      nameWithType:
+        CSharp: IWindowManager.SetWindowArgs(Transform, String)
+        VB: IWindowManager.SetWindowArgs(Transform, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetWindowArgs(Transform, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.SetWindowArgs(Transform, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetWindowArgs
+        path: ''
+        startLine: 34605
+      summary: "\nSets window arguments\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetWindowArgs(Transform content, string args)
+          VB: Sub SetWindowArgs(content As Transform, args As String)
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Transform of the window
+        - id: args
+          type: System.String
+          description: Arguments
+      overload: Battlehub.RTEditor.IWindowManager.SetWindowArgs*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.DestroyWindow(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.DestroyWindow(Transform)
+      language: CSharp
+      name:
+        CSharp: DestroyWindow(Transform)
+        VB: DestroyWindow(Transform)
+      nameWithType:
+        CSharp: IWindowManager.DestroyWindow(Transform)
+        VB: IWindowManager.DestroyWindow(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.DestroyWindow(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.DestroyWindow(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: DestroyWindow
+        path: ''
+        startLine: 34611
+      summary: "\nDestroys window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void DestroyWindow(Transform conent)
+          VB: Sub DestroyWindow(conent As Transform)
+        parameters:
+        - id: conent
+          type: Global.Transform
+          description: Transform of the window
+      overload: Battlehub.RTEditor.IWindowManager.DestroyWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType(System.String)
+      language: CSharp
+      name:
+        CSharp: DestroyWindowsOfType(String)
+        VB: DestroyWindowsOfType(String)
+      nameWithType:
+        CSharp: IWindowManager.DestroyWindowsOfType(String)
+        VB: IWindowManager.DestroyWindowsOfType(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: DestroyWindowsOfType
+        path: ''
+        startLine: 34617
+      summary: "\nDestroys window of type \n"
+      example: []
+      syntax:
+        content:
+          CSharp: void DestroyWindowsOfType(string windowTypeName)
+          VB: Sub DestroyWindowsOfType(windowTypeName As String)
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+      overload: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.Boolean,System.Single,System.Single)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.Boolean,System.Single,System.Single)
+      language: CSharp
+      name:
+        CSharp: CreateDialogWindow(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, Boolean, Single, Single)
+        VB: CreateDialogWindow(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), Boolean, Single, Single)
+      nameWithType:
+        CSharp: IWindowManager.CreateDialogWindow(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, Boolean, Single, Single)
+        VB: IWindowManager.CreateDialogWindow(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), Boolean, Single, Single)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String, System.String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.Boolean, System.Single, System.Single)
+        VB: Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String, System.String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.Boolean, System.Single, System.Single)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateDialogWindow
+        path: ''
+        startLine: 34630
+      summary: "\nCreates dialog window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreateDialogWindow(string windowTypeName, string header, DialogAction<DialogCancelArgs> okAction, DialogAction<DialogCancelArgs> cancelAction, bool canResize, float minWidth = 50F, float minHeight = 50F)
+          VB: Function CreateDialogWindow(windowTypeName As String, header As String, okAction As DialogAction(Of DialogCancelArgs), cancelAction As DialogAction(Of DialogCancelArgs), canResize As Boolean, minWidth As Single = 50F, minHeight As Single = 50F) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: header
+          type: System.String
+          description: Dialog header text
+        - id: okAction
+          type: Global.DialogAction{DialogCancelArgs}
+          description: The action to take when the OK button is clicked
+        - id: cancelAction
+          type: Global.DialogAction{DialogCancelArgs}
+          description: The action to take when the Cancel button is clicked
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the dialog
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the pop-up window
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the pop-up window
+        return:
+          type: Global.Transform
+          description: ''
+      overload: Battlehub.RTEditor.IWindowManager.CreateDialogWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.Single,System.Single,System.Single,System.Single,System.Boolean)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.Single,System.Single,System.Single,System.Single,System.Boolean)
+      language: CSharp
+      name:
+        CSharp: CreateDialogWindow(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, Single, Single, Single, Single, Boolean)
+        VB: CreateDialogWindow(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), Single, Single, Single, Single, Boolean)
+      nameWithType:
+        CSharp: IWindowManager.CreateDialogWindow(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, Single, Single, Single, Single, Boolean)
+        VB: IWindowManager.CreateDialogWindow(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), Single, Single, Single, Single, Boolean)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String, System.String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.Single, System.Single, System.Single, System.Single, System.Boolean)
+        VB: Battlehub.RTEditor.IWindowManager.CreateDialogWindow(System.String, System.String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.Single, System.Single, System.Single, System.Single, System.Boolean)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CreateDialogWindow
+        path: ''
+        startLine: 34648
+      summary: "\nCreates dialog window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Transform CreateDialogWindow(string windowTypeName, string header, DialogAction<DialogCancelArgs> okAction = null, DialogAction<DialogCancelArgs> cancelAction = null, float minWidth = 250F, float minHeight = 250F, float preferredWidth = 700F, float preferredHeight = 400F, bool canResize = true)
+          VB: Function CreateDialogWindow(windowTypeName As String, header As String, okAction As DialogAction(Of DialogCancelArgs) = Nothing, cancelAction As DialogAction(Of DialogCancelArgs) = Nothing, minWidth As Single = 250F, minHeight As Single = 250F, preferredWidth As Single = 700F, preferredHeight As Single = 400F, canResize As Boolean = True) As Transform
+        parameters:
+        - id: windowTypeName
+          type: System.String
+          description: Window type name
+        - id: header
+          type: System.String
+          description: Dialog header text
+        - id: okAction
+          type: Global.DialogAction{DialogCancelArgs}
+          description: The action to take when the OK button is clicked
+        - id: cancelAction
+          type: Global.DialogAction{DialogCancelArgs}
+          description: he action to take when the Cancel button is clicked
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the pop-up window
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the pop-up window
+        - id: preferredWidth
+          type: System.Single
+          description: Perferred width of the pop-up window
+        - id: preferredHeight
+          type: System.Single
+          description: Perferred height of the pop-up window
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the dialog
+        return:
+          type: Global.Transform
+          description: ''
+      overload: Battlehub.RTEditor.IWindowManager.CreateDialogWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow
+      commentId: M:Battlehub.RTEditor.IWindowManager.DestroyDialogWindow
+      language: CSharp
+      name:
+        CSharp: DestroyDialogWindow()
+        VB: DestroyDialogWindow()
+      nameWithType:
+        CSharp: IWindowManager.DestroyDialogWindow()
+        VB: IWindowManager.DestroyDialogWindow()
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow()
+        VB: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow()
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: DestroyDialogWindow
+        path: ''
+        startLine: 34658
+      summary: "\nDestroys the topmost dialog window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void DestroyDialogWindow()
+          VB: Sub DestroyDialogWindow
+      overload: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.MessageBox(System.String,System.String,DialogAction{DialogCancelArgs})
+      commentId: M:Battlehub.RTEditor.IWindowManager.MessageBox(System.String,System.String,DialogAction{DialogCancelArgs})
+      language: CSharp
+      name:
+        CSharp: MessageBox(String, String, DialogAction<DialogCancelArgs>)
+        VB: MessageBox(String, String, DialogAction(Of DialogCancelArgs))
+      nameWithType:
+        CSharp: IWindowManager.MessageBox(String, String, DialogAction<DialogCancelArgs>)
+        VB: IWindowManager.MessageBox(String, String, DialogAction(Of DialogCancelArgs))
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.MessageBox(System.String, System.String, DialogAction<DialogCancelArgs>)
+        VB: Battlehub.RTEditor.IWindowManager.MessageBox(System.String, System.String, DialogAction(Of DialogCancelArgs))
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: MessageBox
+        path: ''
+        startLine: 34666
+      summary: "\nCreates message box\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void MessageBox(string header, string text, DialogAction<DialogCancelArgs> ok = null)
+          VB: Sub MessageBox(header As String, text As String, ok As DialogAction(Of DialogCancelArgs) = Nothing)
+        parameters:
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Message text
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok action
+      overload: Battlehub.RTEditor.IWindowManager.MessageBox*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.MessageBox(Sprite,System.String,System.String,DialogAction{DialogCancelArgs})
+      commentId: M:Battlehub.RTEditor.IWindowManager.MessageBox(Sprite,System.String,System.String,DialogAction{DialogCancelArgs})
+      language: CSharp
+      name:
+        CSharp: MessageBox(Sprite, String, String, DialogAction<DialogCancelArgs>)
+        VB: MessageBox(Sprite, String, String, DialogAction(Of DialogCancelArgs))
+      nameWithType:
+        CSharp: IWindowManager.MessageBox(Sprite, String, String, DialogAction<DialogCancelArgs>)
+        VB: IWindowManager.MessageBox(Sprite, String, String, DialogAction(Of DialogCancelArgs))
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.MessageBox(Sprite, System.String, System.String, DialogAction<DialogCancelArgs>)
+        VB: Battlehub.RTEditor.IWindowManager.MessageBox(Sprite, System.String, System.String, DialogAction(Of DialogCancelArgs))
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: MessageBox
+        path: ''
+        startLine: 34675
+      summary: "\nCreates message box\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void MessageBox(Sprite icon, string header, string text, DialogAction<DialogCancelArgs> ok = null)
+          VB: Sub MessageBox(icon As Sprite, header As String, text As String, ok As DialogAction(Of DialogCancelArgs) = Nothing)
+        parameters:
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Message text
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok action
+      overload: Battlehub.RTEditor.IWindowManager.MessageBox*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Confirmation(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Confirmation(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: Confirmation(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String)
+        VB: Confirmation(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String)
+      nameWithType:
+        CSharp: IWindowManager.Confirmation(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String)
+        VB: IWindowManager.Confirmation(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Confirmation(System.String, System.String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Confirmation(System.String, System.String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Confirmation
+        path: ''
+        startLine: 34686
+      summary: "\nCreates confirmation dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Confirmation(string header, string text, DialogAction<DialogCancelArgs> ok, DialogAction<DialogCancelArgs> cancel, string okText = "OK", string cancelText = "Cancel")
+          VB: Sub Confirmation(header As String, text As String, ok As DialogAction(Of DialogCancelArgs), cancel As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancelText As String = "Cancel")
+        parameters:
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Message text
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok action
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Cancel action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+      overload: Battlehub.RTEditor.IWindowManager.Confirmation*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Confirmation(Sprite,System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Confirmation(Sprite,System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: Confirmation(Sprite, String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String)
+        VB: Confirmation(Sprite, String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String)
+      nameWithType:
+        CSharp: IWindowManager.Confirmation(Sprite, String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String)
+        VB: IWindowManager.Confirmation(Sprite, String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Confirmation(Sprite, System.String, System.String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Confirmation(Sprite, System.String, System.String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Confirmation
+        path: ''
+        startLine: 34698
+      summary: "\nCreates confirmation dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Confirmation(Sprite icon, string header, string text, DialogAction<DialogCancelArgs> ok, DialogAction<DialogCancelArgs> cancel, string okText = "OK", string cancelText = "Cancel")
+          VB: Sub Confirmation(icon As Sprite, header As String, text As String, ok As DialogAction(Of DialogCancelArgs), cancel As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancelText As String = "Cancel")
+        parameters:
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Mesasge text
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok action
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Cancel action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+      overload: Battlehub.RTEditor.IWindowManager.Confirmation*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Confirmation(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Confirmation(System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: Confirmation(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, String)
+        VB: Confirmation(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, String)
+      nameWithType:
+        CSharp: IWindowManager.Confirmation(String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, String)
+        VB: IWindowManager.Confirmation(String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Confirmation(System.String, System.String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.String, System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Confirmation(System.String, System.String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.String, System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Confirmation
+        path: ''
+        startLine: 34711
+      summary: "\nCreates 3 button confirmation dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Confirmation(string header, string text, DialogAction<DialogCancelArgs> ok, DialogAction<DialogCancelArgs> cancel, DialogAction<DialogCancelArgs> alt, string okText = "OK", string cancelText = "Cancel", string altText = "Close")
+          VB: Sub Confirmation(header As String, text As String, ok As DialogAction(Of DialogCancelArgs), cancel As DialogAction(Of DialogCancelArgs), alt As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancelText As String = "Cancel", altText As String = "Close")
+        parameters:
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Message text
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok action
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Cancel action
+        - id: alt
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Alternative action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+        - id: altText
+          type: System.String
+          description: Alternative button text
+      overload: Battlehub.RTEditor.IWindowManager.Confirmation*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Confirmation(Sprite,System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Confirmation(Sprite,System.String,System.String,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: Confirmation(Sprite, String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, String)
+        VB: Confirmation(Sprite, String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, String)
+      nameWithType:
+        CSharp: IWindowManager.Confirmation(Sprite, String, String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, String)
+        VB: IWindowManager.Confirmation(Sprite, String, String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Confirmation(Sprite, System.String, System.String, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.String, System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Confirmation(Sprite, System.String, System.String, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.String, System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Confirmation
+        path: ''
+        startLine: 34725
+      summary: "\nCreates 3 button confirmation dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Confirmation(Sprite icon, string header, string text, DialogAction<DialogCancelArgs> ok, DialogAction<DialogCancelArgs> cancel, DialogAction<DialogCancelArgs> alt, string okText = "OK", string cancelText = "Cancel", string altText = "Close")
+          VB: Sub Confirmation(icon As Sprite, header As String, text As String, ok As DialogAction(Of DialogCancelArgs), cancel As DialogAction(Of DialogCancelArgs), alt As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancelText As String = "Cancel", altText As String = "Close")
+        parameters:
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Message text
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok action
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Cancel action
+        - id: alt
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Alternative action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+        - id: altText
+          type: System.String
+          description: Alternative button text
+      overload: Battlehub.RTEditor.IWindowManager.Confirmation*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Prompt(System.String,System.String,DialogAction{Battlehub.RTEditor.PromptDialogArgs},DialogAction{Battlehub.RTEditor.PromptDialogArgs},System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Prompt(System.String,System.String,DialogAction{Battlehub.RTEditor.PromptDialogArgs},DialogAction{Battlehub.RTEditor.PromptDialogArgs},System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: Prompt(String, String, DialogAction<PromptDialogArgs>, DialogAction<PromptDialogArgs>, String, String)
+        VB: Prompt(String, String, DialogAction(Of PromptDialogArgs), DialogAction(Of PromptDialogArgs), String, String)
+      nameWithType:
+        CSharp: IWindowManager.Prompt(String, String, DialogAction<PromptDialogArgs>, DialogAction<PromptDialogArgs>, String, String)
+        VB: IWindowManager.Prompt(String, String, DialogAction(Of PromptDialogArgs), DialogAction(Of PromptDialogArgs), String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Prompt(System.String, System.String, DialogAction<Battlehub.RTEditor.PromptDialogArgs>, DialogAction<Battlehub.RTEditor.PromptDialogArgs>, System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Prompt(System.String, System.String, DialogAction(Of Battlehub.RTEditor.PromptDialogArgs), DialogAction(Of Battlehub.RTEditor.PromptDialogArgs), System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Prompt
+        path: ''
+        startLine: 34736
+      summary: "\nCreates prompt dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Prompt(string header, string text, DialogAction<PromptDialogArgs> ok, DialogAction<PromptDialogArgs> cancel = null, string okText = "OK", string cancelText = "Cancel")
+          VB: Sub Prompt(header As String, text As String, ok As DialogAction(Of PromptDialogArgs), cancel As DialogAction(Of PromptDialogArgs) = Nothing, okText As String = "OK", cancelText As String = "Cancel")
+        parameters:
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Input field text
+        - id: ok
+          type: Global.DialogAction{Battlehub.RTEditor.PromptDialogArgs}
+          description: Ok action
+        - id: cancel
+          type: Global.DialogAction{Battlehub.RTEditor.PromptDialogArgs}
+          description: Cancel action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+      overload: Battlehub.RTEditor.IWindowManager.Prompt*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Prompt(Sprite,System.String,System.String,DialogAction{Battlehub.RTEditor.PromptDialogArgs},DialogAction{Battlehub.RTEditor.PromptDialogArgs},System.String,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Prompt(Sprite,System.String,System.String,DialogAction{Battlehub.RTEditor.PromptDialogArgs},DialogAction{Battlehub.RTEditor.PromptDialogArgs},System.String,System.String)
+      language: CSharp
+      name:
+        CSharp: Prompt(Sprite, String, String, DialogAction<PromptDialogArgs>, DialogAction<PromptDialogArgs>, String, String)
+        VB: Prompt(Sprite, String, String, DialogAction(Of PromptDialogArgs), DialogAction(Of PromptDialogArgs), String, String)
+      nameWithType:
+        CSharp: IWindowManager.Prompt(Sprite, String, String, DialogAction<PromptDialogArgs>, DialogAction<PromptDialogArgs>, String, String)
+        VB: IWindowManager.Prompt(Sprite, String, String, DialogAction(Of PromptDialogArgs), DialogAction(Of PromptDialogArgs), String, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Prompt(Sprite, System.String, System.String, DialogAction<Battlehub.RTEditor.PromptDialogArgs>, DialogAction<Battlehub.RTEditor.PromptDialogArgs>, System.String, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.Prompt(Sprite, System.String, System.String, DialogAction(Of Battlehub.RTEditor.PromptDialogArgs), DialogAction(Of Battlehub.RTEditor.PromptDialogArgs), System.String, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Prompt
+        path: ''
+        startLine: 34748
+      summary: "\nCreates prompt dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Prompt(Sprite icon, string header, string text, DialogAction<PromptDialogArgs> ok, DialogAction<PromptDialogArgs> cancel = null, string okText = "OK", string cancelText = "Cancel")
+          VB: Sub Prompt(icon As Sprite, header As String, text As String, ok As DialogAction(Of PromptDialogArgs), cancel As DialogAction(Of PromptDialogArgs) = Nothing, okText As String = "OK", cancelText As String = "Cancel")
+        parameters:
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+        - id: header
+          type: System.String
+          description: Header text
+        - id: text
+          type: System.String
+          description: Input field text
+        - id: ok
+          type: Global.DialogAction{Battlehub.RTEditor.PromptDialogArgs}
+          description: Ok action
+        - id: cancel
+          type: Global.DialogAction{Battlehub.RTEditor.PromptDialogArgs}
+          description: Cancel action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+      overload: Battlehub.RTEditor.IWindowManager.Prompt*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Dialog(Sprite,System.String,Transform,DialogAction{DialogCancelArgs},System.String,DialogAction{DialogCancelArgs},System.String,System.Boolean,System.Single,System.Single)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Dialog(Sprite,System.String,Transform,DialogAction{DialogCancelArgs},System.String,DialogAction{DialogCancelArgs},System.String,System.Boolean,System.Single,System.Single)
+      language: CSharp
+      name:
+        CSharp: Dialog(Sprite, String, Transform, DialogAction<DialogCancelArgs>, String, DialogAction<DialogCancelArgs>, String, Boolean, Single, Single)
+        VB: Dialog(Sprite, String, Transform, DialogAction(Of DialogCancelArgs), String, DialogAction(Of DialogCancelArgs), String, Boolean, Single, Single)
+      nameWithType:
+        CSharp: IWindowManager.Dialog(Sprite, String, Transform, DialogAction<DialogCancelArgs>, String, DialogAction<DialogCancelArgs>, String, Boolean, Single, Single)
+        VB: IWindowManager.Dialog(Sprite, String, Transform, DialogAction(Of DialogCancelArgs), String, DialogAction(Of DialogCancelArgs), String, Boolean, Single, Single)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Dialog(Sprite, System.String, Transform, DialogAction<DialogCancelArgs>, System.String, DialogAction<DialogCancelArgs>, System.String, System.Boolean, System.Single, System.Single)
+        VB: Battlehub.RTEditor.IWindowManager.Dialog(Sprite, System.String, Transform, DialogAction(Of DialogCancelArgs), System.String, DialogAction(Of DialogCancelArgs), System.String, System.Boolean, System.Single, System.Single)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Dialog
+        path: ''
+        startLine: 34763
+      summary: "\nCreates dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Dialog(Sprite icon, string header, Transform content, DialogAction<DialogCancelArgs> ok, string okText = "OK", DialogAction<DialogCancelArgs> cancel = null, string cancelText = "Cancel", bool canResize = false, float minWidth = 150F, float minHeight = 100F)
+          VB: Sub Dialog(icon As Sprite, header As String, content As Transform, ok As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancel As DialogAction(Of DialogCancelArgs) = Nothing, cancelText As String = "Cancel", canResize As Boolean = False, minWidth As Single = 150F, minHeight As Single = 100F)
+        parameters:
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+        - id: header
+          type: System.String
+          description: Header text
+        - id: content
+          type: Global.Transform
+          description: Dialog content transform
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok Action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Cancel action
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the dialog
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the dialog
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the dialog
+      overload: Battlehub.RTEditor.IWindowManager.Dialog*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Dialog(System.String,Transform,DialogAction{DialogCancelArgs},System.String,DialogAction{DialogCancelArgs},System.String,System.Boolean,System.Single,System.Single)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Dialog(System.String,Transform,DialogAction{DialogCancelArgs},System.String,DialogAction{DialogCancelArgs},System.String,System.Boolean,System.Single,System.Single)
+      language: CSharp
+      name:
+        CSharp: Dialog(String, Transform, DialogAction<DialogCancelArgs>, String, DialogAction<DialogCancelArgs>, String, Boolean, Single, Single)
+        VB: Dialog(String, Transform, DialogAction(Of DialogCancelArgs), String, DialogAction(Of DialogCancelArgs), String, Boolean, Single, Single)
+      nameWithType:
+        CSharp: IWindowManager.Dialog(String, Transform, DialogAction<DialogCancelArgs>, String, DialogAction<DialogCancelArgs>, String, Boolean, Single, Single)
+        VB: IWindowManager.Dialog(String, Transform, DialogAction(Of DialogCancelArgs), String, DialogAction(Of DialogCancelArgs), String, Boolean, Single, Single)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Dialog(System.String, Transform, DialogAction<DialogCancelArgs>, System.String, DialogAction<DialogCancelArgs>, System.String, System.Boolean, System.Single, System.Single)
+        VB: Battlehub.RTEditor.IWindowManager.Dialog(System.String, Transform, DialogAction(Of DialogCancelArgs), System.String, DialogAction(Of DialogCancelArgs), System.String, System.Boolean, System.Single, System.Single)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Dialog
+        path: ''
+        startLine: 34780
+      summary: "\nCreates dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Dialog(string header, Transform content, DialogAction<DialogCancelArgs> ok, string okText = "OK", DialogAction<DialogCancelArgs> cancel = null, string cancelText = "Cancel", bool canResize = false, float minWidth = 150F, float minHeight = 100F)
+          VB: Sub Dialog(header As String, content As Transform, ok As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancel As DialogAction(Of DialogCancelArgs) = Nothing, cancelText As String = "Cancel", canResize As Boolean = False, minWidth As Single = 150F, minHeight As Single = 100F)
+        parameters:
+        - id: header
+          type: System.String
+          description: Header text
+        - id: content
+          type: Global.Transform
+          description: Dialog content transform
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Ok Action
+        - id: okText
+          type: System.String
+          description: Ok button text
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+          description: Cancel action
+        - id: cancelText
+          type: System.String
+          description: Cancel button text
+        - id: canResize
+          type: System.Boolean
+          description: True to be able to resize the dialog
+        - id: minWidth
+          type: System.Single
+          description: Minimum width of the dialog
+        - id: minHeight
+          type: System.Single
+          description: Minimum height of the dialog
+      overload: Battlehub.RTEditor.IWindowManager.Dialog*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Dialog(System.String,Transform,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Dialog(System.String,Transform,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+      language: CSharp
+      name:
+        CSharp: Dialog(String, Transform, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, Single, Single, Single, Single, Boolean)
+        VB: Dialog(String, Transform, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, Single, Single, Single, Single, Boolean)
+      nameWithType:
+        CSharp: IWindowManager.Dialog(String, Transform, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, Single, Single, Single, Single, Boolean)
+        VB: IWindowManager.Dialog(String, Transform, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, Single, Single, Single, Single, Boolean)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Dialog(System.String, Transform, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.String, System.String, System.Single, System.Single, System.Single, System.Single, System.Boolean)
+        VB: Battlehub.RTEditor.IWindowManager.Dialog(System.String, Transform, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.String, System.String, System.Single, System.Single, System.Single, System.Single, System.Boolean)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Dialog
+        path: ''
+        startLine: 34788
+      summary: "\nCreates dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Dialog(string header, Transform content, DialogAction<DialogCancelArgs> ok, DialogAction<DialogCancelArgs> cancel, string okText = "OK", string cancelText = "Cancel", float minWidth = 150F, float minHeight = 150F, float preferredWidth = 700F, float preferredHeight = 400F, bool canResize = true)
+          VB: Sub Dialog(header As String, content As Transform, ok As DialogAction(Of DialogCancelArgs), cancel As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancelText As String = "Cancel", minWidth As Single = 150F, minHeight As Single = 150F, preferredWidth As Single = 700F, preferredHeight As Single = 400F, canResize As Boolean = True)
+        parameters:
+        - id: header
+          type: System.String
+        - id: content
+          type: Global.Transform
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+        - id: okText
+          type: System.String
+        - id: cancelText
+          type: System.String
+        - id: minWidth
+          type: System.Single
+        - id: minHeight
+          type: System.Single
+        - id: preferredWidth
+          type: System.Single
+        - id: preferredHeight
+          type: System.Single
+        - id: canResize
+          type: System.Boolean
+      overload: Battlehub.RTEditor.IWindowManager.Dialog*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.Dialog(Sprite,System.String,Transform,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+      commentId: M:Battlehub.RTEditor.IWindowManager.Dialog(Sprite,System.String,Transform,DialogAction{DialogCancelArgs},DialogAction{DialogCancelArgs},System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+      language: CSharp
+      name:
+        CSharp: Dialog(Sprite, String, Transform, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, Single, Single, Single, Single, Boolean)
+        VB: Dialog(Sprite, String, Transform, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, Single, Single, Single, Single, Boolean)
+      nameWithType:
+        CSharp: IWindowManager.Dialog(Sprite, String, Transform, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, String, String, Single, Single, Single, Single, Boolean)
+        VB: IWindowManager.Dialog(Sprite, String, Transform, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), String, String, Single, Single, Single, Single, Boolean)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.Dialog(Sprite, System.String, Transform, DialogAction<DialogCancelArgs>, DialogAction<DialogCancelArgs>, System.String, System.String, System.Single, System.Single, System.Single, System.Single, System.Boolean)
+        VB: Battlehub.RTEditor.IWindowManager.Dialog(Sprite, System.String, Transform, DialogAction(Of DialogCancelArgs), DialogAction(Of DialogCancelArgs), System.String, System.String, System.Single, System.Single, System.Single, System.Single, System.Boolean)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: Dialog
+        path: ''
+        startLine: 34798
+      summary: "\nCreates dialog\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void Dialog(Sprite icon, string header, Transform content, DialogAction<DialogCancelArgs> ok, DialogAction<DialogCancelArgs> cancel, string okText = "OK", string cancelText = "Cancel", float minWidth = 150F, float minHeight = 150F, float preferredWidth = 700F, float preferredHeight = 400F, bool canResize = true)
+          VB: Sub Dialog(icon As Sprite, header As String, content As Transform, ok As DialogAction(Of DialogCancelArgs), cancel As DialogAction(Of DialogCancelArgs), okText As String = "OK", cancelText As String = "Cancel", minWidth As Single = 150F, minHeight As Single = 150F, preferredWidth As Single = 700F, preferredHeight As Single = 400F, canResize As Boolean = True)
+        parameters:
+        - id: icon
+          type: Global.Sprite
+        - id: header
+          type: System.String
+        - id: content
+          type: Global.Transform
+        - id: ok
+          type: Global.DialogAction{DialogCancelArgs}
+        - id: cancel
+          type: Global.DialogAction{DialogCancelArgs}
+        - id: okText
+          type: System.String
+        - id: cancelText
+          type: System.String
+        - id: minWidth
+          type: System.Single
+        - id: minHeight
+          type: System.Single
+        - id: preferredWidth
+          type: System.Single
+        - id: preferredHeight
+          type: System.Single
+        - id: canResize
+          type: System.Boolean
+      overload: Battlehub.RTEditor.IWindowManager.Dialog*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.CopyTransform(Transform,Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.CopyTransform(Transform,Transform)
+      language: CSharp
+      name:
+        CSharp: CopyTransform(Transform, Transform)
+        VB: CopyTransform(Transform, Transform)
+      nameWithType:
+        CSharp: IWindowManager.CopyTransform(Transform, Transform)
+        VB: IWindowManager.CopyTransform(Transform, Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.CopyTransform(Transform, Transform)
+        VB: Battlehub.RTEditor.IWindowManager.CopyTransform(Transform, Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: CopyTransform
+        path: ''
+        startLine: 34810
+      summary: "\nCopies source window transform to target window transform\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void CopyTransform(Transform targetConent, Transform sourceContent)
+          VB: Sub CopyTransform(targetConent As Transform, sourceContent As Transform)
+        parameters:
+        - id: targetConent
+          type: Global.Transform
+          description: Target window transform
+        - id: sourceContent
+          type: Global.Transform
+          description: Source window transform
+      overload: Battlehub.RTEditor.IWindowManager.CopyTransform*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetTransform(Transform,Vector2,Vector2,Vector2,Vector2)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetTransform(Transform,Vector2,Vector2,Vector2,Vector2)
+      language: CSharp
+      name:
+        CSharp: SetTransform(Transform, Vector2, Vector2, Vector2, Vector2)
+        VB: SetTransform(Transform, Vector2, Vector2, Vector2, Vector2)
+      nameWithType:
+        CSharp: IWindowManager.SetTransform(Transform, Vector2, Vector2, Vector2, Vector2)
+        VB: IWindowManager.SetTransform(Transform, Vector2, Vector2, Vector2, Vector2)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetTransform(Transform, Vector2, Vector2, Vector2, Vector2)
+        VB: Battlehub.RTEditor.IWindowManager.SetTransform(Transform, Vector2, Vector2, Vector2, Vector2)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetTransform
+        path: ''
+        startLine: 34820
+      summary: "\nSets anchoredPosition, anchorMin, anchorMax and size delta \n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetTransform(Transform content, Vector2 anchoredPosition, Vector2 anchorMin, Vector2 anchorMax, Vector2 sizeDelta)
+          VB: Sub SetTransform(content As Transform, anchoredPosition As Vector2, anchorMin As Vector2, anchorMax As Vector2, sizeDelta As Vector2)
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Target window transform
+        - id: anchoredPosition
+          type: Global.Vector2
+          description: Anchored position
+        - id: anchorMin
+          type: Global.Vector2
+          description: Anchor min
+        - id: anchorMax
+          type: Global.Vector2
+          description: Anchor max
+        - id: sizeDelta
+          type: Global.Vector2
+          description: Size delta
+      overload: Battlehub.RTEditor.IWindowManager.SetTransform*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetHeaderText(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetHeaderText(Transform)
+      language: CSharp
+      name:
+        CSharp: GetHeaderText(Transform)
+        VB: GetHeaderText(Transform)
+      nameWithType:
+        CSharp: IWindowManager.GetHeaderText(Transform)
+        VB: IWindowManager.GetHeaderText(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetHeaderText(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.GetHeaderText(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetHeaderText
+        path: ''
+        startLine: 34827
+      summary: "\nGets header text of the window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: string GetHeaderText(Transform content)
+          VB: Function GetHeaderText(content As Transform) As String
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Window transform
+        return:
+          type: System.String
+          description: Header text
+      overload: Battlehub.RTEditor.IWindowManager.GetHeaderText*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetHeaderText(Transform,System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetHeaderText(Transform,System.String)
+      language: CSharp
+      name:
+        CSharp: SetHeaderText(Transform, String)
+        VB: SetHeaderText(Transform, String)
+      nameWithType:
+        CSharp: IWindowManager.SetHeaderText(Transform, String)
+        VB: IWindowManager.SetHeaderText(Transform, String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetHeaderText(Transform, System.String)
+        VB: Battlehub.RTEditor.IWindowManager.SetHeaderText(Transform, System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetHeaderText
+        path: ''
+        startLine: 34834
+      summary: "\nSets header text of the window\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetHeaderText(Transform content, string headerText)
+          VB: Sub SetHeaderText(content As Transform, headerText As String)
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Window transform
+        - id: headerText
+          type: System.String
+          description: Header text
+      overload: Battlehub.RTEditor.IWindowManager.SetHeaderText*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetHeaderIcon(Transform)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetHeaderIcon(Transform)
+      language: CSharp
+      name:
+        CSharp: GetHeaderIcon(Transform)
+        VB: GetHeaderIcon(Transform)
+      nameWithType:
+        CSharp: IWindowManager.GetHeaderIcon(Transform)
+        VB: IWindowManager.GetHeaderIcon(Transform)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetHeaderIcon(Transform)
+        VB: Battlehub.RTEditor.IWindowManager.GetHeaderIcon(Transform)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetHeaderIcon
+        path: ''
+        startLine: 34841
+      summary: "\nGets header icon\n"
+      example: []
+      syntax:
+        content:
+          CSharp: Sprite GetHeaderIcon(Transform content)
+          VB: Function GetHeaderIcon(content As Transform) As Sprite
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Window transform
+        return:
+          type: Global.Sprite
+          description: Header icon
+      overload: Battlehub.RTEditor.IWindowManager.GetHeaderIcon*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SetHeaderIcon(Transform,Sprite)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SetHeaderIcon(Transform,Sprite)
+      language: CSharp
+      name:
+        CSharp: SetHeaderIcon(Transform, Sprite)
+        VB: SetHeaderIcon(Transform, Sprite)
+      nameWithType:
+        CSharp: IWindowManager.SetHeaderIcon(Transform, Sprite)
+        VB: IWindowManager.SetHeaderIcon(Transform, Sprite)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SetHeaderIcon(Transform, Sprite)
+        VB: Battlehub.RTEditor.IWindowManager.SetHeaderIcon(Transform, Sprite)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SetHeaderIcon
+        path: ''
+        startLine: 34848
+      summary: "\nSets header icon\n"
+      example: []
+      syntax:
+        content:
+          CSharp: void SetHeaderIcon(Transform content, Sprite icon)
+          VB: Sub SetHeaderIcon(content As Transform, icon As Sprite)
+        parameters:
+        - id: content
+          type: Global.Transform
+          description: Window transform
+        - id: icon
+          type: Global.Sprite
+          description: Header icon
+      overload: Battlehub.RTEditor.IWindowManager.SetHeaderIcon*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate
+      commentId: M:Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate
+      language: CSharp
+      name:
+        CSharp: ForceLayoutUpdate()
+        VB: ForceLayoutUpdate()
+      nameWithType:
+        CSharp: IWindowManager.ForceLayoutUpdate()
+        VB: IWindowManager.ForceLayoutUpdate()
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate()
+        VB: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate()
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: ForceLayoutUpdate
+        path: ''
+        startLine: 34850
+      syntax:
+        content:
+          CSharp: void ForceLayoutUpdate()
+          VB: Sub ForceLayoutUpdate
+      overload: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+      commentId: P:Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+      language: CSharp
+      name:
+        CSharp: DefaultPersistentLayoutName
+        VB: DefaultPersistentLayoutName
+      nameWithType:
+        CSharp: IWindowManager.DefaultPersistentLayoutName
+        VB: IWindowManager.DefaultPersistentLayoutName
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+        VB: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+      type: Property
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: DefaultPersistentLayoutName
+        path: ''
+        startLine: 34852
+      syntax:
+        content:
+          CSharp: string DefaultPersistentLayoutName { get; }
+          VB: ReadOnly Property DefaultPersistentLayoutName As String
+        parameters: []
+        return:
+          type: System.String
+      overload: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName*
+      modifiers:
+        CSharp:
+        - get
+        VB:
+        - ReadOnly
+    - id: Battlehub.RTEditor.IWindowManager.LayoutExist(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.LayoutExist(System.String)
+      language: CSharp
+      name:
+        CSharp: LayoutExist(String)
+        VB: LayoutExist(String)
+      nameWithType:
+        CSharp: IWindowManager.LayoutExist(String)
+        VB: IWindowManager.LayoutExist(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.LayoutExist(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.LayoutExist(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: LayoutExist
+        path: ''
+        startLine: 34858
+      syntax:
+        content:
+          CSharp: bool LayoutExist(string name)
+          VB: Function LayoutExist(name As String) As Boolean
+        parameters:
+        - id: name
+          type: System.String
+        return:
+          type: System.Boolean
+      overload: Battlehub.RTEditor.IWindowManager.LayoutExist*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.SaveLayout(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.SaveLayout(System.String)
+      language: CSharp
+      name:
+        CSharp: SaveLayout(String)
+        VB: SaveLayout(String)
+      nameWithType:
+        CSharp: IWindowManager.SaveLayout(String)
+        VB: IWindowManager.SaveLayout(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.SaveLayout(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.SaveLayout(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: SaveLayout
+        path: ''
+        startLine: 34861
+      syntax:
+        content:
+          CSharp: void SaveLayout(string name)
+          VB: Sub SaveLayout(name As String)
+        parameters:
+        - id: name
+          type: System.String
+      overload: Battlehub.RTEditor.IWindowManager.SaveLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.GetLayout(System.String,GameObject)
+      commentId: M:Battlehub.RTEditor.IWindowManager.GetLayout(System.String,GameObject)
+      language: CSharp
+      name:
+        CSharp: GetLayout(String, GameObject)
+        VB: GetLayout(String, GameObject)
+      nameWithType:
+        CSharp: IWindowManager.GetLayout(String, GameObject)
+        VB: IWindowManager.GetLayout(String, GameObject)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.GetLayout(System.String, GameObject)
+        VB: Battlehub.RTEditor.IWindowManager.GetLayout(System.String, GameObject)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: GetLayout
+        path: ''
+        startLine: 34864
+      syntax:
+        content:
+          CSharp: LayoutInfo GetLayout(string name, GameObject tabPrefab = null)
+          VB: Function GetLayout(name As String, tabPrefab As GameObject = Nothing) As LayoutInfo
+        parameters:
+        - id: name
+          type: System.String
+        - id: tabPrefab
+          type: Global.GameObject
+        return:
+          type: Global.LayoutInfo
+      overload: Battlehub.RTEditor.IWindowManager.GetLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.LoadLayout(System.String,GameObject)
+      commentId: M:Battlehub.RTEditor.IWindowManager.LoadLayout(System.String,GameObject)
+      language: CSharp
+      name:
+        CSharp: LoadLayout(String, GameObject)
+        VB: LoadLayout(String, GameObject)
+      nameWithType:
+        CSharp: IWindowManager.LoadLayout(String, GameObject)
+        VB: IWindowManager.LoadLayout(String, GameObject)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.LoadLayout(System.String, GameObject)
+        VB: Battlehub.RTEditor.IWindowManager.LoadLayout(System.String, GameObject)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: LoadLayout
+        path: ''
+        startLine: 34867
+      syntax:
+        content:
+          CSharp: void LoadLayout(string name, GameObject tabPrefab = null)
+          VB: Sub LoadLayout(name As String, tabPrefab As GameObject = Nothing)
+        parameters:
+        - id: name
+          type: System.String
+        - id: tabPrefab
+          type: Global.GameObject
+      overload: Battlehub.RTEditor.IWindowManager.LoadLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+    - id: Battlehub.RTEditor.IWindowManager.DeleteLayout(System.String)
+      commentId: M:Battlehub.RTEditor.IWindowManager.DeleteLayout(System.String)
+      language: CSharp
+      name:
+        CSharp: DeleteLayout(String)
+        VB: DeleteLayout(String)
+      nameWithType:
+        CSharp: IWindowManager.DeleteLayout(String)
+        VB: IWindowManager.DeleteLayout(String)
+      qualifiedName:
+        CSharp: Battlehub.RTEditor.IWindowManager.DeleteLayout(System.String)
+        VB: Battlehub.RTEditor.IWindowManager.DeleteLayout(System.String)
+      type: Method
+      assemblies:
+      - cs.temp.dll
+      namespace: Battlehub.RTEditor
+      source:
+        id: DeleteLayout
+        path: ''
+        startLine: 34870
+      syntax:
+        content:
+          CSharp: void DeleteLayout(string name)
+          VB: Sub DeleteLayout(name As String)
+        parameters:
+        - id: name
+          type: System.String
+      overload: Battlehub.RTEditor.IWindowManager.DeleteLayout*
+      modifiers:
+        CSharp: []
+        VB: []
+references:
+  System:
+    name:
+      CSharp:
+      - name: System
+        nameWithType: System
+        qualifiedName: System
+        isExternal: true
+      VB:
+      - name: System
+        nameWithType: System
+        qualifiedName: System
+    isDefinition: true
+    commentId: N:System
+  System.Boolean:
+    name:
+      CSharp:
+      - id: System.Boolean
+        name: Boolean
+        nameWithType: Boolean
+        qualifiedName: System.Boolean
+        isExternal: true
+      VB:
+      - id: System.Boolean
+        name: Boolean
+        nameWithType: Boolean
+        qualifiedName: System.Boolean
+        isExternal: true
+    isDefinition: true
+    parent: System
+    commentId: T:System.Boolean
+  Battlehub.RTEditor.IWindowManager.IsDialogOpened*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.IsDialogOpened*
+        name: IsDialogOpened
+        nameWithType: IWindowManager.IsDialogOpened
+        qualifiedName: Battlehub.RTEditor.IWindowManager.IsDialogOpened
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.IsDialogOpened*
+        name: IsDialogOpened
+        nameWithType: IWindowManager.IsDialogOpened
+        qualifiedName: Battlehub.RTEditor.IWindowManager.IsDialogOpened
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.IsDialogOpened
+  Global.RectTransform:
+    name:
+      CSharp:
+      - id: Global.RectTransform
+        name: RectTransform
+        nameWithType: RectTransform
+        qualifiedName: RectTransform
+        isExternal: true
+      VB:
+      - id: Global.RectTransform
+        name: RectTransform
+        nameWithType: RectTransform
+        qualifiedName: RectTransform
+        isExternal: true
+    isDefinition: true
+  Battlehub.RTEditor.IWindowManager.PopupRoot*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.PopupRoot*
+        name: PopupRoot
+        nameWithType: IWindowManager.PopupRoot
+        qualifiedName: Battlehub.RTEditor.IWindowManager.PopupRoot
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.PopupRoot*
+        name: PopupRoot
+        nameWithType: IWindowManager.PopupRoot
+        qualifiedName: Battlehub.RTEditor.IWindowManager.PopupRoot
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.PopupRoot
+  Global.Transform:
+    name:
+      CSharp:
+      - id: Global.Transform
+        name: Transform
+        nameWithType: Transform
+        qualifiedName: Transform
+        isExternal: true
+      VB:
+      - id: Global.Transform
+        name: Transform
+        nameWithType: Transform
+        qualifiedName: Transform
+        isExternal: true
+    isDefinition: true
+  Battlehub.RTEditor.IWindowManager.ComponentsRoot*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.ComponentsRoot*
+        name: ComponentsRoot
+        nameWithType: IWindowManager.ComponentsRoot
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ComponentsRoot
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.ComponentsRoot*
+        name: ComponentsRoot
+        nameWithType: IWindowManager.ComponentsRoot
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ComponentsRoot
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.ComponentsRoot
+  Global.Action`1:
+    name:
+      CSharp:
+      - id: Global.Action`1
+        name: Action
+        nameWithType: Action
+        qualifiedName: Action
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Action`1
+        name: Action
+        nameWithType: Action
+        qualifiedName: Action
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: true
+  Global.Action{Battlehub.RTEditor.IWindowManager}:
+    name:
+      CSharp:
+      - id: Global.Action`1
+        name: Action
+        nameWithType: Action
+        qualifiedName: Action
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - id: Battlehub.RTEditor.IWindowManager
+        name: IWindowManager
+        nameWithType: IWindowManager
+        qualifiedName: Battlehub.RTEditor.IWindowManager
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Action`1
+        name: Action
+        nameWithType: Action
+        qualifiedName: Action
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - id: Battlehub.RTEditor.IWindowManager
+        name: IWindowManager
+        nameWithType: IWindowManager
+        qualifiedName: Battlehub.RTEditor.IWindowManager
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: false
+    definition: Global.Action`1
+    commentId: '!:Global.Action{Battlehub.RTEditor.IWindowManager}'
+  Global.Action{Transform}:
+    name:
+      CSharp:
+      - id: Global.Action`1
+        name: Action
+        nameWithType: Action
+        qualifiedName: Action
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - id: Global.Transform
+        name: Transform
+        nameWithType: Transform
+        qualifiedName: Transform
+        isExternal: true
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Action`1
+        name: Action
+        nameWithType: Action
+        qualifiedName: Action
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - id: Global.Transform
+        name: Transform
+        nameWithType: Transform
+        qualifiedName: Transform
+        isExternal: true
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: false
+    definition: Global.Action`1
+    commentId: '!:Global.Action{Transform}'
+  Battlehub.RTEditor:
+    name:
+      CSharp:
+      - name: Battlehub.RTEditor
+        nameWithType: Battlehub.RTEditor
+        qualifiedName: Battlehub.RTEditor
+      VB:
+      - name: Battlehub.RTEditor
+        nameWithType: Battlehub.RTEditor
+        qualifiedName: Battlehub.RTEditor
+    isDefinition: true
+    commentId: N:Battlehub.RTEditor
+  Battlehub.RTEditor.Workspace:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.Workspace
+        name: Workspace
+        nameWithType: Workspace
+        qualifiedName: Battlehub.RTEditor.Workspace
+      VB:
+      - id: Battlehub.RTEditor.Workspace
+        name: Workspace
+        nameWithType: Workspace
+        qualifiedName: Battlehub.RTEditor.Workspace
+    isDefinition: true
+    parent: Battlehub.RTEditor
+    commentId: T:Battlehub.RTEditor.Workspace
+  Battlehub.RTEditor.IWindowManager.ActiveWorkspace*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.ActiveWorkspace*
+        name: ActiveWorkspace
+        nameWithType: IWindowManager.ActiveWorkspace
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.ActiveWorkspace*
+        name: ActiveWorkspace
+        nameWithType: IWindowManager.ActiveWorkspace
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.ActiveWorkspace
+  Global.LayoutInfo:
+    name:
+      CSharp:
+      - id: Global.LayoutInfo
+        name: LayoutInfo
+        nameWithType: LayoutInfo
+        qualifiedName: LayoutInfo
+        isExternal: true
+      VB:
+      - id: Global.LayoutInfo
+        name: LayoutInfo
+        nameWithType: LayoutInfo
+        qualifiedName: LayoutInfo
+        isExternal: true
+    isDefinition: true
+  System.String:
+    name:
+      CSharp:
+      - id: System.String
+        name: String
+        nameWithType: String
+        qualifiedName: System.String
+        isExternal: true
+      VB:
+      - id: System.String
+        name: String
+        nameWithType: String
+        qualifiedName: System.String
+        isExternal: true
+    isDefinition: true
+    parent: System
+    commentId: T:System.String
+  Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*
+        name: CreateLayoutInfo
+        nameWithType: IWindowManager.CreateLayoutInfo
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo*
+        name: CreateLayoutInfo
+        nameWithType: IWindowManager.CreateLayoutInfo
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateLayoutInfo
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.CreateLayoutInfo
+  Battlehub.RTEditor.WindowDescriptor:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.WindowDescriptor
+        name: WindowDescriptor
+        nameWithType: WindowDescriptor
+        qualifiedName: Battlehub.RTEditor.WindowDescriptor
+      VB:
+      - id: Battlehub.RTEditor.WindowDescriptor
+        name: WindowDescriptor
+        nameWithType: WindowDescriptor
+        qualifiedName: Battlehub.RTEditor.WindowDescriptor
+    isDefinition: true
+    parent: Battlehub.RTEditor
+    commentId: T:Battlehub.RTEditor.WindowDescriptor
+  Global.Sprite:
+    name:
+      CSharp:
+      - id: Global.Sprite
+        name: Sprite
+        nameWithType: Sprite
+        qualifiedName: Sprite
+        isExternal: true
+      VB:
+      - id: Global.Sprite
+        name: Sprite
+        nameWithType: Sprite
+        qualifiedName: Sprite
+        isExternal: true
+    isDefinition: true
+  Battlehub.RTEditor.IWindowManager.ValidateLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.ValidateLayout*
+        name: ValidateLayout
+        nameWithType: IWindowManager.ValidateLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ValidateLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.ValidateLayout*
+        name: ValidateLayout
+        nameWithType: IWindowManager.ValidateLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ValidateLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.ValidateLayout
+  Global.Func`2:
+    name:
+      CSharp:
+      - id: Global.Func`2
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: ', '
+        nameWithType: ', '
+        qualifiedName: ', '
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Func`2
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: ', '
+        nameWithType: ', '
+        qualifiedName: ', '
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: true
+  Global.Func{Battlehub.RTEditor.IWindowManager,LayoutInfo}:
+    name:
+      CSharp:
+      - id: Global.Func`2
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - id: Battlehub.RTEditor.IWindowManager
+        name: IWindowManager
+        nameWithType: IWindowManager
+        qualifiedName: Battlehub.RTEditor.IWindowManager
+      - name: ', '
+        nameWithType: ', '
+        qualifiedName: ', '
+      - id: Global.LayoutInfo
+        name: LayoutInfo
+        nameWithType: LayoutInfo
+        qualifiedName: LayoutInfo
+        isExternal: true
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Func`2
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - id: Battlehub.RTEditor.IWindowManager
+        name: IWindowManager
+        nameWithType: IWindowManager
+        qualifiedName: Battlehub.RTEditor.IWindowManager
+      - name: ', '
+        nameWithType: ', '
+        qualifiedName: ', '
+      - id: Global.LayoutInfo
+        name: LayoutInfo
+        nameWithType: LayoutInfo
+        qualifiedName: LayoutInfo
+        isExternal: true
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: false
+    definition: Global.Func`2
+    commentId: '!:Global.Func{Battlehub.RTEditor.IWindowManager,LayoutInfo}'
+  Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout*
+        name: OverrideDefaultLayout
+        nameWithType: IWindowManager.OverrideDefaultLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout*
+        name: OverrideDefaultLayout
+        nameWithType: IWindowManager.OverrideDefaultLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.OverrideDefaultLayout
+  Battlehub.RTEditor.IWindowManager.SetDefaultLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetDefaultLayout*
+        name: SetDefaultLayout
+        nameWithType: IWindowManager.SetDefaultLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetDefaultLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetDefaultLayout*
+        name: SetDefaultLayout
+        nameWithType: IWindowManager.SetDefaultLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetDefaultLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetDefaultLayout
+  Global.Func`1:
+    name:
+      CSharp:
+      - id: Global.Func`1
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Func`1
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: true
+    commentId: '!:Global.Func`1'
+  Global.Func{LayoutInfo}:
+    name:
+      CSharp:
+      - id: Global.Func`1
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - id: Global.LayoutInfo
+        name: LayoutInfo
+        nameWithType: LayoutInfo
+        qualifiedName: LayoutInfo
+        isExternal: true
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.Func`1
+        name: Func
+        nameWithType: Func
+        qualifiedName: Func
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - id: Global.LayoutInfo
+        name: LayoutInfo
+        nameWithType: LayoutInfo
+        qualifiedName: LayoutInfo
+        isExternal: true
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: false
+    definition: Global.Func`1
+    commentId: '!:Global.Func{LayoutInfo}'
+  Battlehub.RTEditor.IWindowManager.SetLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetLayout*
+        name: SetLayout
+        nameWithType: IWindowManager.SetLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetLayout*
+        name: SetLayout
+        nameWithType: IWindowManager.SetLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetLayout
+  Battlehub.RTEditor.IWindowManager.GetLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetLayout*
+        name: GetLayout
+        nameWithType: IWindowManager.GetLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetLayout*
+        name: GetLayout
+        nameWithType: IWindowManager.GetLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetLayout
+  Battlehub.RTEditor.IWindowManager.OverrideWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.OverrideWindow*
+        name: OverrideWindow
+        nameWithType: IWindowManager.OverrideWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.OverrideWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.OverrideWindow*
+        name: OverrideWindow
+        nameWithType: IWindowManager.OverrideWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.OverrideWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.OverrideWindow
+  Global.GameObject:
+    name:
+      CSharp:
+      - id: Global.GameObject
+        name: GameObject
+        nameWithType: GameObject
+        qualifiedName: GameObject
+        isExternal: true
+      VB:
+      - id: Global.GameObject
+        name: GameObject
+        nameWithType: GameObject
+        qualifiedName: GameObject
+        isExternal: true
+    isDefinition: true
+  Battlehub.RTEditor.IWindowManager.OverrideTools*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.OverrideTools*
+        name: OverrideTools
+        nameWithType: IWindowManager.OverrideTools
+        qualifiedName: Battlehub.RTEditor.IWindowManager.OverrideTools
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.OverrideTools*
+        name: OverrideTools
+        nameWithType: IWindowManager.OverrideTools
+        qualifiedName: Battlehub.RTEditor.IWindowManager.OverrideTools
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.OverrideTools
+  Battlehub.RTEditor.IWindowManager.SetTools*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetTools*
+        name: SetTools
+        nameWithType: IWindowManager.SetTools
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetTools
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetTools*
+        name: SetTools
+        nameWithType: IWindowManager.SetTools
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetTools
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetTools
+  Battlehub.RTEditor.IWindowManager.SetLeftBar*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetLeftBar*
+        name: SetLeftBar
+        nameWithType: IWindowManager.SetLeftBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetLeftBar
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetLeftBar*
+        name: SetLeftBar
+        nameWithType: IWindowManager.SetLeftBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetLeftBar
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetLeftBar
+  Battlehub.RTEditor.IWindowManager.SetRightBar*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetRightBar*
+        name: SetRightBar
+        nameWithType: IWindowManager.SetRightBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetRightBar
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetRightBar*
+        name: SetRightBar
+        nameWithType: IWindowManager.SetRightBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetRightBar
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetRightBar
+  Battlehub.RTEditor.IWindowManager.SetTopBar*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetTopBar*
+        name: SetTopBar
+        nameWithType: IWindowManager.SetTopBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetTopBar
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetTopBar*
+        name: SetTopBar
+        nameWithType: IWindowManager.SetTopBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetTopBar
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetTopBar
+  Battlehub.RTEditor.IWindowManager.SetBottomBar*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetBottomBar*
+        name: SetBottomBar
+        nameWithType: IWindowManager.SetBottomBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetBottomBar
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetBottomBar*
+        name: SetBottomBar
+        nameWithType: IWindowManager.SetBottomBar
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetBottomBar
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetBottomBar
+  Battlehub.RTEditor.IWindowManager.IsWindowRegistered*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.IsWindowRegistered*
+        name: IsWindowRegistered
+        nameWithType: IWindowManager.IsWindowRegistered
+        qualifiedName: Battlehub.RTEditor.IWindowManager.IsWindowRegistered
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.IsWindowRegistered*
+        name: IsWindowRegistered
+        nameWithType: IWindowManager.IsWindowRegistered
+        qualifiedName: Battlehub.RTEditor.IWindowManager.IsWindowRegistered
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.IsWindowRegistered
+  Battlehub.RTEditor.CustomWindowDescriptor:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.CustomWindowDescriptor
+        name: CustomWindowDescriptor
+        nameWithType: CustomWindowDescriptor
+        qualifiedName: Battlehub.RTEditor.CustomWindowDescriptor
+      VB:
+      - id: Battlehub.RTEditor.CustomWindowDescriptor
+        name: CustomWindowDescriptor
+        nameWithType: CustomWindowDescriptor
+        qualifiedName: Battlehub.RTEditor.CustomWindowDescriptor
+    isDefinition: true
+    parent: Battlehub.RTEditor
+    commentId: T:Battlehub.RTEditor.CustomWindowDescriptor
+  Battlehub.RTEditor.IWindowManager.RegisterWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.RegisterWindow*
+        name: RegisterWindow
+        nameWithType: IWindowManager.RegisterWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.RegisterWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.RegisterWindow*
+        name: RegisterWindow
+        nameWithType: IWindowManager.RegisterWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.RegisterWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.RegisterWindow
+  Battlehub.RTEditor.IWindowManager.GetWindowDescriptor*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor*
+        name: GetWindowDescriptor
+        nameWithType: IWindowManager.GetWindowDescriptor
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor*
+        name: GetWindowDescriptor
+        nameWithType: IWindowManager.GetWindowDescriptor
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindowDescriptor
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetWindowDescriptor
+  Battlehub.RTEditor.IWindowManager.GetWindowTypeName*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindowTypeName*
+        name: GetWindowTypeName
+        nameWithType: IWindowManager.GetWindowTypeName
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindowTypeName
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindowTypeName*
+        name: GetWindowTypeName
+        nameWithType: IWindowManager.GetWindowTypeName
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindowTypeName
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetWindowTypeName
+  Battlehub.RTEditor.IWindowManager.GetWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindow*
+        name: GetWindow
+        nameWithType: IWindowManager.GetWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindow*
+        name: GetWindow
+        nameWithType: IWindowManager.GetWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetWindow
+  Global.Transform[]:
+    name:
+      CSharp:
+      - id: Global.Transform
+        name: Transform
+        nameWithType: Transform
+        qualifiedName: Transform
+        isExternal: true
+      - name: '[]'
+        nameWithType: '[]'
+        qualifiedName: '[]'
+      VB:
+      - id: Global.Transform
+        name: Transform
+        nameWithType: Transform
+        qualifiedName: Transform
+        isExternal: true
+      - name: ()
+        nameWithType: ()
+        qualifiedName: ()
+    isDefinition: false
+  Battlehub.RTEditor.IWindowManager.GetWindows*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindows*
+        name: GetWindows
+        nameWithType: IWindowManager.GetWindows
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindows
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetWindows*
+        name: GetWindows
+        nameWithType: IWindowManager.GetWindows
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetWindows
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetWindows
+  Battlehub.RTEditor.IWindowManager.GetComponents*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetComponents*
+        name: GetComponents
+        nameWithType: IWindowManager.GetComponents
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetComponents
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetComponents*
+        name: GetComponents
+        nameWithType: IWindowManager.GetComponents
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetComponents
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetComponents
+  Battlehub.RTEditor.IWindowManager.Exists*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.Exists*
+        name: Exists
+        nameWithType: IWindowManager.Exists
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Exists
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.Exists*
+        name: Exists
+        nameWithType: IWindowManager.Exists
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Exists
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.Exists
+  Battlehub.RTEditor.IWindowManager.IsActive*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.IsActive*
+        name: IsActive
+        nameWithType: IWindowManager.IsActive
+        qualifiedName: Battlehub.RTEditor.IWindowManager.IsActive
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.IsActive*
+        name: IsActive
+        nameWithType: IWindowManager.IsActive
+        qualifiedName: Battlehub.RTEditor.IWindowManager.IsActive
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.IsActive
+  Global.RuntimeWindow:
+    name:
+      CSharp:
+      - id: Global.RuntimeWindow
+        name: RuntimeWindow
+        nameWithType: RuntimeWindow
+        qualifiedName: RuntimeWindow
+        isExternal: true
+      VB:
+      - id: Global.RuntimeWindow
+        name: RuntimeWindow
+        nameWithType: RuntimeWindow
+        qualifiedName: RuntimeWindow
+        isExternal: true
+    isDefinition: true
+    commentId: '!:Global.RuntimeWindow'
+  Battlehub.RTEditor.IWindowManager.FindPointerOverWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow*
+        name: FindPointerOverWindow
+        nameWithType: IWindowManager.FindPointerOverWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow*
+        name: FindPointerOverWindow
+        nameWithType: IWindowManager.FindPointerOverWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.FindPointerOverWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.FindPointerOverWindow
+  Battlehub.RTEditor.IWindowManager.ActivateWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.ActivateWindow*
+        name: ActivateWindow
+        nameWithType: IWindowManager.ActivateWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ActivateWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.ActivateWindow*
+        name: ActivateWindow
+        nameWithType: IWindowManager.ActivateWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ActivateWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.ActivateWindow
+  Battlehub.RTEditor.IWindowManager.CreateWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.CreateWindow*
+        name: CreateWindow
+        nameWithType: IWindowManager.CreateWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.CreateWindow*
+        name: CreateWindow
+        nameWithType: IWindowManager.CreateWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.CreateWindow
+  Global.RegionSplitType:
+    name:
+      CSharp:
+      - id: Global.RegionSplitType
+        name: RegionSplitType
+        nameWithType: RegionSplitType
+        qualifiedName: RegionSplitType
+        isExternal: true
+      VB:
+      - id: Global.RegionSplitType
+        name: RegionSplitType
+        nameWithType: RegionSplitType
+        qualifiedName: RegionSplitType
+        isExternal: true
+    isDefinition: true
+    commentId: '!:Global.RegionSplitType'
+  System.Single:
+    name:
+      CSharp:
+      - id: System.Single
+        name: Single
+        nameWithType: Single
+        qualifiedName: System.Single
+        isExternal: true
+      VB:
+      - id: System.Single
+        name: Single
+        nameWithType: Single
+        qualifiedName: System.Single
+        isExternal: true
+    isDefinition: true
+    parent: System
+    commentId: T:System.Single
+  Battlehub.RTEditor.IWindowManager.CreatePopup*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.CreatePopup*
+        name: CreatePopup
+        nameWithType: IWindowManager.CreatePopup
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreatePopup
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.CreatePopup*
+        name: CreatePopup
+        nameWithType: IWindowManager.CreatePopup
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreatePopup
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.CreatePopup
+  Global.Vector3:
+    name:
+      CSharp:
+      - id: Global.Vector3
+        name: Vector3
+        nameWithType: Vector3
+        qualifiedName: Vector3
+        isExternal: true
+      VB:
+      - id: Global.Vector3
+        name: Vector3
+        nameWithType: Vector3
+        qualifiedName: Vector3
+        isExternal: true
+    isDefinition: true
+    commentId: '!:Global.Vector3'
+  Global.Vector2:
+    name:
+      CSharp:
+      - id: Global.Vector2
+        name: Vector2
+        nameWithType: Vector2
+        qualifiedName: Vector2
+        isExternal: true
+      VB:
+      - id: Global.Vector2
+        name: Vector2
+        nameWithType: Vector2
+        qualifiedName: Vector2
+        isExternal: true
+    isDefinition: true
+  Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle*
+        name: ScreenPointToLocalPointInRectangle
+        nameWithType: IWindowManager.ScreenPointToLocalPointInRectangle
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle*
+        name: ScreenPointToLocalPointInRectangle
+        nameWithType: IWindowManager.ScreenPointToLocalPointInRectangle
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.ScreenPointToLocalPointInRectangle
+  Battlehub.RTEditor.IWindowManager.CreateDropdown*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.CreateDropdown*
+        name: CreateDropdown
+        nameWithType: IWindowManager.CreateDropdown
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateDropdown
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.CreateDropdown*
+        name: CreateDropdown
+        nameWithType: IWindowManager.CreateDropdown
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateDropdown
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.CreateDropdown
+  Battlehub.RTEditor.IWindowManager.SetWindowArgs*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetWindowArgs*
+        name: SetWindowArgs
+        nameWithType: IWindowManager.SetWindowArgs
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetWindowArgs
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetWindowArgs*
+        name: SetWindowArgs
+        nameWithType: IWindowManager.SetWindowArgs
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetWindowArgs
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetWindowArgs
+  Battlehub.RTEditor.IWindowManager.DestroyWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.DestroyWindow*
+        name: DestroyWindow
+        nameWithType: IWindowManager.DestroyWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DestroyWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.DestroyWindow*
+        name: DestroyWindow
+        nameWithType: IWindowManager.DestroyWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DestroyWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.DestroyWindow
+  Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType*
+        name: DestroyWindowsOfType
+        nameWithType: IWindowManager.DestroyWindowsOfType
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType*
+        name: DestroyWindowsOfType
+        nameWithType: IWindowManager.DestroyWindowsOfType
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.DestroyWindowsOfType
+  Global.DialogAction`1:
+    name:
+      CSharp:
+      - id: Global.DialogAction`1
+        name: DialogAction
+        nameWithType: DialogAction
+        qualifiedName: DialogAction
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.DialogAction`1
+        name: DialogAction
+        nameWithType: DialogAction
+        qualifiedName: DialogAction
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - name: ''
+        nameWithType: ''
+        qualifiedName: ''
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: true
+  Global.DialogAction{DialogCancelArgs}:
+    name:
+      CSharp:
+      - id: Global.DialogAction`1
+        name: DialogAction
+        nameWithType: DialogAction
+        qualifiedName: DialogAction
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - id: Global.DialogCancelArgs
+        name: DialogCancelArgs
+        nameWithType: DialogCancelArgs
+        qualifiedName: DialogCancelArgs
+        isExternal: true
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.DialogAction`1
+        name: DialogAction
+        nameWithType: DialogAction
+        qualifiedName: DialogAction
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - id: Global.DialogCancelArgs
+        name: DialogCancelArgs
+        nameWithType: DialogCancelArgs
+        qualifiedName: DialogCancelArgs
+        isExternal: true
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: false
+    definition: Global.DialogAction`1
+    commentId: '!:Global.DialogAction{DialogCancelArgs}'
+  Battlehub.RTEditor.IWindowManager.CreateDialogWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.CreateDialogWindow*
+        name: CreateDialogWindow
+        nameWithType: IWindowManager.CreateDialogWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateDialogWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.CreateDialogWindow*
+        name: CreateDialogWindow
+        nameWithType: IWindowManager.CreateDialogWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CreateDialogWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.CreateDialogWindow
+  Battlehub.RTEditor.IWindowManager.DestroyDialogWindow*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow*
+        name: DestroyDialogWindow
+        nameWithType: IWindowManager.DestroyDialogWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow*
+        name: DestroyDialogWindow
+        nameWithType: IWindowManager.DestroyDialogWindow
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DestroyDialogWindow
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.DestroyDialogWindow
+  Battlehub.RTEditor.IWindowManager.MessageBox*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.MessageBox*
+        name: MessageBox
+        nameWithType: IWindowManager.MessageBox
+        qualifiedName: Battlehub.RTEditor.IWindowManager.MessageBox
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.MessageBox*
+        name: MessageBox
+        nameWithType: IWindowManager.MessageBox
+        qualifiedName: Battlehub.RTEditor.IWindowManager.MessageBox
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.MessageBox
+  Battlehub.RTEditor.IWindowManager.Confirmation*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.Confirmation*
+        name: Confirmation
+        nameWithType: IWindowManager.Confirmation
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Confirmation
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.Confirmation*
+        name: Confirmation
+        nameWithType: IWindowManager.Confirmation
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Confirmation
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.Confirmation
+  Global.DialogAction{Battlehub.RTEditor.PromptDialogArgs}:
+    name:
+      CSharp:
+      - id: Global.DialogAction`1
+        name: DialogAction
+        nameWithType: DialogAction
+        qualifiedName: DialogAction
+        isExternal: true
+      - name: <
+        nameWithType: <
+        qualifiedName: <
+      - id: Battlehub.RTEditor.PromptDialogArgs
+        name: PromptDialogArgs
+        nameWithType: PromptDialogArgs
+        qualifiedName: Battlehub.RTEditor.PromptDialogArgs
+      - name: '>'
+        nameWithType: '>'
+        qualifiedName: '>'
+      VB:
+      - id: Global.DialogAction`1
+        name: DialogAction
+        nameWithType: DialogAction
+        qualifiedName: DialogAction
+        isExternal: true
+      - name: '(Of '
+        nameWithType: '(Of '
+        qualifiedName: '(Of '
+      - id: Battlehub.RTEditor.PromptDialogArgs
+        name: PromptDialogArgs
+        nameWithType: PromptDialogArgs
+        qualifiedName: Battlehub.RTEditor.PromptDialogArgs
+      - name: )
+        nameWithType: )
+        qualifiedName: )
+    isDefinition: false
+    definition: Global.DialogAction`1
+    commentId: '!:Global.DialogAction{Battlehub.RTEditor.PromptDialogArgs}'
+  Battlehub.RTEditor.IWindowManager.Prompt*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.Prompt*
+        name: Prompt
+        nameWithType: IWindowManager.Prompt
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Prompt
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.Prompt*
+        name: Prompt
+        nameWithType: IWindowManager.Prompt
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Prompt
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.Prompt
+  Battlehub.RTEditor.IWindowManager.Dialog*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.Dialog*
+        name: Dialog
+        nameWithType: IWindowManager.Dialog
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Dialog
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.Dialog*
+        name: Dialog
+        nameWithType: IWindowManager.Dialog
+        qualifiedName: Battlehub.RTEditor.IWindowManager.Dialog
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.Dialog
+  Battlehub.RTEditor.IWindowManager.CopyTransform*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.CopyTransform*
+        name: CopyTransform
+        nameWithType: IWindowManager.CopyTransform
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CopyTransform
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.CopyTransform*
+        name: CopyTransform
+        nameWithType: IWindowManager.CopyTransform
+        qualifiedName: Battlehub.RTEditor.IWindowManager.CopyTransform
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.CopyTransform
+  Battlehub.RTEditor.IWindowManager.SetTransform*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetTransform*
+        name: SetTransform
+        nameWithType: IWindowManager.SetTransform
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetTransform
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetTransform*
+        name: SetTransform
+        nameWithType: IWindowManager.SetTransform
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetTransform
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetTransform
+  Battlehub.RTEditor.IWindowManager.GetHeaderText*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetHeaderText*
+        name: GetHeaderText
+        nameWithType: IWindowManager.GetHeaderText
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetHeaderText
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetHeaderText*
+        name: GetHeaderText
+        nameWithType: IWindowManager.GetHeaderText
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetHeaderText
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetHeaderText
+  Battlehub.RTEditor.IWindowManager.SetHeaderText*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetHeaderText*
+        name: SetHeaderText
+        nameWithType: IWindowManager.SetHeaderText
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetHeaderText
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetHeaderText*
+        name: SetHeaderText
+        nameWithType: IWindowManager.SetHeaderText
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetHeaderText
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetHeaderText
+  Battlehub.RTEditor.IWindowManager.GetHeaderIcon*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.GetHeaderIcon*
+        name: GetHeaderIcon
+        nameWithType: IWindowManager.GetHeaderIcon
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetHeaderIcon
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.GetHeaderIcon*
+        name: GetHeaderIcon
+        nameWithType: IWindowManager.GetHeaderIcon
+        qualifiedName: Battlehub.RTEditor.IWindowManager.GetHeaderIcon
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.GetHeaderIcon
+  Battlehub.RTEditor.IWindowManager.SetHeaderIcon*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SetHeaderIcon*
+        name: SetHeaderIcon
+        nameWithType: IWindowManager.SetHeaderIcon
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetHeaderIcon
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SetHeaderIcon*
+        name: SetHeaderIcon
+        nameWithType: IWindowManager.SetHeaderIcon
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SetHeaderIcon
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SetHeaderIcon
+  Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate*
+        name: ForceLayoutUpdate
+        nameWithType: IWindowManager.ForceLayoutUpdate
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate*
+        name: ForceLayoutUpdate
+        nameWithType: IWindowManager.ForceLayoutUpdate
+        qualifiedName: Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.ForceLayoutUpdate
+  Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName*
+        name: DefaultPersistentLayoutName
+        nameWithType: IWindowManager.DefaultPersistentLayoutName
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName*
+        name: DefaultPersistentLayoutName
+        nameWithType: IWindowManager.DefaultPersistentLayoutName
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.DefaultPersistentLayoutName
+  Battlehub.RTEditor.IWindowManager.LayoutExist*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.LayoutExist*
+        name: LayoutExist
+        nameWithType: IWindowManager.LayoutExist
+        qualifiedName: Battlehub.RTEditor.IWindowManager.LayoutExist
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.LayoutExist*
+        name: LayoutExist
+        nameWithType: IWindowManager.LayoutExist
+        qualifiedName: Battlehub.RTEditor.IWindowManager.LayoutExist
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.LayoutExist
+  Battlehub.RTEditor.IWindowManager.SaveLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.SaveLayout*
+        name: SaveLayout
+        nameWithType: IWindowManager.SaveLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SaveLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.SaveLayout*
+        name: SaveLayout
+        nameWithType: IWindowManager.SaveLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.SaveLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.SaveLayout
+  Battlehub.RTEditor.IWindowManager.LoadLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.LoadLayout*
+        name: LoadLayout
+        nameWithType: IWindowManager.LoadLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.LoadLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.LoadLayout*
+        name: LoadLayout
+        nameWithType: IWindowManager.LoadLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.LoadLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.LoadLayout
+  Battlehub.RTEditor.IWindowManager.DeleteLayout*:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager.DeleteLayout*
+        name: DeleteLayout
+        nameWithType: IWindowManager.DeleteLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DeleteLayout
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager.DeleteLayout*
+        name: DeleteLayout
+        nameWithType: IWindowManager.DeleteLayout
+        qualifiedName: Battlehub.RTEditor.IWindowManager.DeleteLayout
+    isDefinition: true
+    commentId: Overload:Battlehub.RTEditor.IWindowManager.DeleteLayout
+  Battlehub.RTEditor.IWindowManager:
+    name:
+      CSharp:
+      - id: Battlehub.RTEditor.IWindowManager
+        name: IWindowManager
+        nameWithType: IWindowManager
+        qualifiedName: Battlehub.RTEditor.IWindowManager
+      VB:
+      - id: Battlehub.RTEditor.IWindowManager
+        name: IWindowManager
+        nameWithType: IWindowManager
+        qualifiedName: Battlehub.RTEditor.IWindowManager
+    isDefinition: true
+    commentId: T:Battlehub.RTEditor.IWindowManager

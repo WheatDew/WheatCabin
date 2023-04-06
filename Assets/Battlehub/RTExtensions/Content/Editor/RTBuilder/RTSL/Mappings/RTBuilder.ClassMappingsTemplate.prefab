@@ -1,0 +1,368 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3326680343840182035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3059296721070677611}
+  - component: {fileID: 5354504965617642856}
+  m_Layer: 0
+  m_Name: RTBuilder.ClassMappingsTemplate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3059296721070677611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326680343840182035}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 532495373795424201}
+  - {fileID: 9077863808712678556}
+  - {fileID: 4657209663012205791}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5354504965617642856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326680343840182035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1231a511ac909f64eb91de5a7253a6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  PatchCounter: 4
+--- !u!1 &4371749913559535503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532495373795424201}
+  - component: {fileID: 9209254151979453530}
+  m_Layer: 0
+  m_Name: Battlehub.RTBuilder.MaterialPalette
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &532495373795424201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371749913559535503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3059296721070677611}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9209254151979453530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371749913559535503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 1
+  IsLocked: 0
+  PersistentPropertyTag: 1
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.RTBuilder
+  MappedTypeName: MaterialPalette
+  MappedTypeGUID: 18564e14-eead-4a0f-9773-33aae7b7583b
+  PersistentNamespace: Battlehub.RTBuilder.Battlehub.SL2
+  PersistentTypeName: PersistentMaterialPalette
+  PersistentTypeGUID: b09b22a8-d7cc-4184-9bc0-fe605731fefb
+  PersistentBaseNamespace: UnityEngine.Battlehub.SL2
+  PersistentBaseTypeName: PersistentMonoBehaviour
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 1
+    PersistentNamespace: System.Collections.Generic.Battlehub.SL2
+    PersistentTypeName: List`1[[UnityEngine.Material, UnityEngine.CoreModule]]
+    PersistentName: Materials
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System.Collections.Generic
+    MappedTypeName: List`1[[UnityEngine.Material, UnityEngine.CoreModule]]
+    MappedName: Materials
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 1
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+--- !u!1 &5048600099416438020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9077863808712678556}
+  - component: {fileID: 5962252758436081101}
+  m_Layer: 0
+  m_Name: Battlehub.ProBuilderIntegration.PBMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9077863808712678556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5048600099416438020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3059296721070677611}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5962252758436081101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5048600099416438020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 1
+  IsLocked: 0
+  PersistentPropertyTag: 3
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.ProBuilderIntegration
+  MappedTypeName: PBMesh
+  MappedTypeGUID: 72a7b756-6651-4a48-ad31-91e180873d46
+  PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+  PersistentTypeName: PersistentPBMesh
+  PersistentTypeGUID: f32ec8a9-92fb-429e-8c2e-5aef6336be5a
+  PersistentBaseNamespace: UnityEngine.Battlehub.SL2
+  PersistentBaseTypeName: PersistentMonoBehaviour
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 1
+    PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+    PersistentTypeName: PBFace[]
+    PersistentName: Faces
+    MappedAssemblyName: Battlehub.RTExtensions
+    MappedNamespace: Battlehub.ProBuilderIntegration
+    MappedTypeName: PBFace[]
+    MappedName: Faces
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 2
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Vector3[]
+    PersistentName: Positions
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Vector3[]
+    MappedName: Positions
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 3
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Vector2[]
+    PersistentName: Textures
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Vector2[]
+    MappedName: Textures
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+--- !u!1 &8834426897637443271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4657209663012205791}
+  - component: {fileID: 6010460728200963748}
+  m_Layer: 0
+  m_Name: Battlehub.ProBuilderIntegration.PBPolyShape
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4657209663012205791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8834426897637443271}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3059296721070677611}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6010460728200963748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8834426897637443271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 1
+  IsLocked: 0
+  PersistentPropertyTag: 5
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.ProBuilderIntegration
+  MappedTypeName: PBPolyShape
+  MappedTypeGUID: 6ffca28a-9868-4043-8efe-b9b4635cac1d
+  PersistentNamespace: Battlehub.ProBuilderIntegration.Battlehub.SL2
+  PersistentTypeName: PersistentPBPolyShape
+  PersistentTypeGUID: 063a4816-7c89-4018-a21f-e993df2d911b
+  PersistentBaseNamespace: UnityEngine.Battlehub.SL2
+  PersistentBaseTypeName: PersistentMonoBehaviour
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 0
+    IsProperty: 1
+    PersistentTag: 1
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Boolean
+    PersistentName: IsEditing
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Boolean
+    MappedName: IsEditing
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 2
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32
+    PersistentName: Stage
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32
+    MappedName: Stage
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 3
+    PersistentNamespace: System.Collections.Generic.Battlehub.SL2
+    PersistentTypeName: List`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]
+    PersistentName: Positions
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System.Collections.Generic
+    MappedTypeName: List`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]
+    MappedName: Positions
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 0
+    IsProperty: 1
+    PersistentTag: 4
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32
+    PersistentName: SelectedIndex
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32
+    MappedName: SelectedIndex
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 0
+    IsProperty: 1
+    PersistentTag: 5
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Vector3
+    PersistentName: SelectedPosition
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Vector3
+    MappedName: SelectedPosition
+    UseSurrogate: 1
+    UseSurrogate2: 1
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0

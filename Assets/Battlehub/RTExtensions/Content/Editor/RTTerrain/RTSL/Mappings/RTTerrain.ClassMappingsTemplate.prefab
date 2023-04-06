@@ -1,0 +1,366 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3326680343840182035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3059296721070677611}
+  - component: {fileID: 5354504965617642856}
+  m_Layer: 0
+  m_Name: RTTerrain.ClassMappingsTemplate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3059296721070677611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326680343840182035}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9177841820622524030}
+  - {fileID: 6616384902330217641}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5354504965617642856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326680343840182035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1231a511ac909f64eb91de5a7253a6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  PatchCounter: 4
+--- !u!1 &4178846667452585530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6616384902330217641}
+  - component: {fileID: 3523913175430878140}
+  m_Layer: 0
+  m_Name: Battlehub.RTTerrain.TerrainToolState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6616384902330217641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4178846667452585530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3059296721070677611}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3523913175430878140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4178846667452585530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 1
+  IsLocked: 0
+  PersistentPropertyTag: 11
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.RTTerrain
+  MappedTypeName: TerrainToolState
+  MappedTypeGUID: 76c9ec0f-7072-43d2-a0c8-452bfb32dfaa
+  PersistentNamespace: Battlehub.RTTerrain.Battlehub.SL2
+  PersistentTypeName: PersistentTerrainToolState
+  PersistentTypeGUID: 611f9581-5070-46fd-8832-9aa4d1c886a6
+  PersistentBaseNamespace: UnityEngine.Battlehub.SL2
+  PersistentBaseTypeName: PersistentMonoBehaviour
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 1
+    PersistentNamespace: Battlehub.RTTerrain.Battlehub.SL2
+    PersistentTypeName: TerrainSelectionHandlesTool+Interpolation
+    PersistentName: Interpolation
+    MappedAssemblyName: Battlehub.RTEditor
+    MappedNamespace: Battlehub.RTTerrain
+    MappedTypeName: TerrainSelectionHandlesTool+Interpolation
+    MappedName: Interpolation
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 2
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single
+    PersistentName: Height
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single
+    MappedName: Height
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 3
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single
+    PersistentName: ZSize
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single
+    MappedName: ZSize
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 4
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single
+    PersistentName: XSize
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single
+    MappedName: XSize
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 0
+    IsProperty: 0
+    PersistentTag: 5
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32
+    PersistentName: Spacing
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32
+    MappedName: Spacing
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 6
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single
+    PersistentName: ZSpacing
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single
+    MappedName: ZSpacing
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 7
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single
+    PersistentName: XSpacing
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single
+    MappedName: XSpacing
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 0
+    IsProperty: 0
+    PersistentTag: 8
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Int32
+    PersistentName: Size
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Int32
+    MappedName: Size
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 9
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single[]
+    PersistentName: Grid
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single[]
+    MappedName: Grid
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 10
+    PersistentNamespace: System.Battlehub.SL2
+    PersistentTypeName: Single[]
+    PersistentName: HeightMap
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System
+    MappedTypeName: Single[]
+    MappedName: HeightMap
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 0
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 1
+    IsProperty: 0
+    PersistentTag: 11
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Texture2D
+    PersistentName: CutoutTexture
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Texture2D
+    MappedName: CutoutTexture
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 1
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+--- !u!1 &5588638021568917852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9177841820622524030}
+  - component: {fileID: 5295853850262077158}
+  m_Layer: 0
+  m_Name: Battlehub.RTTerrain.TerrainBrushSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9177841820622524030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588638021568917852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3059296721070677611}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5295853850262077158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588638021568917852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0530efbda98e7b4f8991b85a6e01467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Version: 2.26
+  IsSelected: 1
+  IsLocked: 0
+  PersistentPropertyTag: 4
+  PersistentSubclassTag: 0
+  MappedAssemblyName: Battlehub.RTExtensions
+  MappedNamespace: Battlehub.RTTerrain
+  MappedTypeName: TerrainBrushSource
+  MappedTypeGUID: 45ec761a-d38b-482b-87cb-248c268baba4
+  PersistentNamespace: Battlehub.RTTerrain.Battlehub.SL2
+  PersistentTypeName: PersistentTerrainBrushSource
+  PersistentTypeGUID: 62586cd1-a925-48cc-8653-960fc8453900
+  PersistentBaseNamespace: UnityEngine.Battlehub.SL2
+  PersistentBaseTypeName: PersistentMonoBehaviour
+  CreateCustomImplementation: 0
+  UseTemplate: 1
+  Subclasses: []
+  PropertyMappings:
+  - IsEnabled: 1
+    IsProperty: 1
+    PersistentTag: 3
+    PersistentNamespace: UnityEngine.Battlehub.SL2
+    PersistentTypeName: Texture2D[]
+    PersistentName: UserTextures
+    MappedAssemblyName: UnityEngine.CoreModule
+    MappedNamespace: UnityEngine
+    MappedTypeName: Texture2D[]
+    MappedName: UserTextures
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 1
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0
+  - IsEnabled: 0
+    IsProperty: 1
+    PersistentTag: 4
+    PersistentNamespace: System.Collections.Generic.Battlehub.SL2
+    PersistentTypeName: List`1[[UnityEngine.Sprite, UnityEngine.CoreModule]]
+    PersistentName: UserBrushes
+    MappedAssemblyName: mscorlib
+    MappedNamespace: System.Collections.Generic
+    MappedTypeName: List`1[[UnityEngine.Sprite, UnityEngine.CoreModule]]
+    MappedName: UserBrushes
+    UseSurrogate: 0
+    UseSurrogate2: 0
+    HasDependenciesOrIsDependencyItself: 1
+    IsNonPublic: 0
+    HasPropertyInTemplate: 0

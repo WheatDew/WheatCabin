@@ -1,0 +1,1 @@
+Import new persistent class mappings using Tools->Runtime SaveLoad->PersistentClasses->Import Mappings.

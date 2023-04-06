@@ -1,0 +1,46 @@
+﻿using Battlehub.RTCommon;
+using Battlehub.UIControls.MenuControl;
+using UnityEngine;
+
+namespace Battlehub.RTEditor
+{
+    [MenuDefinition]
+    public class #SCRIPTNAME# : EditorExtension
+    {
+        [SerializeField]
+        private GameObject m_prefab = null;
+
+        protected override void OnEditorExist()
+        {
+            base.OnEditorExist();
+
+            IWindowManager wm = IOC.Resolve<IWindowManager>();
+            Sprite icon = null;
+            bool isDialog = false;
+            RegisterWindow(wm, "#WINDOWNAME#", "#WINDOWNAME#", icon, m_prefab, isDialog);
+        }
+
+        private void RegisterWindow(IWindowManager wm, string typeName, string header, Sprite icon, GameObject prefab, bool isDialog)
+        {
+            wm.RegisterWindow(new CustomWindowDescriptor
+            {
+                IsDialog = isDialog,
+                TypeName = typeName,
+                Descriptor = new WindowDescriptor
+                {
+                    Header = header,
+                    Icon = icon,
+                    MaxWindows = 1,
+                    ContentPrefab = prefab
+                }
+            });
+        }
+
+        [MenuCommand("MenuWindow/#WINDOWNAME#", "", true)]
+        public static void Open()
+        {
+            IWindowManager wm = IOC.Resolve<IWindowManager>();
+            wm.CreateWindow("#WINDOWNAME#");
+        }
+    }
+}
