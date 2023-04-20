@@ -4,12 +4,15 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 using Battlehub.RTHandles;
+using System.Windows.Forms;
+using SkyWhale;
 //using UnityEditor.Callbacks;
 
 public class SMapEditor : MonoBehaviour
 {
     public Dictionary<string,Transform> childLayerList=new Dictionary<string, Transform>();
-    public Dictionary<string,string> abpackList=new Dictionary<string,string>();
+    public Dictionary<string,AssetBundle> assetBundleMap=new Dictionary<string,AssetBundle>();
+    public Dictionary<string,GameObject> storeItemMap=new Dictionary<string, GameObject>();
     public Transform childLayer;
     public RuntimeSceneComponent runtimeSceneComponent;
     public MapEditorData currentMapEditorData;
@@ -17,6 +20,7 @@ public class SMapEditor : MonoBehaviour
     public void Awake()
     {
         InitMapEditor();
+        print("MapEditor Awake");
     }
 
     private void Start()
@@ -48,6 +52,7 @@ public class SMapEditor : MonoBehaviour
         //MapEditorData data = new();
         //data.ChildLayer.Add("Terrain");
         //data.ChildLayer.Add("Water");
+        //data.AssetBundleMap.Add("SkyWhale", "skywhale.editor");
         //File.WriteAllText("Core/MapEditor/Data/MapEditor.json", JsonMapper.ToJson(data));
 
 
@@ -67,41 +72,51 @@ public class SMapEditor : MonoBehaviour
         runtimeSceneComponent.cameraPosition = currentMapEditorData.CameraPosition;
         runtimeSceneComponent.cameraRotation = currentMapEditorData.CameraRotation;
         //初始化资源包列表
-        foreach(var item in currentMapEditorData.ABPackList)
+        foreach(var item in currentMapEditorData.AssetBundleMap)
         {
-            abpackList.Add(item.name,item.path);
+            if (SAssetBundle.Instance == null)
+            {
+                Debug.LogError("ab包实例为空");
+            }
+            assetBundleMap.Add(item.Key,SAssetBundle.Instance.Load(item.Value));
         }
         //初始化资源
         InitMapEditorAsset();
+
+        InitDragStoreAsset();
     }
 
     public void InitMapEditorAsset()
     {
-        AssetBundle ab = AssetBundle.LoadFromFile("Core/AssetBundles/StandaloneWindows/skywhale.editor");
-        var go = ab.LoadAsset<GameObject>("TestTerrain");
+        var go = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestTerrain");
         Instantiate(go, childLayerList["Terrain"]);
-        var go1 = ab.LoadAsset<GameObject>("TestWater");
+        var go1 = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestWater");
         Instantiate(go1, childLayerList["Water"]);
+    }
+
+    public void InitDragStoreAsset()
+    {
+        BuildingList buildingList = JsonMapper.ToObject<BuildingList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
+        for(int i=0;i<buildingList.buildings.Length;i++)
+        {
+            Debug.Log(buildingList.buildings[i]);
+        }
     }
 }
 
 public class MapEditorData
 {
     public List<string> ChildLayer;
-    public List<ABPack> ABPackList;
+    public Dictionary<string,string> AssetBundleMap;
     public Vector3 CameraPosition;
     public Quaternion CameraRotation;
     public MapEditorData()
     {
         ChildLayer = new List<string>();
-        ABPackList = new List<ABPack>();
+        AssetBundleMap = new Dictionary<string, string>();
         CameraPosition = Vector3.zero;
         CameraRotation = Quaternion.identity;
     }
 }
 
-public class ABPack
-{
-    public string name, path;
-}
 
