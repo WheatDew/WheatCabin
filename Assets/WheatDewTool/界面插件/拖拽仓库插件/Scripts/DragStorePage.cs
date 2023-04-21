@@ -17,7 +17,7 @@ public class DragStorePage : MonoBehaviour
 
     public bool inBorder=false;
 
-    public UnityEvent DragEndEvent;
+    public UnityEvent<string> DragEndEvent;
     public UnityEvent InitEvent;
 
     private void Start()
@@ -33,17 +33,14 @@ public class DragStorePage : MonoBehaviour
         }
     }
 
-    public void CreateElement()
+    public void CreateElement(string elementName)
     {
         var obj = Instantiate(elementPrefab, elementParent);
         obj.dragStorePage = this;
+        obj.name = elementName;
+        obj.elementName.text= elementName;
     }
 
-    //测试函数
-    public void TestFunc()
-    {
-        CreateElement();
-    }
 
     //加载资源
     public void LoadResource()

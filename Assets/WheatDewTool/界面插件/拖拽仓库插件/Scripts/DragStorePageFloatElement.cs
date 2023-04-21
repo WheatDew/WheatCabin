@@ -19,13 +19,13 @@ public class DragStorePageFloatElement : MonoBehaviour
         if (dragStorePage.floatElementType==DragStorePage.FloatElementType.Border
             &&!dragStorePage.inBorder)
         {
-            dragStorePage.DragEndEvent.Invoke();
+            dragStorePage.DragEndEvent.Invoke(name);
             Destroy(gameObject);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            dragStorePage.DragEndEvent.Invoke();
+            dragStorePage.DragEndEvent.Invoke(name);
             Destroy(gameObject);
         }
     }

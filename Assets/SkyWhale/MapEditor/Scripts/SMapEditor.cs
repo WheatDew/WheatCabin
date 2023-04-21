@@ -6,13 +6,15 @@ using System.IO;
 using Battlehub.RTHandles;
 using System.Windows.Forms;
 using SkyWhale;
+using Unity.VisualScripting;
+using Battlehub.RTEditor.Examples.Scene3;
 //using UnityEditor.Callbacks;
 
 public class SMapEditor : MonoBehaviour
 {
     public Dictionary<string,Transform> childLayerList=new Dictionary<string, Transform>();
     public Dictionary<string,AssetBundle> assetBundleMap=new Dictionary<string,AssetBundle>();
-    public Dictionary<string,GameObject> storeItemMap=new Dictionary<string, GameObject>();
+
     public Transform childLayer;
     public RuntimeSceneComponent runtimeSceneComponent;
     public MapEditorData currentMapEditorData;
@@ -35,6 +37,31 @@ public class SMapEditor : MonoBehaviour
             SaveMapEditorData();
         }
     }
+
+
+    #region ÍÏ×§´æ´¢×ÊÔ´
+    public DragStorePage dragStorePage;
+    public Dictionary<string, GameObject> storeItemMap = new Dictionary<string, GameObject>();
+
+    public void InitDragStoreAsset()
+    {
+        BuildingList buildingList = JsonMapper.ToObject<BuildingList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
+        for (int i = 0; i < buildingList.buildings.Length; i++)
+        {
+            storeItemMap.Add(buildingList.buildings[i].name, assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>(buildingList.buildings[i].name));
+            dragStorePage.CreateElement(buildingList.buildings[i].name);
+            
+            Debug.Log(buildingList.buildings[i]);
+        }
+
+        dragStorePage.DragEndEvent.AddListener(delegate (string value)
+        {
+            var obj = Instantiate(storeItemMap[value]);
+            obj.AddComponent<CMapEditorModel>();
+        });
+    }
+
+    #endregion
 
     public void SaveMapEditorData()
     {
@@ -88,20 +115,14 @@ public class SMapEditor : MonoBehaviour
 
     public void InitMapEditorAsset()
     {
-        var go = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestTerrain");
-        Instantiate(go, childLayerList["Terrain"]);
+        var terrainPrefab = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestTerrain");
+        var terrain = Instantiate(terrainPrefab, childLayerList["Terrain"]);
+        terrain.layer = LayerMask.NameToLayer("Ground");
         var go1 = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestWater");
         Instantiate(go1, childLayerList["Water"]);
     }
 
-    public void InitDragStoreAsset()
-    {
-        BuildingList buildingList = JsonMapper.ToObject<BuildingList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
-        for(int i=0;i<buildingList.buildings.Length;i++)
-        {
-            Debug.Log(buildingList.buildings[i]);
-        }
-    }
+
 }
 
 public class MapEditorData
