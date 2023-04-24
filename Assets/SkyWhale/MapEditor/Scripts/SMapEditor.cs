@@ -8,12 +8,17 @@ using System.Windows.Forms;
 using SkyWhale;
 using Unity.VisualScripting;
 using Battlehub.RTEditor.Examples.Scene3;
+using UnityEngine.UI;
+using static KWS.KWS_SplineMesh;
 //using UnityEditor.Callbacks;
 
 public class SMapEditor : MonoBehaviour
 {
-    public Dictionary<string,Transform> childLayerList=new Dictionary<string, Transform>();
-    public Dictionary<string,AssetBundle> assetBundleMap=new Dictionary<string,AssetBundle>();
+    #region 主体
+
+    public Dictionary<string, Transform> childLayerList = new Dictionary<string, Transform>();
+    public Dictionary<string, AssetBundle> assetBundleMap = new Dictionary<string, AssetBundle>();
+
 
     public Transform childLayer;
     public RuntimeSceneComponent runtimeSceneComponent;
@@ -27,7 +32,7 @@ public class SMapEditor : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     public void Update()
@@ -37,31 +42,6 @@ public class SMapEditor : MonoBehaviour
             SaveMapEditorData();
         }
     }
-
-
-    #region 拖拽存储资源
-    public DragStorePage dragStorePage;
-    public Dictionary<string, GameObject> storeItemMap = new Dictionary<string, GameObject>();
-
-    public void InitDragStoreAsset()
-    {
-        BuildingList buildingList = JsonMapper.ToObject<BuildingList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
-        for (int i = 0; i < buildingList.buildings.Length; i++)
-        {
-            storeItemMap.Add(buildingList.buildings[i].name, assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>(buildingList.buildings[i].name));
-            dragStorePage.CreateElement(buildingList.buildings[i].name);
-            
-            Debug.Log(buildingList.buildings[i]);
-        }
-
-        dragStorePage.DragEndEvent.AddListener(delegate (string value)
-        {
-            var obj = Instantiate(storeItemMap[value]);
-            obj.AddComponent<CMapEditorModel>();
-        });
-    }
-
-    #endregion
 
     public void SaveMapEditorData()
     {
@@ -99,13 +79,13 @@ public class SMapEditor : MonoBehaviour
         runtimeSceneComponent.cameraPosition = currentMapEditorData.CameraPosition;
         runtimeSceneComponent.cameraRotation = currentMapEditorData.CameraRotation;
         //初始化资源包列表
-        foreach(var item in currentMapEditorData.AssetBundleMap)
+        foreach (var item in currentMapEditorData.AssetBundleMap)
         {
             if (SAssetBundle.Instance == null)
             {
                 Debug.LogError("ab包实例为空");
             }
-            assetBundleMap.Add(item.Key,SAssetBundle.Instance.Load(item.Value));
+            assetBundleMap.Add(item.Key, SAssetBundle.Instance.Load(item.Value));
         }
         //初始化资源
         InitMapEditorAsset();
@@ -122,9 +102,44 @@ public class SMapEditor : MonoBehaviour
         Instantiate(go1, childLayerList["Water"]);
     }
 
+    #endregion
+
+    #region 拖拽存储资源
+    public DragStorePage dragStorePage;
+    public Dictionary<string, StoreItem> storeItemMap = new Dictionary<string, StoreItem>();
+    public Dictionary<string,Texture> storeImageMap=new Dictionary<string, Texture>();
+    public Sprite defaultSprite;
+    public Image test;
+    public void InitDragStoreAsset()
+    {
+        var buildingList = JsonMapper.ToObject<BuildingDataList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
+        for (int i = 0; i < buildingList.buildings.Length; i++)
+        {
+            var itemSprite = assetBundleMap["SkyWhaleEditor"].LoadAsset<Sprite>(buildingList.buildings[i].name+"贴图");
+            Debug.Log(itemSprite.name);
+            //var itemSprite = assetBundleMap["SkyWhaleEditor"].LoadAsset("中世纪平民建筑1贴图", typeof(Sprite));
+            test.sprite = (Sprite)itemSprite;
+            var itemGameObject = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>(buildingList.buildings[i].name);
+            storeItemMap.Add(buildingList.buildings[i].name,new StoreItem(buildingList.buildings[i].name,itemGameObject,(Sprite)itemSprite));
+            dragStorePage.CreateElement(buildingList.buildings[i].name, storeItemMap[buildingList.buildings[i].name].sprite);
+            
+            Debug.Log(buildingList.buildings[i]);
+        }
+
+        dragStorePage.DragEndEvent.AddListener(delegate (string value)
+        {
+            var obj = Instantiate(storeItemMap[value].gameObject);
+            obj.AddComponent<CMapEditorModel>();
+        });
+    }
+
+    #endregion
+
+
 
 }
 
+#region 类型
 public class MapEditorData
 {
     public List<string> ChildLayer;
@@ -139,5 +154,21 @@ public class MapEditorData
         CameraRotation = Quaternion.identity;
     }
 }
+
+public class StoreItem
+{
+    public string name;
+    public GameObject gameObject;
+    public Sprite sprite;
+
+    public StoreItem(string name, GameObject gameObject,Sprite sprite)
+    {
+        this.name = name;
+        this.gameObject = gameObject;
+        this.sprite = sprite;
+    }
+
+}
+#endregion
 
 

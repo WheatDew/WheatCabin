@@ -10,6 +10,7 @@ public class DragStorePageElement : MonoBehaviour, IPointerDownHandler,IPointerE
     [HideInInspector] public DragStorePage dragStorePage;
     public Dictionary<string, string> stringData = new Dictionary<string, string>();
     public Text elementName;
+    public Image elementImage;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -19,6 +20,7 @@ public class DragStorePageElement : MonoBehaviour, IPointerDownHandler,IPointerE
             var obj = Instantiate(dragStorePage.floatElementPrefab,dragStorePage.elementParent);
             obj.dragStorePage = dragStorePage;
             obj.name=transform.name;
+            obj.image.sprite = elementImage.sprite;
             Debug.Log("×ó¼ü´¥·¢");
         }
     }

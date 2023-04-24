@@ -1,14 +1,22 @@
 
+using UnityEngine;
+
 namespace SkyWhale
 {
-    public class Building
+    public class BuildingData
     {
         public string name;
     }
 
-    public class BuildingList
+    public class Building
     {
-        public Building[] buildings;
+        public string name;
+        public Texture2D preview;
+    }
+
+    public class BuildingDataList
+    {
+        public BuildingData[] buildings;
     }
 }
 

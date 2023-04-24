@@ -19,6 +19,8 @@ public class DragStorePage : MonoBehaviour
 
     public UnityEvent<string> DragEndEvent;
     public UnityEvent InitEvent;
+    public UnityEvent<string> ItemInit;
+
 
     private void Start()
     {
@@ -39,6 +41,24 @@ public class DragStorePage : MonoBehaviour
         obj.dragStorePage = this;
         obj.name = elementName;
         obj.elementName.text= elementName;
+    }
+
+    public void CreateElement(string elementName,Sprite elementImage)
+    {
+        var obj = Instantiate(elementPrefab, elementParent);
+        obj.dragStorePage = this;
+        obj.name = elementName;
+        obj.elementName.text = elementName;
+        obj.elementImage.sprite = elementImage;
+    }
+
+    public void CreateElement(string elementName,Texture2D texture)
+    {
+        var obj = Instantiate(elementPrefab, elementParent);
+        obj.dragStorePage = this;
+        obj.name = elementName;
+        obj.elementName.text = elementName;
+        obj.elementImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f,0.5f));
     }
 
 

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DragStorePageFloatElement : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
     [HideInInspector] public DragStorePage dragStorePage;
+    public Image image;
 
     private void Start()
     {
