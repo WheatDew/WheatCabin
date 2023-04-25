@@ -115,12 +115,14 @@ public class SMapEditor : MonoBehaviour
         var buildingList = JsonMapper.ToObject<BuildingDataList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
         for (int i = 0; i < buildingList.buildings.Length; i++)
         {
-            var itemSprite = assetBundleMap["SkyWhaleEditor"].LoadAsset<Sprite>(buildingList.buildings[i].name+"贴图");
-            Debug.Log(itemSprite.name);
-            //var itemSprite = assetBundleMap["SkyWhaleEditor"].LoadAsset("中世纪平民建筑1贴图", typeof(Sprite));
-            test.sprite = (Sprite)itemSprite;
+
+            var itemSprite = assetBundleMap["SkyWhaleEditor"].LoadAsset<Sprite>(buildingList.buildings[i].name + "贴图");
+            if (itemSprite == null)
+            {
+                itemSprite = defaultSprite;
+            }
             var itemGameObject = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>(buildingList.buildings[i].name);
-            storeItemMap.Add(buildingList.buildings[i].name,new StoreItem(buildingList.buildings[i].name,itemGameObject,(Sprite)itemSprite));
+            storeItemMap.Add(buildingList.buildings[i].name,new StoreItem(buildingList.buildings[i].name,itemGameObject,itemSprite));
             dragStorePage.CreateElement(buildingList.buildings[i].name, storeItemMap[buildingList.buildings[i].name].sprite);
             
             Debug.Log(buildingList.buildings[i]);
