@@ -1,16 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using System.IO;
 using Battlehub.RTHandles;
-using System.Windows.Forms;
 using SkyWhale;
-using Unity.VisualScripting;
-using Battlehub.RTEditor.Examples.Scene3;
 using UnityEngine.UI;
-using static KWS.KWS_SplineMesh;
-//using UnityEditor.Callbacks;
+using UnityEngine.Events;
 
 public class SMapEditor : MonoBehaviour
 {
@@ -112,7 +107,7 @@ public class SMapEditor : MonoBehaviour
     public Image test;
     public void InitDragStoreAsset()
     {
-        var buildingList = JsonMapper.ToObject<BuildingDataList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
+        var buildingList = JsonMapper.ToObject<BuildingPrefabDataList>(File.ReadAllText("Core/MapEditor/Data/Building.json"));
         for (int i = 0; i < buildingList.buildings.Length; i++)
         {
 
@@ -132,12 +127,39 @@ public class SMapEditor : MonoBehaviour
         {
             var obj = Instantiate(storeItemMap[value].gameObject);
             obj.AddComponent<CMapEditorModel>();
+            obj.AddComponent<NormalObject>().type="Building";
+            
         });
     }
 
     #endregion
 
+    #region 场景功能
 
+    public static HashSet<NormalObject> objMap=new HashSet<NormalObject>();
+    public static Dictionary<string, UnityAction<string>> funMap = new Dictionary<string, UnityAction<string>>();
+
+    public void SaveScene()
+    {
+        List<NormalData> savedata=new();
+        foreach(var item in objMap)
+        {
+            savedata.Add(new NormalData(item.type, JsonMapper.ToJson(new SimpleData(item.transform.position, item.transform.eulerAngles))));
+        }
+
+        File.WriteAllText("Core/MapEditor/SaveData/test.fzy", JsonMapper.ToJson(savedata));
+        Debug.Log("写入文件成功");
+    }
+
+    public void LoadScene()
+    {
+        var result= File.ReadAllText("Core/MapEditor/SaveData/test.fzy");
+        
+    }
+
+
+
+    #endregion
 
 }
 
@@ -157,6 +179,30 @@ public class MapEditorData
     }
 }
 
+public class NormalData
+{
+    public string type;
+    public string data;
+
+    public NormalData(string type,string data)
+    {
+        this.type = type;
+        this.data = data;
+    }
+}
+public class SimpleData
+{
+    public Vector3 position;
+    public Vector3 rotation;
+
+    public SimpleData(Vector3 position,Vector3 rotation)
+    {
+        this.rotation = rotation;
+        this.position = position;
+    }
+}
+
+
 public class StoreItem
 {
     public string name;
@@ -170,6 +216,12 @@ public class StoreItem
         this.sprite = sprite;
     }
 
+}
+
+public class EditorItem
+{
+    public Vector3 position;
+    public Vector3 rotation;
 }
 #endregion
 
