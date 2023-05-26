@@ -32,10 +32,10 @@ public class SMapEditor : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveMapEditorData();
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    SaveMapEditorData();
+        //}
     }
 
     public void SaveMapEditorData()

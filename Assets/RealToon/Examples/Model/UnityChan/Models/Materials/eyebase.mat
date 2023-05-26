@@ -1,0 +1,328 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: eyebase
+  m_Shader: {fileID: 4800000, guid: d12428961551799408aa97256fd770c3, type: 3}
+  m_ShaderKeywords: N_F_RELGI_ON N_F_SS_ON
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - ALWAYS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AOTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FReflection:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FalloffSampler:
+        m_Texture: {fileID: 2800000, guid: a1d5b2277eb3f6245900378e6fa97575, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlossMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlossTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MCap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MCapMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e315db926a0705845b12da3cc80ea306, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskFReflection:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskGloss:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskReflection:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskSelfLit:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTransparency:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineWidthControl:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RimLightSampler:
+        m_Texture: {fileID: 2800000, guid: a18067604964b5a4d8fd5552ed0d789e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryCutout:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SelfShadowPTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowColorTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowPTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowT:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowTTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: 1b7fb09dfa6a71840b349c30f04c45f0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AOIntensity: 0
+    - _AdjustLightDirectionalLight: 1
+    - _AdjustLightPointSpotlight: 1
+    - _AdjustLightPointSpotlightOnly: 1
+    - _AffectShadow: 1
+    - _AffectlightDirectionalLightOnly: 0
+    - _AlphaBaseCutout: 1
+    - _Brightness: 0
+    - _ColorContrast: 0
+    - _Compa: 8
+    - _CustomLightDirectionFollowObjectRotation: 1
+    - _CustomLightDirectionIntensity: 0
+    - _Cutoff: 0.5
+    - _Cutout: 0
+    - _DefaultReflectionRoughtness: 0
+    - _DirectionalLightAffectShadow: 0
+    - _DirectionalLightIntensity: 0
+    - _DoubleSided: 2
+    - _DoubleSidedOutline: 1
+    - _DynamicNoiseOutline: 0
+    - _DynamicNoisyOutline: 0
+    - _EOPO: 0
+    - _EnableFresnelOnAmbientLightDark: 0
+    - _EnableLightFalloff: 1
+    - _EnableTextureTransparent: 0
+    - _EnvironmentalLightingIntensity: 1
+    - _FReflectionIntensity: 0
+    - _FReflectionTextureBlend: 0
+    - _FalloffPower: 1
+    - _FarDistanceMaxWidth: 10
+    - _FresnelFill: 1
+    - _FresnelIntensity: 0
+    - _FresnelOnLight: 1
+    - _FresnelOnSelfShadow: 1
+    - _FresnelOnShadow: 1
+    - _FresnelOnShadowDark: 0
+    - _FresnelVisibleOnDarkAmbientLight: 0
+    - _GIFlatShade: 0
+    - _GIShadeSize: 0
+    - _GIShadeThreshold: 0
+    - _GlossColorPower: 10
+    - _GlossIntensity: 0
+    - _GlossSoftness: 0
+    - _GlossTextureFollowLight: 0
+    - _GlossTextureFollowObjectRotation: 0
+    - _GlossTextureIntensity: 0
+    - _GlossTextureRotate: 0
+    - _GlossTextureSoftness: 0
+    - _Glossiness: 0.5
+    - _HardEdgeFresnel: 0
+    - _HighlightColorPower: 1
+    - _LightAffectOutlineColor: 0
+    - _LightAffectRimLightColor: 0
+    - _LightAffectShadow: 0
+    - _LightFalloffAffectShadowT: 0
+    - _LightFalloffSoftness: 1
+    - _LightIntensity: -1
+    - _LightIntensityAffectOCALCTPTDirectionalLight: 0
+    - _MCIALO: 0
+    - _MCapIntensity: 1
+    - _MVCOL: 0
+    - _MainTextureColorAO: 0
+    - _MainTextureColorGloss: 0
+    - _MainTextureColorSMixShadowColor: 0.44
+    - _MainTextureColorSSMixSelfShadowColor: 0.44
+    - _MainTextureColorSSSaturation: 1
+    - _MainTextureColorSSaturation: 1
+    - _MainTextureColorSTSaturation: 1
+    - _MainTextureColorSelfShadow: 0
+    - _MainTextureColorShadow: 1
+    - _MainTextureColorShadowT: 0
+    - _MixMainTexToOutline: 0
+    - _N_F_CA: 0
+    - _N_F_CLD: 0
+    - _N_F_CO: 0
+    - _N_F_FR: 0
+    - _N_F_GLO: 0
+    - _N_F_GLOT: 0
+    - _N_F_HDLS: 0
+    - _N_F_HPSS: 0
+    - _N_F_MC: 0
+    - _N_F_NLASOBF: 0
+    - _N_F_NM: 0
+    - _N_F_O: 0
+    - _N_F_PT: 0
+    - _N_F_R: 0
+    - _N_F_RL: 0
+    - _N_F_SCT: 0
+    - _N_F_SL: 0
+    - _N_F_SON: 0
+    - _N_F_SS: 1
+    - _N_F_ST: 0
+    - _N_F_STIAL: 0
+    - _N_F_STIS: 0
+    - _NoisyOutlineIntensity: 0
+    - _NormalIntensity: 1
+    - _NormalMapIntensity: 0
+    - _Opacity: 1
+    - _Oper: 8
+    - _OutlineExtrudeMethod: 0
+    - _OutlineNoiseIntensity: 0
+    - _OutlineWidth: 0.001
+    - _OutlineWidthAffectedByViewDistance: 0
+    - _OutlineZPostionInCamera: 0
+    - _OverallShadowColorPower: 1
+    - _PSGLOTEX: 0
+    - _PTexturePower: 0
+    - _PointLightSVD: 0
+    - _PointSpotlightIntensity: 0.3
+    - _RELG: 1
+    - _ReceiveShadowsIntensity: 1
+    - _ReduceShadowPointLight: 0
+    - _ReduceShadowSpotDirectionalLight: 1
+    - _ReduceTextureQuality: 0
+    - _ReduceWhite: 0
+    - _RefMetallic: 0
+    - _RefVal: 0
+    - _ReflectionBlendToMainTexture: 0
+    - _ReflectionIntensity: 0
+    - _ReflectionRoughtness: 0
+    - _RimLightColorPower: 10
+    - _RimLightInLight: 1
+    - _RimLightSoftness: 1
+    - _RimLightUnfill: 1.5
+    - _SPECIN: 1
+    - _SPECMODE: 0
+    - _STIL: 0
+    - _Saturation: 1
+    - _SaturationPointSpotlight: 1
+    - _SelfLitHighContrast: 0
+    - _SelfLitIntensity: 0
+    - _SelfLitPower: 1
+    - _SelfShadowAffectedByLightShadowStrength: 0
+    - _SelfShadowColorPower: 1
+    - _SelfShadowFollowCamera: 0
+    - _SelfShadowHardness: 1
+    - _SelfShadowIntensity: 1
+    - _SelfShadowMaskFresnel: 0
+    - _SelfShadowMaskGlossTexture: 0
+    - _SelfShadowPTextureIntensity: 0
+    - _SelfShadowRealTimeShadowColorPower: 1
+    - _SelfShadowRealtimeShadowIntensity: 1
+    - _SelfShadowShadowTAtViewDirection: 0
+    - _SelfShadowSize: 0.716
+    - _SelfShadowThreshold: 0.56
+    - _SelfShadowatViewDirection: 0
+    - _ShadowAddLight: 2.38
+    - _ShadowColorTextureIntensity: 0
+    - _ShadowColorTexturePower: 0
+    - _ShadowHardness: 0
+    - _ShadowIntensity: 1
+    - _ShadowMaskGlossTexture: 0
+    - _ShadowPTextureIntensity: 0
+    - _ShadowPTexturePower: 1
+    - _ShadowTColorPower: 1
+    - _ShadowTHardness: 1
+    - _ShadowTIntensity: 0
+    - _ShadowTLightSize: 0.5
+    - _ShadowTLightThreshold: 0.5
+    - _ShadowTLimit: 1.5
+    - _ShadowTShadowSize: 0
+    - _ShadowTShadowThreshold: 0
+    - _ShadowTSize: 0
+    - _ShowAOonAmbientLight: 1
+    - _ShowAOonLight: 1
+    - _ShowInAmbientLightIntensity: 1
+    - _ShowInAmbientLightShadowIntensity: 1
+    - _ShowInAmbientLightShadowThreshold: 0.4
+    - _ShowNormal: 0
+    - _ShowShadowTOnLight: 1
+    - _ShowShadowTOnSelfShadow: 0
+    - _ShowShadowTonAmbientLight: 1
+    - _ShowShadowTonLight: 1
+    - _ShowShadowTonSelfShadow: 1
+    - _ShowShadowTonShadow: 1
+    - _SmoothObjectNormal: 0
+    - _SoftGloss: 0
+    - _TEXMCOLINT: 1
+    - _TexturePatternStyle: 0
+    - _TextureWashout: 0
+    - _Transparent: 0
+    - _UseFReflection: 0
+    - _UseGILighting: 1
+    - _UseSecondaryCutout: 0
+    - _VertexColorBlueControlSmoothObjectNormal: 0
+    - _VertexColorGreenControlSelfShadowThreshold: 0
+    - _VertexColorRedAffectOutlineWitdh: 0
+    - _VertexColorsIntensity: 0
+    - _Washout: 0
+    - _XYZHardness: 14
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0.8014706, g: 0.8014706, b: 0.8014706, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
+    - _OverallShadowColor: {r: 0.5514706, g: 0.5514706, b: 0.5514706, a: 1}
+    - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SelfShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SelfShadowRealTimeShadowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowOverrideColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowTColor: {r: 0, g: 0, b: 0, a: 1}
+    - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
