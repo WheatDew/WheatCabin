@@ -48,8 +48,9 @@ public class SSAOEffect : MonoBehaviour
 	{
 		DestroyMaterial (m_SSAOMaterial);
 	}
-	
-	void Start()
+
+    [System.Obsolete]
+    void Start()
 	{
 		if (!SystemInfo.supportsImageEffects || !SystemInfo.SupportsRenderTextureFormat (RenderTextureFormat.Depth))
 		{

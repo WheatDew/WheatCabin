@@ -29,11 +29,12 @@ public class Water : MonoBehaviour
 	
 	private static bool s_InsideWater = false;
 
-	// This is called when it's known that the object will be rendered by some
-	// camera. We render reflections / refractions and do other updates here.
-	// Because the script executes in edit mode, reflections for the scene view
-	// camera will just work!
-	public void OnWillRenderObject()
+    // This is called when it's known that the object will be rendered by some
+    // camera. We render reflections / refractions and do other updates here.
+    // Because the script executes in edit mode, reflections for the scene view
+    // camera will just work!
+    [System.Obsolete]
+    public void OnWillRenderObject()
 	{
 		if( !enabled || !GetComponent<Renderer>() || !GetComponent<Renderer>().sharedMaterial || !GetComponent<Renderer>().enabled )
 			return;
@@ -310,8 +311,9 @@ public class Water : MonoBehaviour
 		else
 			return m_WaterMode;
 	}
-	
-	private WaterMode FindHardwareWaterSupport()
+
+    [System.Obsolete]
+    private WaterMode FindHardwareWaterSupport()
 	{
 		if( !SystemInfo.supportsRenderTextures || !GetComponent<Renderer>() )
 			return WaterMode.Simple;

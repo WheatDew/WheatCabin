@@ -15,8 +15,9 @@ public class MotionBlur : ImageEffectBase
 	public bool extraBlur = false;
 	
 	private RenderTexture accumTexture;
-	
-	override protected void Start()
+
+    [System.Obsolete]
+    override protected void Start()
 	{
 		if(!SystemInfo.supportsRenderTextures)
 		{
@@ -32,8 +33,9 @@ public class MotionBlur : ImageEffectBase
 		DestroyImmediate(accumTexture);
 	}
 
-	// Called by camera to apply image effect
-	void OnRenderImage (RenderTexture source, RenderTexture destination)
+    // Called by camera to apply image effect
+    [System.Obsolete]
+    void OnRenderImage (RenderTexture source, RenderTexture destination)
 	{
 		// Create the accumulation texture
 		if (accumTexture == null || accumTexture.width != source.width || accumTexture.height != source.height)

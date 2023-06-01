@@ -8,7 +8,8 @@ public class ImageEffectBase : MonoBehaviour {
 	public Shader   shader;
 	private Material m_Material;
 
-	protected virtual void Start ()
+    [System.Obsolete]
+    protected virtual void Start ()
 	{
 		// Disable if we don't support image effects
 		if (!SystemInfo.supportsImageEffects) {

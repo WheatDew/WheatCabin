@@ -60,9 +60,10 @@ public class PlanarReflection : MonoBehaviour
 		RenderTexture rt = new RenderTexture(Mathf.FloorToInt(cam.pixelWidth*0.5F), Mathf.FloorToInt(cam.pixelHeight*0.5F), 24);	
 		rt.hideFlags = HideFlags.DontSave;
 		return rt;
-	}	
-	
-	public void RenderHelpCameras (Camera currentCam) 
+	}
+
+    [System.Obsolete]
+    public void RenderHelpCameras (Camera currentCam) 
 	{
 		if (null == helperCameras)
 			helperCameras = new Dictionary<Camera, bool>();
@@ -87,8 +88,9 @@ public class PlanarReflection : MonoBehaviour
 		if (null != helperCameras)
 			helperCameras.Clear();		
 	}
-	
-	public void WaterTileBeingRendered (Transform tr, Camera currentCam) 
+
+    [System.Obsolete]
+    public void WaterTileBeingRendered (Transform tr, Camera currentCam) 
 	{						
 		RenderHelpCameras(currentCam);
 		
@@ -108,9 +110,9 @@ public class PlanarReflection : MonoBehaviour
 		Shader.EnableKeyword("WATER_SIMPLE");
 		Shader.DisableKeyword("WATER_REFLECTIVE");		
 	}
-		
-	
-	private void RenderReflectionFor (Camera cam, Camera reflectCamera) 
+
+    [System.Obsolete]
+    private void RenderReflectionFor (Camera cam, Camera reflectCamera) 
 	{
 		if(!reflectCamera)
 			return;

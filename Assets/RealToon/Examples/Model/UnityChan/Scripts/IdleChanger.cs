@@ -34,9 +34,10 @@ public class IdleChanger : MonoBehaviour
 		// ランダム判定用関数をスタートする
 		StartCoroutine ("RandomChange");
 	}
-	
-	// Update is called once per frame
-	void  Update ()
+
+    // Update is called once per frame
+    [System.Obsolete]
+    void  Update ()
 	{
 		// ↑キー/スペースが押されたら、ステートを次に送る処理
 		if (Input.GetKeyDown ("up") || Input.GetButton ("Jump")) {

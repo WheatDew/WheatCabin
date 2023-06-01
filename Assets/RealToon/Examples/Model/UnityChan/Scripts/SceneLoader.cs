@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class SceneLoader : MonoBehaviour {
-
-	void OnGUI()
+    [System.Obsolete]
+    void OnGUI()
 	{
 		GUI.Box(new Rect(10 , Screen.height - 100 ,100 ,90), "Change Scene");
 		if(GUI.Button( new Rect(20 , Screen.height - 70 ,80, 20), "Next"))
@@ -12,7 +12,8 @@ public class SceneLoader : MonoBehaviour {
 			LoadPreScene();
 	}
 
-	void LoadPreScene()
+    [System.Obsolete]
+    void LoadPreScene()
 	{
 		int nextLevel = Application.loadedLevel + 1;
 		if( nextLevel <= 1)
@@ -21,7 +22,8 @@ public class SceneLoader : MonoBehaviour {
 		Application.LoadLevel(nextLevel);
 	}
 
-	void LoadNextScene()
+    [System.Obsolete]
+    void LoadNextScene()
 	{
 		int nextLevel = Application.loadedLevel + 1;
 		if( nextLevel >= Application.levelCount)

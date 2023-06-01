@@ -82,8 +82,9 @@ public class ContrastStretchEffect : MonoBehaviour
 			return m_materialApply;
 		}
 	}
-	
-	void Start()
+
+    [System.Obsolete]
+    void Start()
 	{
 		// Disable if we don't support image effects
 		if (!SystemInfo.supportsImageEffects) {

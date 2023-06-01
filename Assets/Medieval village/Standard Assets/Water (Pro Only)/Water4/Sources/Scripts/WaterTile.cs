@@ -34,8 +34,9 @@ public class WaterTile : MonoBehaviour
 		AcquireComponents();
 	}
 #endif
-	
-	public void OnWillRenderObject() 
+
+    [System.Obsolete]
+    public void OnWillRenderObject() 
 	{
 		if (reflection)
 			reflection.WaterTileBeingRendered(transform, Camera.current);

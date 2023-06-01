@@ -36,8 +36,9 @@ public class NoiseEffect : MonoBehaviour
 	
 	private float scratchTimeLeft = 0.0f;
 	private float scratchX, scratchY;
-	
-	protected void Start ()
+
+    [System.Obsolete]
+    protected void Start ()
 	{
 		// Disable if we don't support image effects
 		if (!SystemInfo.supportsImageEffects) {

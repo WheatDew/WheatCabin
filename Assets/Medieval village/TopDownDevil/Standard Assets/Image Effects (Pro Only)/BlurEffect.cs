@@ -39,11 +39,12 @@ public class BlurEffect : MonoBehaviour
 		if( m_Material ) {
 			DestroyImmediate( m_Material );
 		}
-	}	
-	
-	// --------------------------------------------------------
-	
-	protected void Start()
+	}
+
+    // --------------------------------------------------------
+
+    [System.Obsolete]
+    protected void Start()
 	{
 		// Disable if we don't support image effects
 		if (!SystemInfo.supportsImageEffects) {

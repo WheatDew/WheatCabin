@@ -96,8 +96,9 @@ public class GlowEffect : MonoBehaviour
 		if( m_DownsampleMaterial )
 			DestroyImmediate( m_DownsampleMaterial );
 	}
-	
-	protected void Start()
+
+    [System.Obsolete]
+    protected void Start()
 	{
 		// Disable if we don't support image effects
 		if (!SystemInfo.supportsImageEffects)
