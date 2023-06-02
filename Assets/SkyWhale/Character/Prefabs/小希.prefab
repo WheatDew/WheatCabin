@@ -11736,6 +11736,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6060921555137520308}
   - component: {fileID: 215210564820351182}
+  - component: {fileID: 1299768938980166992}
+  - component: {fileID: 4038746391081052744}
+  - component: {fileID: 1528789495555916617}
   m_Layer: 0
   m_Name: "\u5C0F\u5E0C"
   m_TagString: Untagged
@@ -11780,6 +11783,53 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &1299768938980166992
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870074820022417422}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &4038746391081052744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870074820022417422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e3b29297f75534189ddafdda8427ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCharacterForward: 0
+  lockToCameraForward: 0
+  turnSpeed: 10
+  sprintJoystick: 332
+  sprintKeyboard: 32
+--- !u!136 &1528789495555916617
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870074820022417422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6872980057280679820
 GameObject:
   m_ObjectHideFlags: 0

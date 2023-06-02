@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SCamera : MonoBehaviour
 {
-    public GameObject firstPersonCamera;
+    public ThirdPersonCameraGroup thirdPersonCameraGroup;
 
 
 
     public void SetFirstPerson()
     {
-        firstPersonCamera.SetActive(true);
+        thirdPersonCameraGroup.gameObject.SetActive(true);
     }
 }

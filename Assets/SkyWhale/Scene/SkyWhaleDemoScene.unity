@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa68ab352af14c817921dc0cbcb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstPersonCamera: {fileID: 0}
+  thirdPersonCameraGroup: {fileID: 0}
 --- !u!4 &1410176209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4873884716558598674, guid: 093f7837d7a6b2942ba94eef4f7cdfc6, type: 3}
@@ -1098,6 +1098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1517885663}
+  - component: {fileID: 1517885664}
   m_Layer: 0
   m_Name: 3rdPersonCameraGroup
   m_TagString: Untagged
@@ -1122,6 +1123,18 @@ Transform:
   m_Father: {fileID: 1144566205}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1517885664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517885662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16351da9abd93c4a98086ceeb7a31b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1583531636
 GameObject:
   m_ObjectHideFlags: 0
