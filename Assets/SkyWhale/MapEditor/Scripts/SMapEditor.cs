@@ -172,7 +172,11 @@ public class SMapEditor : MonoBehaviour
         OnInstantiateObj.AddListener(delegate (string value, GameObject obj)
         {
             if (storeItemMap[value].type == "Character")
+            {
                 obj.AddComponent<NormalObject>().type = "Character";
+                SPlayer.s.currentPlayer = obj;
+            }
+
         });
     }
 
@@ -200,7 +204,6 @@ public class SMapEditor : MonoBehaviour
         var result= File.ReadAllText("Core/MapEditor/SaveData/test.fzy");
         
     }
-
 
 
     #endregion

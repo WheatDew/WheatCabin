@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class ThirdPersonCameraGroup : MonoBehaviour
 {
-    CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera virtualCamera;
 }
