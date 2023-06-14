@@ -155,13 +155,19 @@ public class SMapEditor : MonoBehaviour
 
         OnInstantiateObj.AddListener(delegate(string value,GameObject obj)
         {
-            SetProperty(storeItemMap[value].name, storeItemMap[value].detailType, obj);
+            if (storeItemMap[value].type == "Building")
+            {
+                var cobj = obj.AddComponent<NormalObject>();
+                cobj.type = "Building";
+            }
         });
 
     }
 
     public void SetProperty(string type,string detailType,GameObject obj)
     {
+        Debug.LogFormat("…Ë÷√ Ù–‘{0} {1}", type, detailType);
+
         if (type == "Building")
         {
             var cobj = obj.AddComponent<NormalObject>();
@@ -171,8 +177,11 @@ public class SMapEditor : MonoBehaviour
         {
             var cobj = obj.AddComponent<NormalObject>();
             cobj.type = "Character";
-            if (detailType == "player")
+            if (detailType == "Player") {
                 SPlayer.s.currentPlayer = obj;
+                cobj.detailType = "Player";
+            }
+
 
         }
     }
@@ -193,7 +202,18 @@ public class SMapEditor : MonoBehaviour
         OnInstantiateObj.AddListener(delegate (string value, GameObject obj)
         {
 
-            SetProperty(storeItemMap[value].name, storeItemMap[value].detailType,obj);
+            if (storeItemMap[value].type == "Character")
+            {
+                var cobj = obj.AddComponent<NormalObject>();
+                cobj.type = "Character";
+                if (storeItemMap[value].type == "Player")
+                {
+                    SPlayer.s.currentPlayer = obj;
+                    cobj.detailType = "Player";
+                }
+
+
+            }
         });
     }
 

@@ -7,15 +7,12 @@ namespace LitJson
 {
     public class JsonRegister
     {
-        public static int RegFloatType;/** 测试变量 可删除*/
         /// <summary>
         /// 注册扩展类型，在序列化之前，外部直接调用该方法
         /// </summary>
         public static void RegisterExtendType()
         {
-            /** 方法二选一即可*/
-            RegisterFloat();
-            //RegisterFloat2();
+            RegisterSceneObjData();
         }
 
         /// <summary>
@@ -37,7 +34,37 @@ namespace LitJson
                 return 0;
             }
             JsonMapper.RegisterImporter((ImporterFunc<string, float>)Importer);
-            RegFloatType = 1;
+        }
+
+        private static void RegisterSceneObjData()
+        {
+            void Exporter(SceneObjData obj, JsonWriter writer)
+            {
+
+                writer.WriteObjectStart();
+
+                writer.WritePropertyName("name");//写入属性名
+                writer.Write(obj.name);//写入值
+                writer.WritePropertyName("type");
+                writer.Write(obj.type);
+                writer.WritePropertyName("detailType");
+                writer.Write(obj.detailType);
+                writer.WritePropertyName("position");
+                writer.Write(string.Format("{0},{1},{2}", obj.position.x, obj.position.y, obj.position.z));
+                writer.WritePropertyName("rotation");
+                writer.Write(string.Format("{0},{1},{2},{3}", obj.rotation.x, obj.rotation.y, obj.rotation.z, obj.rotation.w));
+
+                writer.WriteObjectEnd();
+            }
+            JsonMapper.RegisterExporter((ExporterFunc<SceneObjData>)Exporter);
+
+            SceneObjData Importer(string obj)
+            {
+                
+                var sceneObjData = new SceneObjData("test","test","test",Vector3.zero,Quaternion.identity);
+                return sceneObjData;
+            }
+            JsonMapper.RegisterImporter((ImporterFunc<string, SceneObjData>)Importer);
         }
 
         /// <summary>
@@ -56,7 +83,6 @@ namespace LitJson
                 return (float)obj;
             }
             JsonMapper.RegisterImporter((ImporterFunc<double, float>)Importer);
-            RegFloatType = 2;
         }
     }
 }

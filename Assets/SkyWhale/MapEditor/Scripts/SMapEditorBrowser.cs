@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 using static UnityEngine.Rendering.DebugUI;
