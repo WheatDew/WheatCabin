@@ -25,4 +25,13 @@ public class SMapEditorEvent : MonoBehaviour
     {
 
     }
+
+    public void NewScene()
+    {
+        var sceneObjects = FindObjectsOfType<NormalObject>();
+        foreach(var item in sceneObjects)
+        {
+            Destroy(item.gameObject);
+        }
+    }
 }
