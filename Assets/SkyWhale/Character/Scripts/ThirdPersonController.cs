@@ -10,7 +10,7 @@ namespace SkyWhale
         public bool lockToCameraForward = false;
         public float turnSpeed = 10f;
         public KeyCode sprintJoystick = KeyCode.JoystickButton2;
-        public KeyCode sprintKeyboard = KeyCode.Space;
+        public KeyCode sprintKeyboard = KeyCode.LeftShift;
 
         private float turnSpeedMultiplier;
         private float speed = 0f;

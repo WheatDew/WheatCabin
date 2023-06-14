@@ -15,4 +15,14 @@ public class SMapEditorEvent : MonoBehaviour
         }
 
     }
+
+    public void SaveData()
+    {
+
+    }
+
+    public void ReadData()
+    {
+
+    }
 }

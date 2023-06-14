@@ -9,6 +9,8 @@ using UnityEngine.Events;
 using System.Windows.Forms;
 using Battlehub.RTCommon;
 using Microsoft.Win32.SafeHandles;
+using System.Text.RegularExpressions;
+using static UnityEngine.Rendering.DebugUI;
 
 public class SMapEditor : MonoBehaviour
 {
@@ -120,6 +122,13 @@ public class SMapEditor : MonoBehaviour
         {
 
             var obj = Instantiate(storeItemMap[value].gameObject);
+            Regex regex = new Regex(@"\([C|c]lone\)$");
+            if (regex.IsMatch(obj.name))
+            {
+                obj.name = obj.name[..^7];
+            }
+            
+
             obj.AddComponent<CMapEditorModel>();
             obj.AddComponent<ExposeToEditor>();
             OnInstantiateObj.Invoke(value,obj);
@@ -139,19 +148,33 @@ public class SMapEditor : MonoBehaviour
         {
             var itemSprite = assetBundle.LoadAsset<Sprite>(building.name + "ÌùÍ¼") ?? defaultSprite;
             var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(building.name);
-            storeItemMap.Add(building.name, new StoreItem(building.name, itemGameObject, itemSprite,"Building"));
+            storeItemMap.Add(building.name, new StoreItem(building.name, itemGameObject, itemSprite,"Building",building.detailType));
             dragStorePage.CreateElement(building.name, storeItemMap[building.name].sprite);
 
-            Debug.Log(building);
         }
 
         OnInstantiateObj.AddListener(delegate(string value,GameObject obj)
         {
-            Debug.Log(value);
-            if (storeItemMap[value].type == "Building")
-                obj.AddComponent<NormalObject>().type = "Building";
+            SetProperty(storeItemMap[value].name, storeItemMap[value].detailType, obj);
         });
 
+    }
+
+    public void SetProperty(string type,string detailType,GameObject obj)
+    {
+        if (type == "Building")
+        {
+            var cobj = obj.AddComponent<NormalObject>();
+            cobj.type = "Building";
+        }
+        if (type == "Character")
+        {
+            var cobj = obj.AddComponent<NormalObject>();
+            cobj.type = "Character";
+            if (detailType == "player")
+                SPlayer.s.currentPlayer = obj;
+
+        }
     }
 
     private void LoadCharacterDragItem(string packName,string path)
@@ -163,20 +186,14 @@ public class SMapEditor : MonoBehaviour
         {
             var itemSprite = assetBundle.LoadAsset<Sprite>(character.name + "ÌùÍ¼") ?? defaultSprite;
             var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(character.name);
-            storeItemMap.Add(character.name, new StoreItem(character.name, itemGameObject, itemSprite,"Character"));
+            storeItemMap.Add(character.name, new StoreItem(character.name, itemGameObject, itemSprite,"Character",character.detailType));
             dragStorePage.CreateElement(character.name, storeItemMap[character.name].sprite);
-
-            Debug.Log(character);
         }
 
         OnInstantiateObj.AddListener(delegate (string value, GameObject obj)
         {
-            if (storeItemMap[value].type == "Character")
-            {
-                obj.AddComponent<NormalObject>().type = "Character";
-                SPlayer.s.currentPlayer = obj;
-            }
 
+            SetProperty(storeItemMap[value].name, storeItemMap[value].detailType,obj);
         });
     }
 
@@ -256,13 +273,15 @@ public class StoreItem
     public GameObject gameObject;
     public Sprite sprite;
     public string type;
+    public string detailType;
 
-    public StoreItem(string name, GameObject gameObject,Sprite sprite, string type)
+    public StoreItem(string name, GameObject gameObject,Sprite sprite, string type,string detailType)
     {
         this.name = name;
         this.gameObject = gameObject;
         this.sprite = sprite;
         this.type = type;
+        this.detailType = detailType;
     }
 
 }

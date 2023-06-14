@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 343100967}
   - component: {fileID: 343100968}
   - component: {fileID: 343100969}
+  - component: {fileID: 343100970}
   m_Layer: 0
   m_Name: MapEditor
   m_TagString: Untagged
@@ -469,6 +470,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91caaf2a0f188af4ca4e244300e32b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &343100970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343100966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55415a8d6a35124ab8245622fb5533a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapEditor: {fileID: 0}
 --- !u!1 &643925588
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +644,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 762291862}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 343100970}
+        m_TargetAssemblyTypeName: SMapEditorBrowser, Assembly-CSharp
+        m_MethodName: OpenSceneFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &762291862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,9 +2091,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 343100968}
-        m_TargetAssemblyTypeName: SMapEditor, Assembly-CSharp
-        m_MethodName: SaveScene
+      - m_Target: {fileID: 343100970}
+        m_TargetAssemblyTypeName: SMapEditorBrowser, Assembly-CSharp
+        m_MethodName: SaveSceneFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

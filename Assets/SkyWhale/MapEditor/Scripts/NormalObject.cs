@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalObject : MonoBehaviour
 {
     public string type;
+    public string detailType;
 
     private void Start()
     {

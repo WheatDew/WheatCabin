@@ -20,6 +20,7 @@ public class SCharacter : MonoBehaviour
 public class CharacterPrefabData
 {
     public string name;
+    public string detailType;
 }
 
 public class CharacterPrefabDataList

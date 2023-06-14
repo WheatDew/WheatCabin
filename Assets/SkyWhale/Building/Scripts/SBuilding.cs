@@ -31,6 +31,7 @@ public class SBuilding : MonoBehaviour
 public class BuildingPrefabData
 {
     public string name;
+    public string detailType;
 }
 
 public class BuildingPrefabDataList
