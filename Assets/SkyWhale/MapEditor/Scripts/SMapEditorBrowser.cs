@@ -122,6 +122,15 @@ public class SceneObjData
     public Vector3 position;
     public Quaternion rotation;
 
+    public SceneObjData()
+    {
+        this.name = "";
+        this.type = "";
+        this.detailType = "";
+        this.position = Vector3.zero;
+        this.rotation = Quaternion.identity;
+    }
+
     public SceneObjData(string name,string type,string detailType,Vector3 position,Quaternion rotation)
     {
         this.name = name;
