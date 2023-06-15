@@ -49,10 +49,6 @@ namespace LitJson
                 writer.Write(obj.type);
                 writer.WritePropertyName("detailType");
                 writer.Write(obj.detailType);
-                writer.WritePropertyName("position");
-                writer.Write(string.Format("{0},{1},{2}", obj.position.x, obj.position.y, obj.position.z));
-                writer.WritePropertyName("rotation");
-                writer.Write(string.Format("{0},{1},{2},{3}", obj.rotation.x, obj.rotation.y, obj.rotation.z, obj.rotation.w));
 
                 writer.WriteObjectEnd();
             }
@@ -61,8 +57,8 @@ namespace LitJson
             SceneObjData Importer(string obj)
             {
                 
-                var sceneObjData = new SceneObjData("test","test","test",Vector3.zero,Quaternion.identity);
-                return sceneObjData;
+                //var sceneObjData = new SceneObjData("test","test","test",Vector3.zero,Quaternion.identity);
+                return null;
             }
             JsonMapper.RegisterImporter((ImporterFunc<string, SceneObjData>)Importer);
         }

@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class SCharacter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region ЕЅР§ДњТы
+    private static SCharacter _s;
+    public static SCharacter s { get { return _s; } }
+
+    private void Awake()
     {
-        
+        if (!_s) _s = this;
+    }
+    #endregion
+
+    public void InitCharacter(string name,string type,string detailType,Dictionary<string,int> intStatus,Dictionary<string,float> floatStatus,Dictionary<string,string> stringStatus,GameObject obj)
+    {
+        if (type == "Character")
+        {
+            var cobj = obj.AddComponent<NormalObject>();
+            cobj.intStatus = intStatus;
+            cobj.floatStatus = floatStatus;
+            cobj.stringStatus = stringStatus;
+            cobj.type = "Character";
+            cobj.detailType = detailType;
+            if (detailType == "Player")
+            {
+                SPlayer.s.currentPlayer = obj;
+                cobj.detailType = "Player";
+            }
+        }
+    }
+    public void InitCharacter(SceneObjData data,GameObject obj)
+    {
+        InitCharacter(data.name, data.type, data.detailType, data.intStatus, data.floatStatus, data.stringStatus, obj);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InitCharacter(StoreItem data,GameObject obj)
     {
-        
+        InitCharacter(data.name, data.type, data.detailType, new Dictionary<string, int>(), new Dictionary<string, float>(), new Dictionary<string, string>(), obj);
     }
 }
 
-public class CharacterPrefabData
-{
-    public string name;
-    public string detailType;
-}
-
-public class CharacterPrefabDataList
-{
-    public CharacterPrefabData[] characters;
-}

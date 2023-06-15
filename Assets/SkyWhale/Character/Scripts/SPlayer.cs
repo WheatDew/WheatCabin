@@ -16,5 +16,5 @@ public class SPlayer : MonoBehaviour
 
     #endregion
 
-    public GameObject currentPlayer;
+    [HideInInspector] public GameObject currentPlayer;
 }

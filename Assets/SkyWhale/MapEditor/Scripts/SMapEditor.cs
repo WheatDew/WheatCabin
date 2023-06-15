@@ -11,6 +11,7 @@ using Battlehub.RTCommon;
 using Microsoft.Win32.SafeHandles;
 using System.Text.RegularExpressions;
 using static UnityEngine.Rendering.DebugUI;
+using Unity.VisualScripting;
 
 public class SMapEditor : MonoBehaviour
 {
@@ -114,9 +115,14 @@ public class SMapEditor : MonoBehaviour
 
     public void InitDragStoreAsset()
     {
-        string packName = "SkyWhaleEditor",path= "Core/MapEditor/Data/";
-        LoadBuildingDragItem(packName, path);
-        LoadCharacterDragItem(packName, path);
+        string packName = "SkyWhaleEditor", path = "Core/MapEditor/Data";
+
+        string[] files = Directory.GetFiles(path, "*ItemData.json", SearchOption.AllDirectories);
+        for (int i = 0; i < files.Length; i++)
+        {
+            LoadDragItem(packName,files[i]);
+        }
+
 
         dragStorePage.DragEndEvent.AddListener(delegate (string value)
         {
@@ -131,90 +137,32 @@ public class SMapEditor : MonoBehaviour
 
             obj.AddComponent<CMapEditorModel>();
             obj.AddComponent<ExposeToEditor>();
-            OnInstantiateObj.Invoke(value,obj);
-
+            //Debug.LogFormat("{0} {1} {2}", storeItemMap[value].name, storeItemMap[value].type, storeItemMap[value].detailType);
+            SBuilding.s.InitBuilding(storeItemMap[value], obj);
+            SCharacter.s.InitCharacter(storeItemMap[value], obj);
+            //Debug.Log(SBuilding.s.name);
 
 
         });
     }
 
 
-    private void LoadBuildingDragItem(string packName,string path)
+
+
+    private void LoadDragItem(string packName,string path)
     {
         var assetBundle = assetBundleMap[packName];
-        var buildingList = JsonMapper.ToObject<BuildingPrefabDataList>(File.ReadAllText(path + "Building.json"));
+        var mapItemList = JsonMapper.ToObject<PrefabDataList>(File.ReadAllText(path));
 
-        foreach (var building in buildingList.buildings)
+        foreach (var mapItem in mapItemList.prefabDatas)
         {
-            var itemSprite = assetBundle.LoadAsset<Sprite>(building.name + "ÌùÍ¼") ?? defaultSprite;
-            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(building.name);
-            storeItemMap.Add(building.name, new StoreItem(building.name, itemGameObject, itemSprite,"Building",building.detailType));
-            dragStorePage.CreateElement(building.name, storeItemMap[building.name].sprite);
-
+            var itemSprite = assetBundle.LoadAsset<Sprite>(mapItem.name + "ÌùÍ¼") ?? defaultSprite;
+            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(mapItem.name);
+            storeItemMap.Add(mapItem.name, new StoreItem(mapItem.name, itemGameObject, itemSprite,mapItem.type, mapItem.detailType));
+            dragStorePage.CreateElement(mapItem.name, storeItemMap[mapItem.name].sprite);
         }
 
-        OnInstantiateObj.AddListener(delegate(string value,GameObject obj)
-        {
-            if (storeItemMap[value].type == "Building")
-            {
-                var cobj = obj.AddComponent<NormalObject>();
-                cobj.type = "Building";
-            }
-        });
-
-    }
-
-    public void SetProperty(string type,string detailType,GameObject obj)
-    {
-        Debug.LogFormat("ÉèÖÃÊôÐÔ{0} {1}", type, detailType);
-
-        if (type == "Building")
-        {
-            var cobj = obj.AddComponent<NormalObject>();
-            cobj.type = "Building";
-        }
-        if (type == "Character")
-        {
-            var cobj = obj.AddComponent<NormalObject>();
-            cobj.type = "Character";
-            if (detailType == "Player") {
-                SPlayer.s.currentPlayer = obj;
-                cobj.detailType = "Player";
-            }
-
-
-        }
-    }
-
-    private void LoadCharacterDragItem(string packName,string path)
-    {
-        var assetBundle = assetBundleMap[packName];
-        var characterList = JsonMapper.ToObject<CharacterPrefabDataList>(File.ReadAllText(path + "Character.json"));
-
-        foreach (var character in characterList.characters)
-        {
-            var itemSprite = assetBundle.LoadAsset<Sprite>(character.name + "ÌùÍ¼") ?? defaultSprite;
-            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(character.name);
-            storeItemMap.Add(character.name, new StoreItem(character.name, itemGameObject, itemSprite,"Character",character.detailType));
-            dragStorePage.CreateElement(character.name, storeItemMap[character.name].sprite);
-        }
-
-        OnInstantiateObj.AddListener(delegate (string value, GameObject obj)
-        {
-
-            if (storeItemMap[value].type == "Character")
-            {
-                var cobj = obj.AddComponent<NormalObject>();
-                cobj.type = "Character";
-                if (storeItemMap[value].type == "Player")
-                {
-                    SPlayer.s.currentPlayer = obj;
-                    cobj.detailType = "Player";
-                }
-
-
-            }
-        });
+        
     }
 
     #endregion
@@ -304,6 +252,18 @@ public class StoreItem
         this.detailType = detailType;
     }
 
+}
+
+public class PrefabData
+{
+    public string name;
+    public string type;
+    public string detailType;
+}
+
+public class PrefabDataList
+{
+    public PrefabData[] prefabDatas;
 }
 
 public class EditorItem

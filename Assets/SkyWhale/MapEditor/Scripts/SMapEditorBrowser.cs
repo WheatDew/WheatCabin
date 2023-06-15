@@ -78,7 +78,7 @@ public class SMapEditorBrowser : MonoBehaviour
         for(int i = 0; i < sceneObjects.Length; i++)
         {
             var item = sceneObjects[i];
-            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation);
+            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.intStatus,item.floatStatus,item.stringStatus);
         }
         string s = JsonMapper.ToJson(sceneDataFile);
 
@@ -98,17 +98,16 @@ public class SMapEditorBrowser : MonoBehaviour
         {
             var item = readData.sceneObjDataList[i];
 
-            var obj = Instantiate(mapEditor.storeItemMap[item.name].gameObject,item.position,item.rotation);
+
+            var obj = Instantiate(mapEditor.storeItemMap[item.name].gameObject,new Vector3(item.positionX,item.positionY,item.positionZ),new Quaternion(item.rotationX,item.rotationY,item.rotationZ,item.rotationW));
             Regex regex = new Regex(@"\([C|c]lone\)$");
             if (regex.IsMatch(obj.name))
             {
                 obj.name = obj.name[..^7];
             }
-            obj.AddComponent<CMapEditorModel>();
             obj.AddComponent<ExposeToEditor>();
-
-            mapEditor.SetProperty(item.name, item.detailType, obj);
-
+            SCharacter.s.InitCharacter(item, obj);
+            SBuilding.s.InitBuilding(item, obj);
         }
     }
 
@@ -119,25 +118,44 @@ public class SceneObjData
     public string name;
     public string type;
     public string detailType;
-    public Vector3 position;
-    public Quaternion rotation;
+    public float positionX,positionY,positionZ;
+    public float rotationX,rotationY,rotationZ,rotationW;
+    public Dictionary<string, int> intStatus;
+    public Dictionary<string, float> floatStatus;
+    public Dictionary<string, string> stringStatus;
 
     public SceneObjData()
     {
         this.name = "";
         this.type = "";
         this.detailType = "";
-        this.position = Vector3.zero;
-        this.rotation = Quaternion.identity;
+        this.positionX = 0;
+        this.positionY = 0;
+        this.positionZ = 0;
+        this.rotationX = Quaternion.identity.x;
+        this.rotationY = Quaternion.identity.y;
+        this.rotationZ = Quaternion.identity.z;
+        this.rotationW = Quaternion.identity.w;
+        this.intStatus = new Dictionary<string, int>();
+        this.floatStatus = new Dictionary<string, float>();
+        this.stringStatus = new Dictionary<string, string>();
     }
 
-    public SceneObjData(string name,string type,string detailType,Vector3 position,Quaternion rotation)
+    public SceneObjData(string name,string type,string detailType,Vector3 position,Quaternion rotation,Dictionary<string,int> intStatus,Dictionary<string,float> floatStatus,Dictionary<string,string> stringStatus)
     {
         this.name = name;
         this.type = type;
         this.detailType = detailType;
-        this.position = position;
-        this.rotation = rotation;
+        this.positionX = position.x;
+        this.positionY = position.y;
+        this.positionZ = position.z;
+        this.rotationX = rotation.x;
+        this.rotationY = rotation.y;
+        this.rotationZ = rotation.z;
+        this.rotationW = rotation.w;
+        this.intStatus = intStatus;
+        this.floatStatus = floatStatus;
+        this.stringStatus = stringStatus;
     }
 }
 
