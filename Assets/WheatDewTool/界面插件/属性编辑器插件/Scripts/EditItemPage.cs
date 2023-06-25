@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AddItemPage : MonoBehaviour
+public class EditItemPage : MonoBehaviour
 {
     [HideInInspector] public PropertyEditor editor;
     public InputField nameBox;
@@ -15,15 +15,15 @@ public class AddItemPage : MonoBehaviour
     {
         if (typeBox.text == "整型")
         {
-            editor.CreateItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
+            editor.SetItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
         }
         else if (typeBox.text == "浮点数")
         {
-            editor.CreateItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
+            editor.SetItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
         }
         else if (typeBox.text == "字符串"||typeBox.text=="")
         {
-            editor.CreateItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
+            editor.SetItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
         }
 
         Destroy(gameObject);
