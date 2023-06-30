@@ -1,12 +1,15 @@
 using SkyWhale;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SMapEditorEvent : MonoBehaviour
 {
     public GameObject mapEditorPage;
     public GameObject stopRunningButton;
+
+    public PropertyEditor propertyEditor;
 
     public void StartGame()
     {
