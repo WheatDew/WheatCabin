@@ -13,28 +13,33 @@ public class SBuilding : MonoBehaviour
     public static SBuilding s { get { return _s; } }
 
 
+
     private void Awake()
     {
         if(_s == null)
         {
             _s = this;
         }
+        //添加初始化函数监听
+        mapEditor.mapEditorModelEvent.AddListener(InitBuilding);
     }
     #endregion
+
+
+    public SMapEditor mapEditor;
 
     public void InitBuilding(string name, string type, string detailType, Dictionary<string, int> intStatus, Dictionary<string, float> floatStatus, Dictionary<string, string> stringStatus, GameObject obj)
     {
         if (type == "Building")
         {
             var cobj = obj.AddComponent<NormalObject>();
-            cobj.intStatus = intStatus;
-            cobj.floatStatus = floatStatus;
-            cobj.stringStatus = stringStatus;
+            cobj.propertyData = new PropertyData(intStatus, floatStatus, stringStatus);
             cobj.type = "Building";
             cobj.detailType = detailType;
         }
     }
 
+    //初始化函数的编辑器系统适配
     public void InitBuilding(SceneObjData data, GameObject obj)
     {
         InitBuilding(data.name, data.type, data.detailType, data.intStatus, data.floatStatus, data.stringStatus, obj);

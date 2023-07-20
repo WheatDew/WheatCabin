@@ -11,17 +11,19 @@ public class SCharacter : MonoBehaviour
     private void Awake()
     {
         if (!_s) _s = this;
+
+        mapEditor.mapEditorModelEvent.AddListener(InitCharacter);
     }
     #endregion
 
-    public void InitCharacter(string name,string type,string detailType,Dictionary<string,int> intStatus,Dictionary<string,float> floatStatus,Dictionary<string,string> stringStatus,GameObject obj)
+
+    public SMapEditor mapEditor;
+    public void InitCharacter(string name,string type,string detailType,PropertyData propertyData,GameObject obj)
     {
         if (type == "Character")
         {
             var cobj = obj.AddComponent<NormalObject>();
-            cobj.intStatus = intStatus;
-            cobj.floatStatus = floatStatus;
-            cobj.stringStatus = stringStatus;
+            cobj.propertyData = propertyData;
             cobj.type = "Character";
             cobj.detailType = detailType;
             if (detailType == "Player")
@@ -33,12 +35,12 @@ public class SCharacter : MonoBehaviour
     }
     public void InitCharacter(SceneObjData data,GameObject obj)
     {
-        InitCharacter(data.name, data.type, data.detailType, data.intStatus, data.floatStatus, data.stringStatus, obj);
+        InitCharacter(data.name, data.type, data.detailType, new PropertyData(data.intStatus, data.floatStatus, data.stringStatus), obj);
     }
 
     public void InitCharacter(StoreItem data,GameObject obj)
     {
-        InitCharacter(data.name, data.type, data.detailType, new Dictionary<string, int>(), new Dictionary<string, float>(), new Dictionary<string, string>(), obj);
+        InitCharacter(data.name, data.type, data.detailType, new PropertyData(), obj);
     }
 }
 

@@ -25,6 +25,7 @@ public class SMapEditor : MonoBehaviour
     public RuntimeSceneComponent runtimeSceneComponent;
     public MapEditorData currentMapEditorData;
 
+
     public void Awake()
     {
         InitMapEditor();
@@ -113,6 +114,9 @@ public class SMapEditor : MonoBehaviour
 
     private UnityEvent<string,GameObject> OnInstantiateObj=new UnityEvent<string, GameObject>();
 
+    public UnityEvent<ExposeToEditor> rteComponentEvent = new UnityEvent<ExposeToEditor>();
+    public UnityEvent<StoreItem, GameObject> mapEditorModelEvent = new UnityEvent<StoreItem, GameObject>();
+
     public void InitDragStoreAsset()
     {
         string packName = "SkyWhaleEditor", path = "Core/MapEditor/Data";
@@ -136,10 +140,11 @@ public class SMapEditor : MonoBehaviour
             
 
             obj.AddComponent<CMapEditorModel>();
-            obj.AddComponent<ExposeToEditor>();
-            //Debug.LogFormat("{0} {1} {2}", storeItemMap[value].name, storeItemMap[value].type, storeItemMap[value].detailType);
-            SBuilding.s.InitBuilding(storeItemMap[value], obj);
-            SCharacter.s.InitCharacter(storeItemMap[value], obj);
+            var rteComponent = obj.AddComponent<ExposeToEditor>();
+            mapEditorModelEvent.Invoke(storeItemMap[value], obj);
+            rteComponentEvent.Invoke(rteComponent);
+            //SBuilding.s.InitBuilding(storeItemMap[value], obj);
+            //SCharacter.s.InitCharacter(storeItemMap[value], obj);
             //Debug.Log(SBuilding.s.name);
 
 

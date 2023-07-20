@@ -78,7 +78,7 @@ public class SMapEditorBrowser : MonoBehaviour
         for(int i = 0; i < sceneObjects.Length; i++)
         {
             var item = sceneObjects[i];
-            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.intStatus,item.floatStatus,item.stringStatus);
+            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.propertyData.intData,item.propertyData.floatData,item.propertyData.stringData);
         }
         string s = JsonMapper.ToJson(sceneDataFile);
 

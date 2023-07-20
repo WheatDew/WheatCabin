@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class PropertyEditor : MonoBehaviour
 {
-    [HideInInspector] public PropertyData currentData;
+    [HideInInspector] public NormalObject currentTarget;
     [HideInInspector] public PropertyData bufferData;
     [HideInInspector] public PropertyEditorItem currentItem;
     public PropertyEditorItem itemPrefab;
@@ -20,26 +20,35 @@ public class PropertyEditor : MonoBehaviour
     private EditItemPage editPage;
 
     
-    public void SetCurrentData(PropertyData currentData)
+    public void SetCurrentTarget(NormalObject target,string currentName)
     {
-        this.currentData = currentData;
+        this.currentTarget = target;
+        ReadData();
     }
 
     public void ReadData()
     {   
-        foreach(var item in currentData.intData)
+        foreach(var item in currentTarget.propertyData.intData)
+        {
+            CreateItem(item.Key, item.Value.ToString());
+        }
+        foreach (var item in currentTarget.propertyData.floatData)
+        {
+            CreateItem(item.Key, item.Value.ToString());
+        }
+        foreach (var item in currentTarget.propertyData.stringData)
         {
             CreateItem(item.Key, item.Value.ToString());
         }
         //Ë¢ÐÂ»º´æ
-        bufferData = new PropertyData(currentData);
+        bufferData = new PropertyData(currentTarget.propertyData);
 
     }
 
     public void SaveData()
     {
         //»º´æÐ´Èë¼ÇÂ¼
-        currentData = new PropertyData(bufferData);
+        currentTarget.propertyData = new PropertyData(bufferData);
     }
 
     public void CreateItem(string originName,string originData)
@@ -102,11 +111,6 @@ public class PropertyEditor : MonoBehaviour
         }
     }
 
-    public void TestData()
-    {
-        currentData = new PropertyData();
-        
-    }
 
 }
 
@@ -128,6 +132,13 @@ public class PropertyData
         intData = new Dictionary<string, int>(origin.intData);
         floatData = new Dictionary<string, float>(origin.floatData);
         stringData = new Dictionary<string, string>(origin.stringData);
+    }
+
+    public PropertyData(Dictionary<string,int> intData,Dictionary<string,float> floatData,Dictionary<string,string> stringData)
+    {
+        this.intData = intData;
+        this.floatData = floatData;
+        this.stringData = stringData;
     }
 
     public void Print()
