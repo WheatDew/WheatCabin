@@ -11,6 +11,8 @@ public class AddItemPage : MonoBehaviour
     public InputField dataBox;
     public PropertyErrorPage errorPage;
 
+    public Dropdown typeDropdown;
+
     public void ConfirmButton()
     {
         if (typeBox.text == "整型")
@@ -18,7 +20,7 @@ public class AddItemPage : MonoBehaviour
             editor.CreateItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
             editor.bufferData.intData.Add(string.Format("{0} {1}", typeBox.text, nameBox.text), int.Parse(dataBox.text));
         }
-        else if (typeBox.text == "浮点数")
+        else if (typeBox.text == "浮点型")
         {
             editor.CreateItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
             editor.bufferData.floatData.Add(string.Format("{0} {1}", typeBox.text, nameBox.text), float.Parse(dataBox.text));

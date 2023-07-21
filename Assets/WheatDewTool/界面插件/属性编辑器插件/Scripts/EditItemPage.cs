@@ -9,6 +9,7 @@ public class EditItemPage : MonoBehaviour
     public InputField nameBox;
     public InputField typeBox;
     public InputField dataBox;
+    public Dropdown typeDropdown;
     public PropertyErrorPage errorPage;
 
     public void ConfirmButton()

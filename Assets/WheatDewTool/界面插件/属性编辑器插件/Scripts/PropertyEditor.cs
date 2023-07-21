@@ -18,11 +18,16 @@ public class PropertyEditor : MonoBehaviour
     private AddItemPage addPage;
     public EditItemPage editPagePrefab;
     private EditItemPage editPage;
-
+    public Text title;
     
     public void SetCurrentTarget(NormalObject target,string currentName)
     {
+        title.text = currentName;
         this.currentTarget = target;
+        for(int i = 0; i < itemParent.childCount; i++)
+        {
+            Destroy(itemParent.GetChild(i).gameObject);
+        }
         ReadData();
     }
 
@@ -30,15 +35,15 @@ public class PropertyEditor : MonoBehaviour
     {   
         foreach(var item in currentTarget.propertyData.intData)
         {
-            CreateItem(item.Key, item.Value.ToString());
+            CreateItem(item.Key+" 整型", item.Value.ToString());
         }
         foreach (var item in currentTarget.propertyData.floatData)
         {
-            CreateItem(item.Key, item.Value.ToString());
+            CreateItem(item.Key+" 浮点型", item.Value.ToString());
         }
         foreach (var item in currentTarget.propertyData.stringData)
         {
-            CreateItem(item.Key, item.Value.ToString());
+            CreateItem(item.Key+" 字符串", item.Value.ToString());
         }
         //刷新缓存
         bufferData = new PropertyData(currentTarget.propertyData);
@@ -53,6 +58,7 @@ public class PropertyEditor : MonoBehaviour
 
     public void CreateItem(string originName,string originData)
     {
+        Debug.LogFormat("{0} {1}",originName, originData);
         var obj = Instantiate(itemPrefab, itemParent);
         obj.editor = this;
         obj.originData = originData;
@@ -89,6 +95,7 @@ public class PropertyEditor : MonoBehaviour
         {
             addPage = Instantiate(addPagePrefab, pageParent);
             addPage.editor = this;
+            addPage.typeDropdown.captionText.text = currentItem.originName.Split(' ')[0];
         }
     }
 
