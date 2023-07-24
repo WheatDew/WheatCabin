@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70a5730c9ae4e37a6c8c7bb49c3a668, type: 3}
+  m_Name: MagicItemSetRule
+  m_EditorClassIdentifier: 
+  m_DefaultItemSet:
+    m_States:
+    - m_Name: DisableMagicItemSets
+      m_Preset: {fileID: 11400000, guid: 3a1a23b2822b1194ba5ccd83c174d56e, type: 2}
+      m_BlockList: []
+      m_Default: 0
+    - m_Name: Default
+      m_Preset: {fileID: 0}
+      m_BlockList: []
+      m_Default: 1
+    m_State: '{0}'
+    m_Enabled: 1
+    m_CanSwitchTo: 1
+    m_DisabledIndex: -1
+  m_Default: 0
+  m_ExactAmountValidation: 0
+  m_ItemCategorySlots:
+  - {fileID: 114261901318863308, guid: 5481010ef14c32f4cb7b6661b0c59fb4, type: 2}
+  m_ItemTypeExceptions: []
+  m_ItemCategoryExceptions: []

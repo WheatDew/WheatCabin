@@ -1,0 +1,212 @@
+#add-button
+{
+	width: 22px;
+    background-image: none;
+	font-size: 14px;
+	-unity-font-style: bold;
+}
+
+#remove-button
+{
+	width: 22px;
+    background-image: none;
+	font-size: 14px;
+	-unity-font-style: bold;
+}
+
+#serialized-reference-list-right-action-object
+{
+	margin-top: 2px;
+	margin-right: 22px;
+	margin-bottom: 1px;
+}
+
+#serialized-reference-list-right-label
+{
+	margin-right: 4px;
+}
+
+.indent
+{
+	padding-left: 18px;
+}
+
+.sub-menu
+{
+	margin: 2px;
+	padding: 2px;
+	border-color: #010101;
+	border-width: 1px;
+	border-radius: 2px;
+}
+
+.sub-menu-dark
+{
+	background-color: #404040;
+}
+
+.sub-menu-light
+{
+	background-color: #CACACA;
+}
+
+.sub-menu-title
+{
+	-unity-font-style: bold;
+	font-size: 15px;
+	padding-bottom: 5px;
+}
+
+.sub-menu-button
+{
+	flex-grow: 0;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+	min-width: 125px;
+	min-height: 25px;
+}
+
+#item-type-row-element
+{
+	border-width: 1px;
+	border-color: #000000;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+}
+
+.item-type-row-element-header-dark
+{
+	background-color: rgba(0, 0, 0, 0.13);
+}
+
+.item-type-row-element-header-light
+{
+	background-color: rgba(1, 1, 1, 0.13);
+}
+
+.large-title
+{
+	font-size: 20px;
+	-unity-font-style: bold;
+}
+
+.hyperlink
+{
+	cursor: link;
+}
+
+.contained-list
+{
+	background-color: rgba(0, 0, 0, 0.2);
+	margin-left: 5px;
+	margin-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* 
+ Item Set Manager
+ */
+
+ItemSetListVisualElement
+{
+    margin-top: 4px;
+}
+
+ItemSetGroupListVisualElement FoldoutHeader Label
+{
+    font-size: 14px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}
+
+ItemSetGroupListVisualElement ReorderableList > #header > Foldout
+{
+    flex-grow: 1;
+}
+
+ItemSetVisualElement #ItemSet_DetailContainer
+{
+    margin-right: 5px;
+}
+
+ItemSetVisualElement #ItemSet_SlotList #body
+{
+    border-top-width: 1px;
+    border-top-color: rgba(1, 1, 1, 0.4);
+    border-top-right-radius: 3px; 
+    border-top-left-radius: 3px; 
+}
+
+ItemSetVisualElement #itemSetHeader
+{
+    flex-grow: 1;
+    flex-direction: row;
+    -unity-text-align: middle-center;
+}
+
+ItemSetVisualElement .itemSetHeader-dark-selected
+{
+    background-color: rgb(62, 95, 150);
+}
+
+ItemSetVisualElement .itemSetHeader-light-selected
+{
+    background-color: rgb(61, 128, 223);
+}
+
+ItemSetVisualElement #itemSetHeader_StateIcon
+{
+    width: 20px;
+    height: 20px;
+}
+
+.open-dark-icon
+{
+    padding-left: 8px;
+    padding-right: 8px;
+    background-image: url("../Icons/OpenDarkIcon.png");
+}
+
+.open-light-icon
+{
+    padding-left: 8px;
+    padding-right: 8px;
+    background-image: url("../Icons/OpenLightIcon.png");
+}
+
+/* 
+ Character Item Actions
+ */
+
+CharacterItemActionModuleListElement #CharacterItemActionModule_StateIcon
+{
+    width: 20px;
+    height: 20px;
+}
+
+CharacterItemActionModuleListElement Label{
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+CharacterItemActionModuleListElement Toggle
+{
+    margin-top: 2px;
+    margin-right: 22px;
+    margin-bottom: 1px;
+    margin-left: 22px;
+}
+
+.foldout-icon
+{
+	width: 16px;
+	height: 16px;
+	margin-left: -6px;
+	margin-right: 4px;
+}

@@ -1,0 +1,104 @@
+
+#foldout-header
+{
+    flex-shrink: 0;
+    border-width: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-width: 0px;
+    padding-left: 2px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#foldout-header > Label
+{
+    font-size: 15px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+#foldout-content
+{
+    border-width: 1px; 
+    border-top-width: 0px; 
+    border-bottom-right-radius: 3px; 
+    border-bottom-left-radius: 3px; 
+    min-height: 20px;
+}
+
+.foldout-background-light
+{
+    background-color: rgb(225, 225, 225);
+	border-color: rgb(75, 75, 75);
+}
+
+.foldout-background-dark
+{
+    background-color: rgb(75, 75, 75);
+	border-color: rgb(45, 45, 45);
+}
+
+FoldoutHeader
+{
+    border-top-width: 1px;
+    border-top-color: rgba(1, 1, 1, 0.4);
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(1, 1, 1, 0.3);
+}
+
+FoldoutHeader > Toggle
+{
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.foldout-list-view-element_content
+{
+    padding-left: 5px;
+    padding: 5px;
+}
+
+.foldout-list-view-element_foldout-header_title
+{
+    flex-shrink: 1;
+}
+
+.foldout-list-view-element_foldout-header_title Label
+{
+    -unity-text-align: middle-left;
+}
+
+.foldout-list-view-element_foldout-header_options
+{
+    flex-direction: row;
+    flex-shrink: 0;
+}
+
+.foldout-list-view-element_foldout-header_options Button
+{
+	width: 18px;
+    height: 18px;
+    background-image: none;
+	margin-left: 0px;
+	padding: 0px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-right-radius: 0px; 
+    border-top-left-radius: 0px; 
+	font-size: 13px;
+	-unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.button-border-light
+{
+	border-color: rgb(110, 110, 110);
+    border-top-color: rgb(190, 190, 190);
+}
+
+.button-border-dark
+{
+	border-color: rgb(35, 35, 35);
+    border-top-color: rgb(90, 90, 90);
+}
