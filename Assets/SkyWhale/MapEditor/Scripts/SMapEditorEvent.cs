@@ -53,4 +53,9 @@ public class SMapEditorEvent : MonoBehaviour
             Destroy(item.gameObject);
         }
     }
+
+    public void DisplayOrHiddenPage(GameObject propertyPage)
+    {
+        propertyPage.SetActive(!propertyPage.activeSelf);
+    }
 }
