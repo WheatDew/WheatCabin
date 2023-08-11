@@ -22,7 +22,7 @@ public class SCharacter : MonoBehaviour
     {
         if (type == "Character")
         {
-            var cobj = obj.AddComponent<NormalObject>();
+            var cobj = obj.AddComponent<CharacterObject>();
             cobj.propertyData = propertyData;
             cobj.type = "Character";
             cobj.detailType = detailType;

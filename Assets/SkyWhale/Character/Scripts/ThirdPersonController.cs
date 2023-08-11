@@ -73,6 +73,7 @@ namespace SkyWhale
             }
         }
 
+        //更新目标方向
         public virtual void UpdateTargetDirection()
         {
             if (!useCharacterForward)

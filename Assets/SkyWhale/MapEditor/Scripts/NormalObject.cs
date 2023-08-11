@@ -11,6 +11,11 @@ public class NormalObject : MonoBehaviour
     private void Start()
     {
         SMapEditor.objMap.Add(this);
+        Init();
     }
 
+    public virtual void Init()
+    {
+
+    }
 }
