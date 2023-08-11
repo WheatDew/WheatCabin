@@ -11,6 +11,8 @@ namespace SkyWhale
         public float turnSpeed = 10f;
         public KeyCode sprintJoystick = KeyCode.JoystickButton2;
         public KeyCode sprintKeyboard = KeyCode.LeftShift;
+        public KeyCode attackKeyboard = KeyCode.Mouse0;
+        public KeyCode equipKeyboard = KeyCode.F;
 
         private float turnSpeedMultiplier;
         private float speed = 0f;
@@ -23,12 +25,43 @@ namespace SkyWhale
         private Camera mainCamera;
         private float velocity;
 
+        //״ָ̬ʾ
+        [HideInInspector] public bool isBattling = false;
+        AnimatorStateInfo stateInfo;
+
         // Use this for initialization
         void Start()
         {
             anim = GetComponent<Animator>();
             mainCamera = Camera.main;
         }
+
+        private void Update()
+        {
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+            if (Input.GetKeyDown(equipKeyboard))
+            {
+                if (isBattling)
+                {
+                    anim.SetTrigger("Unarm");
+                    isBattling = false;
+                }
+                else
+                {
+                    anim.SetTrigger("Equip");
+                    isBattling = true;
+                }
+            }
+            if (Input.GetKeyDown(attackKeyboard))
+            {
+                if (isBattling)
+                {
+                    anim.SetTrigger("Attack");
+                }
+            }
+        }
+
 
         // Update is called once per frame
         void FixedUpdate()
