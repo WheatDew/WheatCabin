@@ -4,6 +4,7 @@ namespace SkyWhale
 {
 
     [AddComponentMenu("")] // Don't display in add component menu
+    [RequireComponent(typeof(AnimatorAddon))]
     public class ThirdPersonController : MonoBehaviour
     {
         public bool useCharacterForward = false;

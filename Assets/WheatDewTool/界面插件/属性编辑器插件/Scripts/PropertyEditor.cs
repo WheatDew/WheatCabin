@@ -148,6 +148,27 @@ public class PropertyData
         this.stringData = stringData;
     }
 
+    public void SetData(string key,int value)
+    {
+        if (intData.ContainsKey(key))
+            intData[key] = value;
+        else
+            intData.Add(key, value);
+    }
+
+    public void SetData(string key,float value)
+    {
+        if (floatData.ContainsKey(key))
+            floatData[key] = value;
+        else
+            floatData.Add(key, value);
+    }
+
+    public void SetData(string key,string value)
+    {
+        stringData.Add(key, value);
+    }
+
     public void Print()
     {
         string s = "";
