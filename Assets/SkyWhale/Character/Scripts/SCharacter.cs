@@ -31,11 +31,12 @@ public class SCharacter : MonoBehaviour
     #region 系统函数
     private void Start()
     {
-
+        //WriteOriginPropertyData();
 
     }
     #endregion
 
+    //写入测试数据，用于测试
     public void WriteOriginPropertyData()
     {
         Dictionary<string, int> intData = new Dictionary<string, int> { { "复活次数", 10 } };
@@ -43,14 +44,9 @@ public class SCharacter : MonoBehaviour
         Dictionary<string, string> stringData = new Dictionary<string, string> { { "名字", "白元元" } };
 
         SCharacterData data = new SCharacterData("白元元", intData, floatData, stringData);
-        string s = JsonMapper.ToJson(data);
 
-        s = Regex.Replace(s, @"\\u(?<Value>[a-zA-Z0-9]{4})", m =>
-        {
-            return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
-        });
-        Debug.Log(s);
-        File.WriteAllText("Core/MapEditor/Data/CharacterProperty.json", JsonMapper.ToJson(data));
+
+        File.WriteAllText("Core/MapEditor/Data/CharacterProperty.json",Regex.Unescape(JsonMapper.ToJson(data)));
     }
 
     public void InitOriginPropertyData()
@@ -60,7 +56,10 @@ public class SCharacter : MonoBehaviour
 
         for(int i = 0; i < originDatas.Count; i++)
         {
-            Debug.Log(originDatas[i].ToJson());
+            string jsonData = Regex.Unescape(originDatas[i].ToJson());
+            SCharacterData data = JsonMapper.ToObject<SCharacterData>(jsonData);
+            originPropertyDatas.Add(data.name, new PropertyData(data.intProperty,data.floatProperty,data.stringProperty));
+
         }
 
         //foreach (var item in originDatas)

@@ -134,6 +134,7 @@ public class PropertyData
         stringData = new Dictionary<string, string>();
     }
 
+
     public PropertyData(PropertyData origin)
     {
         intData = new Dictionary<string, int>(origin.intData);
