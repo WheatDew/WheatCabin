@@ -24,16 +24,21 @@ public class PropertyEditor : MonoBehaviour
     {
         title.text = currentName;
         this.currentTarget = target;
-        for(int i = 0; i < itemParent.childCount; i++)
-        {
-            Destroy(itemParent.GetChild(i).gameObject);
-        }
+        //for(int i = 0; i < itemParent.childCount; i++)
+        //{
+        //    Destroy(itemParent.GetChild(i).gameObject);
+        //}
         ReadData();
     }
 
     public void ReadData()
-    {   
-        foreach(var item in currentTarget.propertyData.intData)
+    {
+
+        for (int i = 0; i < itemParent.childCount; i++)
+        {
+            Destroy(itemParent.GetChild(i).gameObject);
+        }
+        foreach (var item in currentTarget.propertyData.intData)
         {
             CreateItem(item.Key+" ÕûÐÍ", item.Value.ToString());
         }
@@ -58,7 +63,7 @@ public class PropertyEditor : MonoBehaviour
 
     public void CreateItem(string originName,string originData)
     {
-        Debug.LogFormat("{0} {1}",originName, originData);
+        Debug.LogFormat("{0}-{1}",originName, originData);
         var obj = Instantiate(itemPrefab, itemParent);
         obj.editor = this;
         obj.originData = originData;
@@ -66,7 +71,8 @@ public class PropertyEditor : MonoBehaviour
         string[] nameSlices = obj.originName.Split(' ');
         if (nameSlices.Length == 2)
         {
-            obj.nameText.text = nameSlices[1];
+            obj.nameText.text = nameSlices[0];
+            
         }
         else if (nameSlices.Length == 1)
         {
@@ -95,7 +101,7 @@ public class PropertyEditor : MonoBehaviour
         {
             addPage = Instantiate(addPagePrefab, pageParent);
             addPage.editor = this;
-            addPage.typeDropdown.captionText.text = currentItem.originName.Split(' ')[0];
+            addPage.typeDropdown.value = 0;
         }
     }
 
