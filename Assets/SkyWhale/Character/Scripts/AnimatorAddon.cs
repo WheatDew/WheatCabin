@@ -48,7 +48,17 @@ public class AnimatorAddon : MonoBehaviour
         self = GetComponent<NormalObject>();
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
+
+        if (self.propertyData.stringData.ContainsKey("TriggerEvent"))
+        {
+            if (self.propertyData.floatData.ContainsKey("TriggerEventTime"))
+            {
+                AddAnimationEvent("GhostSamurai_APose_Attack01_1_ALL_Root", "HalfEvent", 0.5f);
+            }
+        }
     }
+
+
 
     private void Update()
     {

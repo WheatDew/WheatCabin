@@ -19,15 +19,13 @@ public class PropertyEditor : MonoBehaviour
     public EditItemPage editPagePrefab;
     private EditItemPage editPage;
     public Text title;
-    
+
+
     public void SetCurrentTarget(NormalObject target,string currentName)
     {
         title.text = currentName;
         this.currentTarget = target;
-        //for(int i = 0; i < itemParent.childCount; i++)
-        //{
-        //    Destroy(itemParent.GetChild(i).gameObject);
-        //}
+
         ReadData();
     }
 
@@ -69,15 +67,7 @@ public class PropertyEditor : MonoBehaviour
         obj.originData = originData;
         obj.originName = originName;
         string[] nameSlices = obj.originName.Split(' ');
-        if (nameSlices.Length == 2)
-        {
-            obj.nameText.text = nameSlices[0];
-            
-        }
-        else if (nameSlices.Length == 1)
-        {
-            obj.nameText.text = nameSlices[0];
-        }
+        obj.nameText.text = nameSlices[0];
 
     }
 
@@ -88,10 +78,7 @@ public class PropertyEditor : MonoBehaviour
         obj.originData = originData;
         obj.originName = originName;
         string[] nameSlices = obj.originName.Split(' ');
-        if (nameSlices.Length == 2)
-            obj.nameText.text = nameSlices[1];
-        else if (nameSlices.Length == 1)
-            obj.nameText.text = nameSlices[0];
+        obj.nameText.text = nameSlices[0];
 
     }
 
@@ -112,15 +99,10 @@ public class PropertyEditor : MonoBehaviour
             editPage = Instantiate(editPagePrefab, pageParent);
             editPage.editor = this;
             string[] slices = currentItem.originName.Split(' ');
-            if (slices.Length == 1)
-                editPage.nameBox.text = slices[0];
-            else if (slices.Length == 2)
-            {
-                editPage.nameBox.text = slices[1];
-                editPage.typeBox.text = slices[0];
-            }
+            editPage.nameBox.text = slices[0];
             editPage.dataBox.text = currentItem.originData;
-
+            if (slices.Length == 2)
+                editPage.SetTypeDropDown(slices[1]);
         }
     }
 

@@ -7,27 +7,40 @@ public class EditItemPage : MonoBehaviour
 {
     [HideInInspector] public PropertyEditor editor;
     public InputField nameBox;
-    public InputField typeBox;
     public InputField dataBox;
     public Dropdown typeDropdown;
     public PropertyErrorPage errorPage;
 
+    public void SetTypeDropDown(string typeString)
+    {
+        int currentIndex = -1;
+        for (int i = 0; i < typeDropdown.options.Count; i++)
+        {
+            if (typeDropdown.options[i].text == typeString)
+            {
+                currentIndex = i;
+                typeDropdown.value = i;
+                break;
+            }
+        }
+    }
+
     public void ConfirmButton()
     {
-        if (typeBox.text == "整型")
+        if (typeDropdown.captionText.text == "整型")
         {
-            editor.SetItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
-            editor.bufferData.intData[string.Format("{0} {1}", typeBox.text, nameBox.text)]= int.Parse(dataBox.text);
+            editor.SetItem(string.Format("{0} {1}", "整型", nameBox.text), dataBox.text);
+            editor.bufferData.intData[string.Format("{0} {1}", "整型", nameBox.text)]= int.Parse(dataBox.text);
         }
-        else if (typeBox.text == "浮点数")
+        else if (typeDropdown.captionText.text == "浮点数")
         {
-            editor.SetItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
-            editor.bufferData.floatData[string.Format("{0} {1}", typeBox.text, nameBox.text)] = float.Parse(dataBox.text);
+            editor.SetItem(string.Format("{0} {1}", "浮点数", nameBox.text), dataBox.text);
+            editor.bufferData.floatData[string.Format("{0} {1}", "浮点数", nameBox.text)] = float.Parse(dataBox.text);
         }
-        else if (typeBox.text == "字符串"||typeBox.text=="")
+        else if (typeDropdown.captionText.text == "字符串")
         {
-            editor.SetItem(string.Format("{0} {1}", typeBox.text, nameBox.text), dataBox.text);
-            editor.bufferData.stringData[string.Format("{0} {1}", typeBox.text, nameBox.text)] = dataBox.text;
+            editor.SetItem(string.Format("{0} {1}", "字符串", nameBox.text), dataBox.text);
+            editor.bufferData.stringData[string.Format("{0} {1}", "字符串", nameBox.text)] = dataBox.text;
         }
 
         Destroy(gameObject);
