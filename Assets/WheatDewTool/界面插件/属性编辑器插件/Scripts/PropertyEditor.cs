@@ -137,6 +137,12 @@ public class PropertyData
         this.stringData = stringData;
     }
 
+    public PropertyData(string name,string value)
+    {
+        this.stringData = new Dictionary<string, string> { { name, value } };
+    }
+
+
     public void SetData(string key,int value)
     {
         if (intData.ContainsKey(key))

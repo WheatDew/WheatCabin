@@ -49,27 +49,25 @@ public class AnimatorAddon : MonoBehaviour
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
 
-        if (self.propertyData.stringData.ContainsKey("TriggerEvent"))
+        if (self.propertyData.stringData.ContainsKey("TriggerEventAnimation"))
         {
+            if (self.propertyData.stringData.ContainsKey("TriggerEventType"))
+            {
+                triggerEvent.AddListener(FunctionMap.s.map[self.propertyData.stringData["TriggerEventType"]]);
+            }
+
             if (self.propertyData.floatData.ContainsKey("TriggerEventTime"))
             {
-                AddAnimationEvent("GhostSamurai_APose_Attack01_1_ALL_Root", "HalfEvent", 0.5f);
+                AddAnimationEvent(self.propertyData.stringData["TriggerEventAnimation"], "TriggerEvent", (float)self.propertyData.floatData["TriggerEventTime"]);
             }
-        }
-    }
-
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (SPlayer.s.currentPlayer == gameObject)
+            else
             {
-                AddAnimationEvent("GhostSamurai_APose_Attack01_1_ALL_Root", "HalfEvent", 0.5f);
+                AddAnimationEvent(self.propertyData.stringData["TriggerEvent"], "TriggerEvent", 0);
             }
         }
     }
+
+
 
     private void OnDestroy()
     {
