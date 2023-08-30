@@ -21,7 +21,7 @@ public class SBuilding : MonoBehaviour
             _s = this;
         }
         //添加初始化函数监听
-        mapEditor.mapEditorModelEvent.AddListener(InitBuilding);
+        //mapEditor.mapEditorModelEvent.AddListener(InitBuilding);
     }
     #endregion
 
@@ -33,7 +33,7 @@ public class SBuilding : MonoBehaviour
         if (type == "Building")
         {
             var cobj = obj.AddComponent<NormalObject>();
-            cobj.propertyData = new PropertyData(intStatus, floatStatus, stringStatus);
+            //cobj.propertyData = new PropertyData(intStatus, floatStatus, stringStatus);
             cobj.type = "Building";
             cobj.detailType = detailType;
         }
@@ -45,11 +45,11 @@ public class SBuilding : MonoBehaviour
         InitBuilding(data.name, data.type, data.detailType, data.intStatus, data.floatStatus, data.stringStatus, obj);
     }
 
-    public void InitBuilding(StoreItem data, GameObject obj)
-    {
-        Debug.LogFormat("{0} {1} {2}", data.name, data.type, data.detailType);
-        InitBuilding(data.name, data.type, data.detailType, new Dictionary<string, int>(), new Dictionary<string, float>(), new Dictionary<string, string>(), obj);
-    }
+    //public void InitBuilding(StoreItem data, GameObject obj)
+    //{
+    //    Debug.LogFormat("{0} {1} {2}", data.name, data.type, data.detailType);
+    //    InitBuilding(data.name, data.type, data.detailType, new Dictionary<string, int>(), new Dictionary<string, float>(), new Dictionary<string, string>(), obj);
+    //}
 }
 
 #region 类型

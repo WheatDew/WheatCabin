@@ -36,15 +36,15 @@ public class PropertyEditor : MonoBehaviour
         {
             Destroy(itemParent.GetChild(i).gameObject);
         }
-        foreach (var item in currentTarget.propertyData.intData)
+        foreach (var item in currentTarget.propertyData.i)
         {
             CreateItem(item.Key+" 整型", item.Value.ToString());
         }
-        foreach (var item in currentTarget.propertyData.floatData)
+        foreach (var item in currentTarget.propertyData.f)
         {
             CreateItem(item.Key+" 浮点型", item.Value.ToString());
         }
-        foreach (var item in currentTarget.propertyData.stringData)
+        foreach (var item in currentTarget.propertyData.s)
         {
             CreateItem(item.Key+" 字符串", item.Value.ToString());
         }
@@ -109,79 +109,4 @@ public class PropertyEditor : MonoBehaviour
 
 }
 
-public class PropertyData
-{
-    public Dictionary<string, int> intData;
-    public Dictionary<string, float> floatData;
-    public Dictionary<string, string> stringData;
 
-    public PropertyData()
-    {
-        intData = new Dictionary<string, int>();
-        floatData = new Dictionary<string, float>();
-        stringData = new Dictionary<string, string>();
-    }
-
-
-    public PropertyData(PropertyData origin)
-    {
-        intData = new Dictionary<string, int>(origin.intData);
-        floatData = new Dictionary<string, float>(origin.floatData);
-        stringData = new Dictionary<string, string>(origin.stringData);
-    }
-
-    public PropertyData(Dictionary<string,int> intData,Dictionary<string,float> floatData,Dictionary<string,string> stringData)
-    {
-        this.intData = intData;
-        this.floatData = floatData;
-        this.stringData = stringData;
-    }
-
-    public PropertyData(string name,string value)
-    {
-        this.stringData = new Dictionary<string, string> { { name, value } };
-    }
-
-
-    public void SetData(string key,int value)
-    {
-        if (intData.ContainsKey(key))
-            intData[key] = value;
-        else
-            intData.Add(key, value);
-    }
-
-    public void SetData(string key,float value)
-    {
-        if (floatData.ContainsKey(key))
-            floatData[key] = value;
-        else
-            floatData.Add(key, value);
-    }
-
-    public void SetData(string key,string value)
-    {
-        stringData.Add(key, value);
-    }
-
-    public void Print()
-    {
-        string s = "";
-        foreach(var item in intData)
-        {
-            s += item.ToString() + " ";
-        }
-        s += '\n';
-        foreach (var item in floatData)
-        {
-            s += item.ToString() + " ";
-        }
-        s += '\n';
-        foreach (var item in stringData)
-        {
-            s += item.ToString() + " ";
-        }
-
-        Debug.Log(s);
-    }
-}

@@ -16,15 +16,12 @@ public class SCharacter : MonoBehaviour
     private void Awake()
     {
         if (!_s) _s = this;
-
-        InitOriginPropertyData();
-        mapEditor.mapEditorModelEvent.AddListener(InitCharacter);
+        //mapEditor.mapEditorModelEvent.AddListener(InitCharacter);
     }
     #endregion
 
     #region 变量
 
-    public Dictionary<string, PropertyData> originPropertyDatas = new Dictionary<string, PropertyData>();
 
     #endregion
 
@@ -36,38 +33,6 @@ public class SCharacter : MonoBehaviour
     }
     #endregion
 
-    //写入测试数据，用于测试
-    public void WriteOriginPropertyData()
-    {
-        Dictionary<string, int> intData = new Dictionary<string, int> { { "复活次数", 10 } };
-        Dictionary<string, float> floatData = new Dictionary<string, float> { { "健康值", 1.6f } };
-        Dictionary<string, string> stringData = new Dictionary<string, string> { { "名字", "白元元" } };
-
-        SCharacterData data = new SCharacterData("白元元", intData, floatData, stringData);
-
-
-        File.WriteAllText("Core/MapEditor/Data/CharacterProperty.json",Regex.Unescape(JsonMapper.ToJson(data)));
-    }
-
-    public void InitOriginPropertyData()
-    {
-        JsonData originDatas = JsonMapper.ToObject(File.ReadAllText("Core/MapEditor/Data/CharacterProperty.json"));
-
-
-        for(int i = 0; i < originDatas.Count; i++)
-        {
-            string jsonData = Regex.Unescape(originDatas[i].ToJson());
-            SCharacterData data = JsonMapper.ToObject<SCharacterData>(jsonData);
-            originPropertyDatas.Add(data.name, new PropertyData(data.intProperty,data.floatProperty,data.stringProperty));
-
-        }
-
-        //foreach (var item in originDatas)
-        //{
-        //    Debug.Log(item.ConvertTo(typeof(SCharacterData)));
-        //    //originPropertyDatas.Add(item.name, new PropertyData(item.intProperty, item.floatProperty, item.stringProperty));
-        //}
-    }
 
     public SMapEditor mapEditor;
     public void InitCharacter(string name,string type,string detailType,PropertyData propertyData,GameObject obj)
@@ -87,13 +52,13 @@ public class SCharacter : MonoBehaviour
     }
     public void InitCharacter(SceneObjData data,GameObject obj)
     {
-        InitCharacter(data.name, data.type, data.detailType, new PropertyData(data.intStatus, data.floatStatus, data.stringStatus), obj);
+        //InitCharacter(data.name, data.type, data.detailType, new PropertyData(data.intStatus, data.floatStatus, data.stringStatus), obj);
     }
 
-    public void InitCharacter(StoreItem data,GameObject obj)
-    {
-        InitCharacter(data.name, data.type, data.detailType,new PropertyData( originPropertyDatas[data.name]), obj);
-    }
+    //public void InitCharacter(StoreItem data,GameObject obj)
+    //{
+    //    InitCharacter(data.name, data.type, data.detailType,new PropertyData( PropertyMap.s.map[data.name]), obj);
+    //}
 }
 
 public class SCharacterDatas

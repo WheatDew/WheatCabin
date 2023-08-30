@@ -49,20 +49,20 @@ public class AnimatorAddon : MonoBehaviour
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
 
-        if (self.propertyData.stringData.ContainsKey("TriggerEventAnimation"))
+        if (self.propertyData.s.ContainsKey("TriggerEventAnimation"))
         {
-            if (self.propertyData.stringData.ContainsKey("TriggerEventType"))
+            if (self.propertyData.s.ContainsKey("TriggerEventType"))
             {
-                triggerEvent.AddListener(FunctionMap.s.map[self.propertyData.stringData["TriggerEventType"]]);
+                triggerEvent.AddListener(FunctionMap.s.map[self.propertyData.s["TriggerEventType"]]);
             }
 
-            if (self.propertyData.floatData.ContainsKey("TriggerEventTime"))
+            if (self.propertyData.f.ContainsKey("TriggerEventTime"))
             {
-                AddAnimationEvent(self.propertyData.stringData["TriggerEventAnimation"], "TriggerEvent", (float)self.propertyData.floatData["TriggerEventTime"]);
+                AddAnimationEvent(self.propertyData.s["TriggerEventAnimation"], "TriggerEvent", (float)self.propertyData.f["TriggerEventTime"]);
             }
             else
             {
-                AddAnimationEvent(self.propertyData.stringData["TriggerEvent"], "TriggerEvent", 0);
+                AddAnimationEvent(self.propertyData.s["TriggerEvent"], "TriggerEvent", 0);
             }
         }
     }

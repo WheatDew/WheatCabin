@@ -49,6 +49,6 @@ public class LogSystem : MonoBehaviour
 
     public void LogTest(PropertyData data)
     {
-        WriteLog(data.stringData["LogTestContent"]);
+        WriteLog(data.s["LogTestContent"]);
     }
 }

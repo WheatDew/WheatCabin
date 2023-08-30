@@ -10,7 +10,7 @@ public class NormalObject : MonoBehaviour
 
     private void Start()
     {
-        SMapEditor.objMap.Add(this);
+        //SMapEditor.objMap.Add(this);
         Init();
     }
 

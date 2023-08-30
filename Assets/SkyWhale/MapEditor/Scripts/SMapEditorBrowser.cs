@@ -78,7 +78,7 @@ public class SMapEditorBrowser : MonoBehaviour
         for(int i = 0; i < sceneObjects.Length; i++)
         {
             var item = sceneObjects[i];
-            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.propertyData.intData,item.propertyData.floatData,item.propertyData.stringData);
+            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.propertyData.i,item.propertyData.f,item.propertyData.s);
         }
         string s = JsonMapper.ToJson(sceneDataFile);
 
@@ -93,22 +93,22 @@ public class SMapEditorBrowser : MonoBehaviour
 
     public void JsonToSceneData(string path)
     {
-        var readData = JsonMapper.ToObject<SceneDataFile>(File.ReadAllText(path));
-        for(int i = 0; i < readData.sceneObjDataList.Length; i++)
-        {
-            var item = readData.sceneObjDataList[i];
+        //var readData = JsonMapper.ToObject<SceneDataFile>(File.ReadAllText(path));
+        //for(int i = 0; i < readData.sceneObjDataList.Length; i++)
+        //{
+        //    var item = readData.sceneObjDataList[i];
 
 
-            var obj = Instantiate(mapEditor.storeItemMap[item.name].gameObject,new Vector3(item.positionX,item.positionY,item.positionZ),new Quaternion(item.rotationX,item.rotationY,item.rotationZ,item.rotationW));
-            Regex regex = new Regex(@"\([C|c]lone\)$");
-            if (regex.IsMatch(obj.name))
-            {
-                obj.name = obj.name[..^7];
-            }
-            obj.AddComponent<ExposeToEditor>();
-            SCharacter.s.InitCharacter(item, obj);
-            SBuilding.s.InitBuilding(item, obj);
-        }
+        //    var obj = Instantiate(mapEditor.storeItemMap[item.name].gameObject,new Vector3(item.positionX,item.positionY,item.positionZ),new Quaternion(item.rotationX,item.rotationY,item.rotationZ,item.rotationW));
+        //    Regex regex = new Regex(@"\([C|c]lone\)$");
+        //    if (regex.IsMatch(obj.name))
+        //    {
+        //        obj.name = obj.name[..^7];
+        //    }
+        //    obj.AddComponent<ExposeToEditor>();
+        //    SCharacter.s.InitCharacter(item, obj);
+        //    SBuilding.s.InitBuilding(item, obj);
+        //}
     }
 
 }
