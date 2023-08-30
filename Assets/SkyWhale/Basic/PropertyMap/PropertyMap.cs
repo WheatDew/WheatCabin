@@ -32,11 +32,11 @@ public class PropertyMap : MonoBehaviour
         {
             map.Add(item.Key,item.Value);
         }
-        //获取Json数据
-        foreach (var item in JsonSystem.ReadJsonProperty("Core/MapEditor/Data/Property.json"))
-        {
-            map.Add(item.Key, item.Value);
-        }
+        ////获取Json数据
+        //foreach (var item in JsonSystem.ReadJsonProperty("Core/MapEditor/Data/Property.json"))
+        //{
+        //    map.Add(item.Key, item.Value);
+        //}
     }
 
 }

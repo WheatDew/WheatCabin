@@ -42,7 +42,7 @@ public class ExcelSystem
                     IRow Row_Read = Sheet_Read.GetRow(row);
 
                     string key = Row_Read.GetCell(0).ToSafeString();
-                    
+                    Debug.Log(key);
                     if(Row_Read.GetCell(1).CellType == CellType.Numeric&& Row_Read.GetCell(1).ToSafeString().Contains('.'))
                     {
                         floatDatas.Add(key, (float)Row_Read.GetCell(1).NumericCellValue);
@@ -53,7 +53,7 @@ public class ExcelSystem
                     }
                     else if(Row_Read.GetCell(1).CellType == CellType.Boolean)
                     {
-                        
+                        boolDatas.Add(key, (bool)Row_Read.GetCell(1).BooleanCellValue);
                     }
                     else
                     {
@@ -61,7 +61,7 @@ public class ExcelSystem
                     }
                 }
 
-                //datas.Add(Sheet_Read.SheetName, new PropertyData(intDatas, floatDatas, stringDatas));
+                datas.Add(Sheet_Read.SheetName, new PropertyData(intDatas, floatDatas, stringDatas,boolDatas));
             }
 
             return datas;

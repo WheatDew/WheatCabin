@@ -36,6 +36,7 @@ public class SMapEditor : MonoBehaviour
 
     public void InitMapEditor()
     {
+        Debug.Log(PropertyMap.s);
         var data = PropertyMap.s.map["MapEditor"];
 
         string[] childLayers = data.s["ChildLayer"].Split(',');
@@ -92,53 +93,50 @@ public class SMapEditor : MonoBehaviour
 
     public Sprite defaultSprite;
 
+    public Dictionary<string, GameObject> prefabMap = new Dictionary<string, GameObject>();
+
     public void InitDragStoreAsset()
     {
         var map = PropertyMap.s.map;
         string packName = "SkyWhaleEditor";
 
-        //foreach (var item in map)
-        //{
-            
-        //    LoadDragItem(packName, files[i]);
-        //}
+        LoadDragItem(packName);
 
 
-        //dragStorePage.DragEndEvent.AddListener(delegate (string value)
-        //{
+        dragStorePage.DragEndEvent.AddListener(delegate (string value)
+        {
 
-        //    var obj = Instantiate(storeItemMap[value].gameObject);
-        //    Regex regex = new Regex(@"\([C|c]lone\)$");
-        //    if (regex.IsMatch(obj.name))
-        //    {
-        //        obj.name = obj.name[..^7];
-        //    }
+            //var obj = Instantiate(prefabMap);
 
 
-        //    obj.AddComponent<CMapEditorModel>();
-        //    var rteComponent = obj.AddComponent<ExposeToEditor>();
-        //    mapEditorModelEvent.Invoke(storeItemMap[value], obj);
-        //    rteComponentEvent.Invoke(rteComponent);
+            //obj.AddComponent<CMapEditorModel>();
+            //var rteComponent = obj.AddComponent<ExposeToEditor>();
+            //mapEditorModelEvent.Invoke(storeItemMap[value], obj);
+            //rteComponentEvent.Invoke(rteComponent);
 
-        //});
+        });
     }
 
 
 
-    private void LoadDragItem(string packName, Dictionary<string,PropertyData> datas)
+    private void LoadDragItem(string packName)
     {
         var assetBundle = assetBundleMap[packName];
-
+        var datas = PropertyMap.s.map;
         foreach(var item in datas)
         {
-            var data = item.Value;
-            var itemSprite = assetBundle.LoadAsset<Sprite>(data.s["storeIconName"]) ?? defaultSprite;
-            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.s["prefabName"]);
-            dragStorePage.CreateElement(data.s["storeName"], itemSprite);
+            if (item.Value.b.ContainsKey("IsStoreElement") && item.Value.b["IsStoreElement"])
+            {
+                var data = item.Value;
+                var itemSprite = assetBundle.LoadAsset<Sprite>(data.s["StoreIconName"]) ?? defaultSprite;
+                var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.s["PrefabName"]);
+                if (!prefabMap.ContainsKey(data.s["PrefabName"]))
+                {
+                    prefabMap.Add(data.s["PrefabName"], itemGameObject);
+                }
+                dragStorePage.CreateElement(data.s["StoreName"], itemSprite);
+            }
         }
-
-
-
     }
 
     #endregion
