@@ -106,8 +106,8 @@ public class SMapEditor : MonoBehaviour
 
         dragStorePage.DragEndEvent.AddListener(delegate (string value)
         {
-
-            //var obj = Instantiate(prefabMap[]);
+            Debug.Log(value);
+            //var obj = Instantiate(prefabMap[d);
 
 
             //obj.AddComponent<CMapEditorModel>();

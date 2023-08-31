@@ -9,7 +9,7 @@ public class SAssetBundle : MonoBehaviour
     private AssetBundle mainAB = null; //主包
     private AssetBundleManifest mainManifest = null; //主包中配置文件---用以获取依赖包
 
-    public string basePath= "Core/AssetBundles/StandaloneWindows/";
+    public string basePath= "Resource Bundle/AssetBundles/StandaloneWindows/";
 
     private static SAssetBundle instance;
     public static SAssetBundle Instance { get { return instance; } }

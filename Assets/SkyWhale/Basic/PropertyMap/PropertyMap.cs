@@ -33,7 +33,7 @@ public class PropertyMap : MonoBehaviour
     private void Init()
     {
         //获取Excel数据
-        foreach (var item in ReadExcel("Core/MapEditor/Data/数据.xls"))
+        foreach (var item in ReadExcel("PropertyData/MapEditor/Data/数据.xls"))
         {
             map.Add(item.Key,item.Value);
         }
