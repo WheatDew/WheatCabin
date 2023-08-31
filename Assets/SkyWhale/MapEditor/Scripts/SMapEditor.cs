@@ -39,10 +39,11 @@ public class SMapEditor : MonoBehaviour
         Debug.Log(PropertyMap.s);
         var data = PropertyMap.s.map["MapEditor"];
 
-        string[] childLayers = data.s["ChildLayer"].Split(',');
+        List<string> childLayers = data.GetStrings("ChildLayer");
 
-        for(int i = 0; i < childLayers.Length; i++)
+        for(int i = 0; i < childLayers.Count; i++)
         {
+            Debug.Log(childLayers[i]);
             var t = new GameObject
             {
                 name = childLayers[i]
@@ -53,12 +54,12 @@ public class SMapEditor : MonoBehaviour
 
 
         //初始化摄像机位置
-        runtimeSceneComponent.cameraPosition = new Vector3(data.f["MapEditorCameraPositionX"], data.f["MapEditorCameraPositionY"], data.f["MapEditorCameraPositionZ"]);
-        runtimeSceneComponent.cameraRotation = new Quaternion(data.f["MapEditorCameraRotationX"], data.f["MapEditorCameraRotationY"], data.f["MapEditorCameraRotationZ"],data.f["MapEditorCameraRotationW"]);
+        runtimeSceneComponent.cameraPosition = data.GetVector3("MapEditorCameraPosition");
+        runtimeSceneComponent.cameraRotation = data.GetQuaternion("MapEditorCameraRotation");
         //初始化资源包列表
-        string[] assetBundleMaps = data.s["AssetBundleMap"].Split(',');
+        List<string> assetBundleMaps = data.GetStrings("AssetBundleMap");
 
-        for (int i=0;i<assetBundleMaps.Length;i++)
+        for (int i=0;i<assetBundleMaps.Count;i++)
         {
             if (SAssetBundle.Instance == null)
             {
@@ -106,7 +107,7 @@ public class SMapEditor : MonoBehaviour
         dragStorePage.DragEndEvent.AddListener(delegate (string value)
         {
 
-            //var obj = Instantiate(prefabMap);
+            //var obj = Instantiate(prefabMap[]);
 
 
             //obj.AddComponent<CMapEditorModel>();
@@ -122,20 +123,18 @@ public class SMapEditor : MonoBehaviour
     private void LoadDragItem(string packName)
     {
         var assetBundle = assetBundleMap[packName];
-        var datas = PropertyMap.s.map;
-        foreach(var item in datas)
+        var datas = PropertyMap.s.map["MapEditor"];
+        foreach (var item in datas.GetStrings("StoreElements"))
         {
-            if (item.Value.b.ContainsKey("IsStoreElement") && item.Value.b["IsStoreElement"])
+
+            var data = PropertyMap.s.map[item];
+            var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString("StoreIconName")) ?? defaultSprite;
+            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString("PrefabName"));
+            if (!prefabMap.ContainsKey(data.GetString("PrefabName")))
             {
-                var data = item.Value;
-                var itemSprite = assetBundle.LoadAsset<Sprite>(data.s["StoreIconName"]) ?? defaultSprite;
-                var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.s["PrefabName"]);
-                if (!prefabMap.ContainsKey(data.s["PrefabName"]))
-                {
-                    prefabMap.Add(data.s["PrefabName"], itemGameObject);
-                }
-                dragStorePage.CreateElement(data.s["StoreName"], itemSprite);
+                prefabMap.Add(data.GetString("PrefabName"), itemGameObject);
             }
+            dragStorePage.CreateElement(data.GetString("StoreName"), itemSprite);
         }
     }
 

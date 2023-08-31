@@ -69,26 +69,26 @@ public class SMapEditorBrowser : MonoBehaviour
 
     public void SceneDataToJson(string path)
     {
-        //var buildingList = JsonMapper.ToObject<BuildingPrefabDataList>(File.ReadAllText(path));
-        var sceneObjects = FindObjectsOfType<NormalObject>();
-        SceneDataFile sceneDataFile = new SceneDataFile();
-        sceneDataFile.sceneObjDataList = new SceneObjData[sceneObjects.Length];
+        ////var buildingList = JsonMapper.ToObject<BuildingPrefabDataList>(File.ReadAllText(path));
+        //var sceneObjects = FindObjectsOfType<NormalObject>();
+        //SceneDataFile sceneDataFile = new SceneDataFile();
+        //sceneDataFile.sceneObjDataList = new SceneObjData[sceneObjects.Length];
 
 
-        for(int i = 0; i < sceneObjects.Length; i++)
-        {
-            var item = sceneObjects[i];
-            sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.propertyData.i,item.propertyData.f,item.propertyData.s);
-        }
-        string s = JsonMapper.ToJson(sceneDataFile);
+        //for(int i = 0; i < sceneObjects.Length; i++)
+        //{
+        //    var item = sceneObjects[i];
+        //    sceneDataFile.sceneObjDataList[i] = new SceneObjData(item.name, item.type, item.detailType, item.transform.position,item.transform.rotation,item.propertyData.,item.propertyData.f,item.propertyData.s);
+        //}
+        //string s = JsonMapper.ToJson(sceneDataFile);
 
-        s = Regex.Replace(s, @"\\u(?<Value>[a-zA-Z0-9]{4})", m => {
-            return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
-        });
+        //s = Regex.Replace(s, @"\\u(?<Value>[a-zA-Z0-9]{4})", m => {
+        //    return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
+        //});
 
-        Debug.Log(s);
-        File.WriteAllText(path, s,System.Text.Encoding.UTF8);
-        Debug.LogFormat("写入文件{0}成功", path);
+        //Debug.Log(s);
+        //File.WriteAllText(path, s,System.Text.Encoding.UTF8);
+        //Debug.LogFormat("写入文件{0}成功", path);
     }
 
     public void JsonToSceneData(string path)
