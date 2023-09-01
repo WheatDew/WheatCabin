@@ -34,7 +34,7 @@ public class AnimatorAddon : MonoBehaviour
     #region 变量定义
     private Animator animator;
     private AnimationClip[] clips;
-    private NormalObject self;
+    private Entity self;
 
     private UnityEvent<PropertyData> startEvent = new UnityEvent<PropertyData>();
     private UnityEvent<PropertyData> endEvent = new UnityEvent<PropertyData>();
@@ -45,7 +45,7 @@ public class AnimatorAddon : MonoBehaviour
     #region 系统函数
     private void Start()
     {
-        self = GetComponent<NormalObject>();
+        self = GetComponent<Entity>();
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalObject : MonoBehaviour
+public class Entity : MonoBehaviour
 {
     public string type;
     public string detailType;
@@ -10,7 +10,7 @@ public class NormalObject : MonoBehaviour
 
     private void Start()
     {
-        //SMapEditor.objMap.Add(this);
+        PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
         Init();
     }
 

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class DragStorePage : MonoBehaviour
 {
@@ -17,9 +15,16 @@ public class DragStorePage : MonoBehaviour
 
     public bool inBorder=false;
 
-    public UnityEvent<string> DragEndEvent;
+    public UnityEvent<PropertyData> DragEndEvent;
     public UnityEvent InitEvent;
-    public UnityEvent<string> ItemInit;
+    public UnityEvent<PropertyData> ItemInit;
+
+    #region 属性对应列表
+
+    public string storeElementDisplayName = "StoreElementDisplayName";
+    public string storeElementSpriteName = "StoreElementSpriteName";
+
+    #endregion
 
 
     private void Start()
@@ -43,13 +48,14 @@ public class DragStorePage : MonoBehaviour
         obj.elementName.text= elementName;
     }
 
-    public void CreateElement(string elementName,Sprite elementImage)
+    public void CreateElement(PropertyData data,Sprite elementImage)
     {
         var obj = Instantiate(elementPrefab, elementParent);
         obj.dragStorePage = this;
-        obj.name = elementName;
-        obj.elementName.text = elementName;
+        obj.name = data.GetString(storeElementDisplayName);
+        obj.elementName.text = data.GetString(storeElementDisplayName);
         obj.elementImage.sprite = elementImage;
+        obj.data = data;
     }
 
     public void CreateElement(string elementName,Texture2D texture)

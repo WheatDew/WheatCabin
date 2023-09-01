@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class NormalObjectSystem : MonoBehaviour
 {
-    public List<NormalObject> objects;
+    public List<Entity> objects;
     public string saveDataPath;
-    public Dictionary<string,NormalObject> normalObjects;
+    public Dictionary<string,Entity> normalObjects;
     public string packName;
     public AssetBundle assetBundle;
 
@@ -27,6 +27,6 @@ public class NormalObjectSystem : MonoBehaviour
     public virtual void ReadScene()
     {
         string result = File.ReadAllText(saveDataPath);
-        objects = JsonMapper.ToObject<List<NormalObject>>(result);
+        objects = JsonMapper.ToObject<List<Entity>>(result);
     }
 }

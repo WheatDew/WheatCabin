@@ -32,7 +32,7 @@ public class SBuilding : MonoBehaviour
     {
         if (type == "Building")
         {
-            var cobj = obj.AddComponent<NormalObject>();
+            var cobj = obj.AddComponent<Entity>();
             //cobj.propertyData = new PropertyData(intStatus, floatStatus, stringStatus);
             cobj.type = "Building";
             cobj.detailType = detailType;

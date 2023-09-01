@@ -16,33 +16,35 @@ public class SCharacter : MonoBehaviour
     private void Awake()
     {
         if (!_s) _s = this;
-        //mapEditor.mapEditorModelEvent.AddListener(InitCharacter);
     }
     #endregion
 
-    #region 变量
+    #region 属性转换
 
+    public string displayName = "DisplayName";
+    public string objectType = "Type";
+    public string detailType = "DetialType";
 
     #endregion
 
     #region 系统函数
     private void Start()
     {
-        //WriteOriginPropertyData();
+        mapEditor.elementTypeInitEvent.AddListener(InitCharacter);
 
     }
     #endregion
 
 
     public SMapEditor mapEditor;
-    public void InitCharacter(string name,string type,string detailType,PropertyData propertyData,GameObject obj)
+    public void InitCharacter(PropertyData data,GameObject obj)
     {
-        if (type == "Character")
+        if (data.GetString(objectType) == "Character")
         {
             var cobj = obj.AddComponent<CharacterObject>();
-            cobj.propertyData = propertyData;
+            cobj.propertyData = data;
             cobj.type = "Character";
-            cobj.detailType = detailType;
+            cobj.detailType = data.GetString(detailType);
             if (detailType == "Player")
             {
                 SPlayer.s.currentPlayer = obj;
@@ -50,69 +52,9 @@ public class SCharacter : MonoBehaviour
             }
         }
     }
-    public void InitCharacter(SceneObjData data,GameObject obj)
-    {
-        //InitCharacter(data.name, data.type, data.detailType, new PropertyData(data.intStatus, data.floatStatus, data.stringStatus), obj);
-    }
-
-    //public void InitCharacter(StoreItem data,GameObject obj)
-    //{
-    //    InitCharacter(data.name, data.type, data.detailType,new PropertyData( PropertyMap.s.map[data.name]), obj);
-    //}
-}
-
-public class SCharacterDatas
-{
-    public SCharacterData[] datas;
 
 }
 
-public class SCharacterData
-{
-    public string name;
-    public Dictionary<string, int> intProperty;
-    public Dictionary<string, float> floatProperty;
-    public Dictionary<string, string> stringProperty;
 
-    public SCharacterData()
-    {
-        name = "";
-        intProperty = new Dictionary<string, int>();
-        floatProperty = new Dictionary<string, float>();
-        stringProperty = new Dictionary<string, string>();
-    }
-
-    public SCharacterData(string name)
-    {
-        this.name = name;
-        intProperty = new Dictionary<string, int>();
-        floatProperty = new Dictionary<string, float>();
-        stringProperty = new Dictionary<string, string>();
-    }
-
-    public SCharacterData(string name,Dictionary<string,int> intProperty)
-    {
-        this.name = name;
-        this.intProperty = intProperty;
-        floatProperty = new Dictionary<string, float>();
-        stringProperty = new Dictionary<string, string>();
-    }
-
-    public SCharacterData(string name,Dictionary<string,float> floatProperty)
-    {
-        this.name = name;
-        intProperty = new Dictionary<string, int>();
-        this.floatProperty = floatProperty;
-        stringProperty = new Dictionary<string, string>();
-    }
-
-    public SCharacterData(string name, Dictionary<string, int> intProperty, Dictionary<string, float> floatProperty,Dictionary<string,string> stringProperty)
-    {
-        this.name = name;
-        this.intProperty = intProperty;
-        this.floatProperty = floatProperty;
-        this.stringProperty = stringProperty;
-    }
-}
 
 

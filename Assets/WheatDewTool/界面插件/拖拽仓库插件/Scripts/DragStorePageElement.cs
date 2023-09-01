@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Data;
 
 public class DragStorePageElement : MonoBehaviour, IPointerDownHandler,IPointerExitHandler
 {
     [HideInInspector] public DragStorePage dragStorePage;
     public Dictionary<string, string> stringData = new Dictionary<string, string>();
+    public PropertyData data;
     public Text elementName;
     public Image elementImage;
 
@@ -21,6 +23,7 @@ public class DragStorePageElement : MonoBehaviour, IPointerDownHandler,IPointerE
             obj.dragStorePage = dragStorePage;
             obj.name=transform.name;
             obj.image.sprite = elementImage.sprite;
+            obj.data = data;
             Debug.Log("×ó¼ü´¥·¢");
         }
     }

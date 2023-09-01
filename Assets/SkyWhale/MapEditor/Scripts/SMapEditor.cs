@@ -16,6 +16,12 @@ using JetBrains.Annotations;
 
 public class SMapEditor : MonoBehaviour
 {
+    #region 系统函数
+
+
+
+    #endregion
+
     #region 主体
 
     public Dictionary<string, Transform> childLayerList = new Dictionary<string, Transform>();
@@ -84,6 +90,16 @@ public class SMapEditor : MonoBehaviour
 
     #endregion
 
+    #region 属性转换
+
+    private string storeElementIconName = "StoreElementIconName";
+    private string mapEditorPropertyName = "MapEditor";
+    private string storeElements = "StoreElements";
+    private string storeElementPrefabName = "StoreElementPrefabName";
+
+
+    #endregion
+
     #region 拖拽存储资源
     public DragStorePage dragStorePage;
 
@@ -96,6 +112,9 @@ public class SMapEditor : MonoBehaviour
 
     public Dictionary<string, GameObject> prefabMap = new Dictionary<string, GameObject>();
 
+    public UnityEvent<PropertyData,GameObject> elementTypeInitEvent = new UnityEvent<PropertyData,GameObject>(); 
+
+
     public void InitDragStoreAsset()
     {
         var map = PropertyMap.s.map;
@@ -104,17 +123,16 @@ public class SMapEditor : MonoBehaviour
         LoadDragItem(packName);
 
 
-        dragStorePage.DragEndEvent.AddListener(delegate (string value)
+        dragStorePage.DragEndEvent.AddListener(delegate (PropertyData value)
         {
-            Debug.Log(value);
-            //var obj = Instantiate(prefabMap[d);
+            Debug.Log(value.GetString(storeElementPrefabName));
+            var obj = Instantiate(prefabMap[value.GetString(storeElementPrefabName)]);
 
 
-            //obj.AddComponent<CMapEditorModel>();
-            //var rteComponent = obj.AddComponent<ExposeToEditor>();
-            //mapEditorModelEvent.Invoke(storeItemMap[value], obj);
-            //rteComponentEvent.Invoke(rteComponent);
-
+            obj.AddComponent<CMapEditorModel>();
+            var rteComponent = obj.AddComponent<ExposeToEditor>();
+            rteComponentEvent.Invoke(rteComponent);
+            elementTypeInitEvent.Invoke(value,obj);
         });
     }
 
@@ -123,18 +141,19 @@ public class SMapEditor : MonoBehaviour
     private void LoadDragItem(string packName)
     {
         var assetBundle = assetBundleMap[packName];
-        var datas = PropertyMap.s.map["MapEditor"];
-        foreach (var item in datas.GetStrings("StoreElements"))
+        var datas = PropertyMap.s.map[mapEditorPropertyName];
+        foreach (var item in datas.GetStrings(storeElements))
         {
 
             var data = PropertyMap.s.map[item];
-            var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString("StoreIconName")) ?? defaultSprite;
-            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString("PrefabName"));
-            if (!prefabMap.ContainsKey(data.GetString("PrefabName")))
+            var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementIconName)) ?? defaultSprite;
+            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementPrefabName));
+            if (!prefabMap.ContainsKey(data.GetString(storeElementPrefabName)))
             {
-                prefabMap.Add(data.GetString("PrefabName"), itemGameObject);
+                prefabMap.Add(data.GetString(storeElementPrefabName), itemGameObject);
+                Debug.Log(data.GetString(storeElementPrefabName));
             }
-            dragStorePage.CreateElement(data.GetString("StoreName"), itemSprite);
+            dragStorePage.CreateElement(data, itemSprite);
         }
     }
 

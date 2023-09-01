@@ -28,6 +28,7 @@ public class PropertyMap : MonoBehaviour
 
     //数据模板
     public Dictionary<string, PropertyData> map = new Dictionary<string, PropertyData>();
+    public Dictionary<int, Entity> entityMap = new Dictionary<int, Entity>();
 
     //载入数据模板
     private void Init()
@@ -107,6 +108,20 @@ public class PropertyMap : MonoBehaviour
         return null;
     }
 
+    #endregion
+
+    #region 设置实体
+    public void SetEntity(int id,Entity entity)
+    {
+        if (entityMap.ContainsKey(id))
+        {
+            entityMap[id] = entity;
+        }
+        else
+        {
+            entityMap.Add(id, entity);
+        }
+    }
     #endregion
 }
 

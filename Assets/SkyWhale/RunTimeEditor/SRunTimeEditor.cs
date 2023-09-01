@@ -20,7 +20,7 @@ public class SRunTimeEditor : MonoBehaviour
 
         crte.Selected.AddListener(delegate
         {
-            NormalObject obj = crte.gameObject.GetComponent<NormalObject>();
+            Entity obj = crte.gameObject.GetComponent<Entity>();
 
             propertyEditor.SetCurrentTarget(obj, crte.name);
             Debug.Log(crte.name);

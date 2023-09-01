@@ -7,6 +7,7 @@ public class DragStorePageFloatElement : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
     [HideInInspector] public DragStorePage dragStorePage;
+    public PropertyData data;
     public Image image;
 
     private void Start()
@@ -21,13 +22,13 @@ public class DragStorePageFloatElement : MonoBehaviour
         if (dragStorePage.floatElementType==DragStorePage.FloatElementType.Border
             &&!dragStorePage.inBorder)
         {
-            dragStorePage.DragEndEvent.Invoke(name);
+            dragStorePage.DragEndEvent.Invoke(data);
             Destroy(gameObject);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            dragStorePage.DragEndEvent.Invoke(name);
+            dragStorePage.DragEndEvent.Invoke(data);
             Destroy(gameObject);
         }
     }
