@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SkyWhale
 {
@@ -39,72 +40,81 @@ namespace SkyWhale
 
         private void Update()
         {
-            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            if (Input.GetKeyDown(equipKeyboard))
-            {
-                if (isBattling)
+                if (Input.GetKeyDown(equipKeyboard))
                 {
-                    anim.SetTrigger("Unarm");
-                    isBattling = false;
+                    if (isBattling)
+                    {
+                        anim.SetTrigger("Unarm");
+                        isBattling = false;
+                    }
+                    else
+                    {
+                        anim.SetTrigger("Equip");
+                        isBattling = true;
+                    }
                 }
-                else
+                if (Input.GetKeyDown(attackKeyboard))
                 {
-                    anim.SetTrigger("Equip");
-                    isBattling = true;
+                    if (isBattling)
+                    {
+                        anim.SetTrigger("Attack");
+                    }
                 }
             }
-            if (Input.GetKeyDown(attackKeyboard))
-            {
-                if (isBattling)
-                {
-                    anim.SetTrigger("Attack");
-                }
-            }
+
         }
 
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            input.x = Input.GetAxis("Horizontal");
-            input.y = Input.GetAxis("Vertical");
-
-            // set speed to both vertical and horizontal inputs
-            if (useCharacterForward)
-                speed = Mathf.Abs(input.x) + input.y;
-            else
-                speed = Mathf.Abs(input.x) + Mathf.Abs(input.y);
-
-            speed = Mathf.Clamp(speed, 0f, 1f);
-            speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
-            anim.SetFloat("Speed", speed);
-
-            if (input.y < 0f && useCharacterForward)
-                direction = input.y;
-            else
-                direction = 0f;
-
-            anim.SetFloat("Direction", direction);
-
-            // set sprinting
-            isSprinting = ((Input.GetKey(sprintJoystick) || Input.GetKey(sprintKeyboard)) && input != Vector2.zero && direction >= 0f);
-            anim.SetBool("isSprinting", isSprinting);
-
-            // Update target direction relative to the camera view (or not if the Keep Direction option is checked)
-            UpdateTargetDirection();
-            if (input != Vector2.zero && targetDirection.magnitude > 0.1f)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Vector3 lookDirection = targetDirection.normalized;
-                freeRotation = Quaternion.LookRotation(lookDirection, transform.up);
-                var diferenceRotation = freeRotation.eulerAngles.y - transform.eulerAngles.y;
-                var eulerY = transform.eulerAngles.y;
+                input.x = Input.GetAxis("Horizontal");
+                input.y = Input.GetAxis("Vertical");
 
-                if (diferenceRotation < 0 || diferenceRotation > 0) eulerY = freeRotation.eulerAngles.y;
-                var euler = new Vector3(0, eulerY, 0);
+                // set speed to both vertical and horizontal inputs
+                if (useCharacterForward)
+                    speed = Mathf.Abs(input.x) + input.y;
+                else
+                    speed = Mathf.Abs(input.x) + Mathf.Abs(input.y);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), turnSpeed * turnSpeedMultiplier * Time.deltaTime);
+                speed = Mathf.Clamp(speed, 0f, 1f);
+                speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
+                anim.SetFloat("Speed", speed);
+
+                if (input.y < 0f && useCharacterForward)
+                    direction = input.y;
+                else
+                    direction = 0f;
+
+                anim.SetFloat("Direction", direction);
+
+                // set sprinting
+                isSprinting = ((Input.GetKey(sprintJoystick) || Input.GetKey(sprintKeyboard)) && input != Vector2.zero && direction >= 0f);
+                anim.SetBool("isSprinting", isSprinting);
+
+                // Update target direction relative to the camera view (or not if the Keep Direction option is checked)
+                UpdateTargetDirection();
+                if (input != Vector2.zero && targetDirection.magnitude > 0.1f)
+                {
+                    Vector3 lookDirection = targetDirection.normalized;
+                    freeRotation = Quaternion.LookRotation(lookDirection, transform.up);
+                    var diferenceRotation = freeRotation.eulerAngles.y - transform.eulerAngles.y;
+                    var eulerY = transform.eulerAngles.y;
+
+                    if (diferenceRotation < 0 || diferenceRotation > 0) eulerY = freeRotation.eulerAngles.y;
+                    var euler = new Vector3(0, eulerY, 0);
+
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), turnSpeed * turnSpeedMultiplier * Time.deltaTime);
+                }
             }
+
+            
         }
 
         //更新目标方向

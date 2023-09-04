@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class PropertyMap : MonoBehaviour
@@ -121,12 +122,23 @@ public class PropertyMap : MonoBehaviour
         {
             entityMap.Add(id, entity);
         }
+
+        entity.propertyData.Add(PropertyData.EntityID, id);
     }
+
+    public Entity GetEntity(int id)
+    {
+        return entityMap[id];
+    }
+
     #endregion
 }
 
 public class PropertyData
 {
+    public static string EntityID = "EntityID";
+    public static string StartEvent = "StartEvent";
+
     public Dictionary<string, List<int>> i;
     public Dictionary<string, List<float>> f;
     public Dictionary<string, List<string>> s;
@@ -301,19 +313,17 @@ public class PropertyData
         value = f[key][0];
     }
 
-    public float GetFloatData(string key)
-    {
-        return f[key][0];
-    }
-
-    public float GetFloat(string key,int index)
+    public float GetFloat(string key,int index=0)
     {
         return f[key][index];
     }
 
+
     public Vector3 GetVector3(string key)
     {
-        return new Vector3(f[key][0], f[key][1], f[key][2]);
+        if (f.ContainsKey(key))
+            return new Vector3(f[key][0], f[key][1], f[key][2]);
+        return Vector3.zero;
     }
 
     public Quaternion GetQuaternion(string key)
@@ -339,9 +349,9 @@ public class PropertyData
         value = b[key][0];
     }
 
-    public bool GetBoolData(string key)
+    public bool GetBool(string key,int index = 0)
     {
-        return b[key][0];
+        return b[key][index];
     }
 
     /*获取数组值*/

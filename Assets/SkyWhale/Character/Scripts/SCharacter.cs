@@ -21,9 +21,9 @@ public class SCharacter : MonoBehaviour
 
     #region ÊôÐÔ×ª»»
 
-    public string displayName = "DisplayName";
-    public string objectType = "Type";
-    public string detailType = "DetialType";
+    private string displayName = "DisplayName";
+    private string objectType = "Type";
+    private string detailType = "DetailType";
 
     #endregion
 
@@ -41,11 +41,13 @@ public class SCharacter : MonoBehaviour
     {
         if (data.GetString(objectType) == "Character")
         {
-            var cobj = obj.AddComponent<CharacterObject>();
+            var cobj = obj.AddComponent<CharacterEntity>();
             cobj.propertyData = data;
             cobj.type = "Character";
             cobj.detailType = data.GetString(detailType);
-            if (detailType == "Player")
+            
+
+            if (cobj.detailType == "Player")
             {
                 SPlayer.s.currentPlayer = obj;
                 cobj.detailType = "Player";

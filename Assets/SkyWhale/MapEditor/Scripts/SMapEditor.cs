@@ -125,7 +125,6 @@ public class SMapEditor : MonoBehaviour
 
         dragStorePage.DragEndEvent.AddListener(delegate (PropertyData value)
         {
-            Debug.Log(value.GetString(storeElementPrefabName));
             var obj = Instantiate(prefabMap[value.GetString(storeElementPrefabName)]);
 
 

@@ -11,7 +11,17 @@ public class Entity : MonoBehaviour
     private void Start()
     {
         PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
+        StartEvent();
         Init();
+    }
+
+    public void StartEvent()
+    {
+        if (propertyData.GetString(PropertyData.StartEvent) != null)
+        {
+            
+            FunctionMap.s.map[propertyData.GetString(PropertyData.StartEvent)].Invoke(propertyData);
+        }
     }
 
     public virtual void Init()

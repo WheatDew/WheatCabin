@@ -58,7 +58,7 @@ public class AnimatorAddon : MonoBehaviour
 
             if (self.propertyData.IsFloatExist("TriggerEventTime"))
             {
-                AddAnimationEvent(self.propertyData.GetString("TriggerEventAnimation"), "TriggerEvent", (float)self.propertyData.GetFloatData("TriggerEventTime"));
+                AddAnimationEvent(self.propertyData.GetString("TriggerEventAnimation"), "TriggerEvent", (float)self.propertyData.GetFloat("TriggerEventTime"));
             }
             else
             {

@@ -24,7 +24,6 @@ public class DragStorePageElement : MonoBehaviour, IPointerDownHandler,IPointerE
             obj.name=transform.name;
             obj.image.sprite = elementImage.sprite;
             obj.data = data;
-            Debug.Log("×ó¼ü´¥·¢");
         }
     }
 
