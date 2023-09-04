@@ -40,7 +40,11 @@ public class LifeBar : MonoBehaviour
         {
             if (!buttom.gameObject.activeSelf)
                 buttom.gameObject.SetActive(true);
-            self.position = Camera.main.WorldToScreenPoint(entity.transform.position+positionOffset);
+
+            var endPosition = Camera.main.WorldToScreenPoint(entity.transform.position + positionOffset);
+
+            if (Vector3.Distance(self.position, endPosition) > 5)
+                self.position = Vector3.Lerp(self.position, endPosition, 0.1f);
         }
         else
         {
