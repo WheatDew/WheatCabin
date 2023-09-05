@@ -19,7 +19,7 @@ public class SLifeBar : MonoBehaviour
             _s = this;
         }
 
-        FunctionMap.s.Add("CreateLifeBar", CreateLifeBarFunction);
+        FunctionMap.Add("CreateLifeBar", CreateLifeBarFunction);
     }
 
     #endregion

@@ -32,24 +32,24 @@ public class PropertyEditor : MonoBehaviour
     public void ReadData()
     {
 
-        for (int i = 0; i < itemParent.childCount; i++)
-        {
-            Destroy(itemParent.GetChild(i).gameObject);
-        }
-        foreach (var item in currentTarget.propertyData.i)
-        {
-            CreateItem(item.Key+" 整型", item.Value.ToString());
-        }
-        foreach (var item in currentTarget.propertyData.f)
-        {
-            CreateItem(item.Key+" 浮点型", item.Value.ToString());
-        }
-        foreach (var item in currentTarget.propertyData.s)
-        {
-            CreateItem(item.Key+" 字符串", item.Value.ToString());
-        }
-        //刷新缓存
-        bufferData = new PropertyData(currentTarget.propertyData);
+        //for (int i = 0; i < itemParent.childCount; i++)
+        //{
+        //    Destroy(itemParent.GetChild(i).gameObject);
+        //}
+        //foreach (var item in currentTarget.propertyData.i)
+        //{
+        //    CreateItem(item.Key+" 整型", item.Value.ToString());
+        //}
+        //foreach (var item in currentTarget.propertyData.f)
+        //{
+        //    CreateItem(item.Key+" 浮点型", item.Value.ToString());
+        //}
+        //foreach (var item in currentTarget.propertyData.s)
+        //{
+        //    CreateItem(item.Key+" 字符串", item.Value.ToString());
+        //}
+        ////刷新缓存
+        //bufferData = new PropertyData(currentTarget.propertyData);
 
     }
 
@@ -61,7 +61,7 @@ public class PropertyEditor : MonoBehaviour
 
     public void CreateItem(string originName,string originData)
     {
-        Debug.LogFormat("{0}-{1}",originName, originData);
+        //Debug.LogFormat("{0}-{1}",originName, originData);
         var obj = Instantiate(itemPrefab, itemParent);
         obj.editor = this;
         obj.originData = originData;

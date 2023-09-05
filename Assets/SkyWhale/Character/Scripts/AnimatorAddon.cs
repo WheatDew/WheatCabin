@@ -39,7 +39,12 @@ public class AnimatorAddon : MonoBehaviour
     private UnityEvent<PropertyData> startEvent = new UnityEvent<PropertyData>();
     private UnityEvent<PropertyData> endEvent = new UnityEvent<PropertyData>();
     private UnityEvent<PropertyData> triggerEvent = new UnityEvent<PropertyData>();
+
+    private PropertyData triggerEventData;
+
     #endregion
+
+    private string animationEventKey = "AnimationTriggerEvent";
 
 
     #region ÏµÍ³º¯Êý
@@ -49,20 +54,19 @@ public class AnimatorAddon : MonoBehaviour
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
 
-        if (self.propertyData.IsStringExist("TriggerEventAnimation"))
+        if (self.propertyData.ContainsKey(animationEventKey))
         {
-            if (self.propertyData.IsStringExist("TriggerEventType"))
-            {
-                triggerEvent.AddListener(FunctionMap.s.map[self.propertyData.GetString("TriggerEventType")]);
-            }
 
-            if (self.propertyData.IsFloatExist("TriggerEventTime"))
+            triggerEvent.AddListener(FunctionMap.map[self.propertyData.GetString(animationEventKey,1)]);
+
+
+            if (self.propertyData.ContainsKey(animationEventKey))
             {
-                AddAnimationEvent(self.propertyData.GetString("TriggerEventAnimation"), "TriggerEvent", (float)self.propertyData.GetFloat("TriggerEventTime"));
+                AddAnimationEvent(self.propertyData.GetString(animationEventKey), "TriggerEvent", self.propertyData.GetFloat(animationEventKey));
             }
             else
             {
-                AddAnimationEvent(self.propertyData.GetString("TriggerEvent"), "TriggerEvent", 0);
+                AddAnimationEvent(self.propertyData.GetString(animationEventKey), "TriggerEvent", 0);
             }
         }
     }
@@ -89,7 +93,7 @@ public class AnimatorAddon : MonoBehaviour
 
     public void TriggerEvent()
     {
-        triggerEvent.Invoke(self.propertyData);
+        triggerEvent.Invoke(triggerEventData);
     }
 
     public void AddStartEvent(string clipName,float time, UnityAction<PropertyData> targetEvent)

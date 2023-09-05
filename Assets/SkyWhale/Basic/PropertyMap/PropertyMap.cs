@@ -1,5 +1,6 @@
 using Cinemachine.Examples;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using System;
 using System.Collections;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PropertyMap : MonoBehaviour
 {
@@ -75,6 +77,12 @@ public class PropertyMap : MonoBehaviour
                 for (int row = 0; row <= Sheet_Read.LastRowNum; row++)
                 {
                     IRow Row_Read = Sheet_Read.GetRow(row);
+
+                    if (Row_Read.GetCell(0).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0]=='#')
+                    {
+                        continue;
+                    }
+
                     string key = Row_Read.GetCell(0).ToSafeString();
 
 
@@ -138,301 +146,253 @@ public class PropertyData
     public static string EntityID = "EntityID";
     public static string StartEvent = "StartEvent";
 
-    public Dictionary<string, List<int>> i;
-    public Dictionary<string, List<float>> f;
-    public Dictionary<string, List<string>> s;
-    public Dictionary<string, List<bool>> b;
+    public string stringData;
+    public float floatData;
+    public int intData;
+    public bool boolData;
+
+    public List<PropertyData> list;
+    public Dictionary<string,PropertyData> map;
 
 
     public PropertyData()
     {
-        i = new Dictionary<string, List<int>>();
-        f = new Dictionary<string, List<float>>();
-        s = new Dictionary<string, List<string>>();
-        b = new Dictionary<string, List<bool>>();
-
+        list = new List<PropertyData>();
+        map = new Dictionary<string, PropertyData>();
     }
 
     public PropertyData(PropertyData origin)
     {
-        i = new Dictionary<string, List<int>>(origin.i);
-        f = new Dictionary<string, List<float>>(origin.f);
-        s = new Dictionary<string, List<string>>(origin.s);
-        b = new Dictionary<string, List<bool>>(origin.b);
+        stringData = origin.stringData;
+        floatData = origin.floatData;
+        intData = origin.intData;
+        boolData = origin.boolData;
+        list = new List<PropertyData>(origin.list);
+        map = new Dictionary<string, PropertyData>(origin.map);
+    }
+
+    public PropertyData(string data)
+    {
+        stringData = data;
+    }
+
+    public PropertyData(float data)
+    {
+        floatData = data;
+    }
+
+    public PropertyData(int data)
+    {
+        intData = data;
+    }
+
+    public PropertyData(bool data)
+    {
+        boolData = data;
     }
 
     #region 添加值
 
     public void Add(string key,int value)
     {
-        if (i.ContainsKey(key))
-            i[key].Add(value);
+        if (!map.ContainsKey(key))
+            map.Add(key, (new PropertyData()).Add(value));
         else
-            i[key] = new List<int> { value };
+            map[key].Add(value);
+
+    }
+
+    public PropertyData Add(int value)
+    {
+        list.Add(new PropertyData(value));
+        return this;
     }
 
     public void Add(string key, float value)
     {
-        if (f.ContainsKey(key))
-            f[key].Add(value);
+        if (!map.ContainsKey(key))
+            map.Add(key, (new PropertyData()).Add(value));
         else
-            f[key] = new List<float> { value };
+            map[key].Add(value);
+    }
+
+    public PropertyData Add(float value)
+    {
+        list.Add(new PropertyData(value));
+        return this;
     }
 
     public void Add(string key, string value)
     {
-        if (s.ContainsKey(key))
-            s[key].Add(value);
+        if (!map.ContainsKey(key))
+            map.Add(key, (new PropertyData()).Add(value));
         else
-            s[key] = new List<string> { value };
+            map[key].Add(value);
+    }
+
+    public PropertyData Add(string value)
+    {
+        list.Add(new PropertyData(value));
+        return this;
     }
 
     public void Add(string key, bool value)
     {
-        if (b.ContainsKey(key))
-            b[key].Add(value);
+        if (!map.ContainsKey(key))
+            map.Add(key, (new PropertyData()).Add(value));
         else
-            b[key] = new List<bool> { value };
+            map[key].Add(value);
+    }
+
+    public PropertyData Add(bool value)
+    {
+        list.Add(new PropertyData(value));
+        return this;
+    }
+
+
+    public void AddPropertyData(string key, PropertyData value)
+    {
+        if (!map.ContainsKey(key))
+            map.Add(key,value);
+    }
+
+    public void Add(string key, PropertyData value)
+    {
+        if (!map.ContainsKey(key))
+            map.Add(key, new PropertyData(value));
     }
 
     #endregion
 
     #region 设置值
 
-    /*初始化值*/
-    public void InitDatas(Dictionary<string, List<int>> datas)
-    {
-        i =new Dictionary<string, List<int>>(datas);
-    }
-
-    public void InitDatas(Dictionary<string, List<float>> datas)
-    {
-        f = new Dictionary<string, List<float>>(datas);
-    }
-
-    public void InitDatas(Dictionary<string, List<string>> datas)
-    {
-        s = new Dictionary<string, List<string>>(datas);
-    }
-
-    public void InitDatas(Dictionary<string, List<bool>> datas)
-    {
-        b = new Dictionary<string, List<bool>>(datas);
-    }
-
 
     /*设置单个值*/
 
-    public void SetData(string key, int value)
+    public void SetData(string key, int value,int index=0)
     {
-        if (i.ContainsKey(key))
-            i[key][0] = value;
+        if (map.ContainsKey(key))
+            map[key].list[index] = new PropertyData(value);
         else
-            i.Add(key, new List<int> { value });
+            map.Add(key, new PropertyData(value));
     }
 
-    public void SetData(string key, float value)
+    public void SetData(string key, float value,int index=0)
     {
-        if (f.ContainsKey(key))
-            f[key][0] = value;
+        if (map.ContainsKey(key))
+            map[key].list[index] = new PropertyData(value);
         else
-            f.Add(key, new List<float> { value });
+            map.Add(key, new PropertyData(value));
     }
 
-    public void SetData(string key, string value)
+    public void SetData(string key, string value,int index=0)
     {
-        if (s.ContainsKey(key))
-            s[key][0] = value;
+        if (map.ContainsKey(key))
+            map[key].list[index] = new PropertyData(value);
         else
-            s.Add(key, new List<string> { value });
+            map.Add(key, new PropertyData(value));
     }
 
-    public void SetData(string key, bool value)
+    public void SetData(string key, bool value,int index=0)
     {
-        if (b.ContainsKey(key))
-            b[key][0] = value;
+        if (map.ContainsKey(key))
+            map[key].list[index] = new PropertyData(value);
         else
-            b.Add(key, new List<bool> { value });
+            map.Add(key, new PropertyData(value));
     }
 
-    /*设置数组*/
-
-    public void SetDatas(string key, int[] value)
-    {
-        if (i.ContainsKey(key))
-            i[key] = value.ToList();
-        else
-            i.Add(key, value.ToList());
-    }
-
-    public void SetDatas(string key, float[] value)
-    {
-        if (f.ContainsKey(key))
-            f[key] = value.ToList();
-        else
-            f.Add(key, value.ToList());
-    }
-
-    public void SetDatas(string key, string[] value)
-    {
-        if (s.ContainsKey(key))
-            s[key] = value.ToList();
-        else
-            s.Add(key, value.ToList());
-    }
-
-    public void SetDatas(string key, bool[] value)
-    {
-        if (b.ContainsKey(key))
-            b[key] = value.ToList();
-        else
-            b.Add(key, value.ToList());
-    }
 
     #endregion
 
     #region 获取值
 
-    /*获取单个值*/
 
-    
-
-    public void GetData(string key,out int value)
-    {
-        value = i[key][0];
-    }
 
     public int GetIntData(string key)
     {
-        return i[key][0];
+        return map[key].intData;
     }
 
-    public void GetData(string key, out float value)
+    public int GetInt(string key,int index=0)
     {
-        value = f[key][0];
+        return map[key].list[index].intData;
     }
 
     public float GetFloat(string key,int index=0)
     {
-        return f[key][index];
+        return map[key].list[index].floatData;
     }
 
 
     public Vector3 GetVector3(string key)
     {
-        if (f.ContainsKey(key))
-            return new Vector3(f[key][0], f[key][1], f[key][2]);
-        return Vector3.zero;
+        return new Vector3(GetFloat(key,0), GetFloat(key, 1), GetFloat(key, 2));
     }
 
     public Quaternion GetQuaternion(string key)
     {
-        return new Quaternion(f[key][0], f[key][1], f[key][2], f[key][3]);
+        return new Quaternion(GetFloat(key, 0), GetFloat(key, 1), GetFloat(key, 2), GetFloat(key, 3));
     }
 
-    public void GetData(string key, out string value)
+    public string GetString()
     {
-        value = s[key][0];
+        return stringData;
     }
 
-    public string GetString(string key)
+    public string GetString(string key,int index=0)
     {
-        if (s.ContainsKey(key))
-            return s[key][0];
-        else
-            return null;
+        return map[key].list[index].stringData;
     }
 
-    public void GetData(string key, out bool value)
-    {
-        value = b[key][0];
-    }
 
     public bool GetBool(string key,int index = 0)
     {
-        return b[key][index];
+        return map[key].list[index].boolData;
     }
 
-    /*获取数组值*/
 
-    public void GetDatas(string key, out int[] value)
+    public List<PropertyData> GetDatas()
     {
-        value = i[key].ToArray();
+        return list;
     }
 
-    public void GetDatas(string key, out float[] value)
+    public List<string> GetStrings()
     {
-        value = f[key].ToArray();
-    }
-
-    public void GetDatas(string key, out string[] value)
-    {
-        value = s[key].ToArray();
+        var stringList = new List<string>();
+        for(int i = 0; i < list.Count; i++)
+        {
+            if (list[i].GetString() != null)
+            {
+                stringList.Add(list[i].GetString());
+            }
+        }
+        return stringList;
     }
 
     public List<string> GetStrings(string key)
     {
-        return s[key];
-    }
-
-    public void GetData(string key, out bool[] value)
-    {
-        value = b[key].ToArray();
+        if (map.ContainsKey(key))
+            return map[key].GetStrings();
+        return null;
     }
 
     #endregion
 
     #region 判断键是否存在
 
-    public bool IsIntExist(string key)
+    public bool ContainsKey(string key)
     {
-        return i.ContainsKey(key);
+        return map.ContainsKey(key);
     }
 
-    public bool IsFloatExist(string key)
-    {
-        return f.ContainsKey(key);
-    }
-
-    public bool IsStringExist(string key)
-    {
-        return s.ContainsKey(key);
-    }
-
-    public bool IsBoolExist(string key)
-    {
-        return b.ContainsKey(key);
-    }
 
 
     #endregion
 
     #region 自定义函数
 
-    public void Print()
-    {
-        string s = "";
-        foreach (var item in i)
-        {
-            s += item.ToString() + " ";
-        }
-        s += '\n';
-        foreach (var item in f)
-        {
-            s += item.ToString() + " ";
-        }
-        s += '\n';
-        foreach (var item in this.s)
-        {
-            s += item.ToString() + " ";
-        }
-        s += '\n';
-        foreach (var item in this.b)
-        {
-            s += item.ToString() + " ";
-        }
-        Debug.Log(s);
-    }
+
 
     #endregion
 }

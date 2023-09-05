@@ -20,7 +20,7 @@ public class Entity : MonoBehaviour
         if (propertyData.GetString(PropertyData.StartEvent) != null)
         {
             
-            FunctionMap.s.map[propertyData.GetString(PropertyData.StartEvent)].Invoke(propertyData);
+            FunctionMap.map[propertyData.GetString(PropertyData.StartEvent)].Invoke(propertyData);
         }
     }
 

@@ -10,7 +10,7 @@ public class CharacterEntity : Entity
     {
         if (propertyData.GetBool(IsLifeBarKey))
         {
-            FunctionMap.s.map[SLifeBar.CreateLifeBar].Invoke(propertyData);
+            FunctionMap.map[SLifeBar.CreateLifeBar].Invoke(propertyData);
         }
     }
 }

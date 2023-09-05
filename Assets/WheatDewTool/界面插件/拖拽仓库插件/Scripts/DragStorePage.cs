@@ -21,8 +21,7 @@ public class DragStorePage : MonoBehaviour
 
     #region 属性对应列表
 
-    public string storeElementDisplayName = "StoreElementDisplayName";
-    public string storeElementSpriteName = "StoreElementSpriteName";
+    public string storeElementKey = "StoreElement";
 
     #endregion
 
@@ -52,20 +51,20 @@ public class DragStorePage : MonoBehaviour
     {
         var obj = Instantiate(elementPrefab, elementParent);
         obj.dragStorePage = this;
-        obj.name = data.GetString(storeElementDisplayName);
-        obj.elementName.text = data.GetString(storeElementDisplayName);
+        obj.name = data.GetString(storeElementKey,2);
+        obj.elementName.text = data.GetString(storeElementKey, 2);
         obj.elementImage.sprite = elementImage;
         obj.data = data;
     }
 
-    public void CreateElement(string elementName,Texture2D texture)
-    {
-        var obj = Instantiate(elementPrefab, elementParent);
-        obj.dragStorePage = this;
-        obj.name = elementName;
-        obj.elementName.text = elementName;
-        obj.elementImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f,0.5f));
-    }
+    //public void CreateElement(string elementName,Texture2D texture)
+    //{
+    //    var obj = Instantiate(elementPrefab, elementParent);
+    //    obj.dragStorePage = this;
+    //    obj.name = elementName;
+    //    obj.elementName.text = elementName;
+    //    obj.elementImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f,0.5f));
+    //}
 
 
     //加载资源

@@ -15,7 +15,7 @@ public class LogSystem : MonoBehaviour
             _s = this;
         }
 
-        FunctionMap.s.Add("LogTest", LogTest);
+        FunctionMap.Add("LogTest", LogTest);
     }
 
 

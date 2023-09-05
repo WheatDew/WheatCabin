@@ -92,11 +92,9 @@ public class SMapEditor : MonoBehaviour
 
     #region ÊôÐÔ×ª»»
 
-    private string storeElementIconName = "StoreElementIconName";
     private string mapEditorPropertyName = "MapEditor";
     private string storeElements = "StoreElements";
-    private string storeElementPrefabName = "StoreElementPrefabName";
-
+    private string storeElementKey = "StoreElement";
 
     #endregion
 
@@ -125,7 +123,7 @@ public class SMapEditor : MonoBehaviour
 
         dragStorePage.DragEndEvent.AddListener(delegate (PropertyData value)
         {
-            var obj = Instantiate(prefabMap[value.GetString(storeElementPrefabName)]);
+            var obj = Instantiate(prefabMap[value.GetString(storeElementKey,1)]);
 
 
             obj.AddComponent<CMapEditorModel>();
@@ -145,12 +143,12 @@ public class SMapEditor : MonoBehaviour
         {
 
             var data = PropertyMap.s.map[item];
-            var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementIconName)) ?? defaultSprite;
-            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementPrefabName));
-            if (!prefabMap.ContainsKey(data.GetString(storeElementPrefabName)))
+            var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementKey,2)) ?? defaultSprite;
+            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementKey,1));
+            if (!prefabMap.ContainsKey(data.GetString(storeElementKey, 1)))
             {
-                prefabMap.Add(data.GetString(storeElementPrefabName), itemGameObject);
-                Debug.Log(data.GetString(storeElementPrefabName));
+                prefabMap.Add(data.GetString(storeElementKey, 1), itemGameObject);
+                Debug.Log(data.GetString(storeElementKey, 1));
             }
             dragStorePage.CreateElement(data, itemSprite);
         }
