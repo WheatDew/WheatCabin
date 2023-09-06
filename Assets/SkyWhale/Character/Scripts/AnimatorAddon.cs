@@ -36,11 +36,11 @@ public class AnimatorAddon : MonoBehaviour
     private AnimationClip[] clips;
     private Entity self;
 
-    private UnityEvent<PropertyData> startEvent = new UnityEvent<PropertyData>();
-    private UnityEvent<PropertyData> endEvent = new UnityEvent<PropertyData>();
-    private UnityEvent<PropertyData> triggerEvent = new UnityEvent<PropertyData>();
+    private UnityEvent<Property> startEvent = new UnityEvent<Property>();
+    private UnityEvent<Property> endEvent = new UnityEvent<Property>();
+    private UnityEvent<Property> triggerEvent = new UnityEvent<Property>();
 
-    private PropertyData triggerEventData;
+    private Property triggerEventData;
 
     #endregion
 
@@ -96,17 +96,17 @@ public class AnimatorAddon : MonoBehaviour
         triggerEvent.Invoke(triggerEventData);
     }
 
-    public void AddStartEvent(string clipName,float time, UnityAction<PropertyData> targetEvent)
+    public void AddStartEvent(string clipName,float time, UnityAction<Property> targetEvent)
     {
         AddAnimationEvent(clipName, "StartEvent", time);
     }
 
-    public void AddEndEvent(string clipName,float time, UnityAction<PropertyData> targetEvent)
+    public void AddEndEvent(string clipName,float time, UnityAction<Property> targetEvent)
     {
         AddAnimationEvent(clipName, "EndEvent", time);
     }
 
-    public void AddTriggerEvent(string clipName, float time, UnityAction<PropertyData> targetEvent)
+    public void AddTriggerEvent(string clipName, float time, UnityAction<Property> targetEvent)
     {
         AddAnimationEvent(clipName, "TriggerEvent", time);
     }

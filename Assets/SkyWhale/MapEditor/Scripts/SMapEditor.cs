@@ -45,17 +45,17 @@ public class SMapEditor : MonoBehaviour
         Debug.Log(PropertyMap.s);
         var data = PropertyMap.s.map["MapEditor"];
 
-        List<string> childLayers = data.GetStrings("ChildLayer");
+        List<Property> childLayers = data.GetDatas("ChildLayer");
 
         for(int i = 0; i < childLayers.Count; i++)
         {
             Debug.Log(childLayers[i]);
             var t = new GameObject
             {
-                name = childLayers[i]
+                name = childLayers[i].GetString()
             };
             t.transform.parent = childLayer;
-            childLayerList.Add(childLayers[i], t.transform);
+            childLayerList.Add(childLayers[i].GetString(), t.transform);
         }
 
 
@@ -63,7 +63,7 @@ public class SMapEditor : MonoBehaviour
         runtimeSceneComponent.cameraPosition = data.GetVector3("MapEditorCameraPosition");
         runtimeSceneComponent.cameraRotation = data.GetQuaternion("MapEditorCameraRotation");
         //初始化资源包列表
-        List<string> assetBundleMaps = data.GetStrings("AssetBundleMap");
+        List<Property> assetBundleMaps = data.GetDatas("AssetBundleMap");
 
         for (int i=0;i<assetBundleMaps.Count;i++)
         {
@@ -71,7 +71,7 @@ public class SMapEditor : MonoBehaviour
             {
                 Debug.LogError("ab包实例为空");
             }
-            assetBundleMap.Add("SkyWhaleEditor", SAssetBundle.Instance.Load(assetBundleMaps[i]));
+            assetBundleMap.Add("SkyWhaleEditor", SAssetBundle.Instance.Load(assetBundleMaps[i].GetString()));
         }
         //初始化资源
         InitMapEditorAsset();
@@ -110,7 +110,7 @@ public class SMapEditor : MonoBehaviour
 
     public Dictionary<string, GameObject> prefabMap = new Dictionary<string, GameObject>();
 
-    public UnityEvent<PropertyData,GameObject> elementTypeInitEvent = new UnityEvent<PropertyData,GameObject>(); 
+    public UnityEvent<Property,GameObject> elementTypeInitEvent = new UnityEvent<Property,GameObject>(); 
 
 
     public void InitDragStoreAsset()
@@ -121,7 +121,7 @@ public class SMapEditor : MonoBehaviour
         LoadDragItem(packName);
 
 
-        dragStorePage.DragEndEvent.AddListener(delegate (PropertyData value)
+        dragStorePage.DragEndEvent.AddListener(delegate (Property value)
         {
             var obj = Instantiate(prefabMap[value.GetString(storeElementKey,1)]);
 
@@ -139,10 +139,10 @@ public class SMapEditor : MonoBehaviour
     {
         var assetBundle = assetBundleMap[packName];
         var datas = PropertyMap.s.map[mapEditorPropertyName];
-        foreach (var item in datas.GetStrings(storeElements))
+        foreach (var item in datas.GetDatas(storeElements))
         {
 
-            var data = PropertyMap.s.map[item];
+            var data = PropertyMap.s.map[item.GetString()];
             var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementKey,2)) ?? defaultSprite;
             var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementKey,1));
             if (!prefabMap.ContainsKey(data.GetString(storeElementKey, 1)))

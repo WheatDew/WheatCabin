@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class PropertyEditor : MonoBehaviour
 {
     [HideInInspector] public Entity currentTarget;
-    [HideInInspector] public PropertyData bufferData;
+    [HideInInspector] public Property bufferData;
     [HideInInspector] public PropertyEditorItem currentItem;
     public PropertyEditorItem itemPrefab;
     public Transform itemParent,pageParent;
@@ -56,7 +56,7 @@ public class PropertyEditor : MonoBehaviour
     public void SaveData()
     {
         //»º´æÐ´Èë¼ÇÂ¼
-        currentTarget.propertyData = new PropertyData(bufferData);
+        currentTarget.propertyData = new Property(bufferData);
     }
 
     public void CreateItem(string originName,string originData)

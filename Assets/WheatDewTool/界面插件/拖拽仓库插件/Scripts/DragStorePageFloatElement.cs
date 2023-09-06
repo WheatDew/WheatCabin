@@ -7,7 +7,7 @@ public class DragStorePageFloatElement : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
     [HideInInspector] public DragStorePage dragStorePage;
-    public PropertyData data;
+    public Property data;
     public Image image;
 
     private void Start()

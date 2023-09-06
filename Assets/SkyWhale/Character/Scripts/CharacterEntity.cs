@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CharacterEntity : Entity
 {
-    public static string IsLifeBarKey = "IsLifeBar";
+    public static string LifeBarKey = "LifeBar";
 
     public override void Init()
     {
-        if (propertyData.GetBool(IsLifeBarKey))
+        if (propertyData.ContainsKey(LifeBarKey))
         {
-            FunctionMap.map[SLifeBar.CreateLifeBar].Invoke(propertyData);
+            var data = propertyData.GetData(LifeBarKey);
+            data.Add(transform.GetInstanceID());
+            FunctionMap.map[SLifeBar.CreateLifeBar].Invoke(propertyData.GetData(LifeBarKey));
         }
     }
 }

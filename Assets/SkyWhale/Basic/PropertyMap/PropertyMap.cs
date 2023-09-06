@@ -1,3 +1,4 @@
+using Battlehub.Spline3;
 using Cinemachine.Examples;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
@@ -10,6 +11,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityWeld.Binding.Adapters;
 
 public class PropertyMap : MonoBehaviour
 {
@@ -29,7 +31,7 @@ public class PropertyMap : MonoBehaviour
     #endregion
 
     //数据模板
-    public Dictionary<string, PropertyData> map = new Dictionary<string, PropertyData>();
+    public Dictionary<string, Property> map = new Dictionary<string, Property>();
     public Dictionary<int, Entity> entityMap = new Dictionary<int, Entity>();
 
     //载入数据模板
@@ -52,7 +54,7 @@ public class PropertyMap : MonoBehaviour
     private bool ReadExcelEnable_NPOI = true;
     private bool ReadExcelEnable_ExcelDataReader = false;
 
-    public Dictionary<string, PropertyData> ReadExcel(string filePath)
+    public Dictionary<string, Property> ReadExcel(string filePath)
     {
         if (ReadExcelEnable_NPOI == true)
         {
@@ -64,13 +66,13 @@ public class PropertyMap : MonoBehaviour
                 MyBook = new HSSFWorkbook(MyAddress_Read);
             }
 
-            Dictionary<string, PropertyData> datas = new Dictionary<string, PropertyData>();
+            Dictionary<string, Property> datas = new Dictionary<string, Property>();
 
             for (int i = 0; i < MyBook.NumberOfSheets; i++)
             {
                 ISheet Sheet_Read = MyBook.GetSheetAt(i);
 
-                PropertyData data = new PropertyData();
+                Property data = new Property();
 
                 Debug.Log(Sheet_Read.SheetName);
 
@@ -107,7 +109,7 @@ public class PropertyMap : MonoBehaviour
                     }
                 }
 
-                datas.Add(Sheet_Read.SheetName, new PropertyData(data));
+                datas.Add(Sheet_Read.SheetName, new Property(data));
             }
 
             return datas;
@@ -130,7 +132,7 @@ public class PropertyMap : MonoBehaviour
             entityMap.Add(id, entity);
         }
 
-        entity.propertyData.Add(PropertyData.EntityID, id);
+        entity.propertyData.Add(Property.EntityID, id);
     }
 
     public Entity GetEntity(int id)
@@ -141,258 +143,349 @@ public class PropertyMap : MonoBehaviour
     #endregion
 }
 
-public class PropertyData
+public class Property
 {
     public static string EntityID = "EntityID";
     public static string StartEvent = "StartEvent";
 
-    public string stringData;
-    public float floatData;
-    public int intData;
-    public bool boolData;
-
-    public List<PropertyData> list;
-    public Dictionary<string,PropertyData> map;
 
 
-    public PropertyData()
+    public List<Property> list;
+
+    public Dictionary<string, Property> map;
+
+    public Property()
     {
-        list = new List<PropertyData>();
-        map = new Dictionary<string, PropertyData>();
+        list = new List<Property>();
+        map = new Dictionary<string, Property>();
     }
 
-    public PropertyData(PropertyData origin)
+    public Property(Property property)
     {
-        stringData = origin.stringData;
-        floatData = origin.floatData;
-        intData = origin.intData;
-        boolData = origin.boolData;
-        list = new List<PropertyData>(origin.list);
-        map = new Dictionary<string, PropertyData>(origin.map);
+        list = new List<Property>(property.list);
+        map = new Dictionary<string, Property>(property.map);
+    }
+    
+
+    #region String类型
+
+    string stringValue;
+
+    public Property(string value,bool isSynclist=false)
+    {
+        stringValue = value;
+        if (isSynclist)
+            list = new List<Property> { new Property(value) };
     }
 
-    public PropertyData(string data)
+    public void Add(string value)
     {
-        stringData = data;
+        if (list == null)
+            Debug.Log("list为空");
+
+        //list.Add(new Property(value));
     }
 
-    public PropertyData(float data)
-    {
-        floatData = data;
-    }
-
-    public PropertyData(int data)
-    {
-        intData = data;
-    }
-
-    public PropertyData(bool data)
-    {
-        boolData = data;
-    }
-
-    #region 添加值
-
-    public void Add(string key,int value)
-    {
-        if (!map.ContainsKey(key))
-            map.Add(key, (new PropertyData()).Add(value));
-        else
-            map[key].Add(value);
-
-    }
-
-    public PropertyData Add(int value)
-    {
-        list.Add(new PropertyData(value));
-        return this;
-    }
-
-    public void Add(string key, float value)
-    {
-        if (!map.ContainsKey(key))
-            map.Add(key, (new PropertyData()).Add(value));
-        else
-            map[key].Add(value);
-    }
-
-    public PropertyData Add(float value)
-    {
-        list.Add(new PropertyData(value));
-        return this;
-    }
-
-    public void Add(string key, string value)
-    {
-        if (!map.ContainsKey(key))
-            map.Add(key, (new PropertyData()).Add(value));
-        else
-            map[key].Add(value);
-    }
-
-    public PropertyData Add(string value)
-    {
-        list.Add(new PropertyData(value));
-        return this;
-    }
-
-    public void Add(string key, bool value)
-    {
-        if (!map.ContainsKey(key))
-            map.Add(key, (new PropertyData()).Add(value));
-        else
-            map[key].Add(value);
-    }
-
-    public PropertyData Add(bool value)
-    {
-        list.Add(new PropertyData(value));
-        return this;
-    }
-
-
-    public void AddPropertyData(string key, PropertyData value)
-    {
-        if (!map.ContainsKey(key))
-            map.Add(key,value);
-    }
-
-    public void Add(string key, PropertyData value)
-    {
-        if (!map.ContainsKey(key))
-            map.Add(key, new PropertyData(value));
-    }
-
-    #endregion
-
-    #region 设置值
-
-
-    /*设置单个值*/
-
-    public void SetData(string key, int value,int index=0)
+    public void Add(string key,string value)
     {
         if (map.ContainsKey(key))
-            map[key].list[index] = new PropertyData(value);
+            map[key].Add(value);
         else
-            map.Add(key, new PropertyData(value));
+            map.Add(key, new Property(value));
     }
 
-    public void SetData(string key, float value,int index=0)
+    public void Set(string value)
     {
-        if (map.ContainsKey(key))
-            map[key].list[index] = new PropertyData(value);
-        else
-            map.Add(key, new PropertyData(value));
+        stringValue = value;
     }
 
-    public void SetData(string key, string value,int index=0)
+    public void Set(string key,string value)
     {
-        if (map.ContainsKey(key))
-            map[key].list[index] = new PropertyData(value);
-        else
-            map.Add(key, new PropertyData(value));
+        map[key].Set(value);
     }
 
-    public void SetData(string key, bool value,int index=0)
+    public void Set(int index,string value)
     {
-        if (map.ContainsKey(key))
-            map[key].list[index] = new PropertyData(value);
-        else
-            map.Add(key, new PropertyData(value));
+        list[index].Set(value);
     }
 
-
-    #endregion
-
-    #region 获取值
-
-
-
-    public int GetIntData(string key)
+    public void Set(string key,int index,string value)
     {
-        return map[key].intData;
-    }
-
-    public int GetInt(string key,int index=0)
-    {
-        return map[key].list[index].intData;
-    }
-
-    public float GetFloat(string key,int index=0)
-    {
-        return map[key].list[index].floatData;
-    }
-
-
-    public Vector3 GetVector3(string key)
-    {
-        return new Vector3(GetFloat(key,0), GetFloat(key, 1), GetFloat(key, 2));
-    }
-
-    public Quaternion GetQuaternion(string key)
-    {
-        return new Quaternion(GetFloat(key, 0), GetFloat(key, 1), GetFloat(key, 2), GetFloat(key, 3));
+        map[key].Set(index, value);
     }
 
     public string GetString()
     {
-        return stringData;
+        return stringValue;
     }
 
-    public string GetString(string key,int index=0)
+    public string GetString(int index)
     {
-        return map[key].list[index].stringData;
+        return list[index].GetString();
     }
 
-
-    public bool GetBool(string key,int index = 0)
+    public string GetString(string key)
     {
-        return map[key].list[index].boolData;
+        return map[key].GetString();
     }
 
-
-    public List<PropertyData> GetDatas()
+    public string GetString(string key,int index)
     {
-        return list;
-    }
-
-    public List<string> GetStrings()
-    {
-        var stringList = new List<string>();
-        for(int i = 0; i < list.Count; i++)
-        {
-            if (list[i].GetString() != null)
-            {
-                stringList.Add(list[i].GetString());
-            }
-        }
-        return stringList;
-    }
-
-    public List<string> GetStrings(string key)
-    {
-        if (map.ContainsKey(key))
-            return map[key].GetStrings();
-        return null;
+        return map[key].GetString(index);
     }
 
     #endregion
 
-    #region 判断键是否存在
+    #region Int类型
+
+    int intValue;
+
+    public Property(int value,bool isSynclist=false)
+    {
+        intValue = value;
+        if (isSynclist)
+            list = new List<Property> { new Property(value) };
+    }
+
+    public void Add(int value)
+    {
+        list.Add(new Property(value));
+    }
+
+    public void Add(string key, int value)
+    {
+        if (map.ContainsKey(key))
+            map[key].Add(value);
+        else
+            map.Add(key, new Property(value));
+    }
+
+    public void Set(int value)
+    {
+        intValue = value;
+    }
+
+    public void Set(string key, int value)
+    {
+        map[key].Set(value);
+    }
+
+    public void Set(int index, int value)
+    {
+        list[index].Set(value);
+    }
+
+    public void Set(string key, int index, int value)
+    {
+        map[key].Set(index, value);
+    }
+
+    public int GetInt()
+    {
+        return intValue;
+    }
+
+    public int GetInt(int index)
+    {
+        return list[index].GetInt();
+    }
+
+    public int GetInt(string key)
+    {
+        return map[key].GetInt();
+    }
+
+    public int GetInt(string key, int index)
+    {
+        return map[key].GetInt(index);
+    }
+
+    #endregion
+
+    #region Float类型
+
+    float floatValue;
+
+    public Property(float value,bool isSynclist=false)
+    {
+        floatValue = value;
+        if (isSynclist)
+            list = new List<Property> { new Property(value) };
+    }
+
+    public void Add(float value)
+    {
+        list.Add(new Property(value));
+    }
+
+    public void Add(string key, float value)
+    {
+        if (map.ContainsKey(key))
+            map[key].Add(value);
+        else
+            map.Add(key, new Property(value));
+    }
+
+    public void Set(float value)
+    {
+        floatValue = value;
+    }
+
+    public void Set(string key, float value)
+    {
+        map[key].Set(value);
+    }
+
+    public void Set(int index, float value)
+    {
+        list[index].Set(value);
+    }
+
+    public void Set(string key, int index, float value)
+    {
+        map[key].Set(index, value);
+    }
+
+    public float GetFloat()
+    {
+        return floatValue;
+    }
+
+    public float GetFloat(int index)
+    {
+        return list[index].GetFloat();
+    }
+
+    public float GetFloat(string key)
+    {
+        return map[key].GetFloat();
+    }
+
+    public float GetFloat(string key, int index)
+    {
+        return map[key].GetFloat(index);
+    }
+
+    public Vector3 GetVector3()
+    {
+        return new Vector3(GetFloat(0), GetFloat(1), GetFloat(2));
+    }
+
+    public Vector3 GetVector3(string key)
+    {
+        return map[key].GetVector3();
+    }
+
+    public Quaternion GetQuaternion()
+    {
+        return new Quaternion(GetFloat(0), GetFloat(1), GetFloat(2),GetFloat(3));
+    }
+
+    public Quaternion GetQuaternion(string key)
+    {
+        return map[key].GetQuaternion();
+    }
+
+    #endregion
+
+    #region Bool类型
+
+    bool boolValue;
+
+    public Property(bool value,bool isSynclist=false)
+    {
+        boolValue = value;
+        if(isSynclist)
+        list = new List<Property> { new Property(value) };
+    }
+
+    public void Add(bool value)
+    {
+        list.Add(new Property(value));
+    }
+
+    public void Add(string key, bool value)
+    {
+        if (map.ContainsKey(key))
+            map[key].Add(value);
+        else
+            map.Add(key, new Property(value));
+    }
+
+    public void Set(bool value)
+    {
+        boolValue = value;
+    }
+
+    public void Set(string key, bool value)
+    {
+        map[key].Set(value);
+    }
+
+    public void Set(int index, bool value)
+    {
+        list[index].Set(value);
+    }
+
+    public void Set(string key, int index, bool value)
+    {
+        map[key].Set(index, value);
+    }
+
+    public bool GetBool()
+    {
+        return boolValue;
+    }
+
+    public bool GetBool(int index)
+    {
+        return list[index].GetBool();
+    }
+
+    public bool GetBool(string key)
+    {
+        return map[key].GetBool();
+    }
+
+    public bool GetBool(string key, int index)
+    {
+        return map[key].GetBool(index);
+    }
+
+    #endregion
+
+
+    #region 数据组
+
+    public Property GetData(string key)
+    {
+        return map[key];
+    }
+
+    public Property GetData(int index)
+    {
+        return list[index];
+    }
+
+    public List<Property> GetDatas()
+    {
+        return list;
+    }
+
+    public List<Property> GetDatas(string key)
+    {
+        return map[key].GetDatas();
+    }
+
+    #endregion
 
     public bool ContainsKey(string key)
     {
         return map.ContainsKey(key);
     }
 
-
-
-    #endregion
-
-    #region 自定义函数
-
-
-
-    #endregion
 }
+
+
+
+

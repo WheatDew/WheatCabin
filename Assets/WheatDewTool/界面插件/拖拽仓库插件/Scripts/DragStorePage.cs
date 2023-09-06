@@ -15,9 +15,9 @@ public class DragStorePage : MonoBehaviour
 
     public bool inBorder=false;
 
-    public UnityEvent<PropertyData> DragEndEvent;
+    public UnityEvent<Property> DragEndEvent;
     public UnityEvent InitEvent;
-    public UnityEvent<PropertyData> ItemInit;
+    public UnityEvent<Property> ItemInit;
 
     #region 属性对应列表
 
@@ -47,7 +47,7 @@ public class DragStorePage : MonoBehaviour
         obj.elementName.text= elementName;
     }
 
-    public void CreateElement(PropertyData data,Sprite elementImage)
+    public void CreateElement(Property data,Sprite elementImage)
     {
         var obj = Instantiate(elementPrefab, elementParent);
         obj.dragStorePage = this;

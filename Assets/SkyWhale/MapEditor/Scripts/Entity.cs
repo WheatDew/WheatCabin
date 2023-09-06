@@ -6,7 +6,7 @@ public class Entity : MonoBehaviour
 {
     public string type;
     public string detailType;
-    public PropertyData propertyData=new PropertyData();
+    public Property propertyData=new Property();
 
     private void Start()
     {
@@ -17,10 +17,10 @@ public class Entity : MonoBehaviour
 
     public void StartEvent()
     {
-        if (propertyData.GetString(PropertyData.StartEvent) != null)
+        if (propertyData.GetString(Property.StartEvent) != null)
         {
             
-            FunctionMap.map[propertyData.GetString(PropertyData.StartEvent)].Invoke(propertyData);
+            FunctionMap.map[propertyData.GetString(Property.StartEvent)].Invoke(propertyData);
         }
     }
 

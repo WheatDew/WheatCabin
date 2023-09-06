@@ -7,10 +7,10 @@ using UnityEngine.Events;
 public class FunctionMap
 {
 
-    public static Dictionary<string, UnityAction<PropertyData>> map = new Dictionary<string, UnityAction<PropertyData>>();
+    public static Dictionary<string, UnityAction<Property>> map = new Dictionary<string, UnityAction<Property>>();
 
 
-    public static void Add(string name, UnityAction<PropertyData> action)
+    public static void Add(string name, UnityAction<Property> action)
     {
         map.Add(name, action);
     }
