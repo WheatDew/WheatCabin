@@ -1,5 +1,4 @@
-using Battlehub.Spline3;
-using Cinemachine.Examples;
+
 using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
@@ -10,8 +9,7 @@ using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityWeld.Binding.Adapters;
+using UnityEngine.Assertions.Must;
 
 public class PropertyMap : MonoBehaviour
 {
@@ -37,10 +35,12 @@ public class PropertyMap : MonoBehaviour
     //载入数据模板
     private void Init()
     {
+        ReadExcel("PropertyData/MapEditor/Data/数据.xls");
+
         //获取Excel数据
         foreach (var item in ReadExcel("PropertyData/MapEditor/Data/数据.xls"))
         {
-            map.Add(item.Key,item.Value);
+            map.Add(item.Key, item.Value);
         }
         ////获取Json数据
         //foreach (var item in JsonSystem.ReadJsonProperty("Core/MapEditor/Data/Property.json"))
@@ -80,16 +80,23 @@ public class PropertyMap : MonoBehaviour
                 {
                     IRow Row_Read = Sheet_Read.GetRow(row);
 
-                    if (Row_Read.GetCell(0).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0]=='#')
+                    if (Row_Read.GetCell(0).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
                     {
                         continue;
                     }
 
                     string key = Row_Read.GetCell(0).ToSafeString();
-
+                    Debug.LogFormat("当前的键为:{0}，当前数组长度为:{1}", key,Row_Read.Cells.Count);
 
                     for (int column = 1; column < Row_Read.Cells.Count; column++)
                     {
+                        if (Row_Read.GetCell(column).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
+                        {
+                            break;
+                        }
+                        Debug.LogFormat("{0} {1} {2}",Row_Read.GetCell(column).CellType,Row_Read.GetCell(column),column);
+                        
+
                         if (Row_Read.GetCell(column).CellType == CellType.Numeric && Row_Read.GetCell(column).ToSafeString().Contains('.'))
                         {
                             data.Add(key, (float)Row_Read.GetCell(column).NumericCellValue);
@@ -109,6 +116,7 @@ public class PropertyMap : MonoBehaviour
                     }
                 }
 
+                data.SetMapReference();
                 datas.Add(Sheet_Read.SheetName, new Property(data));
             }
 
@@ -123,6 +131,7 @@ public class PropertyMap : MonoBehaviour
     #region 设置实体
     public void SetEntity(int id,Entity entity)
     {
+        Debug.Log("初始实例列表");
         if (entityMap.ContainsKey(id))
         {
             entityMap[id] = entity;
@@ -143,6 +152,7 @@ public class PropertyMap : MonoBehaviour
     #endregion
 }
 
+public enum PropertyType { Empty,Data,Int,String,Float,Bool,List,Map}
 public class Property
 {
     public static string EntityID = "EntityID";
@@ -150,9 +160,11 @@ public class Property
 
 
 
-    public List<Property> list;
+    private List<Property> list;
 
-    public Dictionary<string, Property> map;
+    private Dictionary<string, Property> map;
+
+    private PropertyType type;
 
     public Property()
     {
@@ -171,19 +183,15 @@ public class Property
 
     string stringValue;
 
-    public Property(string value,bool isSynclist=false)
+    public Property(string value)
     {
-        stringValue = value;
-        if (isSynclist)
-            list = new List<Property> { new Property(value) };
+        Set(value);
     }
 
     public void Add(string value)
     {
-        if (list == null)
-            Debug.Log("list为空");
-
-        //list.Add(new Property(value));
+        list.Add(new Property(value));
+        type = PropertyType.List;
     }
 
     public void Add(string key,string value)
@@ -191,12 +199,19 @@ public class Property
         if (map.ContainsKey(key))
             map[key].Add(value);
         else
-            map.Add(key, new Property(value));
+        {
+            map.Add(key, new Property());
+            map[key].Add(value);
+        }
+
+        type = PropertyType.Map;
+
     }
 
     public void Set(string value)
     {
         stringValue = value;
+        type = PropertyType.String;
     }
 
     public void Set(string key,string value)
@@ -214,25 +229,25 @@ public class Property
         map[key].Set(index, value);
     }
 
-    public string GetString()
+
+    public string GetString(int index=0)
     {
-        return stringValue;
+        if (type == PropertyType.String)
+            return stringValue;
+        else if (type == PropertyType.Data)
+            return data.GetString();
+        else if (type == PropertyType.List)
+            return list[index].GetString();
+        Debug.LogErrorFormat("错误的类型{0}",type);
+        return null;
+
     }
 
-    public string GetString(int index)
-    {
-        return list[index].GetString();
-    }
-
-    public string GetString(string key)
-    {
-        return map[key].GetString();
-    }
-
-    public string GetString(string key,int index)
+    public string GetString(string key, int index = 0)
     {
         return map[key].GetString(index);
     }
+
 
     #endregion
 
@@ -240,11 +255,9 @@ public class Property
 
     int intValue;
 
-    public Property(int value,bool isSynclist=false)
+    public Property(int value)
     {
-        intValue = value;
-        if (isSynclist)
-            list = new List<Property> { new Property(value) };
+        Set(value);
     }
 
     public void Add(int value)
@@ -257,12 +270,16 @@ public class Property
         if (map.ContainsKey(key))
             map[key].Add(value);
         else
-            map.Add(key, new Property(value));
+        {
+            map.Add(key, new Property());
+            map[key].Add(value);
+        }
     }
 
     public void Set(int value)
     {
         intValue = value;
+        type = PropertyType.Int;
     }
 
     public void Set(string key, int value)
@@ -287,15 +304,13 @@ public class Property
 
     public int GetInt(int index)
     {
+        if (type==PropertyType.Int)
+            return GetInt();
         return list[index].GetInt();
     }
 
-    public int GetInt(string key)
-    {
-        return map[key].GetInt();
-    }
 
-    public int GetInt(string key, int index)
+    public int GetInt(string key, int index=0)
     {
         return map[key].GetInt(index);
     }
@@ -306,11 +321,9 @@ public class Property
 
     float floatValue;
 
-    public Property(float value,bool isSynclist=false)
+    public Property(float value)
     {
-        floatValue = value;
-        if (isSynclist)
-            list = new List<Property> { new Property(value) };
+        Set(value);
     }
 
     public void Add(float value)
@@ -323,12 +336,17 @@ public class Property
         if (map.ContainsKey(key))
             map[key].Add(value);
         else
-            map.Add(key, new Property(value));
+        {
+            map.Add(key, new Property());
+            map[key].Add(value);
+        }
+
     }
 
     public void Set(float value)
     {
         floatValue = value;
+        type = PropertyType.Float;
     }
 
     public void Set(string key, float value)
@@ -353,15 +371,13 @@ public class Property
 
     public float GetFloat(int index)
     {
+        if (type==PropertyType.Float)
+            return GetFloat();
         return list[index].GetFloat();
     }
 
-    public float GetFloat(string key)
-    {
-        return map[key].GetFloat();
-    }
 
-    public float GetFloat(string key, int index)
+    public float GetFloat(string key, int index=0)
     {
         return map[key].GetFloat(index);
     }
@@ -392,11 +408,10 @@ public class Property
 
     bool boolValue;
 
-    public Property(bool value,bool isSynclist=false)
+    public Property(bool value)
     {
-        boolValue = value;
-        if(isSynclist)
-        list = new List<Property> { new Property(value) };
+        Set(value);
+
     }
 
     public void Add(bool value)
@@ -409,12 +424,16 @@ public class Property
         if (map.ContainsKey(key))
             map[key].Add(value);
         else
-            map.Add(key, new Property(value));
+        {
+            map.Add(key, new Property());
+            map[key].Add(value);
+        }
     }
 
     public void Set(bool value)
     {
         boolValue = value;
+        type = PropertyType.Bool;
     }
 
     public void Set(string key, bool value)
@@ -439,32 +458,50 @@ public class Property
 
     public bool GetBool(int index)
     {
+        if (type==PropertyType.Bool)
+            return GetBool();
         return list[index].GetBool();
     }
 
-    public bool GetBool(string key)
-    {
-        return map[key].GetBool();
-    }
 
-    public bool GetBool(string key, int index)
+    public bool GetBool(string key, int index=0)
     {
         return map[key].GetBool(index);
     }
 
     #endregion
 
-
     #region 数据组
+
+    Property data;
+
+    public Property Set(Property property)
+    {
+        data = property;
+        type = PropertyType.Data;
+        return this;
+    }
+
+    public Property GetData()
+    {
+        if (type == PropertyType.Data)
+            return data;
+        return list[0];
+    }
+
+    public Property GetData(int index)
+    {
+        return list[index];
+    }
 
     public Property GetData(string key)
     {
         return map[key];
     }
 
-    public Property GetData(int index)
+    public Property GetData(string key,int index)
     {
-        return list[index];
+        return map[key].GetData(index);
     }
 
     public List<Property> GetDatas()
@@ -477,12 +514,37 @@ public class Property
         return map[key].GetDatas();
     }
 
+    public void SetMapReference()
+    {
+        foreach (var item in map)
+        {
+            if (item.Value.list != null&&item.Value.list.Count>0)
+            {
+                for(int i = 0; i < item.Value.list.Count; i++)
+                {
+                    var target = item.Value.list[i];
+                    if (target.type==PropertyType.String && target.GetString() != null && target.GetString()[0] == '&')
+                    {
+                        Debug.Log(target.stringValue);
+                        target.Set( map[target.GetString()[1..]]);
+                    }
+                }
+            }
+        }
+    }
+
+    public Dictionary<string,Property>.KeyCollection GetKeys()
+    {
+        return map.Keys;
+    }
+
     #endregion
 
     public bool ContainsKey(string key)
     {
         return map.ContainsKey(key);
     }
+
 
 }
 

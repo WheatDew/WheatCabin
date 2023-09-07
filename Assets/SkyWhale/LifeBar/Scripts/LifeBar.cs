@@ -8,10 +8,8 @@ public class LifeBar : MonoBehaviour
     public RectTransform buttom;
     public RectTransform self;
 
-    [HideInInspector] public string lifeBarKey = "LifeBar";
     [HideInInspector] public string healthPointKey = "HealthPoint";
     [HideInInspector] public string maxHealthPointKey = "MaxHealthPoint";
-    [HideInInspector] public string entityID = "EntityID";
 
     [HideInInspector] public Property target;
 
@@ -22,11 +20,12 @@ public class LifeBar : MonoBehaviour
 
     private void Start()
     {
-        entity = PropertyMap.s.GetEntity(target.GetInt(entityID));
-        positionOffset.y = target.GetFloat(lifeBarKey, 1);
 
+        entity = PropertyMap.s.GetEntity(target.GetInt(Property.EntityID));
+        positionOffset.y = target.GetFloat(CharacterEntity.LifeBarKey, 1);
 
     }
+
 
     private void Update()
     {

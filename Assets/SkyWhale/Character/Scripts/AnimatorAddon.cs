@@ -58,11 +58,11 @@ public class AnimatorAddon : MonoBehaviour
         {
 
             triggerEvent.AddListener(FunctionMap.map[self.propertyData.GetString(animationEventKey,1)]);
-
+            triggerEventData = self.propertyData.GetData(animationEventKey, 3);
 
             if (self.propertyData.ContainsKey(animationEventKey))
             {
-                AddAnimationEvent(self.propertyData.GetString(animationEventKey), "TriggerEvent", self.propertyData.GetFloat(animationEventKey));
+                AddAnimationEvent(self.propertyData.GetString(animationEventKey,0), "TriggerEvent", self.propertyData.GetFloat(animationEventKey,2));
             }
             else
             {

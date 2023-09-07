@@ -12,7 +12,7 @@ public class CharacterEntity : Entity
         {
             var data = propertyData.GetData(LifeBarKey);
             data.Add(transform.GetInstanceID());
-            FunctionMap.map[SLifeBar.CreateLifeBar].Invoke(propertyData.GetData(LifeBarKey));
+            FunctionMap.map[SLifeBar.CreateLifeBar].Invoke(propertyData);
         }
     }
 }

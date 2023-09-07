@@ -17,11 +17,7 @@ public class Entity : MonoBehaviour
 
     public void StartEvent()
     {
-        if (propertyData.GetString(Property.StartEvent) != null)
-        {
-            
-            FunctionMap.map[propertyData.GetString(Property.StartEvent)].Invoke(propertyData);
-        }
+
     }
 
     public virtual void Init()

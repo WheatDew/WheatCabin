@@ -6,6 +6,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class SCharacter : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class SCharacter : MonoBehaviour
     private void Start()
     {
         mapEditor.elementTypeInitEvent.AddListener(InitCharacter);
-
+        Debug.Log("初始化角色系统");
     }
     #endregion
 

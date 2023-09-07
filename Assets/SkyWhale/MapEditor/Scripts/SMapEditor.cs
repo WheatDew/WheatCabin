@@ -125,7 +125,7 @@ public class SMapEditor : MonoBehaviour
         {
             var obj = Instantiate(prefabMap[value.GetString(storeElementKey,1)]);
 
-
+            Debug.Log(obj.name);
             obj.AddComponent<CMapEditorModel>();
             var rteComponent = obj.AddComponent<ExposeToEditor>();
             rteComponentEvent.Invoke(rteComponent);
