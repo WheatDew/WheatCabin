@@ -86,7 +86,7 @@ public class PropertyMap : MonoBehaviour
                     }
 
                     string key = Row_Read.GetCell(0).ToSafeString();
-                    Debug.LogFormat("当前的键为:{0}，当前数组长度为:{1}", key,Row_Read.Cells.Count);
+                    //Debug.LogFormat("当前的键为:{0}，当前数组长度为:{1}", key,Row_Read.Cells.Count);
 
                     for (int column = 1; column < Row_Read.Cells.Count; column++)
                     {
@@ -94,7 +94,7 @@ public class PropertyMap : MonoBehaviour
                         {
                             break;
                         }
-                        Debug.LogFormat("{0} {1} {2}",Row_Read.GetCell(column).CellType,Row_Read.GetCell(column),column);
+                        //Debug.LogFormat("{0} {1} {2}",Row_Read.GetCell(column).CellType,Row_Read.GetCell(column),column);
                         
 
                         if (Row_Read.GetCell(column).CellType == CellType.Numeric && Row_Read.GetCell(column).ToSafeString().Contains('.'))
@@ -131,7 +131,7 @@ public class PropertyMap : MonoBehaviour
     #region 设置实体
     public void SetEntity(int id,Entity entity)
     {
-        Debug.Log("初始实例列表");
+
         if (entityMap.ContainsKey(id))
         {
             entityMap[id] = entity;
@@ -141,7 +141,7 @@ public class PropertyMap : MonoBehaviour
             entityMap.Add(id, entity);
         }
 
-        entity.propertyData.Add(Property.EntityID, id);
+        entity.data.Set(Property.EntityID, 0, id);
     }
 
     public Entity GetEntity(int id)
@@ -214,15 +214,12 @@ public class Property
         type = PropertyType.String;
     }
 
-    public void Set(string key,string value)
-    {
-        map[key].Set(value);
-    }
 
     public void Set(int index,string value)
     {
         list[index].Set(value);
     }
+
 
     public void Set(string key,int index,string value)
     {
@@ -263,6 +260,7 @@ public class Property
     public void Add(int value)
     {
         list.Add(new Property(value));
+        type = PropertyType.List;
     }
 
     public void Add(string key, int value)
@@ -274,6 +272,8 @@ public class Property
             map.Add(key, new Property());
             map[key].Add(value);
         }
+
+        type = PropertyType.Map;
     }
 
     public void Set(int value)
@@ -282,10 +282,6 @@ public class Property
         type = PropertyType.Int;
     }
 
-    public void Set(string key, int value)
-    {
-        map[key].Set(value);
-    }
 
     public void Set(int index, int value)
     {
@@ -297,16 +293,16 @@ public class Property
         map[key].Set(index, value);
     }
 
-    public int GetInt()
+    public int GetInt(int index=0)
     {
-        return intValue;
-    }
-
-    public int GetInt(int index)
-    {
-        if (type==PropertyType.Int)
-            return GetInt();
-        return list[index].GetInt();
+        if (type == PropertyType.Int)
+            return intValue;
+        else if (type == PropertyType.Data)
+            return data.GetInt();
+        else if (type == PropertyType.List)
+            return list[index].GetInt();
+        Debug.LogErrorFormat("类型错误:{0}",type);
+        return 0;
     }
 
 
@@ -349,10 +345,6 @@ public class Property
         type = PropertyType.Float;
     }
 
-    public void Set(string key, float value)
-    {
-        map[key].Set(value);
-    }
 
     public void Set(int index, float value)
     {
@@ -471,6 +463,7 @@ public class Property
 
     #endregion
 
+
     #region 数据组
 
     Property data;
@@ -504,9 +497,22 @@ public class Property
         return map[key].GetData(index);
     }
 
+    /// <summary>
+    /// 返回数据数组
+    /// </summary>
+    /// <returns></returns>
     public List<Property> GetDatas()
     {
         return list;
+    }
+
+    /// <summary>
+    /// 返回数据字典
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<string,Property> GetMap()
+    {
+        return map;
     }
 
     public List<Property> GetDatas(string key)

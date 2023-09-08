@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class SLifeBar : MonoBehaviour
 {
-    public static string CreateLifeBar = "CreateLifeBar";
+    public static string CreateLifeBarKey = "CreateLifeBar";
 
     #region µ¥Àý
 
-    private SLifeBar _s;
-    public SLifeBar s { get { return this; } }
+    private static SLifeBar _s;
+    public static SLifeBar s { get { return _s; } }
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class SLifeBar : MonoBehaviour
             _s = this;
         }
 
-        FunctionMap.Add("CreateLifeBar", CreateLifeBarFunction);
+        FunctionMap.Add("CreateLifeBar", CreateLifeBar);
     }
 
     #endregion
@@ -27,7 +27,7 @@ public class SLifeBar : MonoBehaviour
     public LifeBar prefab;
     public Transform elementParent;
 
-    public void CreateLifeBarFunction(Property data)
+    public void CreateLifeBar(Property data)
     {
         var obj = Instantiate(prefab, elementParent);
 

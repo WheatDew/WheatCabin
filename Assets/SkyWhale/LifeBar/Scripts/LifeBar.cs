@@ -22,6 +22,7 @@ public class LifeBar : MonoBehaviour
     {
 
         entity = PropertyMap.s.GetEntity(target.GetInt(Property.EntityID));
+        Debug.Log(entity.gameObject.name);
         positionOffset.y = target.GetFloat(CharacterEntity.LifeBarKey, 1);
 
     }

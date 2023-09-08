@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using static UnityEngine.Rendering.DebugUI;
 using Unity.VisualScripting;
 using JetBrains.Annotations;
+using NPOI.SS.Formula.Functions;
 
 public class SMapEditor : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class SMapEditor : MonoBehaviour
 
     #region Ö÷Ìå
 
-    public Dictionary<string, Transform> childLayerList = new Dictionary<string, Transform>();
-    public Dictionary<string, AssetBundle> assetBundleMap = new Dictionary<string, AssetBundle>();
+    public static Dictionary<string, Transform> childLayerList = new Dictionary<string, Transform>();
+    public static Dictionary<string, AssetBundle> assetBundleMap = new Dictionary<string, AssetBundle>();
 
 
     public Transform childLayer;
@@ -154,9 +155,18 @@ public class SMapEditor : MonoBehaviour
         }
     }
 
+
     #endregion
 
+    public static T GetAssetBundleElement<T>(string packName,string objName) where T:Object
+    {
+        return assetBundleMap[packName].LoadAsset<T>(objName);
+    }
 
+    public static GameObject GetAssetBundleElement(string packName, string objName)
+    {
+        return assetBundleMap[packName].LoadAsset<GameObject>(objName);
+    }
 }
 
 

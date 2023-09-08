@@ -30,17 +30,17 @@ public class EditItemPage : MonoBehaviour
         if (typeDropdown.captionText.text == "整型")
         {
             editor.SetItem(string.Format("{0} {1}", "整型", nameBox.text), dataBox.text);
-            editor.bufferData.Set(nameBox.text,int.Parse(dataBox.text));
+            editor.bufferData.Add(nameBox.text,int.Parse(dataBox.text));
         }
         else if (typeDropdown.captionText.text == "浮点数")
         {
             editor.SetItem(string.Format("{0} {1}", "浮点数", nameBox.text), dataBox.text);
-            editor.bufferData.Set(nameBox.text, float.Parse(dataBox.text));
+            editor.bufferData.Add(nameBox.text, float.Parse(dataBox.text));
         }
         else if (typeDropdown.captionText.text == "字符串")
         {
             editor.SetItem(string.Format("{0} {1}", "字符串", nameBox.text), dataBox.text);
-            editor.bufferData.Set( nameBox.text, dataBox.text);
+            editor.bufferData.Add( nameBox.text, dataBox.text);
         }
 
         Destroy(gameObject);

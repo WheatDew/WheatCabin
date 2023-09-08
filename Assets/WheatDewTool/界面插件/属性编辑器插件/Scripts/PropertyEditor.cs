@@ -56,7 +56,7 @@ public class PropertyEditor : MonoBehaviour
     public void SaveData()
     {
         //»º´æÐ´Èë¼ÇÂ¼
-        currentTarget.propertyData = new Property(bufferData);
+        currentTarget.data = new Property(bufferData);
     }
 
     public void CreateItem(string originName,string originData)

@@ -42,8 +42,9 @@ public class SCharacter : MonoBehaviour
     {
         if (data.GetString(objectType) == "Character")
         {
+
             var cobj = obj.AddComponent<CharacterEntity>();
-            cobj.propertyData = data;
+            cobj.InitData(data);
             cobj.type = "Character";
             cobj.detailType = data.GetString(detailType);
             

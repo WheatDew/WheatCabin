@@ -5,14 +5,17 @@ using UnityEngine;
 public class CharacterEntity : Entity
 {
     public static string LifeBarKey = "LifeBar";
+    public static string WeaponKey = "Weapon";
 
     public override void Init()
     {
-        if (propertyData.ContainsKey(LifeBarKey))
+        if (data.ContainsKey(LifeBarKey))
         {
-            var data = propertyData.GetData(LifeBarKey);
-            data.Add(transform.GetInstanceID());
-            FunctionMap.map[SLifeBar.CreateLifeBar].Invoke(propertyData);
+            SLifeBar.s.CreateLifeBar(data);
+        }
+        if (data.ContainsKey(WeaponKey))
+        {
+            BattleSystem.s.SetWeapon(data.GetData(WeaponKey));
         }
     }
 }

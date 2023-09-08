@@ -6,13 +6,11 @@ public class Entity : MonoBehaviour
 {
     public string type;
     public string detailType;
-    public Property propertyData=new Property();
+    public Property data=new Property();
 
     private void Start()
     {
-        PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
-        StartEvent();
-        Init();
+        
     }
 
     public void StartEvent()
@@ -22,6 +20,14 @@ public class Entity : MonoBehaviour
 
     public virtual void Init()
     {
+        
+    }
 
+    public void InitData(Property data)
+    {
+        this.data = data;
+        PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
+        StartEvent();
+        Init();
     }
 }
