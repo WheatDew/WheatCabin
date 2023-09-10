@@ -11,6 +11,8 @@ public class BattleSystem : MonoBehaviour
     {
         if (_s == null)
             _s = this;
+
+        FunctionMap.Add("WeaponDisplay", WeaponDispaly);
     }
 
     /// <summary>
@@ -45,14 +47,45 @@ public class BattleSystem : MonoBehaviour
     public void SetWeapon(Property data)
     {
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
-        Debug.Log(target.gameObject.name);
-        Transform parent = target.transform.Find(data.GetString(1));
-        var obj = Instantiate(SMapEditor.GetAssetBundleElement(data.GetString(2),data.GetString(3)), target.transform);
+        var character = (CharacterEntity)target;
+        Transform parent = FindChild(target.transform,data.GetString(1));
+        character.weaponPoint = parent;
+        var obj = Instantiate(SMapEditor.GetAssetBundleElement(data.GetString(2),data.GetString(3)), parent);
+        parent.gameObject.SetActive(false);
         Debug.Log(obj.transform.parent);
+    }
+
+    public void WeaponDispaly(Property data)
+    {
+        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        var character = (CharacterEntity)target;
+
+        character.weaponPoint.gameObject.SetActive(true);
     }
 
     public void SetSecondary(Property data)
     {
         
+    }
+
+    //查找所有子物体
+    public Transform FindChild(Transform parent, string name)
+    {
+        Transform result = null;
+        for(int i = 0; i < parent.childCount; i++)
+        {
+            if (parent.GetChild(i).name == name)
+            {
+                return parent.GetChild(i);
+            }
+            result = FindChild(parent.GetChild(i), name);
+            if (result != null)
+            {
+                return result;
+            }
+
+
+        }
+        return result;
     }
 }

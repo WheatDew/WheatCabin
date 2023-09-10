@@ -15,7 +15,7 @@ public class LogSystem : MonoBehaviour
             _s = this;
         }
 
-        FunctionMap.Add("LogTest", LogTest);
+        FunctionMap.Add("WriteLog", WriteLog);
     }
 
 
@@ -47,7 +47,7 @@ public class LogSystem : MonoBehaviour
         logContent+=content+"\n";
     }
 
-    public void LogTest(Property data)
+    public void WriteLog(Property data)
     {
         WriteLog(data.GetString());
     }

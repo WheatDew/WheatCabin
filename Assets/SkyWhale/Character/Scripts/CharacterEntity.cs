@@ -7,6 +7,7 @@ public class CharacterEntity : Entity
     public static string LifeBarKey = "LifeBar";
     public static string WeaponKey = "Weapon";
 
+    public Transform weaponPoint;
     public override void Init()
     {
         if (data.ContainsKey(LifeBarKey))

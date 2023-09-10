@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum AnimatorAddonEventType { Start,End,Trigger}
 public class AnimatorAddon : MonoBehaviour
 {
     /*
@@ -36,15 +35,12 @@ public class AnimatorAddon : MonoBehaviour
     private AnimationClip[] clips;
     private Entity self;
 
-    private UnityEvent<Property> startEvent = new UnityEvent<Property>();
-    private UnityEvent<Property> endEvent = new UnityEvent<Property>();
-    private UnityEvent<Property> triggerEvent = new UnityEvent<Property>();
+    List<Property> animationEventDatas = new List<Property>();
 
-    private Property triggerEventData;
 
     #endregion
 
-    private string animationEventKey = "AnimationTriggerEvent";
+    private string animationEventKey = "AnimationEvent";
 
 
     #region 系统函数
@@ -53,21 +49,31 @@ public class AnimatorAddon : MonoBehaviour
         self = GetComponent<Entity>();
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
-
+        Debug.Log("初始化组件");
         if (self.data.ContainsKey(animationEventKey))
         {
+            Debug.Log("初始化动画事件");
 
-            triggerEvent.AddListener(FunctionMap.map[self.data.GetString(animationEventKey,1)]);
-            triggerEventData = self.data.GetData(animationEventKey, 3);
+            var list = self.data.GetData(animationEventKey).GetDatas();
 
-            if (self.data.ContainsKey(animationEventKey))
+            for(int i = 0; i < list.Count; i++)
             {
-                AddAnimationEvent(self.data.GetString(animationEventKey,0), "TriggerEvent", self.data.GetFloat(animationEventKey,2));
+                int index = i;
+                animationEventDatas.Add(list[index].GetData());
+                AddAnimationEvent(index);
             }
-            else
-            {
-                AddAnimationEvent(self.data.GetString(animationEventKey), "TriggerEvent", 0);
-            }
+
+            //triggerEvent.AddListener(FunctionMap.map[self.data.GetString(animationEventKey,1)]);
+            //triggerEventData = self.data.GetData(animationEventKey, 3);
+
+            //if (self.data.ContainsKey(animationEventKey))
+            //{
+            //    AddAnimationEvent(self.data.GetString(animationEventKey,0), "TriggerEvent", self.data.GetFloat(animationEventKey,2));
+            //}
+            //else
+            //{
+            //    AddAnimationEvent(self.data.GetString(animationEventKey), "TriggerEvent", 0);
+            //}
         }
     }
 
@@ -81,45 +87,30 @@ public class AnimatorAddon : MonoBehaviour
 
     #region --自定义函数
 
-    public void StartEvent()
+
+
+    public void TriggerEvent(int i)
     {
-        startEvent.Invoke(self.data);
+        FunctionMap.map[animationEventDatas[i].GetString(2)](animationEventDatas[i].GetData(3));
     }
 
-    public void EndEvent()
-    {
-        endEvent.Invoke(self.data);
-    }
 
-    public void TriggerEvent()
+    public void AddAnimationEvent(int index)
     {
-        triggerEvent.Invoke(triggerEventData);
-    }
 
-    public void AddStartEvent(string clipName,float time, UnityAction<Property> targetEvent)
-    {
-        AddAnimationEvent(clipName, "StartEvent", time);
-    }
+        string clipName = animationEventDatas[index].GetString(0);
+        Debug.Log(clipName);
+        float time = animationEventDatas[index].GetFloat(1);
 
-    public void AddEndEvent(string clipName,float time, UnityAction<Property> targetEvent)
-    {
-        AddAnimationEvent(clipName, "EndEvent", time);
-    }
-
-    public void AddTriggerEvent(string clipName, float time, UnityAction<Property> targetEvent)
-    {
-        AddAnimationEvent(clipName, "TriggerEvent", time);
-    }
-
-    public void AddAnimationEvent(string clipName,string eventFunctionName,float time)
-    {
         AnimationClip[] _clips = animator.runtimeAnimatorController.animationClips;
+
         for (int i = 0; i < _clips.Length; i++)
         {
             if (_clips[i].name == clipName)
             {
                 AnimationEvent _event = new AnimationEvent();
-                _event.functionName = eventFunctionName;
+                _event.functionName = "TriggerEvent";
+                _event.intParameter = index;
                 _event.time = _clips[i].length * time;
                 _clips[i].AddEvent(_event);
                 break;
