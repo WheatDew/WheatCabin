@@ -290,7 +290,12 @@ public class Property
 
     public void Set(string key, int index, int value)
     {
-        map[key].Set(index, value);
+        if (map.ContainsKey(key))
+            map[key].Set(index, value);
+        else
+        {
+            map.Add(key, new Property(value));
+        }
     }
 
     public int GetInt(int index=0)
@@ -377,6 +382,11 @@ public class Property
     public Vector3 GetVector3()
     {
         return new Vector3(GetFloat(0), GetFloat(1), GetFloat(2));
+    }
+
+    public Vector3 GetVector3(int index)
+    {
+        return list[index].GetVector3();
     }
 
     public Vector3 GetVector3(string key)

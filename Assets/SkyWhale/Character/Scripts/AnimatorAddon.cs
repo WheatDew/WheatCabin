@@ -49,7 +49,7 @@ public class AnimatorAddon : MonoBehaviour
         self = GetComponent<Entity>();
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
-        Debug.Log("初始化组件");
+
         if (self.data.ContainsKey(animationEventKey))
         {
             Debug.Log("初始化动画事件");
@@ -63,17 +63,6 @@ public class AnimatorAddon : MonoBehaviour
                 AddAnimationEvent(index);
             }
 
-            //triggerEvent.AddListener(FunctionMap.map[self.data.GetString(animationEventKey,1)]);
-            //triggerEventData = self.data.GetData(animationEventKey, 3);
-
-            //if (self.data.ContainsKey(animationEventKey))
-            //{
-            //    AddAnimationEvent(self.data.GetString(animationEventKey,0), "TriggerEvent", self.data.GetFloat(animationEventKey,2));
-            //}
-            //else
-            //{
-            //    AddAnimationEvent(self.data.GetString(animationEventKey), "TriggerEvent", 0);
-            //}
         }
     }
 

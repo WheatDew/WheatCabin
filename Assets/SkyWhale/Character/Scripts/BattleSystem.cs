@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class BattleSystem : MonoBehaviour
@@ -13,6 +14,7 @@ public class BattleSystem : MonoBehaviour
             _s = this;
 
         FunctionMap.Add("WeaponDisplay", WeaponDispaly);
+        FunctionMap.Add("WeaponHidden", WeaponHidden);
     }
 
     /// <summary>
@@ -50,9 +52,32 @@ public class BattleSystem : MonoBehaviour
         var character = (CharacterEntity)target;
         Transform parent = FindChild(target.transform,data.GetString(1));
         character.weaponPoint = parent;
-        var obj = Instantiate(SMapEditor.GetAssetBundleElement(data.GetString(2),data.GetString(3)), parent);
+        Vector3 positionOffset,rotationOffset;
+
+
+        positionOffset = Vector3.zero;
+        rotationOffset = Vector3.zero;
+        switch (data.GetDatas().Count)
+        {
+            case 3:
+                break;
+            case 4:
+                positionOffset = data.GetVector3(3);
+                rotationOffset = Vector3.zero;
+                break;
+            case 5:
+                positionOffset = data.GetVector3(3);
+                rotationOffset = data.GetVector3(4);
+                break;
+            default:
+                Debug.LogError("参数数量错误");
+                break;
+        }
+
+
+        SWeapon.s.Create(data.GetString(2), parent, positionOffset, rotationOffset);
         parent.gameObject.SetActive(false);
-        Debug.Log(obj.transform.parent);
+
     }
 
     public void WeaponDispaly(Property data)
@@ -61,6 +86,14 @@ public class BattleSystem : MonoBehaviour
         var character = (CharacterEntity)target;
 
         character.weaponPoint.gameObject.SetActive(true);
+    }
+
+    public void WeaponHidden(Property data)
+    {
+        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        var character = (CharacterEntity)target;
+
+        character.weaponPoint.gameObject.SetActive(false);
     }
 
     public void SetSecondary(Property data)

@@ -93,9 +93,15 @@ public class SMapEditor : MonoBehaviour
 
     #region ÊôÐÔ×ª»»
 
-    private string mapEditorPropertyName = "MapEditor";
-    private string storeElements = "StoreElements";
-    private string storeElementKey = "StoreElement";
+    [HideInInspector] public static string mapEditorPropertyName = "MapEditor";
+    [HideInInspector] public static string storeElements = "StoreElements";
+    [HideInInspector] public static string storeElementKey = "StoreElement";
+
+    [HideInInspector] public static string displayNameKey = "DisplayName";
+    [HideInInspector] public static string objectTypeKey = "Type";
+    [HideInInspector] public static string detailTypeKey = "DetailType";
+    [HideInInspector] public static string packNameKey = "PackName";
+    [HideInInspector] public static string packObjectNameKey = "PackObjectName";
 
     #endregion
 
