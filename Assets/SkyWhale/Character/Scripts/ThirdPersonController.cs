@@ -100,7 +100,7 @@ namespace SkyWhale
 
                 // Update target direction relative to the camera view (or not if the Keep Direction option is checked)
                 UpdateTargetDirection();
-                if (input != Vector2.zero && targetDirection.magnitude > 0.1f)
+                if (input != Vector2.zero && targetDirection.magnitude > 0.1f&&anim.GetCurrentAnimatorStateInfo(0).IsTag("Move"))
                 {
                     Vector3 lookDirection = targetDirection.normalized;
                     freeRotation = Quaternion.LookRotation(lookDirection, transform.up);
