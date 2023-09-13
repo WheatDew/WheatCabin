@@ -17,28 +17,9 @@ public class BattleSystem : MonoBehaviour
         FunctionMap.Add("WeaponHidden", WeaponHidden);
     }
 
-    /// <summary>
-    /// 接收一个参数，参数的列表第一个为造成伤害的实体，第二个为接受伤害的实体
-    /// </summary>
-    /// <param name="target"></param>
-    public void Damage(Property target)
-    {
-        var param = target.GetDatas();
-
-        Entity passive = PropertyMap.s.entityMap[param[0].GetInt()];
-        Entity active = PropertyMap.s.entityMap[param[1].GetInt()];
-    }
 
     /// <summary>
-    /// 判定
-    /// </summary>
-    public void Determination(Vector3 start,Vector3 end)
-    {
-
-    }
-
-    /// <summary>
-    /// 设置判定点，类型为数组类型，[0]为目标对象，[1]为起始点，[2]为结束点
+    /// 设置判定点，类型为数组类型，[0]为起始点，[1]为结束点，[2]为伤害来源,[3]为伤害目标
     /// </summary>
     /// <param name="target"></param>
     public void SetDeterminationPoint(Property target)
@@ -75,7 +56,9 @@ public class BattleSystem : MonoBehaviour
         }
 
 
-        SWeapon.s.Create(data.GetString(2), parent, positionOffset, rotationOffset);
+        var weapon = SWeapon.s.Create(data.GetString(2), parent, positionOffset, rotationOffset);
+        data.Set(3, weapon.transform.GetInstanceID());
+        Debug.Log(data.GetInt(3));
         parent.gameObject.SetActive(false);
 
     }

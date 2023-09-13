@@ -27,14 +27,14 @@ public class SWeapon : MonoBehaviour
 
     private void Start()
     {
-        
+        FunctionMap.Add("Damage", Damage);
     }
 
     #endregion
 
     #region 自定义函数
 
-    public void Create(string name,Transform parent,Vector3 position,Vector3 rotation)
+    public GameObject Create(string name,Transform parent,Vector3 position,Vector3 rotation)
     {
         Property data = PropertyMap.s.map[name];
         Debug.Log(data.GetString(SMapEditor.packNameKey));
@@ -46,9 +46,27 @@ public class SWeapon : MonoBehaviour
         var weapon = obj.AddComponent<Weapon>();
         weapon.InitData(data);
         GameObject start = new GameObject();
+        start.transform.parent = parent;
+        start.name = "start";
         start.transform.localPosition = data.GetVector3(rayStartKey);
+        start.transform.localRotation = Quaternion.identity;
         GameObject end = new GameObject();
+        end.transform.parent = parent;
+        end.name = "end";
         end.transform.localPosition = data.GetVector3(rayEndKey);
+        end.transform.localRotation = Quaternion.identity;
+        weapon.start = start;
+        weapon.end = end;
+        return obj;
+    }
+
+    /// <summary>
+    /// 接收一个参数，参数的列表第一个为造成伤害的实体，第二个为接受伤害的实体
+    /// </summary>
+    /// <param name="target"></param>
+    public void Damage(Property target)
+    {
+        
     }
 
     #endregion
