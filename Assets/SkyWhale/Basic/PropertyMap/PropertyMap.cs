@@ -31,6 +31,7 @@ public class PropertyMap : MonoBehaviour
     //数据模板
     public Dictionary<string, Property> map = new Dictionary<string, Property>();
     public Dictionary<int, Entity> entityMap = new Dictionary<int, Entity>();
+    public static Dictionary<int, GameObject> gameObjectMap = new Dictionary<int, GameObject>();
 
     //载入数据模板
     private void Init()
@@ -148,6 +149,26 @@ public class PropertyMap : MonoBehaviour
     {
         return entityMap[id];
     }
+
+    public static void SetGameObject(int id, GameObject entity)
+    {
+
+        if (gameObjectMap.ContainsKey(id))
+        {
+            gameObjectMap[id] = entity;
+        }
+        else
+        {
+            gameObjectMap.Add(id, entity);
+        }
+    }
+
+    public static GameObject GetGameObject(int id)
+    {
+        return gameObjectMap[id];
+    }
+
+
 
     #endregion
 }
@@ -278,8 +299,17 @@ public class Property
 
     public void Set(int value)
     {
-        intValue = value;
-        type = PropertyType.Int;
+        if (type == PropertyType.Data)
+        {
+            data.Set(value);
+        }
+        else
+        {
+            intValue = value;
+            type = PropertyType.Int;
+        }
+
+
     }
 
 

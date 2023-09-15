@@ -8,6 +8,9 @@ public class CharacterEntity : Entity
     public static string WeaponKey = "Weapon";
 
     public Transform weaponPoint;
+    public Weapon weapon;
+    public Animator animator;
+
     public override void Init()
     {
         if (data.ContainsKey(LifeBarKey))
@@ -16,7 +19,10 @@ public class CharacterEntity : Entity
         }
         if (data.ContainsKey(WeaponKey))
         {
-            BattleSystem.s.SetWeapon(data.GetData(WeaponKey));
+            BattleSystem.s.SetWeapon(data);
         }
+
+        animator = GetComponent<Animator>();
+        gameObject.layer = 7;
     }
 }

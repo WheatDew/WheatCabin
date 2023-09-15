@@ -27,8 +27,9 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void SetWeapon(Property data)
+    public void SetWeapon(Property origin)
     {
+        var data = origin.GetData(CharacterEntity.WeaponKey);
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         var character = (CharacterEntity)target;
         Transform parent = FindChild(target.transform,data.GetString(1));
@@ -56,9 +57,8 @@ public class BattleSystem : MonoBehaviour
         }
 
 
-        var weapon = SWeapon.s.Create(data.GetString(2), parent, positionOffset, rotationOffset);
-        data.Set(3, weapon.transform.GetInstanceID());
-        Debug.Log(data.GetInt(3));
+        var weapon = SWeapon.s.Create(character, parent, positionOffset, rotationOffset);
+
         parent.gameObject.SetActive(false);
 
     }

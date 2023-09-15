@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public static string StartEventKey="StartEvent";
+
     public string type;
     public string detailType;
     public Property data=new Property();
@@ -15,7 +17,11 @@ public class Entity : MonoBehaviour
 
     public void StartEvent()
     {
-
+        if (data.ContainsKey(StartEventKey))
+        {
+            var startEventData = data.GetData(StartEventKey);
+            FunctionMap.map[startEventData.GetString(0)].Invoke(startEventData.GetData(1));
+        }
     }
 
     public virtual void Init()
@@ -27,7 +33,6 @@ public class Entity : MonoBehaviour
     {
         this.data = data;
         PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
-        StartEvent();
         Init();
     }
 }
