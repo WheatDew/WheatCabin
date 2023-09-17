@@ -195,6 +195,10 @@ public class Property
 
     public Property(Property property)
     {
+        intValue = property.intValue;
+        floatValue = property.floatValue;
+        boolValue = property.boolValue;
+        stringValue = property.stringValue;
         list = new List<Property>(property.list);
         map = new Dictionary<string, Property>(property.map);
     }
@@ -278,10 +282,11 @@ public class Property
         Set(value);
     }
 
-    public void Add(int value)
+    public Property Add(int value)
     {
         list.Add(new Property(value));
         type = PropertyType.List;
+        return this;
     }
 
     public void Add(string key, int value)
@@ -313,9 +318,10 @@ public class Property
     }
 
 
-    public void Set(int index, int value)
+    public Property Set(int index, int value)
     {
         list[index].Set(value);
+        return this;
     }
 
     public void Set(string key, int index, int value)
