@@ -199,6 +199,8 @@ public class Property
         floatValue = property.floatValue;
         boolValue = property.boolValue;
         stringValue = property.stringValue;
+        data = property.data;
+        type = property.type;
         list = new List<Property>(property.list);
         map = new Dictionary<string, Property>(property.map);
     }

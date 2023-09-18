@@ -68,7 +68,7 @@ public class AnimatorAddon : MonoBehaviour
 
         if (self.data.ContainsKey(animationPersistEventKey))
         {
-            Debug.Log("初始化动画触发事件");
+            Debug.Log("初始化动画持续事件");
 
             var list = self.data.GetData(animationPersistEventKey).GetDatas();
 
@@ -78,9 +78,12 @@ public class AnimatorAddon : MonoBehaviour
                 Property originData = list[index].GetData().Add(-1);
 
                 animationPersistEventDatas.Add((new Property(originData)).Set(6, 0));
+                AddAnimationPersistEvent(index*3);
                 animationPersistEventDatas.Add((new Property(originData)).Set(6, 1));
+                AddAnimationPersistEvent(index*3+1);
                 animationPersistEventDatas.Add((new Property(originData)).Set(6, 2));
-                AddAnimationEvent(index);
+                AddAnimationPersistEvent(index*3+2);
+
             }
 
         }
@@ -104,10 +107,14 @@ public class AnimatorAddon : MonoBehaviour
         FunctionMap.map[animationEventDatas[i].GetString(0)](animationEventDatas[i].GetData(1));
     }
 
+    public void TriggerPersistEvent(int i)
+    {
+        FunctionMap.map[animationEventDatas[i].GetString(0)](animationEventDatas[i].GetData(1));
+    }
+
 
     public void AddAnimationEvent(int index)
     {
-
         string clipName;
         float time;
 
@@ -145,11 +152,13 @@ public class AnimatorAddon : MonoBehaviour
         {
             if (_clips[i].name == clipName)
             {
-
-
                 int timer = 0;
                 for (float time = startTime+interpolation; time < endTime; time += interpolation)
                 {
+                    if(time==startTime+interpolation)
+                    {
+                        AddAnimationEvent(_clips[i], time, index);
+                    }
                     AddAnimationEvent(_clips[i], time, index);
                     timer++;
                     if (timer > 50)
@@ -158,20 +167,25 @@ public class AnimatorAddon : MonoBehaviour
                         break;
                     }
                 }
-
                 break;
             }
         }
         animator.Rebind();
-
-
-
     }
 
     public void AddAnimationEvent(AnimationClip clip,float time,int param)
     {
         AnimationEvent _event = new AnimationEvent();
         _event.functionName = "TriggerEvent";
+        _event.intParameter = param;
+        _event.time = clip.length * time;
+        clip.AddEvent(_event);
+    }
+
+    public void AddPersistAnimationEvent(AnimationClip clip, float time, int param)
+    {
+        AnimationEvent _event = new AnimationEvent();
+        _event.functionName = "AddAnimationPersistEvent";
         _event.intParameter = param;
         _event.time = clip.length * time;
         clip.AddEvent(_event);
