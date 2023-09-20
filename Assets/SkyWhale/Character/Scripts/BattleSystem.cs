@@ -59,12 +59,17 @@ public class BattleSystem : MonoBehaviour
 
         var weapon = SWeapon.s.Create(character, parent, positionOffset, rotationOffset);
 
-        parent.gameObject.SetActive(false);
+        character.weapon = weapon;
+
+        character.weaponPoint.gameObject.SetActive(false);
+        //weapon.SetActive(false);
+        //parent.gameObject.SetActive(false);
 
     }
 
     public void WeaponDispaly(Property data)
     {
+        Debug.Log("调用WeaponDisplay");
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         var character = (CharacterEntity)target;
 
@@ -73,6 +78,7 @@ public class BattleSystem : MonoBehaviour
 
     public void WeaponHidden(Property data)
     {
+        Debug.Log("调用WeaponHidden");
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         var character = (CharacterEntity)target;
 

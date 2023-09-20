@@ -36,12 +36,10 @@ public class AnimatorAddon : MonoBehaviour
     private Entity self;
 
     List<Property> animationEventDatas = new List<Property>();
-    List<Property> animationPersistEventDatas = new List<Property>();
 
     #endregion
 
     private string animationEventKey = "AnimationEvent";
-    private string animationPersistEventKey = "AnimationPersistEvent";
 
 
     #region 系统函数
@@ -51,9 +49,9 @@ public class AnimatorAddon : MonoBehaviour
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
 
+        Debug.Log("初始化AnimationAddon");
         if (self.data.ContainsKey(animationEventKey))
         {
-            Debug.Log("初始化动画触发事件");
 
             var list = self.data.GetData(animationEventKey).GetDatas();
 
@@ -65,29 +63,6 @@ public class AnimatorAddon : MonoBehaviour
             }
 
         }
-
-        if (self.data.ContainsKey(animationPersistEventKey))
-        {
-            Debug.Log("初始化动画持续事件");
-
-            var list = self.data.GetData(animationPersistEventKey).GetDatas();
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                int index = i;
-                Property originData = list[index].GetData().Add(-1);
-
-                animationPersistEventDatas.Add((new Property(originData)).Set(6, 0));
-                AddAnimationPersistEvent(index*3);
-                animationPersistEventDatas.Add((new Property(originData)).Set(6, 1));
-                AddAnimationPersistEvent(index*3+1);
-                animationPersistEventDatas.Add((new Property(originData)).Set(6, 2));
-                AddAnimationPersistEvent(index*3+2);
-
-            }
-
-        }
-
     }
 
 
@@ -104,12 +79,7 @@ public class AnimatorAddon : MonoBehaviour
 
     public void TriggerEvent(int i)
     {
-        FunctionMap.map[animationEventDatas[i].GetString(0)](animationEventDatas[i].GetData(1));
-    }
-
-    public void TriggerPersistEvent(int i)
-    {
-        FunctionMap.map[animationEventDatas[i].GetString(0)](animationEventDatas[i].GetData(1));
+        FunctionMap.map[animationEventDatas[i].GetString(2)](animationEventDatas[i].GetData(3));
     }
 
 
@@ -118,8 +88,8 @@ public class AnimatorAddon : MonoBehaviour
         string clipName;
         float time;
 
-        clipName = animationEventDatas[index].GetString(2);
-        time = animationEventDatas[index].GetFloat(3);
+        clipName = animationEventDatas[index].GetString(0);
+        time = animationEventDatas[index].GetFloat(1);
 
         AnimationClip[] _clips = animator.runtimeAnimatorController.animationClips;
 
@@ -128,45 +98,6 @@ public class AnimatorAddon : MonoBehaviour
             if (_clips[i].name == clipName)
             {
                 AddAnimationEvent(_clips[i], time, index);
-                break;
-            }
-        }
-        animator.Rebind();
-    }
-
-    public void AddAnimationPersistEvent(int index)
-    {
-
-        string clipName;
-        float startTime, endTime;
-        float interpolation;
-
-        clipName = animationEventDatas[index].GetString(2);
-        startTime = animationEventDatas[index].GetFloat(3);
-        endTime = animationEventDatas[index].GetFloat(4);
-        interpolation = animationEventDatas[index].GetFloat(5);
-
-        AnimationClip[] _clips = animator.runtimeAnimatorController.animationClips;
-
-        for (int i = 0; i < _clips.Length; i++)
-        {
-            if (_clips[i].name == clipName)
-            {
-                int timer = 0;
-                for (float time = startTime+interpolation; time < endTime; time += interpolation)
-                {
-                    if(time==startTime+interpolation)
-                    {
-                        AddAnimationEvent(_clips[i], time, index);
-                    }
-                    AddAnimationEvent(_clips[i], time, index);
-                    timer++;
-                    if (timer > 50)
-                    {
-                        Debug.LogError("插值次数过多");
-                        break;
-                    }
-                }
                 break;
             }
         }
@@ -182,14 +113,6 @@ public class AnimatorAddon : MonoBehaviour
         clip.AddEvent(_event);
     }
 
-    public void AddPersistAnimationEvent(AnimationClip clip, float time, int param)
-    {
-        AnimationEvent _event = new AnimationEvent();
-        _event.functionName = "AddAnimationPersistEvent";
-        _event.intParameter = param;
-        _event.time = clip.length * time;
-        clip.AddEvent(_event);
-    }
 
     /// <summary>
     /// 添加动画事件

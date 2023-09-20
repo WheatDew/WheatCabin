@@ -28,8 +28,7 @@ public class SWeapon : MonoBehaviour
 
     private void Start()
     {
-        FunctionMap.Add("DamageStart", DamageStart);
-        FunctionMap.Add("DamageEnd", DamageEnd);
+        FunctionMap.Add("Damage", Damage);
         FunctionMap.Add("DisplayWeaponRange", DisplayWeaponRange);
     }
 
@@ -37,7 +36,7 @@ public class SWeapon : MonoBehaviour
 
     #region 自定义函数
 
-    public GameObject Create(CharacterEntity origin,Transform parent,Vector3 position,Vector3 rotation)
+    public Weapon Create(CharacterEntity origin,Transform parent,Vector3 position,Vector3 rotation)
     {
 
         Property data = PropertyMap.s.map[origin.data.GetString(CharacterEntity.WeaponKey,2)];
@@ -66,32 +65,23 @@ public class SWeapon : MonoBehaviour
 
         weapon.StartEvent();
 
-        return obj;
+        return weapon;
     }
 
     /// <summary>
     /// 接收一个参数，参数的列表第一个为造成伤害的实体，第二个为接受伤害的实体
     /// </summary>
     /// <param name="target"></param>
-    public void DamageStart(Property data)
+    public void Damage(Property data)
     {
+        Debug.Log(data.GetData(0));
+        //Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        //var character = (CharacterEntity)target;
 
-        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
-        var character = (CharacterEntity)target;
-
-        character.weapon.DamageStart();
+        //character.weapon.DamageStart();
 
     }
 
-    public void DamageEnd(Property data)
-    {
-
-        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
-        var character = (CharacterEntity)target;
-
-        character.weapon.DamageEnd();
-
-    }
 
     public void DisplayWeaponRange(Property data)
     {
