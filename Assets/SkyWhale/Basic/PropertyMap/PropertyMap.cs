@@ -69,6 +69,7 @@ public class PropertyMap : MonoBehaviour
 
             Dictionary<string, Property> datas = new Dictionary<string, Property>();
 
+            //获取工作表
             for (int i = 0; i < MyBook.NumberOfSheets; i++)
             {
                 ISheet Sheet_Read = MyBook.GetSheetAt(i);
@@ -77,25 +78,27 @@ public class PropertyMap : MonoBehaviour
 
                 Debug.Log(Sheet_Read.SheetName);
 
+                //获取条目
                 for (int row = 0; row <= Sheet_Read.LastRowNum; row++)
                 {
                     IRow Row_Read = Sheet_Read.GetRow(row);
 
-                    if (Row_Read.GetCell(0).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
+                    if (Row_Read.GetCell(0)==null||Row_Read.GetCell(0).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
                     {
                         continue;
                     }
-
+                    //获取条目名
                     string key = Row_Read.GetCell(0).ToSafeString();
-                    //Debug.LogFormat("当前的键为:{0}，当前数组长度为:{1}", key,Row_Read.Cells.Count);
+                    Debug.LogFormat("当前的键为:{0}，当前数组长度为:{1}", key,Row_Read.Cells.Count);
 
+                    //获取条目内容
                     for (int column = 1; column < Row_Read.Cells.Count; column++)
                     {
-                        if (Row_Read.GetCell(column).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
+                        if (Row_Read.GetCell(column)==null|| Row_Read.GetCell(column).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
                         {
                             break;
                         }
-                        //Debug.LogFormat("{0} {1} {2}",Row_Read.GetCell(column).CellType,Row_Read.GetCell(column),column);
+                        Debug.LogFormat("{0} {1} {2}",Row_Read.GetCell(column).CellType,Row_Read.GetCell(column),column);
                         
 
                         if (Row_Read.GetCell(column).CellType == CellType.Numeric && Row_Read.GetCell(column).ToSafeString().Contains('.'))
@@ -259,10 +262,10 @@ public class Property
         if (type == PropertyType.String)
             return stringValue;
         else if (type == PropertyType.Data)
-            return data.GetString();
+            return data.GetString(index);
         else if (type == PropertyType.List)
-            return list[index].GetString();
-        Debug.LogErrorFormat("错误的类型{0}",type);
+            return list[index].GetString(index);
+        Debug.LogErrorFormat("错误的类型{0}而目标类型为String",type);
         return null;
 
     }
@@ -341,9 +344,9 @@ public class Property
         if (type == PropertyType.Int)
             return intValue;
         else if (type == PropertyType.Data)
-            return data.GetInt();
+            return data.GetInt(index);
         else if (type == PropertyType.List)
-            return list[index].GetInt();
+            return list[index].GetInt(index);
         Debug.LogErrorFormat("类型错误:{0}",type);
         return 0;
     }
@@ -399,16 +402,16 @@ public class Property
         map[key].Set(index, value);
     }
 
-    public float GetFloat()
+    public float GetFloat(int index=0)
     {
-        return floatValue;
-    }
-
-    public float GetFloat(int index)
-    {
-        if (type==PropertyType.Float)
-            return GetFloat();
-        return list[index].GetFloat();
+        if (type == PropertyType.Float)
+            return floatValue;
+        else if (type == PropertyType.Data)
+            return data.GetFloat(index);
+        else if (type == PropertyType.List)
+            return list[index].GetFloat();
+        Debug.LogErrorFormat("类型错误:{0}", type);
+        return 0;
     }
 
 
@@ -419,7 +422,12 @@ public class Property
 
     public Vector3 GetVector3()
     {
-        return new Vector3(GetFloat(0), GetFloat(1), GetFloat(2));
+        if (type == PropertyType.List)
+            return new Vector3(GetFloat(0), GetFloat(1), GetFloat(2));
+        else if (type == PropertyType.Data)
+            return data.GetVector3();
+        Debug.LogErrorFormat("类型错误：需要为List或Data类型，但目标类型为{0}", type);
+        return Vector3.zero;
     }
 
     public Vector3 GetVector3(int index)
@@ -599,6 +607,10 @@ public class Property
         return map.ContainsKey(key);
     }
 
+    public PropertyType DataType()
+    {
+        return type;
+    }
 
 }
 

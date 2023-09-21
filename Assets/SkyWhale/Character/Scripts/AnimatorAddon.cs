@@ -79,17 +79,22 @@ public class AnimatorAddon : MonoBehaviour
 
     public void TriggerEvent(int i)
     {
-        FunctionMap.map[animationEventDatas[i].GetString(2)](animationEventDatas[i].GetData(3));
+        FunctionMap.map[animationEventDatas[i].GetString(1)](animationEventDatas[i].GetData(2));
     }
 
 
     public void AddAnimationEvent(int index)
     {
         string clipName;
-        float time;
+        float[] time;
 
         clipName = animationEventDatas[index].GetString(0);
-        time = animationEventDatas[index].GetFloat(1);
+        time = new float[animationEventDatas[index].GetDatas().Count-3];
+        for(int i = 0,j=3; j < animationEventDatas[index].GetDatas().Count; i++,j++)
+        {
+            time[i] = animationEventDatas[index].GetFloat(j);
+
+        }
 
         AnimationClip[] _clips = animator.runtimeAnimatorController.animationClips;
 
@@ -97,7 +102,10 @@ public class AnimatorAddon : MonoBehaviour
         {
             if (_clips[i].name == clipName)
             {
-                AddAnimationEvent(_clips[i], time, index);
+                for(int n = 0; n < time.Length; n++)
+                {
+                    AddAnimationEvent(_clips[i], time[n], index);
+                }
                 break;
             }
         }

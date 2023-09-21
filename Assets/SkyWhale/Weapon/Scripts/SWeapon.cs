@@ -74,7 +74,7 @@ public class SWeapon : MonoBehaviour
     /// <param name="target"></param>
     public void Damage(Property data)
     {
-        Debug.Log(data.GetData(0));
+        Debug.LogFormat("damage 0:{0} 1:{1} type:{2}", data.GetInt(0), data.GetData().DataType(), data.GetData().GetDatas()[1].DataType());
         //Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         //var character = (CharacterEntity)target;
 
