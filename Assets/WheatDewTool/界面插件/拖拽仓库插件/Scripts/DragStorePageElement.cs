@@ -10,7 +10,7 @@ public class DragStorePageElement : MonoBehaviour, IPointerDownHandler,IPointerE
 {
     [HideInInspector] public DragStorePage dragStorePage;
     public Dictionary<string, string> stringData = new Dictionary<string, string>();
-    public Property data;
+    public INya data;
     public Text elementName;
     public Image elementImage;
 

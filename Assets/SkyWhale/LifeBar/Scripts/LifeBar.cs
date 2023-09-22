@@ -11,7 +11,7 @@ public class LifeBar : MonoBehaviour
     [HideInInspector] public string healthPointKey = "HealthPoint";
     [HideInInspector] public string maxHealthPointKey = "MaxHealthPoint";
 
-    [HideInInspector] public Property target;
+    [HideInInspector] public INya target;
 
     private Vector3 barSize=new Vector3(300,20);
 
@@ -21,7 +21,7 @@ public class LifeBar : MonoBehaviour
     private void Start()
     {
 
-        entity = PropertyMap.s.GetEntity(target.GetInt(Property.EntityID));
+        entity = PropertyMap.s.GetEntity(target.GetInt("EntityID"));
         Debug.Log(entity.gameObject.name);
         positionOffset.y = target.GetFloat(CharacterEntity.LifeBarKey, 1);
 

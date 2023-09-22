@@ -27,7 +27,7 @@ public class SLifeBar : MonoBehaviour
     public LifeBar prefab;
     public Transform elementParent;
 
-    public void CreateLifeBar(Property data)
+    public void CreateLifeBar(INya data)
     {
         var obj = Instantiate(prefab, elementParent);
 

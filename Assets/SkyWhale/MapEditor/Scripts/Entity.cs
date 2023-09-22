@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour
 
     public string type;
     public string detailType;
-    public Property data=new Property();
+    public INya data=new NyaMap();
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class Entity : MonoBehaviour
         
     }
 
-    public void InitData(Property data)
+    public void InitData(INya data)
     {
         this.data = data;
         PropertyMap.s.SetEntity(transform.GetInstanceID(), this);

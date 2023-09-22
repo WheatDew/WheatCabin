@@ -47,7 +47,7 @@ public class LogSystem : MonoBehaviour
         logContent+=content+"\n";
     }
 
-    public void WriteLog(Property data)
+    public void WriteLog(INya data)
     {
         WriteLog(data.GetString());
     }

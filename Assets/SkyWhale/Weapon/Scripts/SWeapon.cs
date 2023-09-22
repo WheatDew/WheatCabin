@@ -39,7 +39,7 @@ public class SWeapon : MonoBehaviour
     public Weapon Create(CharacterEntity origin,Transform parent,Vector3 position,Vector3 rotation)
     {
 
-        Property data = PropertyMap.s.map[origin.data.GetString(CharacterEntity.WeaponKey,2)];
+        INya data = PropertyMap.s.map[origin.data.GetString(CharacterEntity.WeaponKey,2)];
         var obj = Instantiate(SMapEditor.GetAssetBundleElement(data.GetString(SMapEditor.packNameKey),data.GetString(SMapEditor.packObjectNameKey)),parent);
 
         obj.transform.localPosition = position;
@@ -72,9 +72,9 @@ public class SWeapon : MonoBehaviour
     /// 接收一个参数，参数的列表第一个为造成伤害的实体，第二个为接受伤害的实体
     /// </summary>
     /// <param name="target"></param>
-    public void Damage(Property data)
+    public void Damage(INya data)
     {
-        Debug.LogFormat("damage 0:{0} 1:{1} type:{2}", data.GetInt(0), data.GetData().DataType(), data.GetData().GetDatas()[1].DataType());
+        //Debug.LogFormat("damage 0:{0} 1:{1} type:{2}", data.GetInt(0), data.GetData().DataType(), data.GetData().GetDatas()[1].DataType());
         //Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         //var character = (CharacterEntity)target;
 
@@ -83,7 +83,7 @@ public class SWeapon : MonoBehaviour
     }
 
 
-    public void DisplayWeaponRange(Property data)
+    public void DisplayWeaponRange(INya data)
     {
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         var weapon = (Weapon)target;

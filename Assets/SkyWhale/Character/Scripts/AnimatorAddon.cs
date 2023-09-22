@@ -35,7 +35,7 @@ public class AnimatorAddon : MonoBehaviour
     private AnimationClip[] clips;
     private Entity self;
 
-    List<Property> animationEventDatas = new List<Property>();
+    List<INya> animationEventDatas = new List<INya>();
 
     #endregion
 
@@ -53,7 +53,7 @@ public class AnimatorAddon : MonoBehaviour
         if (self.data.ContainsKey(animationEventKey))
         {
 
-            var list = self.data.GetData(animationEventKey).GetDatas();
+            var list = self.data.GetList(animationEventKey);
 
             for(int i = 0; i < list.Count; i++)
             {
@@ -89,8 +89,8 @@ public class AnimatorAddon : MonoBehaviour
         float[] time;
 
         clipName = animationEventDatas[index].GetString(0);
-        time = new float[animationEventDatas[index].GetDatas().Count-3];
-        for(int i = 0,j=3; j < animationEventDatas[index].GetDatas().Count; i++,j++)
+        time = new float[animationEventDatas[index].GetList().Count-3];
+        for(int i = 0,j=3; j < animationEventDatas[index].GetList().Count; i++,j++)
         {
             time[i] = animationEventDatas[index].GetFloat(j);
 

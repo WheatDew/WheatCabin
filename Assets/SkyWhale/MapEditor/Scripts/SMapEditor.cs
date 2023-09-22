@@ -46,7 +46,7 @@ public class SMapEditor : MonoBehaviour
         Debug.Log(PropertyMap.s);
         var data = PropertyMap.s.map["MapEditor"];
 
-        List<Property> childLayers = data.GetDatas("ChildLayer");
+        List<INya> childLayers = data.GetList("ChildLayer");
 
         for(int i = 0; i < childLayers.Count; i++)
         {
@@ -64,7 +64,7 @@ public class SMapEditor : MonoBehaviour
         runtimeSceneComponent.cameraPosition = data.GetVector3("MapEditorCameraPosition");
         runtimeSceneComponent.cameraRotation = data.GetQuaternion("MapEditorCameraRotation");
         //初始化资源包列表
-        List<Property> assetBundleMaps = data.GetDatas("AssetBundleMap");
+        List<INya> assetBundleMaps = data.GetList("AssetBundleMap");
 
         for (int i=0;i<assetBundleMaps.Count;i++)
         {
@@ -117,7 +117,7 @@ public class SMapEditor : MonoBehaviour
 
     public Dictionary<string, GameObject> prefabMap = new Dictionary<string, GameObject>();
 
-    public UnityEvent<Property,GameObject> elementTypeInitEvent = new UnityEvent<Property,GameObject>(); 
+    public UnityEvent<INya,GameObject> elementTypeInitEvent = new UnityEvent<INya,GameObject>(); 
 
 
     public void InitDragStoreAsset()
@@ -128,7 +128,7 @@ public class SMapEditor : MonoBehaviour
         LoadDragItem(packName);
 
 
-        dragStorePage.DragEndEvent.AddListener(delegate (Property value)
+        dragStorePage.DragEndEvent.AddListener(delegate (INya value)
         {
             var obj = Instantiate(prefabMap[value.GetString(storeElementKey,1)]);
 
@@ -146,7 +146,7 @@ public class SMapEditor : MonoBehaviour
     {
         var assetBundle = assetBundleMap[packName];
         var datas = PropertyMap.s.map[mapEditorPropertyName];
-        foreach (var item in datas.GetDatas(storeElements))
+        foreach (var item in datas.GetList(storeElements))
         {
 
             var data = PropertyMap.s.map[item.GetString()];

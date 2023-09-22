@@ -22,12 +22,12 @@ public class BattleSystem : MonoBehaviour
     /// 设置判定点，类型为数组类型，[0]为起始点，[1]为结束点，[2]为伤害来源,[3]为伤害目标
     /// </summary>
     /// <param name="target"></param>
-    public void SetDeterminationPoint(Property target)
+    public void SetDeterminationPoint(INya target)
     {
 
     }
 
-    public void SetWeapon(Property origin)
+    public void SetWeapon(INya origin)
     {
         var data = origin.GetData(CharacterEntity.WeaponKey);
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
@@ -39,7 +39,7 @@ public class BattleSystem : MonoBehaviour
 
         positionOffset = Vector3.zero;
         rotationOffset = Vector3.zero;
-        switch (data.GetDatas().Count)
+        switch (data.GetList().Count)
         {
             case 3:
                 break;
@@ -67,7 +67,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void WeaponDispaly(Property data)
+    public void WeaponDispaly(INya data)
     {
         Debug.Log("调用WeaponDisplay");
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
@@ -76,7 +76,7 @@ public class BattleSystem : MonoBehaviour
         character.weaponPoint.gameObject.SetActive(true);
     }
 
-    public void WeaponHidden(Property data)
+    public void WeaponHidden(INya data)
     {
         Debug.Log("调用WeaponHidden");
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
@@ -85,7 +85,7 @@ public class BattleSystem : MonoBehaviour
         character.weaponPoint.gameObject.SetActive(false);
     }
 
-    public void SetSecondary(Property data)
+    public void SetSecondary(INya data)
     {
         
     }

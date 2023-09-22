@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class JsonSystem : MonoBehaviour
 {
-    public static Dictionary<string,Property> ReadJsonProperty(string filePath)
+    public static Dictionary<string,INya> ReadJsonProperty(string filePath)
     {
 
 
-        Dictionary<string, Property> datas = new Dictionary<string, Property>();
+        Dictionary<string, INya> datas = new Dictionary<string, INya>();
 
         if (!File.Exists(filePath))
         {
