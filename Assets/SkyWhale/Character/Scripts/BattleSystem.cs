@@ -39,22 +39,6 @@ public class BattleSystem : MonoBehaviour
 
         positionOffset = Vector3.zero;
         rotationOffset = Vector3.zero;
-        switch (data.GetList().Count)
-        {
-            case 3:
-                break;
-            case 4:
-                positionOffset = data.GetVector3(3);
-                rotationOffset = Vector3.zero;
-                break;
-            case 5:
-                positionOffset = data.GetVector3(3);
-                rotationOffset = data.GetVector3(4);
-                break;
-            default:
-                Debug.LogError("参数数量错误");
-                break;
-        }
 
 
         var weapon = SWeapon.s.Create(character, parent, positionOffset, rotationOffset);

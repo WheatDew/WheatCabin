@@ -146,19 +146,23 @@ public class SMapEditor : MonoBehaviour
     {
         var assetBundle = assetBundleMap[packName];
         var datas = PropertyMap.s.map[mapEditorPropertyName];
-        foreach (var item in datas.GetList(storeElements))
+        if (datas.ContainsKey(storeElements))
         {
-
-            var data = PropertyMap.s.map[item.GetString()];
-            var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementKey,2)) ?? defaultSprite;
-            var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementKey,1));
-            if (!prefabMap.ContainsKey(data.GetString(storeElementKey, 1)))
+            foreach (var item in datas.GetList(storeElements))
             {
-                prefabMap.Add(data.GetString(storeElementKey, 1), itemGameObject);
-                Debug.Log(data.GetString(storeElementKey, 1));
+
+                var data = PropertyMap.s.map[item.GetString()];
+                var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementKey, 2)) ?? defaultSprite;
+                var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementKey, 1));
+                if (!prefabMap.ContainsKey(data.GetString(storeElementKey, 1)))
+                {
+                    prefabMap.Add(data.GetString(storeElementKey, 1), itemGameObject);
+                    Debug.Log(data.GetString(storeElementKey, 1));
+                }
+                dragStorePage.CreateElement(data, itemSprite);
             }
-            dragStorePage.CreateElement(data, itemSprite);
         }
+
     }
 
 

@@ -178,8 +178,10 @@ public class PropertyMap : MonoBehaviour
     #endregion
 }
 
+public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map }
+
 #region 老方法
-public enum PropertyType { Empty,Data,Int,String,Float,Bool,List,Map}
+
 //public class INya
 //{
 //    public static string EntityID = "EntityID";
@@ -635,10 +637,7 @@ public interface INyaFloat
     float GetFloat(string key) { Debug.LogError("错误"); return 0; }
     float GetFloat(int index) { Debug.LogError("错误"); return 0; }
     float GetFloat(string key,int index) { Debug.LogError("错误"); return 0; }
-    Vector3 GetVector3(string key) { Debug.LogError("错误"); return Vector3.zero; }
-    Vector3 GetVector3(int index) { Debug.LogError("错误"); return Vector3.zero; }
-    Quaternion GetQuaternion(string key) { Debug.LogError("错误"); return Quaternion.identity; }
-    Quaternion GetQuaternion(int index) { Debug.LogError("错误"); return Quaternion.identity; }
+    
 }
 
 public interface INyaBool
@@ -653,7 +652,9 @@ public interface INyaList
 {
     List<INya> GetList() { Debug.LogError("错误"); return null; }
     NyaList Add(INya value) { Debug.LogError("错误"); return null; }
-    List<INya> GetList(string key) { Debug.LogError("错误"); return null; }
+    Vector3 GetVector3() { Debug.LogError("错误"); return Vector3.zero; }
+    Quaternion GetQuaternion() { Debug.LogError("错误"); return Quaternion.identity; }
+
 }
 
 public interface INyaMap
@@ -661,6 +662,9 @@ public interface INyaMap
 
     Dictionary<string, INya> GetMap() { Debug.LogError("错误"); return null; }
     NyaMap Add(string key, INya value) { Debug.LogError("错误"); return null; }
+    List<INya> GetList(string key) { Debug.LogError("错误"); return null; }
+    Vector3 GetVector3(string key) { Debug.LogError("错误"); return Vector3.zero; }
+    Quaternion GetQuaternion(string key) { Debug.LogError("错误"); return Quaternion.identity; }
     void SetMapReference() { Debug.LogError("错误"); }
     bool ContainsKey(string key) { Debug.LogError("错误"); return false; }
 }
@@ -671,6 +675,7 @@ public interface INya:INyaInt,INyaString,INyaFloat,INyaBool,INyaList,INyaMap
     INya GetData(string key) { Debug.LogError("错误"); return null; }
     INya GetData(int index) { Debug.LogError("错误"); return null; }
     INya GetData(string key,int index) { Debug.LogError("错误"); return null; }
+    NyaType Type() { Debug.LogError("错误"); return global::NyaType.Empty; }
 }
 
 public class NyaInt : INya
@@ -686,6 +691,10 @@ public class NyaInt : INya
         return data;
     }
 
+    public NyaType Type()
+    {
+        return NyaType.Int;
+    }
 }
 
 public class NyaFloat : INya
@@ -699,6 +708,11 @@ public class NyaFloat : INya
     public float GetFloat()
     {
         return data;
+    }
+
+    public NyaType Type()
+    {
+        return NyaType.Float;
     }
 }
 
@@ -714,6 +728,11 @@ public class NyaBool : INya
     {
         return data;
     }
+
+    public NyaType Type()
+    {
+        return NyaType.Bool;
+    }
 }
 
 public class NyaString : INya
@@ -727,6 +746,11 @@ public class NyaString : INya
     public string GetString()
     {
         return data;
+    }
+
+    public NyaType Type()
+    {
+        return NyaType.String;
     }
 }
 
@@ -742,6 +766,10 @@ public class NyaData : INya
     {
         return data;
     }
+    public NyaType Type()
+    {
+        return NyaType.Data;
+    }
 }
 
 public class NyaList : INya
@@ -753,10 +781,45 @@ public class NyaList : INya
         data = new List<INya>();
     }
 
+    public List<INya> GetList()
+    {
+        return data;
+    }
+
+    public Vector3 GetVector3()
+    {
+        if(data[0].Type()==NyaType.Float&& data[1].Type() == NyaType.Float&& data[2].Type() == NyaType.Float)
+        {
+            return new Vector3(data[0].GetFloat(), data[1].GetFloat(), data[2].GetFloat());
+        }
+        else
+        {
+            Debug.LogErrorFormat("类型转化错误，转换类型为NyaFloat NyaFloat NyaFloat,目标类型为{0} {1} {2}", data[0].Type(), data[1].Type(), data[2].Type());
+            return Vector3.zero;
+        }
+    }
+    public Quaternion GetQuaternion()
+    {
+        if (data[0].Type() == NyaType.Float && data[1].Type() == NyaType.Float && data[2].Type() == NyaType.Float&& data[3].Type() == NyaType.Float)
+        {
+            return new Quaternion(data[0].GetFloat(), data[1].GetFloat(), data[2].GetFloat(), data[3].GetFloat());
+        }
+        else
+        {
+            Debug.LogErrorFormat("类型转化错误，转换类型为NyaFloat NyaFloat NyaFloat NyaFloat,目标类型为{0} {1} {2} {3}", data[0].Type(), data[1].Type(), data[2].Type(),data[3].Type());
+            return Quaternion.identity;
+        }
+    }
+
     public NyaList Add(INya value)
     {
         data.Add(value);
         return this;
+    }
+
+    public NyaType Type()
+    {
+        return NyaType.List;
     }
 }
 
@@ -774,10 +837,91 @@ public class NyaMap : INya
         this.data = data.data;
     }
 
-    public NyaMap Add(string key,INya value)
+    public NyaType Type()
     {
-        data.Add(key, value);
+        return NyaType.Map;
+    }
+
+    public Vector3 GetVector3(string key)
+    {
+        if (data[key].Type() == NyaType.List)
+        {
+            return data[key].GetVector3();
+        }
+        else
+        {
+            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
+            return Vector3.zero;
+        }
+
+    }
+
+    public Quaternion GetQuaternion(string key)
+    {
+        if (data[key].Type() == NyaType.List)
+        {
+            return data[key].GetQuaternion();
+        }
+        else
+        {
+            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
+            return Quaternion.identity;
+        }
+
+    }
+
+    public List<INya> GetList(string key)
+    {
+        var result = data[key];
+        if (result.Type() == NyaType.List)
+        {
+            return data[key].GetList();
+        }
+        else
+        {
+            Debug.LogErrorFormat("类型错误，使用的类型为NyaType.List类型，但实际类型为{0}", result.Type());
+            return null;
+        }
+    }
+
+    public NyaMap Add(string key, INya value)
+    {
+        if (data.ContainsKey(key))
+        {
+            data[key].Add(value);
+        }
+        else
+        {
+            data.Add(key, new NyaList());
+            data[key].Add(value);
+        }
         return this;
+    }
+
+    public void SetMapReference()
+    {
+
+        foreach (var item in data)
+        {
+            if (item.Value != null &&item.Value.Type()==NyaType.List&&item.Value.GetList().Count > 0)
+            {
+                for (int i = 0; i < item.Value.GetList().Count; i++)
+                {
+                    var target = item.Value.GetList()[i];
+                    if (target.Type() == NyaType.String && target.GetString() != null && target.GetString()[0] == '&')
+                    {
+                        Debug.Log(target.GetString());
+                        item.Value.GetList()[i] = new NyaData(data[target.GetString()[1..]]);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public bool ContainsKey(string key)
+    {
+        return data.ContainsKey(key);
     }
 }
 
