@@ -21,7 +21,7 @@ public class LifeBar : MonoBehaviour
     private void Start()
     {
 
-        entity = PropertyMap.s.GetEntity(target.GetInt("EntityID"));
+        entity = PropertyMap.s.GetEntity(target.GetInt("EntityID",0));
         Debug.Log(entity.gameObject.name);
         positionOffset.y = target.GetFloat(CharacterEntity.LifeBarKey, 1);
 
@@ -30,7 +30,7 @@ public class LifeBar : MonoBehaviour
 
     private void Update()
     {
-        barSize.x = target.GetFloat(healthPointKey) / target.GetFloat(maxHealthPointKey) * 300;
+        barSize.x = target.GetFloat(healthPointKey,0) / target.GetFloat(maxHealthPointKey,0) * 300;
         topBar.sizeDelta = barSize;
 
         if (Camera.main != null)

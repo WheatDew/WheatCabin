@@ -17,11 +17,11 @@ public class Entity : MonoBehaviour
 
     public void StartEvent()
     {
-        if (data.ContainsKey(StartEventKey))
-        {
-            var startEventData = data.GetData(StartEventKey);
-            FunctionMap.map[startEventData.GetString(0)].Invoke(startEventData.GetData(1));
-        }
+        //if (data.ContainsKey(StartEventKey))
+        //{
+        //    var startEventData = data.GetData(StartEventKey);
+        //    FunctionMap.map[startEventData.GetString(0)].Invoke(startEventData.GetData(1));
+        //}
     }
 
     public virtual void Init()

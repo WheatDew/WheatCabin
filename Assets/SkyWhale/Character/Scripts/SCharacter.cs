@@ -40,6 +40,7 @@ public class SCharacter : MonoBehaviour
     public SMapEditor mapEditor;
     public void InitCharacter(INya data,GameObject obj)
     {
+        Debug.Log(data.Type());
         if (data.GetString(objectType) == "Character")
         {
 

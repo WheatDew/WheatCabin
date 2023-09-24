@@ -29,8 +29,10 @@ public class BattleSystem : MonoBehaviour
 
     public void SetWeapon(INya origin)
     {
-        var data = origin.GetData(CharacterEntity.WeaponKey);
+        //Debug.Log(origin.GetMap()["Weapon"].GetList().Count);
+        var data = origin.GetListData(CharacterEntity.WeaponKey);
         Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        //Debug.Log(data.GetList().Count);
         var character = (CharacterEntity)target;
         Transform parent = FindChild(target.transform,data.GetString(1));
         character.weaponPoint = parent;

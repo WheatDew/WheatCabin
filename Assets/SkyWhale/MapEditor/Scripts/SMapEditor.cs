@@ -43,14 +43,14 @@ public class SMapEditor : MonoBehaviour
 
     public void InitMapEditor()
     {
-        Debug.Log(PropertyMap.s);
+        //Debug.Log(PropertyMap.s);
         var data = PropertyMap.s.map["MapEditor"];
 
         List<INya> childLayers = data.GetList("ChildLayer");
 
         for(int i = 0; i < childLayers.Count; i++)
         {
-            Debug.Log(childLayers[i]);
+            //Debug.Log(childLayers[i]);
             var t = new GameObject
             {
                 name = childLayers[i].GetString()
@@ -157,7 +157,7 @@ public class SMapEditor : MonoBehaviour
                 if (!prefabMap.ContainsKey(data.GetString(storeElementKey, 1)))
                 {
                     prefabMap.Add(data.GetString(storeElementKey, 1), itemGameObject);
-                    Debug.Log(data.GetString(storeElementKey, 1));
+                    //Debug.Log(data.GetString(storeElementKey, 1));
                 }
                 dragStorePage.CreateElement(data, itemSprite);
             }
