@@ -51,8 +51,8 @@ public class DragStorePage : MonoBehaviour
     {
         var obj = Instantiate(elementPrefab, elementParent);
         obj.dragStorePage = this;
-        obj.name = data.GetString(storeElementKey,2);
-        obj.elementName.text = data.GetString(storeElementKey, 2);
+        obj.name = data.Get(storeElementKey,2).String;
+        obj.elementName.text = data.Get(storeElementKey, 2).String;
         obj.elementImage.sprite = elementImage;
         obj.data = data;
     }

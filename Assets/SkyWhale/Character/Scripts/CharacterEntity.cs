@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class CharacterEntity : Entity
 {
-    public static string LifeBarKey = "LifeBar";
-    public static string WeaponKey = "Weapon";
 
     public Transform weaponPoint;
     public Weapon weapon;
+    public List<BoxCollider> hitBoxs=new List<BoxCollider>();
     public Animator animator;
 
     public override void Init()
     {
-        if (data.ContainsKey(LifeBarKey))
+        if (data.Map.ContainsKey(DataKey.LifeBar))
         {
             SLifeBar.s.CreateLifeBar(data);
         }
-        if (data.ContainsKey(WeaponKey))
+        if (data.Map.ContainsKey(DataKey.Weapon))
         {
             BattleSystem.s.SetWeapon(data);
         }

@@ -50,15 +50,15 @@ public class AnimatorAddon : MonoBehaviour
         clips = animator.runtimeAnimatorController.animationClips;
 
         Debug.Log("≥ı ºªØAnimationAddon");
-        if (self.data.ContainsKey(animationEventKey))
+        if (self.data.Map.ContainsKey(animationEventKey))
         {
 
-            var list = self.data.GetList(animationEventKey);
+            var list = self.data.Map[animationEventKey].List;
 
             for(int i = 0; i < list.Count; i++)
             {
                 int index = i;
-                animationEventDatas.Add(list[index].GetData());
+                animationEventDatas.Add(list[index].Data);
                 AddAnimationEvent(index);
             }
 
@@ -79,7 +79,7 @@ public class AnimatorAddon : MonoBehaviour
 
     public void TriggerEvent(int i)
     {
-        FunctionMap.map[animationEventDatas[i].GetString(1)](animationEventDatas[i].GetData(2));
+        FunctionMap.map[animationEventDatas[i].List[1].String](animationEventDatas[i].List[2].Data);
     }
 
 
@@ -88,11 +88,11 @@ public class AnimatorAddon : MonoBehaviour
         string clipName;
         float[] time;
 
-        clipName = animationEventDatas[index].GetString(0);
-        time = new float[animationEventDatas[index].GetList().Count-3];
-        for(int i = 0,j=3; j < animationEventDatas[index].GetList().Count; i++,j++)
+        clipName = animationEventDatas[index].List[0].String;
+        time = new float[animationEventDatas[index].List.Count-3];
+        for(int i = 0,j=3; j < animationEventDatas[index].List.Count; i++,j++)
         {
-            time[i] = animationEventDatas[index].GetFloat(j);
+            time[i] = animationEventDatas[index].List[j].Float;
 
         }
 

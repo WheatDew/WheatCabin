@@ -30,11 +30,11 @@ public class BattleSystem : MonoBehaviour
     public void SetWeapon(INya origin)
     {
         //Debug.Log(origin.GetMap()["Weapon"].GetList().Count);
-        var data = origin.GetListData(CharacterEntity.WeaponKey);
-        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        var data = origin.Map[DataKey.Weapon];
+        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
         //Debug.Log(data.GetList().Count);
         var character = (CharacterEntity)target;
-        Transform parent = FindChild(target.transform,data.GetString(1));
+        Transform parent = FindChild(target.transform,data.List[1].String);
         character.weaponPoint = parent;
         Vector3 positionOffset,rotationOffset;
 
@@ -56,7 +56,7 @@ public class BattleSystem : MonoBehaviour
     public void WeaponDispaly(INya data)
     {
         Debug.Log("调用WeaponDisplay");
-        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
         var character = (CharacterEntity)target;
 
         character.weaponPoint.gameObject.SetActive(true);
@@ -65,7 +65,7 @@ public class BattleSystem : MonoBehaviour
     public void WeaponHidden(INya data)
     {
         Debug.Log("调用WeaponHidden");
-        Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
+        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
         var character = (CharacterEntity)target;
 
         character.weaponPoint.gameObject.SetActive(false);

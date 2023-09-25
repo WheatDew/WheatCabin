@@ -28,6 +28,12 @@ public class SCharacter : MonoBehaviour
 
     #endregion
 
+    #region 外部引用
+
+    public Material translucence;
+
+    #endregion
+
     #region 系统函数
     private void Start()
     {
@@ -40,20 +46,33 @@ public class SCharacter : MonoBehaviour
     public SMapEditor mapEditor;
     public void InitCharacter(INya data,GameObject obj)
     {
-        Debug.Log(data.Type());
-        if (data.GetString(objectType) == "Character")
+        Debug.Log(data.Type);
+        if (data.Get(objectType,0).String == "Character")
         {
 
-            var cobj = obj.AddComponent<CharacterEntity>();
-            cobj.InitData(data);
-            cobj.type = "Character";
-            cobj.detailType = data.GetString(detailType);
+            var character = obj.AddComponent<CharacterEntity>();
+            for(int i = 0; i < 1; i++)
+            {
+                GameObject hitBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                hitBox.name = "HitBox";
+                hitBox.transform.parent = character.transform;
+                character.hitBoxs.Add(hitBox.GetComponent<BoxCollider>());
+                character.hitBoxs[i].size = Vector3.one * 0.5f;
+                character.hitBoxs[i].isTrigger = true;
+                character.hitBoxs[i].enabled = false;
+                var hitBoxMesh = hitBox.GetComponent<MeshRenderer>();
+                hitBoxMesh.material = translucence;
+            }
+
+            character.InitData(data);
+            character.type = "Character";
+            character.detailType = data.Get(detailType,0).String;
             
 
-            if (cobj.detailType == "Player")
+            if (character.detailType == "Player")
             {
                 SPlayer.s.currentPlayer = obj;
-                cobj.detailType = "Player";
+                character.detailType = "Player";
             }
         }
     }

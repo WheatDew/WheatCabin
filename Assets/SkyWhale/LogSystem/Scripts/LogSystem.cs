@@ -49,6 +49,6 @@ public class LogSystem : MonoBehaviour
 
     public void WriteLog(INya data)
     {
-        WriteLog(data.GetString());
+        WriteLog(data.String);
     }
 }

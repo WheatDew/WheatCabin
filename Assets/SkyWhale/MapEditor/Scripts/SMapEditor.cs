@@ -46,25 +46,25 @@ public class SMapEditor : MonoBehaviour
         //Debug.Log(PropertyMap.s);
         var data = PropertyMap.s.map["MapEditor"];
 
-        List<INya> childLayers = data.GetList("ChildLayer");
+        List<INya> childLayers = data.Map["ChildLayer"].List;
 
         for(int i = 0; i < childLayers.Count; i++)
         {
             //Debug.Log(childLayers[i]);
             var t = new GameObject
             {
-                name = childLayers[i].GetString()
+                name = childLayers[i].String
             };
             t.transform.parent = childLayer;
-            childLayerList.Add(childLayers[i].GetString(), t.transform);
+            childLayerList.Add(childLayers[i].String, t.transform);
         }
 
 
         //初始化摄像机位置
-        runtimeSceneComponent.cameraPosition = data.GetVector3("MapEditorCameraPosition");
-        runtimeSceneComponent.cameraRotation = data.GetQuaternion("MapEditorCameraRotation");
+        runtimeSceneComponent.cameraPosition = data.Map["MapEditorCameraPosition"].Vector3;
+        runtimeSceneComponent.cameraRotation = data.Map["MapEditorCameraRotation"].Quaternion;
         //初始化资源包列表
-        List<INya> assetBundleMaps = data.GetList("AssetBundleMap");
+        List<INya> assetBundleMaps = data.Map["AssetBundleMap"].List;
 
         for (int i=0;i<assetBundleMaps.Count;i++)
         {
@@ -72,7 +72,7 @@ public class SMapEditor : MonoBehaviour
             {
                 Debug.LogError("ab包实例为空");
             }
-            assetBundleMap.Add("SkyWhaleEditor", SAssetBundle.Instance.Load(assetBundleMaps[i].GetString()));
+            assetBundleMap.Add("SkyWhaleEditor", SAssetBundle.Instance.Load(assetBundleMaps[i].String));
         }
         //初始化资源
         InitMapEditorAsset();
@@ -97,11 +97,7 @@ public class SMapEditor : MonoBehaviour
     [HideInInspector] public static string storeElements = "StoreElements";
     [HideInInspector] public static string storeElementKey = "StoreElement";
 
-    [HideInInspector] public static string displayNameKey = "DisplayName";
-    [HideInInspector] public static string objectTypeKey = "Type";
-    [HideInInspector] public static string detailTypeKey = "DetailType";
-    [HideInInspector] public static string packNameKey = "PackName";
-    [HideInInspector] public static string packObjectNameKey = "PackObjectName";
+
 
     #endregion
 
@@ -130,7 +126,7 @@ public class SMapEditor : MonoBehaviour
 
         dragStorePage.DragEndEvent.AddListener(delegate (INya value)
         {
-            var obj = Instantiate(prefabMap[value.GetString(storeElementKey,1)]);
+            var obj = Instantiate(prefabMap[value.Get(storeElementKey,1).String]);
 
             Debug.Log(obj.name);
             obj.AddComponent<CMapEditorModel>();
@@ -146,17 +142,17 @@ public class SMapEditor : MonoBehaviour
     {
         var assetBundle = assetBundleMap[packName];
         var datas = PropertyMap.s.map[mapEditorPropertyName];
-        if (datas.ContainsKey(storeElements))
+        if (datas.Map.ContainsKey(storeElements))
         {
-            foreach (var item in datas.GetList(storeElements))
+            foreach (var item in datas.Map[storeElements].List)
             {
 
-                var data = PropertyMap.s.map[item.GetString()];
-                var itemSprite = assetBundle.LoadAsset<Sprite>(data.GetString(storeElementKey, 2)) ?? defaultSprite;
-                var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.GetString(storeElementKey, 1));
-                if (!prefabMap.ContainsKey(data.GetString(storeElementKey, 1)))
+                var data = PropertyMap.s.map[item.String];
+                var itemSprite = assetBundle.LoadAsset<Sprite>(data.Get(storeElementKey, 2).String) ?? defaultSprite;
+                var itemGameObject = assetBundleMap[packName].LoadAsset<GameObject>(data.Get(storeElementKey, 1).String);
+                if (!prefabMap.ContainsKey(data.Get(storeElementKey, 1).String))
                 {
-                    prefabMap.Add(data.GetString(storeElementKey, 1), itemGameObject);
+                    prefabMap.Add(data.Get(storeElementKey, 1).String, itemGameObject);
                     //Debug.Log(data.GetString(storeElementKey, 1));
                 }
                 dragStorePage.CreateElement(data, itemSprite);

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -151,7 +152,7 @@ public class PropertyMap : MonoBehaviour
             entityMap.Add(id, entity);
         }
 
-        entity.data.Set("EntityID", 0, id);
+        entity.data.Set("EntityID", 0,new NyaInt(id));
     }
 
     public Entity GetEntity(int id)
@@ -619,485 +620,178 @@ public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map }
 #endregion
 
 #region 老方法2
-public interface INyaInt
+
+
+public interface INya
 {
-    int GetInt() { Debug.LogError("错误"); return 0; }
-    int GetInt(int index) { Debug.LogError("错误"); return 0; }
-    int GetInt(string key, int index) { Debug.LogError("错误"); return 0; }
-    void Set(int value) { Debug.LogError("错误"); }
-}
+    //value
+    int Int { get => throw new NotImplementedException(string.Format("当前类型为{0}",Type)); set => throw new NotImplementedException(); }
+    string String { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    float Float { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    bool Bool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    INya Data { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
 
-public interface INyaString
-{
-    string GetString() { Debug.LogError("错误"); return null; }
+    //list
+    List<INya> List { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
+    void Set(int index, INya data) { throw new NotImplementedException(); }
+    INya Get(int index) { throw new NotImplementedException(string.Format("当前类型为{0}", Type)); }
+    void Add(INya data) { throw new NotImplementedException(); }
+    Vector3 Vector3 { get => throw new NotImplementedException(); }
+    Quaternion Quaternion { get => throw new NotImplementedException(); }
 
-}
-
-public interface INyaFloat
-{
-    float GetFloat() { Debug.LogError("错误"); return 0; }
-    float GetFloat(int index) { Debug.LogError("错误"); return 0; }
-    float GetFloat(string key, int index) { Debug.LogError("错误"); return 0; }
-
-}
-
-public interface INyaBool
-{
-    bool GetBool() { Debug.LogError("错误"); return false; }
-    bool GetBool(string key) { Debug.LogError("错误"); return false; }
-    bool GetBool(int index) { Debug.LogError("错误"); return false; }
-    bool GetBool(string key, int index) { Debug.LogError("错误"); return false; }
-}
-
-public interface INyaList
-{
-    List<INya> GetList() { Debug.LogError("错误"); return null; }
-    NyaList Add(INya value) { Debug.LogError("错误"); return null; }
-    string GetString(int index) { Debug.LogError("错误"); return null; }
-    Vector3 GetVector3() { Debug.LogError("错误"); return Vector3.zero; }
-    Quaternion GetQuaternion() { Debug.LogError("错误"); return Quaternion.identity; }
-    void Set(int index, int value) { Debug.LogError("错误"); }
-
-}
-
-public interface INyaMap
-{
-
-    Dictionary<string, INya> GetMap() { Debug.LogError("错误"); return null; }
-    NyaMap Add(string key, INya value) { Debug.LogError("错误"); return null; }
-    List<INya> GetList(string key) { Debug.LogError("错误"); return null; }
-    INya GetListData(string key) { Debug.LogError("错误"); return null; }
-    INya GetData(string key) { Debug.LogError("错误"); return null; }
-    string GetString(string key) { Debug.LogErrorFormat("错误"); return null; }
-    string GetString(string key, int index) { Debug.LogError("错误"); return null; }
-    Vector3 GetVector3(string key) { Debug.LogError("错误"); return Vector3.zero; }
-    Quaternion GetQuaternion(string key) { Debug.LogError("错误"); return Quaternion.identity; }
-    void Set(string key, int index, int value) { Debug.LogError("错误"); }
-
+    //map
+    Dictionary<string, INya> Map { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    void Set(string key,int index,INya data) { throw new NotImplementedException(); }
+    INya Get(string key, int index) { throw new NotImplementedException(); }
+    void Add(string key, INya data) { throw new NotImplementedException(); }
     void SetMapReference() { Debug.LogError("错误"); }
-    bool ContainsKey(string key) { Debug.LogError("错误"); return false; }
+
+    //public
+    NyaType Type { get => throw new NotImplementedException();}
+    
 }
-
-
-public interface INya : INyaInt, INyaString, INyaFloat, INyaBool, INyaList, INyaMap
-{
-    INya GetData() { Debug.LogError("错误"); return null; }
-
-    INya GetData(int index) { Debug.LogError("错误"); return null; }
-    INya GetData(string key, int index) { Debug.LogError("错误"); return null; }
-    NyaType Type() { Debug.LogError("错误"); return global::NyaType.Empty; }
-}
-
-
 
 public class NyaInt : INya
 {
-    public int data;
+    public int Int { get; set; }
+    public NyaType Type { get; } = NyaType.Int;
     public NyaInt(int data)
     {
-        this.data = data;
+        Int = data;
     }
-    public int GetInt()
-    {
-        return data;
-    }
-    public void Set(int value)
-    {
-        data = value;
-    }
-    public NyaType Type()
-    {
-        return NyaType.Int;
-    }
+
 }
 
 public class NyaFloat : INya
 {
-    public float data;
+    public float Float { get; set; }
+    public NyaType Type { get; } = NyaType.Float;
     public NyaFloat(float data)
     {
-        this.data = data;
-    }
-
-    public float GetFloat()
-    {
-        return data;
-    }
-
-    public NyaType Type()
-    {
-        return NyaType.Float;
+        Float = data;
     }
 }
 
 public class NyaBool : INya
 {
-    public bool data;
+    public bool Bool { get; set; }
+    public NyaType Type { get; } = NyaType.Bool;
     public NyaBool(bool data)
     {
-        this.data = data;
-    }
-
-    public bool GetBool()
-    {
-        return data;
-    }
-
-    public NyaType Type()
-    {
-        return NyaType.Bool;
+        Bool = data;
     }
 }
 
 public class NyaString : INya
 {
-    public string data;
+    public string String { get; set; }
+    public NyaType Type { get; } = NyaType.String;
     public NyaString(string data)
     {
-        this.data = data;
-    }
-
-    public string GetString()
-    {
-        return data;
-    }
-
-    public NyaType Type()
-    {
-        return NyaType.String;
+        String = data;
     }
 }
 
 public class NyaData : INya
 {
-    public INya data;
+    public INya Data { get; set; }
+    public int Int { get => Data.Int; set => Data.Int = value; }
+    public string String { get => Data.String; set => Data.String = value; }
+    public float Float { get => Data.Float; set => Data.Float = value; }
+    public bool Bool { get => Data.Bool; set => Data.Bool = value; }
+    public List<INya> List { get => Data.List; set => Data.List = value; }
+
+    public NyaType Type { get; } = NyaType.Data;
     public NyaData(INya data)
     {
-        this.data = data;
+        Data = data;
     }
-
-    public INya GetData()
-    {
-        return data;
-    }
-    public NyaType Type()
-    {
-        return NyaType.Data;
-    }
-    public int GetInt()
-    {
-        if (data.Type() == NyaType.Int)
-        {
-            return data.GetInt();
-        }
-        if (data.Type() == NyaType.List)
-        {
-            return data.GetInt(0);
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型错误，转换类型为int或List，目标类型为{0}", Type());
-            return 0;
-        }
-    }
-
-    public string GetString()
-    {
-        if (data.Type() == NyaType.String)
-        {
-            return data.GetString();
-        }
-        if (data.Type() == NyaType.List)
-        {
-            return data.GetString(0);
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型错误，转换类型为string或List，目标类型为{0}", Type());
-            return null;
-        }
-    }
-
 }
 
 public class NyaList : INya
 {
-    public List<INya> data;
+    public List<INya> List { get; set; }
+    public int Int { get => List[0].Int; set => List[0].Int = value; }
+    public string String { get => List[0].String; set => List[0].String = value; }
+    public float Float { get => List[0].Float; set => List[0].Float = value; }
+    public bool Bool { get => List[0].Bool; set => List[0].Bool = value; }
+    public NyaType Type { get; } = NyaType.List;
+    public Vector3 Vector3 { get => new Vector3(List[0].Float, List[1].Float, List[2].Float); }
+    public Quaternion Quaternion { get => new Quaternion(List[0].Float, List[1].Float, List[2].Float, List[3].Float);}
+
     public NyaList()
     {
-        data = new List<INya>();
+        List = new List<INya>();
     }
-    public List<INya> GetList()
+    public void Set(int index,INya data)
     {
-        return data;
+        List[index] = data;
     }
-    public INya GetData(int index)
+    public void Add(INya data)
     {
-        if (data[index].Type() == NyaType.Data)
-        {
-            return data[index].GetData();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaData,目标类型为{0},目标值为{1}", data[index].Type(), data[index].GetString());
-            return null;
-        }
-    }
-    public string GetString(int index)
-    {
-        if (index >= data.Count)
-        {
-            Debug.LogErrorFormat("超出数组范围，数组长度值为{0}，而目标值为{1}", data.Count, index);
-        }
-        if (data[index].Type() == NyaType.String)
-        {
-            return data[index].GetString();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaString,目标类型为{0}", data[index].Type());
-            return null;
-        }
-    }
-    public int GetInt(int index)
-    {
-        if (data[index].Type() == NyaType.Int)
-        {
-            return data[index].GetInt();
-        }
-        else if (data[index].Type() == NyaType.Data)
-        {
-            return data[index].GetInt();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaInt或NyaData,目标类型为{0}", data[index].Type());
-            return 0;
-        }
-    }
-    public float GetFloat(int index)
-    {
-        if (data[index].Type() == NyaType.Float)
-        {
-            return data[index].GetFloat();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaFloat,目标类型为{0}", data[index].Type());
-            return 0;
-        }
-    }
-    public Vector3 GetVector3()
-    {
-        if (data[0].Type() == NyaType.Float && data[1].Type() == NyaType.Float && data[2].Type() == NyaType.Float)
-        {
-            return new Vector3(data[0].GetFloat(), data[1].GetFloat(), data[2].GetFloat());
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaFloat NyaFloat NyaFloat,目标类型为{0} {1} {2}", data[0].Type(), data[1].Type(), data[2].Type());
-            return Vector3.zero;
-        }
-    }
-    public Quaternion GetQuaternion()
-    {
-        if (data[0].Type() == NyaType.Float && data[1].Type() == NyaType.Float && data[2].Type() == NyaType.Float && data[3].Type() == NyaType.Float)
-        {
-            return new Quaternion(data[0].GetFloat(), data[1].GetFloat(), data[2].GetFloat(), data[3].GetFloat());
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaFloat NyaFloat NyaFloat NyaFloat,目标类型为{0} {1} {2} {3}", data[0].Type(), data[1].Type(), data[2].Type(), data[3].Type());
-            return Quaternion.identity;
-        }
-    }
-    public void Set(int index, int value)
-    {
-        if (data[index].Type() == NyaType.Int)
-        {
-            data[index].Set(value);
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaInt,目标类型为{0}", data[index].Type());
-        }
-    }
-    public NyaList Add(INya value)
-    {
-        data.Add(value);
-        return this;
-    }
-    public NyaType Type()
-    {
-        return NyaType.List;
+        List.Add(data);
     }
 }
 
 public class NyaMap : INya
 {
-    public Dictionary<string, INya> data;
-
+    public Dictionary<string, INya> Map { get; set; }
+    public NyaType Type { get; } = NyaType.Map;
     public NyaMap()
     {
-        data = new Dictionary<string, INya>();
+        Map = new Dictionary<string, INya>();
     }
-    public NyaMap(NyaMap data)
+    public NyaMap(NyaMap origin)
     {
-        this.data = data.data;
+        Map = origin.Map;
     }
-    public Dictionary<string, INya> GetMap()
+    public void Set(string key,int index,INya data)
     {
-        return data;
+        Map[key].Set(index, data);
     }
-    public NyaType Type()
+    public INya Get(string key,int index)
     {
-        return NyaType.Map;
+        return Map[key].List[index];
     }
-    public int GetInt(string key, int index)
+    public void Add(string key,INya data)
     {
-        return data[key].GetInt(index);
-    }
-    public float GetFloat(string key, int index)
-    {
-        return data[key].GetFloat(index);
-    }
-    public string GetString(string key)
-    {
-        return GetString(key, 0);
-    }
-    public string GetString(string key, int index)
-    {
-        if (data[key].Type() == NyaType.List)
+        if (Map.ContainsKey(key))
         {
-            return data[key].GetString(index);
+            Map[key].Add(data);
         }
         else
         {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
-            return null;
-        }
-    }
-    public Vector3 GetVector3(string key)
-    {
-        if (data[key].Type() == NyaType.List)
-        {
-            return data[key].GetVector3();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
-            return Vector3.zero;
+            Map.Add(key, new NyaList());
+            Map[key].Add(data);
         }
 
     }
-    public Quaternion GetQuaternion(string key)
-    {
-        if (data[key].Type() == NyaType.List)
-        {
-            return data[key].GetQuaternion();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
-            return Quaternion.identity;
-        }
 
-    }
-    public INya GetData(string key)
-    {
-        if (data[key].Type() == NyaType.List)
-        {
-            return data[key].GetData(0);
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
-            return null;
-        }
-    }
-    public List<INya> GetList(string key)
-    {
-        var result = data[key];
-        if (result.Type() == NyaType.List)
-        {
-            return data[key].GetList();
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型错误，使用的类型为NyaType.List类型，但实际类型为{0}", result.Type());
-            return null;
-        }
-    }
-    public INya GetListData(string key)
-    {
-        var result = data[key];
-        if (result.Type() == NyaType.List)
-        {
-            return data[key];
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型错误，使用的类型为NyaType.List类型，但实际类型为{0}", result.Type());
-            return null;
-        }
-    }
-    public void Set(string key, int index, int value)
-    {
-        if (data[key].Type() == NyaType.List)
-        {
-            data[key].Set(index, value);
-        }
-        else
-        {
-            Debug.LogErrorFormat("类型转化错误，转换类型为NyaList,目标类型为{0}", data[key].Type());
-        }
-    }
-    public NyaMap Add(string key, INya value)
-    {
-        if (data.ContainsKey(key))
-        {
-            if (key == "Weapon")
-            {
-                Debug.Log(data[key].Type());
-            }
-            data[key].Add(value);
-        }
-        else
-        {
-            data.Add(key, new NyaList());
-            data[key].Add(value);
-        }
-        return this;
-    }
     public void SetMapReference()
     {
-        if (data.ContainsKey("Weapon"))
-            Debug.Log(data["Weapon"].GetList().Count);
-        foreach (var item in data)
+        if (Map.ContainsKey("Weapon"))
+            Debug.Log(Map["Weapon"].List.Count);
+        foreach (var item in Map)
         {
-            if (item.Value != null && item.Value.Type() == NyaType.List && item.Value.GetList().Count > 0)
+            if (item.Value != null && item.Value.Type == NyaType.List && item.Value.List.Count > 0)
             {
-                for (int i = 0; i < item.Value.GetList().Count; i++)
+                for (int i = 0; i < item.Value.List.Count; i++)
                 {
-                    var target = item.Value.GetList()[i];
-                    if (target.Type() == NyaType.String && target.GetString() != null && target.GetString()[0] == '&')
+                    var target = item.Value.List[i];
+                    if (target.Type == NyaType.String && target.String != null && target.String[0] == '&')
                     {
                         //Debug.Log(target.GetString());
-                        item.Value.GetList()[i] = new NyaData(data[target.GetString()[1..]]);
+                        item.Value.List[i] = new NyaData(Map[target.String[1..]]);
                     }
                 }
             }
         }
-        if (data.ContainsKey("Weapon"))
-            Debug.Log(data["Weapon"].GetList().Count);
 
-    }
-    public bool ContainsKey(string key)
-    {
-        return data.ContainsKey(key);
     }
 }
 
 
 #endregion 
+
+
 
