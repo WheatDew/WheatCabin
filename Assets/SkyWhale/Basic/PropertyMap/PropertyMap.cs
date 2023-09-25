@@ -731,6 +731,10 @@ public class NyaList : INya
     {
         List.Add(data);
     }
+    public Vector3 GetVector3(int index)
+    {
+        return new Vector3(List[index].Float, List[index + 1].Float, List[index + 2].Float);
+    }
 }
 
 public class NyaMap : INya
