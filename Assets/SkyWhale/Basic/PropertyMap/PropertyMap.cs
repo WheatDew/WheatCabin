@@ -637,6 +637,7 @@ public interface INya
     INya Get(int index) { throw new NotImplementedException(string.Format("当前类型为{0}", Type)); }
     void Add(INya data) { throw new NotImplementedException(); }
     Vector3 Vector3 { get => throw new NotImplementedException(); }
+    Vector3 GetVector3(int index) { throw new NotImplementedException(string.Format("当前类型为{0}", Type)); }
     Quaternion Quaternion { get => throw new NotImplementedException(); }
 
     //map

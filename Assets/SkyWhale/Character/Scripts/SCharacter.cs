@@ -38,7 +38,7 @@ public class SCharacter : MonoBehaviour
     private void Start()
     {
         mapEditor.elementTypeInitEvent.AddListener(InitCharacter);
-        //FunctionMap.map.Add("SetHitBox")
+        FunctionMap.map.Add("SetHitBox", SetHitBox);
         Debug.Log("初始化角色系统完成");
     }
     #endregion
@@ -72,6 +72,7 @@ public class SCharacter : MonoBehaviour
             GameObject hitBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
             hitBox.name = "HitBox";
             hitBox.transform.parent = character.transform;
+            hitBox.transform.localPosition = data.GetVector3(1);
             character.hitBoxs.Add(hitBox.GetComponent<BoxCollider>());
             character.hitBoxs[i].size = Vector3.one * 0.5f;
             character.hitBoxs[i].isTrigger = true;
