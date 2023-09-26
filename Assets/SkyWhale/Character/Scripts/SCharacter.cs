@@ -74,7 +74,7 @@ public class SCharacter : MonoBehaviour
             hitBox.transform.parent = character.transform;
             hitBox.transform.localPosition = data.GetVector3(1);
             character.hitBoxs.Add(hitBox.GetComponent<BoxCollider>());
-            character.hitBoxs[i].size = Vector3.one * 0.5f;
+            character.hitBoxs[i].size = data.GetVector3(1);
             character.hitBoxs[i].isTrigger = true;
             character.hitBoxs[i].enabled = false;
             var hitBoxMesh = hitBox.GetComponent<MeshRenderer>();
