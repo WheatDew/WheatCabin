@@ -139,7 +139,7 @@ public class PropertyMap : MonoBehaviour
 
     #endregion
 
-    #region 设置实体
+    #region 设置和获取实体
     public void SetEntity(int id,Entity entity)
     {
 
@@ -178,9 +178,23 @@ public class PropertyMap : MonoBehaviour
         return gameObjectMap[id];
     }
 
+    public T GetEntity<T>(int id) where T:Entity
+    {
+        if (PropertyMap.s.entityMap[id] is T obj)
+        {
+            return obj;
+        }
+        else
+        {
+            Debug.LogErrorFormat("类型转换错误");
+            return null;
+        }
+    }
 
 
     #endregion
+
+
 }
 
 public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map }
@@ -707,6 +721,7 @@ public class NyaData : INya
     {
         Data = data;
     }
+    public Vector3 GetVector3(int index) { return Data.GetVector3(index); }
 }
 
 public class NyaList : INya
@@ -724,6 +739,11 @@ public class NyaList : INya
     {
         List = new List<INya>();
     }
+
+    public NyaList(NyaList origin)
+    {
+        List = new List<INya>(origin.List);
+    }
     public void Set(int index,INya data)
     {
         List[index] = data;
@@ -736,6 +756,7 @@ public class NyaList : INya
     {
         return new Vector3(List[index].Float, List[index + 1].Float, List[index + 2].Float);
     }
+
 }
 
 public class NyaMap : INya

@@ -7,7 +7,7 @@ public class CharacterEntity : Entity
 
     public Transform weaponPoint;
     public Weapon weapon;
-    public List<BoxCollider> hitBoxs=new List<BoxCollider>();
+    public List<CHitbox> hitBoxs=new List<CHitbox>();
     public Animator animator;
 
     public override void Init()

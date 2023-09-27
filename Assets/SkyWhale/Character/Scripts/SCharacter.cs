@@ -31,6 +31,7 @@ public class SCharacter : MonoBehaviour
     #region 外部引用
 
     public Material translucence;
+    public CHitbox hitboxPrefab;
 
     #endregion
 
@@ -38,7 +39,8 @@ public class SCharacter : MonoBehaviour
     private void Start()
     {
         mapEditor.elementTypeInitEvent.AddListener(InitCharacter);
-        FunctionMap.map.Add("SetHitBox", SetHitBox);
+        FunctionMap.map.Add("SetHitbox", SetHitbox);
+        FunctionMap.map.Add("DisplayHitbox", DisplayHitbox);
         Debug.Log("初始化角色系统完成");
     }
     #endregion
@@ -64,24 +66,28 @@ public class SCharacter : MonoBehaviour
         }
     }
 
-    public void SetHitBox(INya data)
+    public void SetHitbox(INya data)
     {
         for (int i = 0; i < 1; i++)
         {
-            CharacterEntity character = (CharacterEntity)PropertyMap.s.entityMap[data.List[0].Int];
-            GameObject hitBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[0].Int);
+            var hitBox = Instantiate(hitboxPrefab);
             hitBox.name = "HitBox";
             hitBox.transform.parent = character.transform;
             hitBox.transform.localPosition = data.GetVector3(1);
-            character.hitBoxs.Add(hitBox.GetComponent<BoxCollider>());
-            character.hitBoxs[i].size = data.GetVector3(1);
-            character.hitBoxs[i].isTrigger = true;
-            character.hitBoxs[i].enabled = false;
-            var hitBoxMesh = hitBox.GetComponent<MeshRenderer>();
-            hitBoxMesh.material = translucence;
+            hitBox.transform.localScale = data.GetVector3(4);
+            character.hitBoxs.Add(hitBox);
+            
         }
     }
-
+    public void DisplayHitbox(INya data)
+    {
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[0].Int);
+        foreach(var item in character.hitBoxs)
+        {
+            item.meshRenderer.enabled = true;
+        }
+    }
 }
 
 
