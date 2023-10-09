@@ -41,6 +41,9 @@ public class SCharacter : MonoBehaviour
         mapEditor.elementTypeInitEvent.AddListener(InitCharacter);
         FunctionMap.map.Add("SetHitbox", SetHitbox);
         FunctionMap.map.Add("DisplayHitbox", DisplayHitbox);
+        FunctionMap.map.Add("HiddenHitbox", HiddenHitbox);
+        FunctionMap.map.Add("EnableHitbox", EnableHitbox);
+        FunctionMap.map.Add("DisableHitbox", DisableHitbox);
         Debug.Log("初始化角色系统完成");
     }
     #endregion
@@ -68,26 +71,37 @@ public class SCharacter : MonoBehaviour
 
     public void SetHitbox(INya data)
     {
-        for (int i = 0; i < 1; i++)
-        {
-            CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[0].Int);
-            var hitBox = Instantiate(hitboxPrefab);
-            hitBox.name = "HitBox";
-            hitBox.transform.parent = character.transform;
-            hitBox.transform.localPosition = data.GetVector3(1);
-            hitBox.transform.localScale = data.GetVector3(4);
-            character.hitBoxs.Add(hitBox);
-            
-        }
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[1].Int);
+        Vector3 position = data.GetVector3(2);
+        Vector3 scale = data.GetVector3(5);
+        character.SetHitbox(hitboxPrefab,position,scale);
     }
     public void DisplayHitbox(INya data)
     {
-        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[0].Int);
-        foreach(var item in character.hitBoxs)
-        {
-            item.meshRenderer.enabled = true;
-        }
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[1].Int);
+        character.DisplayHitbox();
     }
+
+    public void HiddenHitbox(INya data)
+    {
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[1].Int);
+        character.HiddenHitbox();
+    }
+
+    public void EnableHitbox(INya data)
+    {
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[0].Int);
+        Vector3 position = data.GetVector3(1);
+        Vector3 scale = data.GetVector3(4);
+        character.EnableHitbox(position,scale);
+    }
+
+    public void DisableHitbox(INya data)
+    {
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.Int);
+        character.DisableHitbox(20f);
+    }
+
 }
 
 

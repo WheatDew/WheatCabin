@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DataKey
 {
+    //character
     public static string LifeBar = "LifeBar";
     public static string Weapon = "Weapon";
     public static string StartEvent = "StartEvent";
+    public static string HealthPoint = "HealthPoint";
+
 
     public static string displayName = "DisplayName";
     public static string objectType = "Type";

@@ -19,8 +19,11 @@ public class Entity : MonoBehaviour
     {
         if (data.Map.ContainsKey(DataKey.StartEvent))
         {
-            var startEventData = data.Map[DataKey.StartEvent];
-            FunctionMap.map[startEventData.List[0].String].Invoke(startEventData.List[1]);
+            var startEventData = data.Map[DataKey.StartEvent].List;
+            for(int i = 0; i < startEventData.Count; i++)
+            {
+                FunctionMap.map[startEventData[i].List[0].String].Invoke(startEventData[i]);
+            }
         }
     }
 
@@ -31,7 +34,7 @@ public class Entity : MonoBehaviour
 
     public void InitData(INya data)
     {
-        this.data = data;
+        this.data =new NyaData(data);
         PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
         Init();
         StartEvent();

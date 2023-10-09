@@ -74,6 +74,7 @@ public class SWeapon : MonoBehaviour
     /// <param name="target"></param>
     public void Damage(INya data)
     {
+        Debug.Log("Damage");
         //Debug.LogFormat("damage 0:{0} 1:{1} type:{2}", data.GetInt(0), data.GetData().DataType(), data.GetData().GetDatas()[1].DataType());
         //Entity target = PropertyMap.s.entityMap[data.GetInt(0)];
         //var character = (CharacterEntity)target;
@@ -85,10 +86,10 @@ public class SWeapon : MonoBehaviour
 
     public void DisplayWeaponRange(INya data)
     {
-        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
-        var weapon = (Weapon)target;
+        //Entity target = PropertyMap.s.entityMap[data.List[0].Int];
+        //var weapon = (Weapon)target;
 
-        weapon.DisplayWeaponRange();
+        //weapon.DisplayWeaponRange();
     }
 
     #endregion

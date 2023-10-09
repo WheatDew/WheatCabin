@@ -192,6 +192,7 @@ public class PropertyMap : MonoBehaviour
     }
 
 
+
     #endregion
 
 
@@ -640,8 +641,8 @@ public interface INya
 {
     //value
     int Int { get => throw new NotImplementedException(string.Format("当前类型为{0}",Type)); set => throw new NotImplementedException(); }
-    string String { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    float Float { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    string String { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
+    float Float { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
     bool Bool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     INya Data { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
 
@@ -656,20 +657,24 @@ public interface INya
 
     //map
     Dictionary<string, INya> Map { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    void Set(string key,int index,INya data) { throw new NotImplementedException(); }
+    void Set(string key,int index,INya data) { throw new NotImplementedException(string.Format("当前类型为{0}", Type)); }
     INya Get(string key, int index) { throw new NotImplementedException(); }
     void Add(string key, INya data) { throw new NotImplementedException(); }
     void SetMapReference() { Debug.LogError("错误"); }
 
     //public
     NyaType Type { get => throw new NotImplementedException();}
-    
+    INya Clone { get => throw new NotImplementedException(); }
+
 }
+
 
 public class NyaInt : INya
 {
     public int Int { get; set; }
     public NyaType Type { get; } = NyaType.Int;
+    public INya Clone { get { return new NyaInt(Int);} }
+
     public NyaInt(int data)
     {
         Int = data;
@@ -681,6 +686,7 @@ public class NyaFloat : INya
 {
     public float Float { get; set; }
     public NyaType Type { get; } = NyaType.Float;
+    public INya Clone { get { return new NyaFloat(Float); } }
     public NyaFloat(float data)
     {
         Float = data;
@@ -691,6 +697,7 @@ public class NyaBool : INya
 {
     public bool Bool { get; set; }
     public NyaType Type { get; } = NyaType.Bool;
+    public INya Clone { get { return new NyaBool(Bool); } }
     public NyaBool(bool data)
     {
         Bool = data;
@@ -701,6 +708,7 @@ public class NyaString : INya
 {
     public string String { get; set; }
     public NyaType Type { get; } = NyaType.String;
+    public INya Clone { get { return new NyaString(String); } }
     public NyaString(string data)
     {
         String = data;
@@ -717,6 +725,7 @@ public class NyaData : INya
     public List<INya> List { get => Data.List; set => Data.List = value; }
 
     public NyaType Type { get; } = NyaType.Data;
+    public INya Clone { get { return new NyaData(Data); } }
     public NyaData(INya data)
     {
         Data = data;
@@ -734,7 +743,18 @@ public class NyaList : INya
     public NyaType Type { get; } = NyaType.List;
     public Vector3 Vector3 { get => new Vector3(List[0].Float, List[1].Float, List[2].Float); }
     public Quaternion Quaternion { get => new Quaternion(List[0].Float, List[1].Float, List[2].Float, List[3].Float);}
-
+    public INya Clone
+    {
+        get
+        {
+            NyaList result = new NyaList();
+            foreach (var item in List)
+            {
+                result.Add(item.Clone);
+            }
+            return result;
+        }
+    }
     public NyaList()
     {
         List = new List<INya>();
@@ -742,7 +762,7 @@ public class NyaList : INya
 
     public NyaList(NyaList origin)
     {
-        List = new List<INya>(origin.List);
+        List = origin.Clone.List;
     }
     public void Set(int index,INya data)
     {
@@ -763,13 +783,25 @@ public class NyaMap : INya
 {
     public Dictionary<string, INya> Map { get; set; }
     public NyaType Type { get; } = NyaType.Map;
+    public INya Clone
+    {
+        get
+        {
+            NyaMap result = new NyaMap();
+            foreach (var item in Map)
+            {
+                result.Add(item.Key,item.Value.Clone);
+            }
+            return result;
+        }
+    }
     public NyaMap()
     {
         Map = new Dictionary<string, INya>();
     }
     public NyaMap(NyaMap origin)
     {
-        Map = origin.Map;
+        Map =origin.Clone.Map;
     }
     public void Set(string key,int index,INya data)
     {
@@ -814,6 +846,8 @@ public class NyaMap : INya
         }
 
     }
+
+
 }
 
 
