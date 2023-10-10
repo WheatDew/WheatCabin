@@ -19,10 +19,10 @@ public class CharacterEntity : Entity
         {
             SLifeBar.s.CreateLifeBar(data);
         }
-        if (data.Map.ContainsKey(DataKey.Weapon))
-        {
-            BattleSystem.s.SetWeapon(data);
-        }
+        //if (data.Map.ContainsKey(DataKey.Weapon))
+        //{
+        //    BattleSystem.s.SetWeapon(data);
+        //}
 
         animator = GetComponent<Animator>();
         gameObject.layer = 7;
@@ -76,7 +76,7 @@ public class CharacterEntity : Entity
             
             CharacterEntity enemy = PropertyMap.s.GetEntity<CharacterEntity>(item);
             Debug.LogFormat("{0} {1}", gameObject.name, enemy.gameObject.name);
-            //enemy.Damage(100);
+            enemy.Damage(damageValue,this);
         }
         hitObjects.Clear();
         hitBox.meshRenderer.enabled = false;
@@ -84,8 +84,57 @@ public class CharacterEntity : Entity
 
     }
 
-    public void Damage(float value)
+    public void Damage(float value,CharacterEntity origin)
     {
-        data.Map[DataKey.HealthPoint].List[0].Float -= value;
+        INya health = data.Map[DataKey.HealthPoint].List[0];
+        health.Float -= value;
+        if (health.Float > 0)
+            HitAnimation(origin);
+        else
+        {
+            health.Float = 0;
+            animator.SetTrigger("Die");
+            transform.tag = "Die";
+        }
+    }
+
+    public void HitAnimation(CharacterEntity origin)
+    {
+        // 获取 Enemy 和 Origin 的位置信息
+        Vector3 selfPosition = transform.position;
+        Vector3 originPosition = origin.transform.position;
+
+
+
+        // 计算 Origin 相对于 Enemy 的位置差
+        Vector3 offset = originPosition - selfPosition;
+
+        // 判断 Origin 位于哪个区域
+        if (Mathf.Abs(offset.x) > Mathf.Abs(offset.z))
+        {
+            if (offset.x > 0)
+            {
+                // Origin 位于右面
+                animator.SetTrigger("HitRight");
+            }
+            else
+            {
+                // Origin 位于左面
+                animator.SetTrigger("HitLeft");
+            }
+        }
+        else
+        {
+            if (offset.z > 0)
+            {
+                // Origin 位于前面
+                animator.SetTrigger("HitForward");
+            }
+            else
+            {
+                // Origin 位于后面
+                animator.SetTrigger("HitBack");
+            }
+        }
     }
 }

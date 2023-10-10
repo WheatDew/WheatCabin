@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour
         if (data.Map.ContainsKey(DataKey.StartEvent))
         {
             var startEventData = data.Map[DataKey.StartEvent].List;
+            Debug.LogFormat("{0} {1}", startEventData[0].Type, startEventData[0].String);
             for(int i = 0; i < startEventData.Count; i++)
             {
                 FunctionMap.map[startEventData[i].List[0].String].Invoke(startEventData[i]);
@@ -34,7 +35,9 @@ public class Entity : MonoBehaviour
 
     public void InitData(INya data)
     {
-        this.data =new NyaData(data);
+        Debug.Log(data.Type);
+        this.data = data.Clone;
+        this.data.SetMapReference();
         PropertyMap.s.SetEntity(transform.GetInstanceID(), this);
         Init();
         StartEvent();

@@ -52,7 +52,6 @@ public class SCharacter : MonoBehaviour
     public SMapEditor mapEditor;
     public void InitCharacter(INya data,GameObject obj)
     {
-        Debug.Log(data.Type);
         if (data.Get(objectType,0).String == "Character")
         {
 
@@ -98,8 +97,8 @@ public class SCharacter : MonoBehaviour
 
     public void DisableHitbox(INya data)
     {
-        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.Int);
-        character.DisableHitbox(20f);
+        CharacterEntity character = PropertyMap.s.GetEntity<CharacterEntity>(data.List[0].Int);
+        character.DisableHitbox(data.List[7].Float);
     }
 
 }

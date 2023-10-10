@@ -15,6 +15,7 @@ public class BattleSystem : MonoBehaviour
 
         FunctionMap.Add("WeaponDisplay", WeaponDispaly);
         FunctionMap.Add("WeaponHidden", WeaponHidden);
+        FunctionMap.Add("SetWeapon", SetWeapon);
     }
 
 
@@ -27,30 +28,20 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void SetWeapon(INya origin)
+    public void SetWeapon(INya data)
     {
-        //Debug.Log(origin.GetMap()["Weapon"].GetList().Count);
-        var data = origin.Map[DataKey.Weapon];
-        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
-        //Debug.Log(data.GetList().Count);
+        Entity target = PropertyMap.s.entityMap[data.List[1].Int];
         var character = (CharacterEntity)target;
-        Transform parent = FindChild(target.transform,data.List[1].String);
+        Transform parent = FindChild(target.transform,data.List[2].String);
         character.weaponPoint = parent;
         Vector3 positionOffset,rotationOffset;
-
 
         positionOffset = Vector3.zero;
         rotationOffset = Vector3.zero;
 
-
-        var weapon = SWeapon.s.Create(character, parent, positionOffset, rotationOffset);
-
+        var weapon = SWeapon.s.Create(character, parent, positionOffset, rotationOffset, PropertyMap.s.map[data.List[3].String]);
         character.weapon = weapon;
-
         character.weaponPoint.gameObject.SetActive(false);
-        //weapon.SetActive(false);
-        //parent.gameObject.SetActive(false);
-
     }
 
     public void WeaponDispaly(INya data)

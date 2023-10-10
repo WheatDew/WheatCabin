@@ -36,10 +36,10 @@ public class SWeapon : MonoBehaviour
 
     #region 自定义函数
 
-    public Weapon Create(CharacterEntity origin,Transform parent,Vector3 position,Vector3 rotation)
+    public Weapon Create(CharacterEntity origin,Transform parent,Vector3 position,Vector3 rotation,INya data)
     {
 
-        INya data = PropertyMap.s.map[origin.data.Get(DataKey.Weapon,2).String];
+        //INya data = PropertyMap.s.map[origin.data.Get(DataKey.Weapon,2).String];
         var obj = Instantiate(SMapEditor.GetAssetBundleElement(data.Get(DataKey.packName,0).String, data.Get(DataKey.packObjectName,0).String),parent);
 
         obj.transform.localPosition = position;
@@ -63,7 +63,7 @@ public class SWeapon : MonoBehaviour
 
         origin.weapon = weapon;
 
-        weapon.StartEvent();
+        //weapon.StartEvent();
 
         return weapon;
     }

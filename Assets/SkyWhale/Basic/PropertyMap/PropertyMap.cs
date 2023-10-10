@@ -1,4 +1,5 @@
 
+using Battlehub.UIControls;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
@@ -97,7 +98,7 @@ public class PropertyMap : MonoBehaviour
                     //获取条目内容
                     for (int column = 1; column < Row_Read.Cells.Count; column++)
                     {
-                        if (Row_Read.GetCell(column)==null|| Row_Read.GetCell(column).CellType == CellType.Blank || Row_Read.GetCell(0).ToSafeString()[0] == '#')
+                        if (Row_Read.GetCell(column)==null|| Row_Read.GetCell(column).CellType == CellType.Blank || Row_Read.GetCell(column).ToSafeString()[0] == '#')
                         {
                             break;
                         }
@@ -127,7 +128,7 @@ public class PropertyMap : MonoBehaviour
                     }
                 }
 
-                data.SetMapReference();
+                //data.SetMapReference();
                 datas.Add(Sheet_Read.SheetName, data);
             }
 
@@ -658,7 +659,7 @@ public interface INya
     //map
     Dictionary<string, INya> Map { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     void Set(string key,int index,INya data) { throw new NotImplementedException(string.Format("当前类型为{0}", Type)); }
-    INya Get(string key, int index) { throw new NotImplementedException(); }
+    INya Get(string key, int index) { throw new NotImplementedException(string.Format("当前类型为{0}", Type)); }
     void Add(string key, INya data) { throw new NotImplementedException(); }
     void SetMapReference() { Debug.LogError("错误"); }
 
@@ -723,6 +724,7 @@ public class NyaData : INya
     public float Float { get => Data.Float; set => Data.Float = value; }
     public bool Bool { get => Data.Bool; set => Data.Bool = value; }
     public List<INya> List { get => Data.List; set => Data.List = value; }
+    public Dictionary<string, INya> Map { get => Data.Map; set => Data.Map = value; }
 
     public NyaType Type { get; } = NyaType.Data;
     public INya Clone { get { return new NyaData(Data); } }
@@ -731,6 +733,9 @@ public class NyaData : INya
         Data = data;
     }
     public Vector3 GetVector3(int index) { return Data.GetVector3(index); }
+    public void Set(string key, int index, INya data) { Data.Map[key].Set(index, data); }
+    public void Set(int index, INya data) { Data.List[index] = data; }
+    public INya Get(string key, int index) { return Data.Map[key].List[index]; }
 }
 
 public class NyaList : INya
@@ -750,7 +755,7 @@ public class NyaList : INya
             NyaList result = new NyaList();
             foreach (var item in List)
             {
-                result.Add(item.Clone);
+                result.List.Add(item.Clone);
             }
             return result;
         }
@@ -790,7 +795,7 @@ public class NyaMap : INya
             NyaMap result = new NyaMap();
             foreach (var item in Map)
             {
-                result.Add(item.Key,item.Value.Clone);
+                result.Map.Add(item.Key,item.Value.Clone);
             }
             return result;
         }
@@ -827,10 +832,10 @@ public class NyaMap : INya
 
     public void SetMapReference()
     {
-        if (Map.ContainsKey("Weapon"))
-            Debug.Log(Map["Weapon"].List.Count);
+        //Debug.LogFormat("{0} {1}",Map.Count,Map["Name"].String);
         foreach (var item in Map)
         {
+            //Debug.LogFormat("{0} {1}", item.Key, item.Value.List.Count);
             if (item.Value != null && item.Value.Type == NyaType.List && item.Value.List.Count > 0)
             {
                 for (int i = 0; i < item.Value.List.Count; i++)
@@ -838,7 +843,7 @@ public class NyaMap : INya
                     var target = item.Value.List[i];
                     if (target.Type == NyaType.String && target.String != null && target.String[0] == '&')
                     {
-                        //Debug.Log(target.GetString());
+                        //Debug.Log(target.String);
                         item.Value.List[i] = new NyaData(Map[target.String[1..]]);
                     }
                 }
