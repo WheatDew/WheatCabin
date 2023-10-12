@@ -16,7 +16,7 @@ public class PerformanceTest : MonoBehaviour
         stopwatch.Start();
         int ri;
         NyaList list = new NyaList();
-        NyaExpression ep=new NyaExpression()
+        //NyaExpression ep=new NyaExpression()
         // 在这里执行需要测量性能的代码块
         for (int i = 0; i < 100; i++)
         {
