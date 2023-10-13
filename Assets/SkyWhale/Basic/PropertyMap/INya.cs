@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#region ¿œ∑Ω∑®2
 
+public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map }
 
 public interface INya
 {
@@ -233,5 +233,3 @@ public class NyaMap : INya
 
 }
 
-
-#endregion 

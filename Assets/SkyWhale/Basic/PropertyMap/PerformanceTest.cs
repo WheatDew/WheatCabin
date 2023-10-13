@@ -9,6 +9,13 @@ public class PerformanceTest : MonoBehaviour
 {
     void Start()
     {
+        NyaExpression expression = new NyaExpression("a+b-c");
+        NyaList nyaList = new NyaList();
+        nyaList.Add(new NyaFloat(1.9f));
+        nyaList.Add(new NyaFloat(3.2f));
+        nyaList.Add(new NyaFloat(3.8f));
+        print(expression.Calculate(nyaList));
+
         // 创建 Stopwatch 对象
         Stopwatch stopwatch = new Stopwatch();
 
