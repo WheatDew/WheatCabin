@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 
-public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map }
+public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map,Symbol,Placeholder }
 
 public interface INya
 {
@@ -13,6 +14,7 @@ public interface INya
     string String { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
     float Float { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
     bool Bool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    string Placeholder { get => throw new NotImplementedException(string.Format("读取失败,当前类型为{0}", Type)); set => throw new NotImplementedException(string.Format("写入失败,当前类型为{0}", Type)); }
     INya Data { get => throw new NotImplementedException(string.Format("当前类型为{0}", Type)); set => throw new NotImplementedException(); }
 
     //list
@@ -34,6 +36,8 @@ public interface INya
     //public
     NyaType Type { get => throw new NotImplementedException(); }
     INya Clone { get => throw new NotImplementedException(); }
+    int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    float Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 }
 
@@ -82,6 +86,19 @@ public class NyaString : INya
     public NyaString(string data)
     {
         String = data;
+    }
+}
+
+
+public class NyaPlaceholder : INya
+{
+    public string Placeholder { get; set; }
+    public float Value { get; set; }
+    public NyaType Type { get; } = NyaType.Placeholder;
+    public INya Clone { get { return new NyaPlaceholder(Placeholder); } }
+    public NyaPlaceholder(string data)
+    {
+        Placeholder = data;
     }
 }
 

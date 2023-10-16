@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,61 +17,133 @@ public interface INyaExpression
 
 public class NyaExpression:INyaExpression
 {
-    UnityAction<INya> ua;
-    float result;
-    int dataIndex = 0;
+    UnityAction ua;
+    int resultIndex = -1;
+    INya expression;
+    List<NyaPlaceholder> paramers;
     public NyaExpression(string expression)
     {
-        ua += delegate (INya nya) { result = nya.List[0].Float; };
-        for (int i = 0; i < expression.Length-1; i++)
+        this.expression = new NyaList();
+        paramers = new List<NyaPlaceholder>();
+        for (int i = 0; i < expression.Length; i++)
         {
             char token = expression[i];
-            
+
             if (char.IsWhiteSpace(token))
             {
                 continue; // ºöÂÔ¿Õ¸ñ
             }
             else if (char.IsLetter(token))
             {
-                dataIndex++;
-                continue;
+                var placeholder = new NyaPlaceholder(token.ToString());
+                this.expression.Add(placeholder);
+                paramers.Add(placeholder);
             }
             else if (IsOperator(token))
             {
-                AddAction(token);
+                this.expression.Add(new NyaPlaceholder(token.ToString()));
             }
         }
-        
+        for (int p = 5; p >= 0; p--)
+        {
+            for (int i = 0; i < this.expression.List.Count; i++)
+            {
+                if (IsOperator(this.expression.List[i].Placeholder))
+                {
+                    int priority = -1;
+                    if (IsOperator(this.expression.List[i].Placeholder, out priority) && priority == p)
+                    {
+                        int leftIndex = i - 1;
+                        int rightIndex = i + 1;
+                        while (leftIndex>=0)
+                        {
+                            if (this.expression.List[leftIndex].Placeholder != "#")
+                                break;
+                            else
+                                leftIndex--;
+                        }
+                        while (rightIndex <= this.expression.List.Count)
+                        {
+                            Debug.LogFormat("{0} {1}", rightIndex, this.expression.List.Count);
+                            if (this.expression.List[rightIndex].Placeholder != "#")
+                                break;
+                            else
+                                rightIndex++;
+                        }
+                        AddAction(this.expression.List[i].Placeholder, i, leftIndex, rightIndex);
+                        this.expression.List[leftIndex].Placeholder = "#";
+                        this.expression.List[rightIndex].Placeholder = "#";
+                    }
+                }
 
-            
+            }
+
+        }
+        for(int i = 0; i < this.expression.List.Count; i++)
+        {
+            if (this.expression.List[i].Placeholder != "#")
+            {
+                resultIndex = i;
+                break;
+            }
+        }
     }
 
     private bool IsOperator(char c)
     {
         return c == '+' || c == '-' || c == '*' || c == '/';
+
+    }
+    private bool IsOperator(string c)
+    {
+        return c == "+" || c == "-" || c == "*" || c == "/";
+
+    }
+    private bool IsOperator(string s,out int priority)
+    {
+        priority = -1;
+        if(s == "+" || s == "-")
+        {
+            priority = 0;
+            return true;
+        }
+        else if(s == "*" || s == "/")
+        {
+            priority = 1;
+            return true;
+        }
+        return false;
+
     }
 
-    private void AddAction(char c)
+    private void AddAction(string s,int currentIndex,int liftIndex,int rightIndex)
     {
-        Debug.LogFormat("{0} {1}",dataIndex,c);
-        switch (c)
+        var ep = expression.List;
+        switch (s)
         {
-            case '+':
-                Debug.Log("Ìí¼Ó¼ÓºÅÔËËã");
-                ua += delegate (INya nya) { int index = dataIndex; result += nya.List[index].Float; };
+            case "+":
+                ua += delegate { ep[currentIndex].Value = ep[liftIndex].Value + ep[rightIndex].Value; };
                 break;
-            case '-':
-                Debug.Log("Ìí¼Ó¼õºÅÔËËã");
-                ua += delegate (INya nya) { int index = dataIndex; result -= nya.List[index].Float; };
+            case "-":
+                ua += delegate { ep[currentIndex].Value = ep[liftIndex].Value - ep[rightIndex].Value; };
+                break;
+            case "*":
+                ua += delegate { ep[currentIndex].Value = ep[liftIndex].Value * ep[rightIndex].Value; };
+                break;
+            case "/":
+                ua += delegate { ep[currentIndex].Value = ep[liftIndex].Value / ep[rightIndex].Value; };
                 break;
         }
+        
     }
     public float Calculate(INya data)
     {
-
-        result = 0;
-        ua(data);
-        return result;
+        for(int i = 0; i < data.List.Count; i++)
+        {
+            paramers[i].Value = data.List[i].Float;
+        }
+        ua();
+        return expression.List[resultIndex].Value;
     }
 }
 
