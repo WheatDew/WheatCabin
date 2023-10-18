@@ -7,24 +7,44 @@ using UnityEngine.Events;
 
 public class NyaCalc
 {
-    
+    public static Dictionary<string, int> pairs = new Dictionary<string, int> { { "a", 0 }, { "b", 1 }, { "c", 2 }, { "d", 3 } };
+    public static HashSet<char> endToken = new HashSet<char> { '+', '-', '*', '/' };
+    public static Dictionary<string, NyaExpression> map = new Dictionary<string, NyaExpression>();
+    public static void Add(string name,string expression)
+    {
+        map.Add(name, new NyaExpression(expression));
+    }
+    public static void Calculate(string expressionName,INya data,int offset)
+    {
+        map[expressionName].Calculate(data);
+    }
+
+    public static bool IsEndToken(char c)
+    {
+        return endToken.Contains(c);
+    }
+    public static int GetPairId(string s)
+    {
+        return pairs[s];
+    }
 }
 
-public interface INyaExpression
-{
-    
-}
 
-public class NyaExpression:INyaExpression
+
+public class NyaExpression
 {
     UnityAction ua;
     int resultIndex = -1;
     INya expression;
+
     List<NyaPlaceholder> paramers;
+    List<int> paramersSequence;
+
     public NyaExpression(string expression)
     {
         this.expression = new NyaList();
         paramers = new List<NyaPlaceholder>();
+        paramersSequence = new List<int>();
         for (int i = 0; i < expression.Length; i++)
         {
             char token = expression[i];
@@ -37,7 +57,9 @@ public class NyaExpression:INyaExpression
             {
                 var placeholder = new NyaPlaceholder(token.ToString());
                 this.expression.Add(placeholder);
+
                 paramers.Add(placeholder);
+                paramersSequence.Add(NyaCalc.GetPairId(placeholder.Placeholder));
             }
             else if (IsOperator(token))
             {
@@ -136,121 +158,13 @@ public class NyaExpression:INyaExpression
         }
         
     }
-    public float Calculate(INya data)
+    public float Calculate(INya data,int offset=0)
     {
-        for(int i = 0; i < data.List.Count; i++)
+        for(int i = 0; i < paramers.Count; i++)
         {
-            paramers[i].Value = data.List[i].Float;
+            paramers[i].Value = data.List[paramersSequence[i] +offset].Float;
         }
         ua();
         return expression.List[resultIndex].Value;
-    }
-}
-
-public class SimpleExpressionParser
-{
-    private static Dictionary<char, int> precedence = new Dictionary<char, int>
-    {
-        { '+', 1 },
-        { '-', 1 },
-        { '*', 2 },
-        { '/', 2 }
-    };
-
-    public static double Parse(string expression, Dictionary<char, double> variables)
-    {
-        Stack<double> valueStack = new Stack<double>();
-        Stack<char> operatorStack = new Stack<char>();
-
-        for (int i = 0; i < expression.Length; i++)
-        {
-            char token = expression[i];
-
-            if (char.IsWhiteSpace(token))
-            {
-                continue; // 忽略空格
-            }
-            else if (char.IsLetter(token))
-            {
-                // 如果标记是字母，表示变量
-                string variable = token.ToString();
-                while (i + 1 < expression.Length && char.IsLetterOrDigit(expression[i + 1]))
-                {
-                    i++;
-                    variable += expression[i];
-                }
-
-                if (variables.ContainsKey(variable[0]))
-                {
-                    valueStack.Push(variables[variable[0]]);
-                }
-                else
-                {
-                    throw new ArgumentException("未定义的变量: " + variable);
-                }
-            }
-            else if (IsOperator(token))
-            {
-                while (operatorStack.Count > 0 && IsOperator(operatorStack.Peek()) &&
-                       precedence[operatorStack.Peek()] >= precedence[token])
-                {
-                    PerformOperation(operatorStack.Pop(), valueStack);
-                }
-                operatorStack.Push(token);
-            }
-        }
-
-        while (operatorStack.Count > 0)
-        {
-            PerformOperation(operatorStack.Pop(), valueStack);
-        }
-
-        if (valueStack.Count != 1)
-        {
-            throw new ArgumentException("表达式格式不正确");
-        }
-
-        return valueStack.Pop();
-    }
-
-    private static bool IsOperator(char c)
-    {
-        return c == '+' || c == '-' || c == '*' || c == '/';
-    }
-
-    private static void PerformOperation(char operation, Stack<double> values)
-    {
-        if (values.Count < 2)
-        {
-            throw new ArgumentException("表达式格式不正确");
-        }
-
-        double b = values.Pop();
-        double a = values.Pop();
-
-        double result;
-        switch (operation)
-        {
-            case '+':
-                result = a + b;
-                break;
-            case '-':
-                result = a - b;
-                break;
-            case '*':
-                result = a * b;
-                break;
-            case '/':
-                if (b == 0)
-                {
-                    throw new DivideByZeroException("除数为零");
-                }
-                result = a / b;
-                break;
-            default:
-                throw new ArgumentException("不支持的操作符: " + operation);
-        }
-
-        values.Push(result);
     }
 }

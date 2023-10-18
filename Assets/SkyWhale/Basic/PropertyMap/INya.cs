@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -38,6 +39,7 @@ public interface INya
     INya Clone { get => throw new NotImplementedException(); }
     int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     float Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Action OnValueChange { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 }
 
@@ -57,8 +59,11 @@ public class NyaInt : INya
 
 public class NyaFloat : INya
 {
-    public float Float { get; set; }
-    public string String { get => Float.ToString(); set => Float = float.Parse(value); }
+    private float value;
+    public float Float { get => value; set { if (this.value != value) { this.value = value; OnValueChange?.Invoke(); } } }
+    public string String { get => value.ToString(); set => this.value = float.Parse(value); }
+    public Action OnValueChange { get; set; }
+
     public NyaType Type { get; } = NyaType.Float;
     public INya Clone { get { return new NyaFloat(Float); } }
     public NyaFloat(float data)
@@ -231,6 +236,58 @@ public class NyaMap : INya
                     {
                         //Debug.Log(target.String);
                         item.Value.List[i] = new NyaData(Map[target.String[1..]]);
+                    }
+                    if (target.Type == NyaType.String && target.String != null && target.String[0] == '$')
+                    {
+                        NyaFloat current = new NyaFloat(0);
+                        string origin = target.String[1..];
+                        INya paramers = new NyaList();
+
+                        string pattern = @"\{[^}]+\}|\d+";
+                        string patternNumber = @"^\d+$";
+                        MatchCollection matches = Regex.Matches(origin, pattern);
+
+                        char currentLetter = 'a';
+                        foreach (Match match in matches)
+                        {
+                            string matchedText = match.Value;
+                            if (Regex.IsMatch(matchedText, @"\d+"))
+                            {
+                                // 如果匹配到数字，替换为字母
+                                origin = origin.Replace(matchedText, currentLetter.ToString());
+                            }
+                            else
+                            {
+                                // 如果匹配到大括号内的文本，也替换为字母
+                                origin = origin.Replace(matchedText, currentLetter.ToString());
+                            }
+                            currentLetter++;
+                        }
+
+                        NyaExpression expression = new NyaExpression(origin);
+                        Action calculate = delegate
+                        {
+                            current.Float = expression.Calculate(paramers, 0);
+                        };
+
+                        foreach (Match match in matches)
+                        {
+                            if (Regex.IsMatch(match.Value, patternNumber))
+                            {
+                                paramers.Add(new NyaFloat(float.Parse(match.Value)));
+                            }
+                            else
+                            {
+                                NyaFloat floatValue = new NyaFloat(Map[match.Value].Float);
+                                floatValue.OnValueChange += calculate;
+                                paramers.Add(floatValue);
+                            }
+                        }
+
+                        current.Float= expression.Calculate(paramers, 0);
+                        Debug.Log("计算后的值为" + current.Float.ToString());
+                        item.Value.List[i] = current;
+
                     }
                 }
             }

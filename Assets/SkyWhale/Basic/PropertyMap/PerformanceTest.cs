@@ -3,20 +3,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class PerformanceTest : MonoBehaviour
 {
+    
     void Start()
     {
-        NyaExpression expression = new NyaExpression("a+b*c");
-        NyaList nyaList = new NyaList();
-        nyaList.Add(new NyaFloat(1.9f));
-        nyaList.Add(new NyaFloat(3.2f));
-        nyaList.Add(new NyaFloat(3.8f));
-        print(expression.Calculate(nyaList));
-        print(expression.Calculate(nyaList));
-        print(expression.Calculate(nyaList));
+        string inputString = "{health}+20*3";
+        string pattern = @"\{[^}]+\}|\d+";
+
+        MatchCollection matches = Regex.Matches(inputString, pattern);
+
+        char currentLetter = 'a';
+        foreach (Match match in matches)
+        {
+            string matchedText = match.Value;
+            if (Regex.IsMatch(matchedText, @"\d+"))
+            {
+                // 如果匹配到数字，替换为字母
+                inputString = inputString.Replace(matchedText, currentLetter.ToString());
+            }
+            else
+            {
+                // 如果匹配到大括号内的文本，也替换为字母
+                inputString = inputString.Replace(matchedText, currentLetter.ToString());
+            }
+            currentLetter++;
+        }
+
+        print(inputString);
+
+        //NyaExpression expression = new NyaExpression("a+b*a");
+        //NyaList nyaList = new NyaList();
+        //nyaList.Add(new NyaFloat(2f));
+        //nyaList.Add(new NyaFloat(4f));
+        //print(expression.Calculate(nyaList));
 
         // 创建 Stopwatch 对象
         Stopwatch stopwatch = new Stopwatch();
@@ -29,7 +52,7 @@ public class PerformanceTest : MonoBehaviour
         // 在这里执行需要测量性能的代码块
         for (int i = 0; i < 10000; i++)
         {
-            expression.Calculate(nyaList);
+            
         }
 
         // 停止计时
