@@ -8,8 +8,13 @@ using UnityEngine;
 
 public class PerformanceTest : MonoBehaviour
 {
-    
-    void Start()
+
+    public void Start()
+    {
+        //test();
+    }
+
+    void test()
     {
         string inputString = "{health}+20*3";
         string pattern = @"\{[^}]+\}|\d+";

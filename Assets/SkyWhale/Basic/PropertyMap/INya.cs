@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 
 public enum NyaType { Empty, Data, Int, String, Float, Bool, List, Map,Symbol,Placeholder }
@@ -234,13 +235,109 @@ public class NyaMap : INya
                     var target = item.Value.List[i];
                     if (target.Type == NyaType.String && target.String != null && target.String[0] == '&')
                     {
-                        //Debug.Log(target.String);
                         item.Value.List[i] = new NyaData(Map[target.String[1..]]);
                     }
-                    if (target.Type == NyaType.String && target.String != null && target.String[0] == '$')
+                    else if (target.Type == NyaType.String && target.String != null && target.String[0] == '$' && target.String[1..].Contains('$'))
                     {
+                        string origin;
+                        float upperLimit = float.MaxValue, lowerLimit = float.MinValue;
                         NyaFloat current = new NyaFloat(0);
-                        string origin = target.String[1..];
+
+                        origin = target.String[1..];
+
+                        string[] slices = origin.Split('$');
+                        if (slices.Length == 2)
+                        {
+                            current.Float = Regex.IsMatch(slices[0], @"\d+") ? float.Parse(slices[0]) : Map[slices[0]].Float;
+                            origin = slices[1];
+                        }
+                        else if(slices.Length==3)
+                        {
+                            current.Float = Regex.IsMatch(slices[0], @"\d+") ? float.Parse(slices[0]) : Map[slices[0]].Float;
+                            upperLimit= Regex.IsMatch(slices[1], @"\d+") ? float.Parse(slices[1]) : Map[slices[1]].Float;
+                            origin = slices[2];
+                        }
+                        else if (slices.Length == 4)
+                        {
+                            current.Float = Regex.IsMatch(slices[0], @"\d+") ? float.Parse(slices[0]) : Map[slices[0]].Float;
+                            upperLimit = Regex.IsMatch(slices[1], @"\d+") ? float.Parse(slices[1]) : Map[slices[1]].Float;
+                            lowerLimit = Regex.IsMatch(slices[2], @"\d+") ? float.Parse(slices[2]) : Map[slices[2]].Float;
+                            origin = slices[3];
+                        }
+
+
+
+                        INya paramers = new NyaList();
+
+                        string pattern = @"\{[^}]+\}|\d+";
+                        string patternNumber = @"^\d+$";
+                        MatchCollection matches = Regex.Matches(origin, pattern);
+
+                        char currentLetter = 'a';
+                        foreach (Match match in matches)
+                        {
+                            string matchedText = match.Value;
+                            if (Regex.IsMatch(matchedText, @"\d+"))
+                            {
+                                // 如果匹配到数字，替换为字母
+                                origin = origin.Replace(matchedText, currentLetter.ToString());
+                            }
+                            else
+                            {
+                                // 如果匹配到大括号内的文本，也替换为字母
+                                origin = origin.Replace(matchedText, currentLetter.ToString());
+                            }
+                            currentLetter++;
+                        }
+
+                        NyaExpression expression = new NyaExpression(origin);
+
+                        foreach (Match match in matches)
+                        {
+                            string content;
+                            if (match.Value[0] == '{')
+                            {
+                                content = match.Value[1..^1];
+                            }
+                            else
+                            {
+                                content = match.Value;
+                            }
+                            if (Regex.IsMatch(content, patternNumber))
+                            {
+                                paramers.Add(new NyaFloat(float.Parse(content)));
+                            }
+                            else if (content == "self")
+                            {
+                                paramers.Add(current);
+                            }
+                            else
+                            {
+
+                                NyaFloat floatValue = new NyaFloat(Map[content].Float);
+                                paramers.Add(floatValue);
+                            }
+                        }
+                        Global.circle += delegate {
+                            float value = expression.Calculate(paramers, 0);
+                            if (value > upperLimit)
+                                value = upperLimit;
+                            else if (value < lowerLimit)
+                                value = lowerLimit;
+                            current.Float = value;
+                            Debug.Log("当前值为" + current.Float.ToString());
+                        };
+
+
+                        item.Value.List[i] = current;
+
+                    }
+                    else if (target.Type == NyaType.String && target.String != null && target.String[0] == '$')
+                    {
+                        string origin;
+                        NyaFloat current = new NyaFloat(0);
+                        origin = target.String[1..];
+
                         INya paramers = new NyaList();
 
                         string pattern = @"\{[^}]+\}|\d+";
@@ -272,20 +369,20 @@ public class NyaMap : INya
 
                         foreach (Match match in matches)
                         {
-                            if (Regex.IsMatch(match.Value, patternNumber))
+                            string content = match.Value[1..^1];
+                            if (Regex.IsMatch(content, patternNumber))
                             {
-                                paramers.Add(new NyaFloat(float.Parse(match.Value)));
+                                paramers.Add(new NyaFloat(float.Parse(content)));
                             }
                             else
                             {
-                                NyaFloat floatValue = new NyaFloat(Map[match.Value].Float);
+                                NyaFloat floatValue = new NyaFloat(Map[content].Float);
                                 floatValue.OnValueChange += calculate;
                                 paramers.Add(floatValue);
                             }
                         }
 
-                        current.Float= expression.Calculate(paramers, 0);
-                        Debug.Log("计算后的值为" + current.Float.ToString());
+                        current.Float = expression.Calculate(paramers, 0);
                         item.Value.List[i] = current;
 
                     }

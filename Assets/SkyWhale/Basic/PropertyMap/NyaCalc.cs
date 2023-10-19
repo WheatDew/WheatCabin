@@ -165,6 +165,8 @@ public class NyaExpression
             paramers[i].Value = data.List[paramersSequence[i] +offset].Float;
         }
         ua();
+        Debug.Log("计算后的值为" + expression.List[resultIndex].Value);
+        LogSystem.s.WriteLog("计算后的值为" + expression.List[resultIndex].Value);
         return expression.List[resultIndex].Value;
     }
 }
