@@ -19,6 +19,7 @@ public class SCamera : MonoBehaviour
     #endregion
 
     public ThirdPersonCameraGroup thirdPersonCameraGroup;
+    public QuarterView quarterView;
     [HideInInspector] public GameObject EditorCameraGroup;
 
     private void Start()
@@ -33,10 +34,19 @@ public class SCamera : MonoBehaviour
         thirdPersonCameraGroup.virtualCamera.Follow = target;
         thirdPersonCameraGroup.virtualCamera.LookAt = target;
     }
+
     public void SetEditorPersonCamera()
     {
         EditorCameraGroup.SetActive(true);
         thirdPersonCameraGroup.gameObject.SetActive(false);
         
+    }
+
+    public void SetQuarterView(Transform target)
+    {
+        EditorCameraGroup.SetActive(false);
+        thirdPersonCameraGroup.gameObject.SetActive(false);
+        quarterView.gameObject.SetActive(true);
+        quarterView.target = target;
     }
 }

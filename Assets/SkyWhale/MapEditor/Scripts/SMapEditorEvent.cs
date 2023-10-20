@@ -19,8 +19,10 @@ public class SMapEditorEvent : MonoBehaviour
         editorTimeTransformData.Clear();
         if (SPlayer.s.currentPlayer != null)
         {
-            SCamera.s.SetThirdPersonCamera(SPlayer.s.currentPlayer.transform);
-            SPlayer.s.currentPlayer.AddComponent<ThirdPersonController>();
+            //SCamera.s.SetThirdPersonCamera(SPlayer.s.currentPlayer.transform);
+            SCamera.s.SetQuarterView(SPlayer.s.currentPlayer.transform);
+            //SPlayer.s.currentPlayer.AddComponent<ThirdPersonController>();
+            SPlayer.s.currentPlayer.AddComponent<QuarterViewController>();
             mapEditorPage.SetActive(false);
             stopRunningButton.SetActive(true);
             FindObjectOfType<RTEBase>().gameObject.SetActive(false);
@@ -38,6 +40,10 @@ public class SMapEditorEvent : MonoBehaviour
         stopRunningButton.SetActive(false);
         mapEditorPage.SetActive(true);
         foreach(var item in FindObjectsOfType<ThirdPersonController>())
+        {
+            Destroy(item);
+        }
+        foreach (var item in FindObjectsOfType<QuarterViewController>())
         {
             Destroy(item);
         }
