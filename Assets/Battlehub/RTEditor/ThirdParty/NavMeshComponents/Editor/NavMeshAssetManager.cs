@@ -39,25 +39,14 @@ namespace UnityEditor.AI
             }
             else
             {
-
                 var prefabStage = PrefabStageUtility.GetPrefabStage(surface.gameObject);
                 var isPartOfPrefab = prefabStage != null && prefabStage.IsPartOfPrefabContents(surface.gameObject);
-
-#if UNITY_2020_1_OR_NEWER
-                if (isPartOfPrefab && !string.IsNullOrEmpty(prefabStage.assetPath))
-                {
-                    var prefabDirectoryName = Path.GetDirectoryName(prefabStage.assetPath);
-                    if (!string.IsNullOrEmpty(prefabDirectoryName))
-                        targetPath = prefabDirectoryName;
-                }
-#else
                 if (isPartOfPrefab && !string.IsNullOrEmpty(prefabStage.prefabAssetPath))
                 {
                     var prefabDirectoryName = Path.GetDirectoryName(prefabStage.prefabAssetPath);
                     if (!string.IsNullOrEmpty(prefabDirectoryName))
                         targetPath = prefabDirectoryName;
                 }
-#endif
             }
             if (!Directory.Exists(targetPath))
                 Directory.CreateDirectory(targetPath);

@@ -16,11 +16,6 @@ using NPOI.SS.Formula.Functions;
 
 public class SMapEditor : MonoBehaviour
 {
-    #region 系统函数
-
-
-
-    #endregion
 
     #region 主体
 
@@ -84,6 +79,8 @@ public class SMapEditor : MonoBehaviour
         var terrainPrefab = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestTerrain");
         var terrain = Instantiate(terrainPrefab, childLayerList["Terrain"]);
         terrain.layer = LayerMask.NameToLayer("Ground");
+        terrain.AddComponent<NyaTerrain>();
+
         var go1 = assetBundleMap["SkyWhaleEditor"].LoadAsset<GameObject>("TestWater");
         Instantiate(go1, childLayerList["Water"]);
     }

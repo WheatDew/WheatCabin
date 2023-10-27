@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class QuarterView : MonoBehaviour
 {
-    public Transform target;
+    public Camera targetCamera;
+    [HideInInspector] public Transform target;
 
     private void Update()
     {

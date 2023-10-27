@@ -66,9 +66,7 @@ namespace UnityEngine.AI
         public bool overrideVoxelSize { get { return m_OverrideVoxelSize; } set { m_OverrideVoxelSize = value; } }
         [SerializeField]
         float m_VoxelSize;
-        public float voxelSize
-        { get { return m_VoxelSize; }
-            set { m_VoxelSize = value; } }
+        public float voxelSize { get { return m_VoxelSize; } set { m_VoxelSize = value; } }
 
         // Currently not supported advanced options
         [SerializeField]

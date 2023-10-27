@@ -22,6 +22,8 @@ public class SCamera : MonoBehaviour
     public QuarterView quarterView;
     [HideInInspector] public GameObject EditorCameraGroup;
 
+    [HideInInspector] public Camera currentCamera;
+
     private void Start()
     {
         EditorCameraGroup = GameObject.Find("RTE SceneView Camera");
@@ -33,13 +35,14 @@ public class SCamera : MonoBehaviour
         thirdPersonCameraGroup.gameObject.SetActive(true);
         thirdPersonCameraGroup.virtualCamera.Follow = target;
         thirdPersonCameraGroup.virtualCamera.LookAt = target;
+        currentCamera = thirdPersonCameraGroup.targetCamera;
     }
 
     public void SetEditorPersonCamera()
     {
         EditorCameraGroup.SetActive(true);
         thirdPersonCameraGroup.gameObject.SetActive(false);
-        
+        currentCamera = null;
     }
 
     public void SetQuarterView(Transform target)
@@ -48,5 +51,6 @@ public class SCamera : MonoBehaviour
         thirdPersonCameraGroup.gameObject.SetActive(false);
         quarterView.gameObject.SetActive(true);
         quarterView.target = target;
+        currentCamera = quarterView.targetCamera;
     }
 }

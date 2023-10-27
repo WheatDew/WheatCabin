@@ -10,11 +10,6 @@ public class Entity : MonoBehaviour
     public string detailType;
     public INya data=new NyaMap();
 
-    private void Start()
-    {
-        
-    }
-
     public void StartEvent()
     {
         if (data.Map.ContainsKey(DataKey.StartEvent))

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(AnimatorAddon))]
+//[RequireComponent(typeof(AnimatorAddon))]
 public class QuarterViewController : MonoBehaviour
 {
 
@@ -32,37 +33,51 @@ public class QuarterViewController : MonoBehaviour
     [HideInInspector] public bool isBattling = false;
     AnimatorStateInfo stateInfo;
 
+    NavMeshAgent agent;
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         mainCamera = Camera.main;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            // 获取用户的输入
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-
-            // 计算移动向量
-            Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
-
-            // 如果有输入，则改变朝向
-            if (movement != Vector3.zero)
+            if (Input.GetMouseButtonDown(1))
             {
-                // 设置目标旋转角度
-                Quaternion targetRotation = Quaternion.LookRotation(movement);
+                Debug.Log("点击右键");
+                RaycastHit result;
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out result))
+                {
+                    Debug.LogFormat("设置点{0}", result.point);
+                    agent.SetDestination(result.point);
 
-                // 平滑插值旋转角度
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                }
             }
 
-            anim.SetFloat("Speed", movement.magnitude);
+            //// 获取用户的输入
+            //float horizontalInput = Input.GetAxis("Horizontal");
+            //float verticalInput = Input.GetAxis("Vertical");
 
-            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            //// 计算移动向量
+            //Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
+
+            //// 如果有输入，则改变朝向
+            //if (movement != Vector3.zero)
+            //{
+            //    // 设置目标旋转角度
+            //    Quaternion targetRotation = Quaternion.LookRotation(movement);
+
+            //    // 平滑插值旋转角度
+            //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            //}
+
+            //anim.SetFloat("Speed", movement.magnitude);
+
+            //stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
             if (Input.GetKeyDown(equipKeyboard))
             {
