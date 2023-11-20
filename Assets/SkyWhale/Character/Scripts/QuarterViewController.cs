@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class QuarterViewController : MonoBehaviour
     private float velocity;
 
     public float rotationSpeed = 100f;
+    private bool isTurnAround = false;
 
     //状态指示
     [HideInInspector] public bool isBattling = false;
@@ -37,26 +39,35 @@ public class QuarterViewController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         anim = GetComponent<Animator>();
-        mainCamera = Camera.main;
-        agent = GetComponent<NavMeshAgent>();
+        mainCamera = SCamera.s.currentCamera;
+        agent = gameObject.AddComponent<NavMeshAgent>();
+        
+        agent.angularSpeed = 1080;
+        agent.speed = 2;
     }
 
     private void Update()
     {
+        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        SetSpeed();
+        
+
+        if (isBattling && RangeCalculateSystem.s.Calculate(transform.position, 2).Count > 1 && stateInfo.normalizedTime > 0.6f)
+        {
+            anim.SetTrigger("Attack");
+        }
+
+        //Debug.Log(stateInfo.IsTag("Turn")+" "+stateInfo.IsTag("Walk"));
+
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Debug.Log("点击右键");
-                RaycastHit result;
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out result))
-                {
-                    Debug.LogFormat("设置点{0}", result.point);
-                    agent.SetDestination(result.point);
-
-                }
+                MoveToPoint();
             }
+            
 
             //// 获取用户的输入
             //float horizontalInput = Input.GetAxis("Horizontal");
@@ -105,6 +116,40 @@ public class QuarterViewController : MonoBehaviour
 
     }
 
+    public void InitQuarterViewController()
+    {
+        
+    }
+
+    //移动到鼠标点击位置
+    public void MoveToPoint()
+    {
+        RaycastHit result;
+        if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out result))
+        {
+            //Debug.LogFormat("设置点{0}", result.point);
+            agent.SetDestination(result.point);
+        }
+    } 
+
+    public void SetSpeed()
+    {
+        anim.SetFloat("Speed", agent.velocity.magnitude);
+        Debug.Log(agent.velocity.magnitude);
+
+    }
+
+    public void  StopAgentOnAnimationPlay(AnimatorStateInfo stateInfo)
+    {
+        if (!stateInfo.IsTag("Move"))
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
+    }
 
     //更新目标方向
     public virtual void UpdateTargetDirection()

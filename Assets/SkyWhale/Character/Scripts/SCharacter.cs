@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem.Controls;
 
 public class SCharacter : MonoBehaviour
@@ -53,9 +54,8 @@ public class SCharacter : MonoBehaviour
     {
         if (data.Get(objectType,0).String == "Character")
         {
-
             var character = obj.AddComponent<CharacterEntity>();
-
+            
             character.InitData(data);
             character.type = "Character";
             character.detailType = data.Get(detailType,0).String;

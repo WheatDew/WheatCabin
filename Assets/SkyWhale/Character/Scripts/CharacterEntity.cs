@@ -27,6 +27,7 @@ public class CharacterEntity : Entity
         animator = GetComponent<Animator>();
         gameObject.layer = 7;
         gameObject.tag = "Character";
+        RangeCalculateSystem.s.Add(this);
     }
 
     public void SetHitbox(CHitbox prefab,Vector3 position,Vector3 scale)

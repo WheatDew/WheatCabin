@@ -325,7 +325,7 @@ public class NyaMap : INya
                             else if (value < lowerLimit)
                                 value = lowerLimit;
                             current.Float = value;
-                            Debug.Log("当前值为" + current.Float.ToString());
+                            //Debug.Log("当前值为" + current.Float.ToString());
                         };
 
 
