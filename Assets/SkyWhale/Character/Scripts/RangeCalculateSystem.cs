@@ -13,24 +13,62 @@ public class RangeCalculateSystem : MonoBehaviour
             _s = this;
     }
 
-    public HashSet<Entity> pool = new HashSet<Entity>();
+    public HashSet<DistenceCalculate> distencePairs = new HashSet<DistenceCalculate>();
+    public Dictionary<Entity, HashSet<DistenceCalculate>> data = new Dictionary<Entity, HashSet<DistenceCalculate>>();
 
     public void Add(Entity entity)
     {
-        if (!pool.Contains(entity))
-            pool.Add(entity);
+
+        if (!data.ContainsKey(entity))
+        {
+            HashSet<DistenceCalculate> list = new HashSet<DistenceCalculate>();
+            foreach(var item in data)
+            {
+                var distencePair = new DistenceCalculate(entity, item.Key);
+                list.Add(distencePair);
+                distencePairs.Add(distencePair);
+            }
+            data.Add(entity, list);
+        }
     }
 
-    public HashSet<Entity> Calculate(Vector3 position,float distence)
+    public HashSet<Entity> Calculate(Entity entity,float targetDistence)
     {
         HashSet<Entity> result = new HashSet<Entity>();
-        foreach(var item in pool)
+        foreach(var item in data[entity])
         {
-            if (Vector3.Distance(position, item.transform.position) < distence)
+            if (item.distence < targetDistence)
             {
-                result.Add(item);
+                result.Add(item.entity2);
             }
         }
+        Debug.Log(result.Count+" "+data.Count);
         return result;
+    }
+
+    private void Update()
+    {
+        foreach(var item in distencePairs)
+        {
+            item.Calculate();
+        }
+    }
+}
+
+public class DistenceCalculate
+{
+    public Entity entity1;
+    public Entity entity2;
+    public float distence;
+
+    public DistenceCalculate(Entity entity1,Entity entity2)
+    {
+        this.entity1 = entity1;
+        this.entity2 = entity2;
+    }
+
+    public void Calculate()
+    {
+        distence = Vector3.Distance(entity1.transform.position, entity2.transform.position);
     }
 }

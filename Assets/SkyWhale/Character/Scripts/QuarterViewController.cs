@@ -1,9 +1,11 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using static UnityEditor.Sprites.Packer;
 
 //[RequireComponent(typeof(AnimatorAddon))]
 public class QuarterViewController : MonoBehaviour
@@ -36,10 +38,20 @@ public class QuarterViewController : MonoBehaviour
     AnimatorStateInfo stateInfo;
 
     NavMeshAgent agent;
+    public CharacterEntity entity;
+    public HashSet<Entity> inRangeEntities;
+
+    //指令缓存
+    public string commandBuffer;
+    public string commandExecuting;
+
+    //帧计数器
+    public int frameTimer = 0;
+
     // Use this for initialization
     void Start()
     {
-
+        entity = GetComponent<CharacterEntity>();
         anim = GetComponent<Animator>();
         mainCamera = SCamera.s.currentCamera;
         agent = gameObject.AddComponent<NavMeshAgent>();
@@ -51,13 +63,9 @@ public class QuarterViewController : MonoBehaviour
     private void Update()
     {
         stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        SetSpeed();
-        
+        CommandCircle(ref commandBuffer,ref commandExecuting,ref stateInfo);
 
-        if (isBattling && RangeCalculateSystem.s.Calculate(transform.position, 2).Count > 1 && stateInfo.normalizedTime > 0.6f)
-        {
-            anim.SetTrigger("Attack");
-        }
+        
 
         //Debug.Log(stateInfo.IsTag("Turn")+" "+stateInfo.IsTag("Walk"));
 
@@ -65,30 +73,8 @@ public class QuarterViewController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                MoveToPoint();
+                commandBuffer = "Move";
             }
-            
-
-            //// 获取用户的输入
-            //float horizontalInput = Input.GetAxis("Horizontal");
-            //float verticalInput = Input.GetAxis("Vertical");
-
-            //// 计算移动向量
-            //Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
-
-            //// 如果有输入，则改变朝向
-            //if (movement != Vector3.zero)
-            //{
-            //    // 设置目标旋转角度
-            //    Quaternion targetRotation = Quaternion.LookRotation(movement);
-
-            //    // 平滑插值旋转角度
-            //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            //}
-
-            //anim.SetFloat("Speed", movement.magnitude);
-
-            //stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
             if (Input.GetKeyDown(equipKeyboard))
             {
@@ -116,26 +102,100 @@ public class QuarterViewController : MonoBehaviour
 
     }
 
-    public void InitQuarterViewController()
+    //命令循环
+    private void CommandCircle(ref string buffer,ref string executing,ref AnimatorStateInfo stateInfo)
     {
-        
+
+
+        //状态更新
+        if (executing != null)
+        {
+            if (executing == "Move")
+            {
+                CheckMoveEnd(ref executing);
+                SetSpeed();
+            }
+
+        }
+
+        if (frameTimer > 0)
+        {
+            frameTimer--;
+            return;
+        }
+
+        //无覆盖指令
+        if (buffer != null&& executing == null)
+        {
+            if (buffer == "Attack"&& isBattling&&stateInfo.normalizedTime>0.6f)
+            {
+                AttackPrepare();
+            }
+        }
+
+        //可覆盖指令
+        if(buffer != null)
+        {
+            if (buffer == "Move"&& (executing == null||executing=="Move"))
+            {
+                MoveToPoint(ref executing);
+                buffer = null;
+                //frameTimer = 0;
+            }
+        }
+
+
+    }
+
+    public void AttackPrepare()
+    {
+        RaycastHit result;
+        if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out result))
+        {
+            if (PropertyMap.s.entityMap[result.transform.GetInstanceID()]&&!isBattling)
+            {
+                anim.SetTrigger("Equip");
+                isBattling = true;
+            }
+
+        }
+    }
+
+    public void AttackAction()
+    {
+        inRangeEntities = RangeCalculateSystem.s.Calculate(entity, 2);
+        if (inRangeEntities.Count > 0)
+        {
+            transform.LookAt(inRangeEntities.First().transform);
+            anim.SetTrigger("Attack");
+        }
     }
 
     //移动到鼠标点击位置
-    public void MoveToPoint()
+    public void MoveToPoint(ref string executing)
     {
         RaycastHit result;
         if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out result))
         {
             //Debug.LogFormat("设置点{0}", result.point);
             agent.SetDestination(result.point);
+            executing = "Move";
+            
         }
     } 
+
+    private void CheckMoveEnd(ref string executing)
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance)
+            executing = null;
+        else
+            executing = "Move";
+    }
 
     public void SetSpeed()
     {
         anim.SetFloat("Speed", agent.velocity.magnitude);
-        Debug.Log(agent.velocity.magnitude);
+        //Debug.Log(agent.velocity.magnitude);
 
     }
 
