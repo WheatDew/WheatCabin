@@ -7,7 +7,6 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using static UnityEditor.Sprites.Packer;
 
-//[RequireComponent(typeof(AnimatorAddon))]
 public class QuarterViewController : MonoBehaviour
 {
 
@@ -48,6 +47,11 @@ public class QuarterViewController : MonoBehaviour
     //帧计数器
     public int frameTimer = 0;
 
+    public IEnumerator action;
+    public Dictionary<string, List<IEnumerator>> actmap = new Dictionary<string, List<IEnumerator>>();
+    public HashSet<string> blockList = new HashSet<string>();
+
+    public string currentGroup = "", currentAction = "";
     // Use this for initialization
     void Start()
     {
@@ -58,22 +62,23 @@ public class QuarterViewController : MonoBehaviour
         
         agent.angularSpeed = 1080;
         agent.speed = 2;
+        actmap.Add("Move",new List<IEnumerator> { Move() });
+        actmap.Add("Equip", new List<IEnumerator> { Equip()});
+
+        //优先级设定
+        blockList.Add("Equip");
     }
 
     private void Update()
     {
         stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        CommandCircle(ref commandBuffer,ref commandExecuting,ref stateInfo);
 
-        
-
-        //Debug.Log(stateInfo.IsTag("Turn")+" "+stateInfo.IsTag("Walk"));
 
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetMouseButtonDown(1))
             {
-                commandBuffer = "Move";
+                Run("Move");
             }
 
             if (Input.GetKeyDown(equipKeyboard))
@@ -85,7 +90,7 @@ public class QuarterViewController : MonoBehaviour
                 }
                 else
                 {
-                    anim.SetTrigger("Equip");
+                    Run("Equip");
                     isBattling = true;
                 }
             }
@@ -102,140 +107,87 @@ public class QuarterViewController : MonoBehaviour
 
     }
 
-    //命令循环
-    private void CommandCircle(ref string buffer,ref string executing,ref AnimatorStateInfo stateInfo)
+
+    public void Run(string key)
     {
-
-
-        //状态更新
-        if (executing != null)
-        {
-            if (executing == "Move")
-            {
-                CheckMoveEnd(ref executing);
-                SetSpeed();
-            }
-
-        }
-
-        if (frameTimer > 0)
-        {
-            frameTimer--;
-            return;
-        }
-
-        //无覆盖指令
-        if (buffer != null&& executing == null)
-        {
-            if (buffer == "Attack"&& isBattling&&stateInfo.normalizedTime>0.6f)
-            {
-                AttackPrepare();
-            }
-        }
-
-        //可覆盖指令
-        if(buffer != null)
-        {
-            if (buffer == "Move"&& (executing == null||executing=="Move"))
-            {
-                MoveToPoint(ref executing);
-                buffer = null;
-                //frameTimer = 0;
-            }
-        }
-
-
+        StopAllCoroutines();
+        StartCoroutine(RunActions(key));
     }
 
-    public void AttackPrepare()
+    public IEnumerator RunActions(string key)
     {
-        RaycastHit result;
-        if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out result))
+        currentGroup = key;
+        var list = actmap[key];
+        for(int i = 0; i < list.Count; i++)
         {
-            if (PropertyMap.s.entityMap[result.transform.GetInstanceID()]&&!isBattling)
-            {
-                anim.SetTrigger("Equip");
-                isBattling = true;
-            }
-
+            yield return list[i];
         }
+        currentGroup = "";
     }
 
-    public void AttackAction()
+    IEnumerator Equip()
     {
-        inRangeEntities = RangeCalculateSystem.s.Calculate(entity, 2);
-        if (inRangeEntities.Count > 0)
+        currentAction = "Equip";
+        anim.SetTrigger("Equip");
+        while (stateInfo.normalizedTime < 1)
         {
-            transform.LookAt(inRangeEntities.First().transform);
-            anim.SetTrigger("Attack");
+            yield return null;
         }
+        Debug.Log("结束");
+        currentAction = "";
     }
 
-    //移动到鼠标点击位置
-    public void MoveToPoint(ref string executing)
+    IEnumerator Move()
     {
+        currentAction = "Move";
         RaycastHit result;
         if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out result))
         {
             //Debug.LogFormat("设置点{0}", result.point);
             agent.SetDestination(result.point);
-            executing = "Move";
+        }
+        agent.isStopped = false;
+        while (true)
+        {
+            anim.SetFloat("Speed", agent.velocity.magnitude);
+            if(agent.remainingDistance <= agent.stoppingDistance)
+            {
+                break;
+            }
+            yield return null;
+        }
+        Debug.Log("结束");
+        anim.SetFloat("Speed", 0);
+        agent.isStopped = true;
+        currentAction = "";
+    }
+
+    ////更新目标方向
+    //public virtual void UpdateTargetDirection()
+    //{
+    //    if (!useCharacterForward)
+    //    {
+    //        turnSpeedMultiplier = 1f;
+    //        var forward = mainCamera.transform.TransformDirection(Vector3.forward);
+    //        forward.y = 0;
+
+    //        //get the right-facing direction of the referenceTransform
+    //        var right = mainCamera.transform.TransformDirection(Vector3.right);
+
+    //        // determine the direction the player will face based on input and the referenceTransform's right and forward directions
+    //        targetDirection = input.x * right + input.y * forward;
+    //    }
+    //    else
+    //    {
+    //        turnSpeedMultiplier = 0.2f;
+    //        var forward = transform.TransformDirection(Vector3.forward);
+    //        forward.y = 0;
+
+    //        //get the right-facing direction of the referenceTransform
+    //        var right = transform.TransformDirection(Vector3.right);
+    //        targetDirection = input.x * right + Mathf.Abs(input.y) * forward;
             
-        }
-    } 
-
-    private void CheckMoveEnd(ref string executing)
-    {
-        if (agent.remainingDistance <= agent.stoppingDistance)
-            executing = null;
-        else
-            executing = "Move";
-    }
-
-    public void SetSpeed()
-    {
-        anim.SetFloat("Speed", agent.velocity.magnitude);
-        //Debug.Log(agent.velocity.magnitude);
-
-    }
-
-    public void  StopAgentOnAnimationPlay(AnimatorStateInfo stateInfo)
-    {
-        if (!stateInfo.IsTag("Move"))
-        {
-            agent.isStopped = true;
-        }
-        else
-        {
-            agent.isStopped = false;
-        }
-    }
-
-    //更新目标方向
-    public virtual void UpdateTargetDirection()
-    {
-        if (!useCharacterForward)
-        {
-            turnSpeedMultiplier = 1f;
-            var forward = mainCamera.transform.TransformDirection(Vector3.forward);
-            forward.y = 0;
-
-            //get the right-facing direction of the referenceTransform
-            var right = mainCamera.transform.TransformDirection(Vector3.right);
-
-            // determine the direction the player will face based on input and the referenceTransform's right and forward directions
-            targetDirection = input.x * right + input.y * forward;
-        }
-        else
-        {
-            turnSpeedMultiplier = 0.2f;
-            var forward = transform.TransformDirection(Vector3.forward);
-            forward.y = 0;
-
-            //get the right-facing direction of the referenceTransform
-            var right = transform.TransformDirection(Vector3.right);
-            targetDirection = input.x * right + Mathf.Abs(input.y) * forward;
-        }
-    }
+    //    }
+    //}
 }
 
