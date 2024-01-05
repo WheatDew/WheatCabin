@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using static UnityEditor.Sprites.Packer;
 
 public class QuarterViewController : MonoBehaviour
 {
@@ -48,7 +47,7 @@ public class QuarterViewController : MonoBehaviour
     public int frameTimer = 0;
 
     public IEnumerator action;
-    public Dictionary<string, List<IEnumerator>> actmap = new Dictionary<string, List<IEnumerator>>();
+    public Dictionary<string, IEnumerator> actmap = new Dictionary<string, IEnumerator>();
     public HashSet<string> blockList = new HashSet<string>();
 
     public string currentGroup = "", currentAction = "";
@@ -62,8 +61,8 @@ public class QuarterViewController : MonoBehaviour
         
         agent.angularSpeed = 1080;
         agent.speed = 2;
-        actmap.Add("Move",new List<IEnumerator> { Move() });
-        actmap.Add("Equip", new List<IEnumerator> { Equip()});
+        actmap.Add("Move",Move());
+        actmap.Add("Equip", Equip());
 
         //优先级设定
         blockList.Add("Equip");
@@ -107,22 +106,10 @@ public class QuarterViewController : MonoBehaviour
 
     }
 
-
-    public void Run(string key)
+    public void Run(string name)
     {
         StopAllCoroutines();
-        StartCoroutine(RunActions(key));
-    }
-
-    public IEnumerator RunActions(string key)
-    {
-        currentGroup = key;
-        var list = actmap[key];
-        for(int i = 0; i < list.Count; i++)
-        {
-            yield return list[i];
-        }
-        currentGroup = "";
+        StartCoroutine(actmap[name]);
     }
 
     IEnumerator Equip()
@@ -136,6 +123,7 @@ public class QuarterViewController : MonoBehaviour
         Debug.Log("结束");
         currentAction = "";
     }
+
 
     IEnumerator Move()
     {
@@ -162,32 +150,5 @@ public class QuarterViewController : MonoBehaviour
         currentAction = "";
     }
 
-    ////更新目标方向
-    //public virtual void UpdateTargetDirection()
-    //{
-    //    if (!useCharacterForward)
-    //    {
-    //        turnSpeedMultiplier = 1f;
-    //        var forward = mainCamera.transform.TransformDirection(Vector3.forward);
-    //        forward.y = 0;
-
-    //        //get the right-facing direction of the referenceTransform
-    //        var right = mainCamera.transform.TransformDirection(Vector3.right);
-
-    //        // determine the direction the player will face based on input and the referenceTransform's right and forward directions
-    //        targetDirection = input.x * right + input.y * forward;
-    //    }
-    //    else
-    //    {
-    //        turnSpeedMultiplier = 0.2f;
-    //        var forward = transform.TransformDirection(Vector3.forward);
-    //        forward.y = 0;
-
-    //        //get the right-facing direction of the referenceTransform
-    //        var right = transform.TransformDirection(Vector3.right);
-    //        targetDirection = input.x * right + Mathf.Abs(input.y) * forward;
-            
-    //    }
-    //}
 }
 

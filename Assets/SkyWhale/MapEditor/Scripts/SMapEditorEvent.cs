@@ -22,7 +22,8 @@ public class SMapEditorEvent : MonoBehaviour
             //SCamera.s.SetThirdPersonCamera(SPlayer.s.currentPlayer.transform);
             SCamera.s.SetQuarterView(SPlayer.s.currentPlayer.transform);
             //SPlayer.s.currentPlayer.AddComponent<ThirdPersonController>();
-            SPlayer.s.currentPlayer.AddComponent<QuarterViewController>();
+            //SPlayer.s.currentPlayer.AddComponent<QuarterViewController>();
+            SPlayer.s.currentPlayer.AddComponent<QuarterViewMouseDirectController>();
             mapEditorPage.SetActive(false);
             stopRunningButton.SetActive(true);
             FindObjectOfType<RTEBase>().gameObject.SetActive(false);
