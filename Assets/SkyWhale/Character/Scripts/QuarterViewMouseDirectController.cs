@@ -32,7 +32,7 @@ public class QuarterViewMouseDirectController : MonoBehaviour
                 _animator.applyRootMotion = false;
             Vector3 dir_forward = transform.forward;
             Vector3 dir_right = transform.right;
-            Vector3 velocity = dir_right * Input.GetAxisRaw("Horizontal") * _animationSpeed + dir_forward * Input.GetAxisRaw("Vertical") * _animationSpeed;
+            Vector3 velocity = Vector3.right * Input.GetAxisRaw("Horizontal") * _animationSpeed + Vector3.forward * Input.GetAxisRaw("Vertical") * _animationSpeed;
             velocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = velocity;
 
@@ -62,7 +62,7 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
         if (Input.GetKeyDown(skillKeyboard))
         {
-
+            _animator.SetTrigger("Skill");
         }
     }
 

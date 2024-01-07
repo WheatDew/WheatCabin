@@ -91,8 +91,8 @@
 //            MyWorkbook.Close();
 
 //        }
-        
-        
+
+
 //        if (GUI.Button(new Rect(60, 120, 200, 30), "Reading Excel Files With " + "<color=yellow>NPOI</color>"))
 //        {
 
@@ -149,7 +149,7 @@
 
 //            IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(MyAddress);
 
-            
+
 //            DataSet Result = excelReader.AsDataSet();
 
 //            excelReader.IsFirstRowAsColumnNames = true;
@@ -170,7 +170,6 @@
 //                        ReadExcelEnable_ExcelDataReader = false;
 
 //                    }
-
 //                    MyString.Add(Result.Tables[0].Rows[i][j].ToString());
 
 //                }
