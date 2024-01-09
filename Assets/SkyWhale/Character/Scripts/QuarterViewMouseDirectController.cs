@@ -36,17 +36,19 @@ public class QuarterViewMouseDirectController : MonoBehaviour
             velocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = velocity;
 
-            _animator.SetFloat("DH", Input.GetAxisRaw("Horizontal"));
-            _animator.SetFloat("DV", Input.GetAxisRaw("Vertical"));
+            _animator.SetFloat("DH", _rigidbody.velocity.sqrMagnitude);
 
-            Vector3 mousePosition = Input.mousePosition;
+            //_animator.SetFloat("DH", Input.GetAxisRaw("Horizontal"));
+            //_animator.SetFloat("DV", Input.GetAxisRaw("Vertical"));
 
-            // 计算鼠标位置相对于屏幕中心的偏移向量
-            Vector3 offset = mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
+            //Vector3 mousePosition = Input.mousePosition;
 
-            // 计算偏移向量的角度
-            float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.down);
+            //// 计算鼠标位置相对于屏幕中心的偏移向量
+            //Vector3 offset = mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
+
+            //// 计算偏移向量的角度
+            //float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.down);
         }
         else
         {
