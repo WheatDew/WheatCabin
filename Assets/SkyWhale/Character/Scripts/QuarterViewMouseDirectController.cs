@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class QuarterViewMouseDirectController : MonoBehaviour
 {
@@ -33,13 +34,16 @@ public class QuarterViewMouseDirectController : MonoBehaviour
             Vector3 dir_forward = transform.forward;
             Vector3 dir_right = transform.right;
             Vector3 velocity = Vector3.right * Input.GetAxisRaw("Horizontal") * _animationSpeed + Vector3.forward * Input.GetAxisRaw("Vertical") * _animationSpeed;
+
+            transform.forward = Vector3.Lerp(transform.forward, velocity.normalized, 0.1f);
+
             velocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = velocity;
 
-            _animator.SetFloat("DH", _rigidbody.velocity.sqrMagnitude);
+            //_animator.SetFloat("DH", _rigidbody.velocity.sqrMagnitude);
 
-            //_animator.SetFloat("DH", Input.GetAxisRaw("Horizontal"));
-            //_animator.SetFloat("DV", Input.GetAxisRaw("Vertical"));
+            _animator.SetFloat("DV", velocity.magnitude);
+            //_animator.SetFloat("DV", velocity.normalized.z);
 
             //Vector3 mousePosition = Input.mousePosition;
 
