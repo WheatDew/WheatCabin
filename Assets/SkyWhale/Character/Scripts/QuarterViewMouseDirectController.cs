@@ -26,23 +26,39 @@ public class QuarterViewMouseDirectController : MonoBehaviour
     private void Update()
     {
         _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (_animatorStateInfo.IsTag("Attack"))
+        {
+            _rigidbody.constraints = ~(RigidbodyConstraints.FreezePositionX & RigidbodyConstraints.FreezePositionZ);
+        }
 
         if (_animatorStateInfo.IsTag("Move"))
         {
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
             if (_animator.applyRootMotion)
                 _animator.applyRootMotion = false;
             Vector3 dir_forward = transform.forward;
             Vector3 dir_right = transform.right;
             Vector3 velocity = Vector3.right * Input.GetAxisRaw("Horizontal") * _animationSpeed + Vector3.forward * Input.GetAxisRaw("Vertical") * _animationSpeed;
-
+            var angle = Vector3.Angle(transform.forward, velocity);
+            var vv = velocity;
             transform.forward = Vector3.Lerp(transform.forward, velocity.normalized, 0.1f);
 
             velocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = velocity;
 
+            if(angle<90)
+                _animator.SetFloat("DV", velocity.magnitude);
+            else if(angle>=90)
+                _animator.SetFloat("DV", -velocity.magnitude);
+
+            //_animator.SetFloat("DH", Mathf.Sin(angle) * velocity.magnitude);
+            //_animator.SetFloat("DV", Mathf.Cos(angle) * velocity.magnitude);
+            
+
             //_animator.SetFloat("DH", _rigidbody.velocity.sqrMagnitude);
 
-            _animator.SetFloat("DV", velocity.magnitude);
+            //_animator.SetFloat("DV", velocity.magnitude);
             //_animator.SetFloat("DV", velocity.normalized.z);
 
             //Vector3 mousePosition = Input.mousePosition;
