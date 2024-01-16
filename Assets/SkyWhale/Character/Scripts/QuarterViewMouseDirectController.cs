@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -17,6 +18,8 @@ public class QuarterViewMouseDirectController : MonoBehaviour
     float _animationSpeed=4;
     AnimatorStateInfo _animatorStateInfo;
 
+    public float timer=0;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -25,15 +28,17 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
         _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+
         if (_animatorStateInfo.IsTag("Attack"))
         {
-            _rigidbody.constraints = ~(RigidbodyConstraints.FreezePositionX & RigidbodyConstraints.FreezePositionZ);
+            if (!_animator.applyRootMotion)
+                _animator.applyRootMotion = true;
         }
 
         if (_animatorStateInfo.IsTag("Move"))
         {
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
             if (_animator.applyRootMotion)
                 _animator.applyRootMotion = false;
@@ -76,17 +81,30 @@ public class QuarterViewMouseDirectController : MonoBehaviour
                 _animator.applyRootMotion = true;
         }
 
-        
         if (Input.GetKeyDown(attackKeyboard))
         {
-            _animator.SetTrigger("Attack");
+            attackTimer = timer;
         }
 
-        if (Input.GetKeyDown(skillKeyboard))
+        if (Input.GetKeyUp(attackKeyboard))
+        {
+            if(timer > attackTimer + 0.5f)
+            {
+                _animator.SetTrigger("SpAttack");
+            }
+            else
+            {
+                _animator.SetTrigger("Attack");
+            }
+
+        }
+
+        if (Input.GetKeyUp(skillKeyboard))
         {
             _animator.SetTrigger("Skill");
         }
     }
 
+    private float attackTimer = 0;
 
 }
