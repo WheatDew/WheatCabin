@@ -182,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124617265}
   m_LocalRotation: {x: 0.32326594, y: -0, z: -0, w: 0.94630814}
-  m_LocalPosition: {x: -0.18247762, y: 6.1181836, z: -6.480213}
+  m_LocalPosition: {x: 5.6386094, y: 3.0078576, z: 4.770471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 5081522074415790580}
+  m_Follow: {fileID: 4223312532811065151}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -335,6 +335,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1079307223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079307226}
+  - component: {fileID: 1079307225}
+  - component: {fileID: 1079307224}
+  m_Layer: 0
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!154 &1079307224
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079307223}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 2e58c88e6a24c9341bc5233a276627ae, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!218 &1079307225
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079307223}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: 2e58c88e6a24c9341bc5233a276627ae, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ScaleInLightmap: 0.0256
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+--- !u!4 &1079307226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079307223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1081746484
 GameObject:
@@ -567,7 +645,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519897689}
   m_LocalRotation: {x: 0.32326594, y: -0, z: -0, w: 0.94630814}
-  m_LocalPosition: {x: -0.18247762, y: 6.1181836, z: -6.480213}
+  m_LocalPosition: {x: 5.6386094, y: 3.0078576, z: 4.770471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -592,7 +670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1903777766
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -820,7 +898,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 10
+  m_CameraDistance: 3
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -2749,7 +2827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5606666851496731470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18247762, y: 0, z: 1.429769}
+  m_LocalPosition: {x: 5.64, y: 0, z: 7.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3164,46 +3242,46 @@ MonoBehaviour:
   serializeData2:
     selectionData:
       positions:
-      - x: -0.058641016
+      - x: -0.058640957
         y: 1.1518464
-        z: -0.15606093
-      - x: -0.08781701
+        z: -0.1560607
+      - x: -0.08781719
         y: 1.0718462
-        z: -0.17088759
-      - x: -0.114864886
+        z: -0.17088747
+      - x: -0.114864826
         y: 0.9918462
-        z: -0.18608212
-      - x: -0.13702598
+        z: -0.18608189
+      - x: -0.13702583
         y: 0.9118464
         z: -0.20027828
-      - x: -0.15154174
+      - x: -0.15154171
         y: 0.8318464
-        z: -0.2121098
-      - x: -0.15565339
+        z: -0.21211004
+      - x: -0.15565348
         y: 0.7518463
         z: -0.22021055
-      - x: -0.14660239
+      - x: -0.14660215
         y: 0.6718464
-        z: -0.2232145
-      - x: 0.052966684
+        z: -0.22321463
+      - x: 0.052966595
         y: 1.1601695
         z: -0.15148306
-      - x: 0.08130355
+      - x: 0.0813036
         y: 1.0801694
         z: -0.16576433
-      - x: 0.10734522
+      - x: 0.107345104
         y: 1.0001694
-        z: -0.18028092
-      - x: 0.1284434
+        z: -0.18028116
+      - x: 0.12844324
         y: 0.9201695
-        z: -0.193856
-      - x: 0.14194979
+        z: -0.19385624
+      - x: 0.14194965
         y: 0.84016955
-        z: -0.20531249
-      - x: 0.145216
+        z: -0.20531225
+      - x: 0.14521599
         y: 0.7601695
-        z: -0.21347308
-      - x: 0.13559385
+        z: -0.21347332
+      - x: 0.13559389
         y: 0.6801695
         z: -0.21716118
       attributes:
@@ -3221,7 +3299,7 @@ MonoBehaviour:
       - Value: 2
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.08643549
+      maxConnectionDistance: 0.08643559
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -3396,7 +3474,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1519897690}
-  verticalMultiple: 2
+  forwardMultiple: 3
+  backMutiple: 3
+  rightMultiple: 3
 --- !u!1 &5618848481364057504
 GameObject:
   m_ObjectHideFlags: 0

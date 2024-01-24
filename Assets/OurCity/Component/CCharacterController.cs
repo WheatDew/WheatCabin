@@ -14,7 +14,7 @@ public class CCharacterController : MonoBehaviour
 
     public Camera playerCamera;
 
-    public Vector3 verticalMultiple;
+    public float forwardMultiple,backMutiple,rightMultiple;
 
 
     private void Start()
@@ -31,6 +31,8 @@ public class CCharacterController : MonoBehaviour
 
         if (verticalInput != 0 || horizontalInput != 0)
             Move();
+        else
+            MoveStop();
 
         Animation();
     }
@@ -48,12 +50,21 @@ public class CCharacterController : MonoBehaviour
         {
             if (_animator.applyRootMotion)
                 _animator.applyRootMotion = false;
-            var velocity = transform.forward.normalized * verticalInput* verticalMultiple.z+ transform.right.normalized*horizontalInput*verticalMultiple.x;
-            
+            //var velocity = verticalInput>0 ?
+            //    transform.forward.normalized * verticalInput* forwardMultiple: transform.forward.normalized * verticalInput * backMutiple + transform.right.normalized*horizontalInput*rightMultiple;
+
+            var velocity =
+                transform.forward.normalized * verticalInput * forwardMultiple + transform.right.normalized * horizontalInput * rightMultiple;
+
             _rigidbody.velocity = velocity;
 
             Debug.LogFormat("{0} {1}", velocity, velocity.magnitude);
         }
+    }
+
+    public void MoveStop()
+    {
+        _rigidbody.velocity = Vector3.zero;
     }
 
     public void Animation()
