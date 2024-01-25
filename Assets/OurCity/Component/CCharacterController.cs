@@ -58,7 +58,7 @@ public class CCharacterController : MonoBehaviour
 
             _rigidbody.velocity = velocity;
 
-            Debug.LogFormat("{0} {1}", velocity, velocity.magnitude);
+            //Debug.LogFormat("{0} {1}", velocity, velocity.magnitude);
         }
     }
 
