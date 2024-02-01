@@ -2,7 +2,7 @@
 /// Project : Easy Build System
 /// Class : Demo_InputHandler.cs
 /// Namespace : EasyBuildSystem.Demos.Bases.Scripts
-/// Copyright : © 2015 - 2022 by PolarInteractive
+/// Copyright : ?2015 - 2022 by PolarInteractive
 /// </summary>
 
 using UnityEngine;

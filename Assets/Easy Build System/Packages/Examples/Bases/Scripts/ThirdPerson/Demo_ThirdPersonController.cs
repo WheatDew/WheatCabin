@@ -6,6 +6,7 @@
 /// </summary>
 
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 {
@@ -53,12 +54,15 @@ namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 
 		bool m_HasAnimator;
 
+		protected UnityEvent awakeEvent,startEvent,updateEvent;
+
 		void Awake()
 		{
 			if (m_Camera == null)
 			{
 				m_Camera = Camera.main.gameObject;
 			}
+			awakeEvent.Invoke();
 		}
 
 		void Start()
@@ -70,6 +74,8 @@ namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 
 			m_JumpTimeoutDelta = m_JumpTimeout;
 			m_FallTimeoutDelta = m_FallTimeout;
+
+			startEvent.Invoke();
 		}
 
 		void Update()
@@ -79,6 +85,7 @@ namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			updateEvent.Invoke();
 		}
 
 		void AssignAnimationIDs()
