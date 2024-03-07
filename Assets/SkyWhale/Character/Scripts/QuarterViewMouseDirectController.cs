@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -20,6 +21,10 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
     public float timer=0;
 
+    private bool skillPrepare=false;
+    private bool spin = false;
+    private GameObject arrow;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -28,6 +33,7 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
     private void Update()
     {
+        MouseDirection();
         timer += Time.deltaTime;
         _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
@@ -57,23 +63,6 @@ public class QuarterViewMouseDirectController : MonoBehaviour
             else if(angle>=90)
                 _animator.SetFloat("DV", -velocity.magnitude);
 
-            //_animator.SetFloat("DH", Mathf.Sin(angle) * velocity.magnitude);
-            //_animator.SetFloat("DV", Mathf.Cos(angle) * velocity.magnitude);
-            
-
-            //_animator.SetFloat("DH", _rigidbody.velocity.sqrMagnitude);
-
-            //_animator.SetFloat("DV", velocity.magnitude);
-            //_animator.SetFloat("DV", velocity.normalized.z);
-
-            //Vector3 mousePosition = Input.mousePosition;
-
-            //// 计算鼠标位置相对于屏幕中心的偏移向量
-            //Vector3 offset = mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
-
-            //// 计算偏移向量的角度
-            //float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.down);
         }
         else
         {
@@ -99,12 +88,59 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(skillKeyboard))
+        if (Input.GetKeyUp(skillKeyboard)&&!skillPrepare)
         {
-            _animator.SetTrigger("Skill");
+            skillPrepare = true;
+            arrow = EffectSystem.s.CreateEffect("arrow");
+        }
+        else if (skillPrepare)
+        {
+
+            arrow.transform.position = transform.position;
+            arrow.transform.rotation = Quaternion.LookRotation(mouseDirection);
+
+            if (Input.GetKeyUp(skillKeyboard))
+            {
+                transform.rotation = Quaternion.LookRotation(mouseDirection);
+                _animator.SetTrigger("Skill");
+                EffectSystem.s.CreateDirectivityEffect("fire", transform.position + Vector3.up, mouseDirection, 3, 3);
+                Destroy(arrow);
+                skillPrepare = false;
+            }
         }
     }
 
     private float attackTimer = 0;
+    private Vector3 mouseDirection = Vector3.zero;
 
+    /// <summary>
+    /// 判断鼠标方向
+    /// </summary>
+    private void MouseDirection()
+    {
+        RaycastHit result;
+        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out result))
+        {
+            Vector3 pos = transform.position;
+            Vector3 mpos = result.point;
+            pos.y = 0;
+            mpos.y = 0;
+            mouseDirection = mpos - pos;
+        }
+        else
+        {
+            mouseDirection = Vector3.zero;
+        }
+    }
+
+    //spin
+    private IEnumerator SpinAnimation(float time)
+    {
+        float timer = 0;
+        while (timer < time)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
 }

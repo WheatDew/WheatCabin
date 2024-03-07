@@ -1,4 +1,3 @@
-using org.mariuszgromada.math.mxparser;
 using System;
 using System.Collections;
 using System.Collections.Generic;
