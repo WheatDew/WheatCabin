@@ -37,6 +37,9 @@ public class QuarterViewMouseDirectController : MonoBehaviour
         timer += Time.deltaTime;
         _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
+        if (spin)
+            return;
+
         if (_animatorStateInfo.IsTag("Attack"))
         {
             if (!_animator.applyRootMotion)
@@ -101,11 +104,7 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
             if (Input.GetKeyUp(skillKeyboard))
             {
-                transform.rotation = Quaternion.LookRotation(mouseDirection);
-                _animator.SetTrigger("Skill");
-                EffectSystem.s.CreateDirectivityEffect("fire", transform.position + Vector3.up, mouseDirection, 3, 3);
-                Destroy(arrow);
-                skillPrepare = false;
+                StartCoroutine(SpinAnimation(arrow, mouseDirection, 0.3f));
             }
         }
     }
@@ -134,13 +133,26 @@ public class QuarterViewMouseDirectController : MonoBehaviour
     }
 
     //spin
-    private IEnumerator SpinAnimation(float time)
+    private IEnumerator SpinAnimation(GameObject arrow,Vector3 direct, float time)
     {
+        spin = true;
+        Quaternion target = Quaternion.LookRotation(mouseDirection);
+        Quaternion origin = transform.rotation;
+
         float timer = 0;
         while (timer < time)
         {
             timer += Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(origin, target, timer / time);
+
+
             yield return null;
         }
+        _animator.SetTrigger("Skill");
+        yield return new WaitForSeconds(0.1f);
+        EffectSystem.s.CreateDirectivityEffect("fire", transform.position + Vector3.up, mouseDirection, 3, 3);
+        Destroy(arrow);
+        skillPrepare = false;
+        spin = false;
     }
 }
