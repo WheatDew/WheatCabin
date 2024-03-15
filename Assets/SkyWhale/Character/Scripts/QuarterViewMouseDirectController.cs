@@ -104,7 +104,7 @@ public class QuarterViewMouseDirectController : MonoBehaviour
 
             if (Input.GetKeyUp(skillKeyboard))
             {
-                StartCoroutine(SpinAnimation(arrow, mouseDirection, 0.3f));
+                StartCoroutine(SpinAnimation(arrow, mouseDirection, 0.1f));
             }
         }
     }
@@ -138,6 +138,7 @@ public class QuarterViewMouseDirectController : MonoBehaviour
         spin = true;
         Quaternion target = Quaternion.LookRotation(mouseDirection);
         Quaternion origin = transform.rotation;
+
 
         float timer = 0;
         while (timer < time)
