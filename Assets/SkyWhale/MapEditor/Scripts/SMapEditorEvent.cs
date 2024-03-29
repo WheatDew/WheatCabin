@@ -17,13 +17,20 @@ public class SMapEditorEvent : MonoBehaviour
     public void StartGame()
     {
         editorTimeTransformData.Clear();
+
+        foreach(var item in FindObjectsOfType<CharacterEntity>())
+        {
+            if (item.gameObject != SPlayer.s.currentPlayer)
+                item.gameObject.AddComponent<QuarterViewAIController>();
+        }
+
         if (SPlayer.s.currentPlayer != null)
         {
             //SCamera.s.SetThirdPersonCamera(SPlayer.s.currentPlayer.transform);
             SCamera.s.SetQuarterView(SPlayer.s.currentPlayer.transform);
             //SPlayer.s.currentPlayer.AddComponent<ThirdPersonController>();
             //SPlayer.s.currentPlayer.AddComponent<QuarterViewController>();
-            SPlayer.s.currentPlayer.AddComponent<QuarterViewMouseDirectController>();
+            SPlayer.s.currentPlayer.AddComponent<QuarterViewPlayerController>();
             mapEditorPage.SetActive(false);
             stopRunningButton.SetActive(true);
             FindObjectOfType<RTEBase>().gameObject.SetActive(false);

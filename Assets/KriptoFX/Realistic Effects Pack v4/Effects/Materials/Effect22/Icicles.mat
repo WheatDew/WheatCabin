@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Icicles
+  m_Shader: {fileID: 4800000, guid: 3b5eaa5a09e6b204085004ea02b03e38, type: 3}
+  m_ShaderKeywords: USE_FRESNEL USE_REFRACTIVE _FADING_ON
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 2157832aa670e3e4597b8d6bfbad0374, type: 3}
+        m_Scale: {x: 0.3, y: 0.3}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMapGlass:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 8900000, guid: c1ad01f33e5dc4d40ae09cf74ba9d47f, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CutoutTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HeightTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 88ff7575bffeb7e498b8c4ee156fe11a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 2157832aa670e3e4597b8d6bfbad0374, type: 3}
+        m_Scale: {x: 0.3, y: 0.3}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaClip: 100
+    - _BumpAmt: 500
+    - _CullMode: 2
+    - _Cutoff: 0
+    - _Cutout: 1
+    - _CutoutThreshold: 0.015
+    - _Distortion: 500
+    - _FPOW: 1
+    - _FresnelDistort: 1500
+    - _FresnelInvert: 1
+    - _FresnelPow: 1.5
+    - _FresnelR0: 0.1
+    - _Height: 0.1
+    - _InvFade: 3
+    - _LightStr: 1
+    - _Metallic: 0.486
+    - _Opacity: 1
+    - _R0: 0.8
+    - _ReflectionStrength: 2.3571427
+    - _RefractiveStrength: -1
+    - _Shininess: 0.145
+    - _Smoothness: 0.746
+    - _TintDistortion: 1
+    - _UseAlphaCliping: 0
+    - _UseBlending: 0
+    - _UseCutout: 0
+    - _UseFresnel: 1
+    - _UseHeight: 0
+    - _UseMainTex: 0
+    - _UseRefractive: 1
+    - _UseSoft: 1
+    - _ZWriteMode: 0
+    m_Colors:
+    - _Color: {r: 0.9505283, g: 1.0090784, b: 1.1048877, a: 1}
+    - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnelColor: {r: 1.5294118, g: 1.7079114, b: 2, a: 1}
+    - _HeightUVScrollDistort: {r: 8, g: 12, b: 0, a: 0}
+    - _MainColor: {r: 0.9996616, g: 1.0612383, b: 1.1619998, a: 1}
+    - _ReflectColor: {r: 0.44723186, g: 0.52302814, b: 0.64705884, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.5916955, g: 0.63500756, b: 0.7058823, a: 1}
