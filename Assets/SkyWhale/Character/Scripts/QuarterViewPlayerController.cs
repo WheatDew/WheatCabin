@@ -12,6 +12,8 @@ public class QuarterViewPlayerController : MonoBehaviour
     public KeyCode sprintKeyboard = KeyCode.LeftShift;
     public KeyCode attackKeyboard = KeyCode.Mouse0;
     public KeyCode skillKeyboard = KeyCode.Mouse1;
+    public KeyCode skillKeyboard1 = KeyCode.Q;
+    public KeyCode skillKeyboard2 = KeyCode.E;
     public KeyCode equipKeyboard = KeyCode.F;
 
     Rigidbody _rigidbody;
@@ -37,10 +39,12 @@ public class QuarterViewPlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentBead = BeadType.arrow;
+            SetMainBuff("fire_buff");
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentBead = BeadType.bead;
+            SetMainBuff("ice_buff");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -114,7 +118,7 @@ public class QuarterViewPlayerController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(skillKeyboard)&&!skillPrepare)
+        if (Input.GetKeyDown(skillKeyboard1)&&!skillPrepare)
         {
             if (currentBead == BeadType.arrow)
             {
@@ -152,7 +156,7 @@ public class QuarterViewPlayerController : MonoBehaviour
                 bead.transform.position = transform.position;
                 bead.transform.rotation = Quaternion.LookRotation(mouseDirection);
 
-                if (Input.GetKeyUp(skillKeyboard))
+                if (Input.GetKeyUp(skillKeyboard1))
                 {
                     StartCoroutine(SpinAnimation(bead, mouseDirection, 0.1f));
                 }
@@ -162,7 +166,7 @@ public class QuarterViewPlayerController : MonoBehaviour
                 if (mousePoisition != Vector3.zero)
                     bead.transform.position = mousePoisition;
 
-                if (Input.GetKeyUp(skillKeyboard))
+                if (Input.GetKeyUp(skillKeyboard1))
                 {
                     StartCoroutine(BeadAnimation(bead, 6));
                 }
@@ -170,7 +174,7 @@ public class QuarterViewPlayerController : MonoBehaviour
             else if (currentBead == BeadType.noTarget)
             {
                 bead.transform.position = transform.position;
-                if (Input.GetKeyUp(skillKeyboard))
+                if (Input.GetKeyUp(skillKeyboard1))
                 {
                     StartCoroutine(NoTargetAnimation(bead, 6));
                 }
@@ -178,7 +182,7 @@ public class QuarterViewPlayerController : MonoBehaviour
             else if (currentBead == BeadType.buff)
             {
                 bead.transform.position = transform.position;
-                if (Input.GetKeyUp(skillKeyboard))
+                if (Input.GetKeyUp(skillKeyboard1))
                 {
                     StartCoroutine(BuffAnimation(bead, 6));
                 }
@@ -193,19 +197,35 @@ public class QuarterViewPlayerController : MonoBehaviour
                         bead.transform.position = mouseTarget.transform.position;
                     if(mouseTarget.tag =="Character" && mouseTarget != gameObject)
                     {
-                        if (Input.GetKeyUp(skillKeyboard))
+                        if (Input.GetKeyUp(skillKeyboard1))
                         {
                             StartCoroutine(TargetAnimation(bead, mouseTarget.transform,0.1f));
                         }
                     }
                 }
-
-
             }
 
 
         }
+
+        if (Input.GetKeyDown(skillKeyboard))
+        {
+            skillPrepare = false;
+            Destroy(bead);
+        }
     }
+
+    #region Ö÷×´Ì¬Ïà¹Ø
+
+    private GameObject currentBuff=null;
+
+    public void SetMainBuff(string buff)
+    {
+        currentBuff = EffectSystem.s.SetMainBuff(buff, transform,currentBuff);
+    }
+
+    #endregion
+
 
     private float attackTimer = 0;
     private Vector3 mouseDirection = Vector3.zero;

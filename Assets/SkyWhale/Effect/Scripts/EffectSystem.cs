@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 public class EffectSystem : MonoBehaviour
 {
@@ -49,6 +48,19 @@ public class EffectSystem : MonoBehaviour
         {
             objectList.Add(effectList[i], assetBundle.LoadAsset<GameObject>(effectList[i]));
         }
+    }
+
+    public GameObject SetMainBuff(string buff,Transform target,GameObject lastBuff)
+    {
+        GameObject currentBuff=null;
+        if (target != null)
+        {
+            if (lastBuff != null)
+                Destroy(lastBuff);
+            currentBuff = Instantiate(objectList[buff], target.position, Quaternion.identity);
+            StartCoroutine(BuffEffect(currentBuff, target, 60));
+        }
+        return currentBuff;
     }
 
     public void CreateBuffEffect(string objname, Transform target, float time)
@@ -136,10 +148,14 @@ public class EffectSystem : MonoBehaviour
         float timer = 0;
         while (timer < time)
         {
+            if (obj == null)
+                break;
+            timer += Time.deltaTime;
             obj.transform.position = target.position;
             yield return null;
         }
-        Destroy(obj);
+        if (obj != null)
+            Destroy(obj);
     }
 
     public GameObject CreateEffect(string objname)
@@ -147,5 +163,6 @@ public class EffectSystem : MonoBehaviour
         var obj = Instantiate(objectList[objname]);
         return obj;
     }
+
 
 }

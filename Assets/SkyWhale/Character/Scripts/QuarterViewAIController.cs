@@ -74,7 +74,7 @@ public class QuarterViewAIController : MonoBehaviour
 
         Vector3 target_xz = target - target.y * Vector3.up;
         Vector3 position_xz = transform.position - transform.position.y * Vector3.up;
-        print(Vector3.Distance(target_xz, position_xz));
+        //print(Vector3.Distance(target_xz, position_xz));
         if (isMoving&&wanderTimer>3)
         {
             isMoving = false;
