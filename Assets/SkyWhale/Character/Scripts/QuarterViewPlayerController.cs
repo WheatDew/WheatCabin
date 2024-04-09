@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+public enum BeadType { arrow, bead, noTarget, buff, target };
 public class QuarterViewPlayerController : MonoBehaviour
 {
-    private enum BeadType { arrow, bead, noTarget, buff, target };
+
 
     public KeyCode sprintKeyboard = KeyCode.LeftShift;
     public KeyCode attackKeyboard = KeyCode.Mouse0;
@@ -27,37 +29,46 @@ public class QuarterViewPlayerController : MonoBehaviour
     private bool spin = false;
     private GameObject bead;
     private BeadType currentBead;
+    private string currentElemental;
+
+
+    //事件组
+    public UnityEvent elemental1ClickEvent = new();
+    public UnityEvent elemental2ClickEvent = new();
+    public UnityEvent elemental3ClickEvent = new();
+    public UnityEvent elemental4ClickEvent = new();
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+
+        elemental1ClickEvent.AddListener(() => SetElemental("fire", "fire_buff"));
+        elemental2ClickEvent.AddListener(() => SetElemental("ice", "ice_buff"));
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (!skillPrepare)
         {
-            currentBead = BeadType.arrow;
-            SetMainBuff("fire_buff");
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                elemental1ClickEvent.Invoke();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                elemental2ClickEvent.Invoke();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                elemental3ClickEvent.Invoke();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                elemental4ClickEvent.Invoke();
+            }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            currentBead = BeadType.bead;
-            SetMainBuff("ice_buff");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            currentBead = BeadType.noTarget;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            currentBead = BeadType.buff;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            currentBead = BeadType.target;
-        }
+
 
 
         MouseDirection();
@@ -118,31 +129,9 @@ public class QuarterViewPlayerController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(skillKeyboard1)&&!skillPrepare)
+        if (Input.GetKeyDown(skillKeyboard2)&&!skillPrepare)
         {
-            if (currentBead == BeadType.arrow)
-            {
-                skillPrepare = true;
-                bead = EffectSystem.s.CreateEffect("arrow");
-            }
-            else if(currentBead == BeadType.bead)
-            {
-                skillPrepare = true;
-                bead = EffectSystem.s.CreateEffect("bead");
-            }
-            else if (currentBead == BeadType.noTarget)
-            {
-                skillPrepare = true;
-                bead = EffectSystem.s.CreateEffect("notarget");
-                bead.transform.localScale = Vector3.one*2;
-            }
-            else if (currentBead == BeadType.buff)
-            {
-                skillPrepare = true;
-                bead = EffectSystem.s.CreateEffect("notarget");
-                bead.transform.localScale = Vector3.one*0.25f;
-            }
-            else if (currentBead == BeadType.target)
+            if (currentBead == BeadType.target)
             {
                 skillPrepare = true;
                 bead = EffectSystem.s.CreateEffect("notarget");
@@ -151,43 +140,7 @@ public class QuarterViewPlayerController : MonoBehaviour
         }
         else if (skillPrepare)
         {
-            if (currentBead == BeadType.arrow)
-            {
-                bead.transform.position = transform.position;
-                bead.transform.rotation = Quaternion.LookRotation(mouseDirection);
-
-                if (Input.GetKeyUp(skillKeyboard1))
-                {
-                    StartCoroutine(SpinAnimation(bead, mouseDirection, 0.1f));
-                }
-            }
-            else if (currentBead == BeadType.bead)
-            {
-                if (mousePoisition != Vector3.zero)
-                    bead.transform.position = mousePoisition;
-
-                if (Input.GetKeyUp(skillKeyboard1))
-                {
-                    StartCoroutine(BeadAnimation(bead, 6));
-                }
-            }
-            else if (currentBead == BeadType.noTarget)
-            {
-                bead.transform.position = transform.position;
-                if (Input.GetKeyUp(skillKeyboard1))
-                {
-                    StartCoroutine(NoTargetAnimation(bead, 6));
-                }
-            }
-            else if (currentBead == BeadType.buff)
-            {
-                bead.transform.position = transform.position;
-                if (Input.GetKeyUp(skillKeyboard1))
-                {
-                    StartCoroutine(BuffAnimation(bead, 6));
-                }
-            }
-            else if (currentBead == BeadType.target)
+            if (currentBead == BeadType.target)
             {
                 if (mousePoisition != Vector3.zero)
                 {
@@ -341,4 +294,33 @@ public class QuarterViewPlayerController : MonoBehaviour
         skillPrepare = false;
         spin = false;
     }
+
+    public SkillInfo currentSkill;
+
+    void SetElemental(string elemental,string effect)
+    {
+        if (!skillPrepare)
+        {
+            SetMainBuff(effect);
+            currentElemental = elemental;
+        }
+    }
+
+    IEnumerator ExecuteSkillPrepare()
+    {
+        yield return null;
+    }
+
+    IEnumerator ExecuteSkill(SkillInfo info)
+    {
+        //判断所属元素组
+        yield return null;
+    }
+}
+
+public class SkillInfo
+{
+    public string type;
+    public BeadType beadType;
+    public string effect;
 }
