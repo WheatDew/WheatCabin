@@ -1,3 +1,4 @@
+using NPOI.SS.Formula.Functions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -28,7 +29,8 @@ public class QuarterViewPlayerController : MonoBehaviour
     private bool skillPrepare=false;
     private bool spin = false;
     private GameObject bead;
-    private BeadType currentBead;
+    //private BeadType currentBead;
+    private Dictionary<string, SkillInfo> skillData = new Dictionary<string, SkillInfo>();
     private string currentElemental;
 
 
@@ -37,6 +39,8 @@ public class QuarterViewPlayerController : MonoBehaviour
     public UnityEvent elemental2ClickEvent = new();
     public UnityEvent elemental3ClickEvent = new();
     public UnityEvent elemental4ClickEvent = new();
+    public UnityEvent skill1ClickEvent = new();
+    public UnityEvent skill2ClickEvent = new();
 
     void Start()
     {
@@ -45,6 +49,8 @@ public class QuarterViewPlayerController : MonoBehaviour
 
         elemental1ClickEvent.AddListener(() => SetElemental("fire", "fire_buff"));
         elemental2ClickEvent.AddListener(() => SetElemental("ice", "ice_buff"));
+        skill1ClickEvent.AddListener(() => ExcuteSkillStart());
+        skillData.Add("fire1", new SkillInfo("fire_buff", BeadType.arrow, "fire"));
     }
 
     private void Update()
@@ -129,37 +135,47 @@ public class QuarterViewPlayerController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(skillKeyboard2)&&!skillPrepare)
+        if (Input.GetKeyDown(skillKeyboard1))
         {
-            if (currentBead == BeadType.target)
-            {
-                skillPrepare = true;
-                bead = EffectSystem.s.CreateEffect("notarget");
-                bead.transform.localScale = Vector3.one * 0.2f;
-            }
+            skill1ClickEvent.Invoke();
         }
-        else if (skillPrepare)
+
+        if (Input.GetKeyDown(skillKeyboard2))
         {
-            if (currentBead == BeadType.target)
-            {
-                if (mousePoisition != Vector3.zero)
-                {
-                    if (mouseTarget.tag != "Character")
-                        bead.transform.position = Vector3.zero;
-                    else
-                        bead.transform.position = mouseTarget.transform.position;
-                    if(mouseTarget.tag =="Character" && mouseTarget != gameObject)
-                    {
-                        if (Input.GetKeyUp(skillKeyboard1))
-                        {
-                            StartCoroutine(TargetAnimation(bead, mouseTarget.transform,0.1f));
-                        }
-                    }
-                }
-            }
+            skill2ClickEvent.Invoke();
+        }
+
+        //if (Input.GetKeyDown(skillKeyboard2)&&!skillPrepare)
+        //{
+        //    if (currentBead == BeadType.target)
+        //    {
+        //        skillPrepare = true;
+        //        bead = EffectSystem.s.CreateEffect("notarget");
+        //        bead.transform.localScale = Vector3.one * 0.2f;
+        //    }
+        //}
+        //else if (skillPrepare)
+        //{
+        //    if (currentBead == BeadType.target)
+        //    {
+        //        if (mousePoisition != Vector3.zero)
+        //        {
+        //            if (mouseTarget.tag != "Character")
+        //                bead.transform.position = Vector3.zero;
+        //            else
+        //                bead.transform.position = mouseTarget.transform.position;
+        //            if(mouseTarget.tag =="Character" && mouseTarget != gameObject)
+        //            {
+        //                if (Input.GetKeyUp(skillKeyboard1))
+        //                {
+        //                    StartCoroutine(TargetAnimation(bead, mouseTarget.transform,0.1f));
+        //                }
+        //            }
+        //        }
+        //    }
 
 
-        }
+        //}
 
         if (Input.GetKeyDown(skillKeyboard))
         {
@@ -306,9 +322,37 @@ public class QuarterViewPlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator executeSkillPrepare;
+
+    private void ExcuteSkillStart()
+    {
+        currentSkill = skillData["fire"];
+
+        skillPrepare = true;
+        bead = EffectSystem.s.CreateEffect("arrow");
+        
+        if (executeSkillPrepare != null)
+        {
+            StopCoroutine(executeSkillPrepare);
+
+        }
+        executeSkillPrepare = ExecuteSkillPrepare();
+        StartCoroutine(executeSkillPrepare);
+    }
+
     IEnumerator ExecuteSkillPrepare()
     {
-        yield return null;
+        while (skillPrepare)
+        {
+            if (currentSkill.beadType == BeadType.arrow)
+            {
+                bead.transform.position = transform.position;
+                bead.transform.rotation = Quaternion.LookRotation(mouseDirection);
+            }
+
+            yield return null;
+        }
+
     }
 
     IEnumerator ExecuteSkill(SkillInfo info)
@@ -323,4 +367,11 @@ public class SkillInfo
     public string type;
     public BeadType beadType;
     public string effect;
+
+    public SkillInfo(string type,BeadType beadType,string effect)
+    {
+        this.type = type;
+        this.beadType = beadType;
+        this.effect = effect;
+    }
 }
