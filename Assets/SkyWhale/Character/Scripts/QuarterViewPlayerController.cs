@@ -31,7 +31,7 @@ public class QuarterViewPlayerController : MonoBehaviour
     private GameObject bead;
     //private BeadType currentBead;
     private Dictionary<string, SkillInfo> skillData = new Dictionary<string, SkillInfo>();
-    private string currentElemental;
+    private string currentElemental="",currentSkillType="";
 
 
     //事件组
@@ -49,8 +49,9 @@ public class QuarterViewPlayerController : MonoBehaviour
 
         elemental1ClickEvent.AddListener(() => SetElemental("fire", "fire_buff"));
         elemental2ClickEvent.AddListener(() => SetElemental("ice", "ice_buff"));
-        skill1ClickEvent.AddListener(() => ExcuteSkillStart());
-        skillData.Add("fire1", new SkillInfo("fire_buff", BeadType.arrow, "fire"));
+        skill1ClickEvent.AddListener(() => ExcuteSkillStart("1"));
+        skill2ClickEvent.AddListener(() => ExcuteSkillStart("2"));
+        skillData.Add("fire&1", new SkillInfo("fire_buff", BeadType.arrow, "fire"));
     }
 
     private void Update()
@@ -324,20 +325,37 @@ public class QuarterViewPlayerController : MonoBehaviour
 
     IEnumerator executeSkillPrepare;
 
-    private void ExcuteSkillStart()
+    private void ExcuteSkillStart(string skillType)
     {
-        currentSkill = skillData["fire"];
-
-        skillPrepare = true;
-        bead = EffectSystem.s.CreateEffect("arrow");
-        
-        if (executeSkillPrepare != null)
+        currentSkillType = skillType;
+        currentSkill = skillData[string.Format("{0}&{1}",currentElemental, currentSkillType)];
+        if (currentSkill != null)
         {
-            StopCoroutine(executeSkillPrepare);
+            skillPrepare = true;
+            bead = EffectSystem.s.CreateEffect("arrow");
 
+            if (executeSkillPrepare != null)
+            {
+                StopCoroutine(executeSkillPrepare);
+
+            }
+            executeSkillPrepare = ExecuteSkillPrepare();
+            StartCoroutine(executeSkillPrepare);
         }
-        executeSkillPrepare = ExecuteSkillPrepare();
-        StartCoroutine(executeSkillPrepare);
+        else
+        {
+            Debug.Log("字典索引为空");
+        }
+
+    }
+
+    private void ExcuteSkillEnd()
+    {
+        if (skillPrepare)
+        {
+            StartCoroutine(SpinAnimation(bead, mouseDirection, 0.1f));
+        }
+
     }
 
     IEnumerator ExecuteSkillPrepare()
