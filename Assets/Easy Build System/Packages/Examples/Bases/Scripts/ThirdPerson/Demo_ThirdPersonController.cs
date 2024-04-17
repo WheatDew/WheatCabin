@@ -62,7 +62,7 @@ namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 			{
 				m_Camera = Camera.main.gameObject;
 			}
-			awakeEvent.Invoke();
+			awakeEvent?.Invoke();
 		}
 
 		void Start()
@@ -75,7 +75,7 @@ namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 			m_JumpTimeoutDelta = m_JumpTimeout;
 			m_FallTimeoutDelta = m_FallTimeout;
 
-			startEvent.Invoke();
+			startEvent?.Invoke();
 		}
 
 		void Update()
@@ -85,7 +85,7 @@ namespace EasyBuildSystem.Examples.Bases.Scripts.ThirdPerson
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			updateEvent.Invoke();
+			updateEvent?.Invoke();
 		}
 
 		void AssignAnimationIDs()
