@@ -21,8 +21,8 @@ namespace OurCity
 
         [SerializeField] bool m_VerticalAutoReturn = false;
 
-        float m_LookAngle;
-        float m_TiltAngle;
+        [HideInInspector] public float m_LookAngle;
+        [HideInInspector] public float m_TiltAngle;
         Vector3 m_PivotEulers;
         Quaternion m_PivotTargetRot;
         Quaternion m_TransformTargetRot;
