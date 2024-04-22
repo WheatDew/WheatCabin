@@ -12,10 +12,14 @@ namespace OurCity
 
         private bool isAim=false;
         private bool isRelaxed = false;
+
+        private Vector3 aimAngle=Vector3.zero;
+        private Quaternion startAimAngle=Quaternion.identity;
+
         private new void Start()
         {
             base.Start();
-
+            startAimAngle = aimCamera.transform.localRotation;
         }
 
         private new void Update()
@@ -64,8 +68,16 @@ namespace OurCity
 
             if(isAim)
             {
-                transform.rotation *= Quaternion.AngleAxis(Input.GetAxisRaw("Mouse X")*10, Vector3.up);
-                
+                float m = 1.7f;
+                aimAngle += new Vector3(Input.GetAxisRaw("Mouse X") * 5, Input.GetAxisRaw("Mouse Y") * 5, 0);
+                if (aimAngle.y > 90f/m)
+                    aimAngle.y = 90f / m;
+                if (aimAngle.y < -90f / m)
+                    aimAngle.y = -90f / m;
+                aimCamera.transform.localRotation = startAimAngle * Quaternion.AngleAxis(aimAngle.y, Vector3.left);
+                m_Animator.SetFloat("AimAngle", aimAngle.y*m);
+                //transform.rotation*= Quaternion.AngleAxis(aimAngle.x, Vector3.up);
+
             }
             
         }
