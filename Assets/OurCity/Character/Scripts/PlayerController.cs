@@ -31,15 +31,13 @@ namespace OurCity
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (m_Animator.GetBool("Relaxed"))
-                {
-                    m_Animator.SetBool("Relaxed", false);
-                    isRelaxed = false;
-                }
-                else
+                if (!isRelaxed&&!m_Animator.GetBool("Relaxed"))
                 {
                     m_Animator.SetBool("Relaxed", true);
-                    isRelaxed = true;
+                }
+                else if(isRelaxed && m_Animator.GetBool("Relaxed"))
+                {
+                    m_Animator.SetBool("Relaxed", false);
                 }
 
             }
@@ -67,8 +65,19 @@ namespace OurCity
             if(isAim)
             {
                 transform.rotation *= Quaternion.AngleAxis(Input.GetAxisRaw("Mouse X")*10, Vector3.up);
+                
             }
             
+        }
+
+        public void SetRelaxed()
+        {
+            isRelaxed = true;
+        }
+
+        public void SetNormal()
+        {
+            isRelaxed = false;
         }
     }
 }
