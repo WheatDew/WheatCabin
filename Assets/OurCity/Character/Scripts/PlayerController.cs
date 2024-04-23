@@ -80,7 +80,7 @@ namespace OurCity
                     aimAngleY = 90f / m;
                 if (aimAngleY < -90f / m)
                     aimAngleY = -90f / m;
-                aimCamera.transform.localRotation =aimCameraOriginRotation * Quaternion.AngleAxis(aimAngleY, Vector3.left);
+                //aimCamera.transform.localRotation =aimCameraOriginRotation * Quaternion.AngleAxis(aimAngleY, Vector3.left);
                 m_Animator.SetFloat("AimAngle", aimAngleY * m);
                 transform.localRotation *= Quaternion.AngleAxis(Input.GetAxis("Mouse X")*5f, Vector3.up);
 
