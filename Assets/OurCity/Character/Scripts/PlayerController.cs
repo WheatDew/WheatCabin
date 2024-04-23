@@ -11,9 +11,10 @@ namespace OurCity
         public GameObject normalCamera, aimCamera;
 
         private bool isAim=false;
-        private bool isRelaxed = false;
         private float aimAngleY = 0;
         private Quaternion aimCameraOriginRotation=Quaternion.identity;
+
+        private AnimatorStateInfo[] animatorStateInfos = new AnimatorStateInfo[4]; 
 
         private new void Start()
         {
@@ -30,44 +31,50 @@ namespace OurCity
 
         public void AimEvent()
         {
-            
+            animatorStateInfos[1] = m_Animator.GetCurrentAnimatorStateInfo(1);
+            animatorStateInfos[2] = m_Animator.GetCurrentAnimatorStateInfo(2);
+
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (!isRelaxed&&!m_Animator.GetBool("Relaxed"))
+                if (animatorStateInfos[1].IsTag("Unrelaxed"))
                 {
                     m_Animator.SetBool("Relaxed", true);
                 }
-                else if(isRelaxed && m_Animator.GetBool("Relaxed"))
+                else if(animatorStateInfos[1].IsTag("Relaxed"))
                 {
                     m_Animator.SetBool("Relaxed", false);
                 }
 
             }
 
-            if (Input.GetMouseButtonDown(0)&&isRelaxed)
+            if (Input.GetMouseButtonDown(0)&& animatorStateInfos[1].IsTag("Relaxed"))
             {
                 m_Animator.SetTrigger("Fire");
             }
 
-            if (Input.GetMouseButtonDown(1)&&isRelaxed)
+            if (Input.GetMouseButtonDown(1)&& animatorStateInfos[1].IsTag("Relaxed"))
             {
                 m_Animator.SetBool("Aim", true);
                 normalCamera.gameObject.SetActive(false);
                 aimCamera.gameObject.SetActive(true);
                 isAim = true;
             }
-            if (Input.GetMouseButtonUp(1)&&isRelaxed)
+            if (Input.GetMouseButtonUp(1)&& animatorStateInfos[1].IsTag("Relaxed"))
             {
                 m_Animator.SetBool("Aim", false);
                 normalCamera.SetActive(true);
                 aimCamera.SetActive(false);
                 isAim = false;
             }
+            if (Input.GetKeyDown(KeyCode.R)&& animatorStateInfos[1].IsTag("Relaxed")&&animatorStateInfos[2].IsTag("Relaxed"))
+            {
+                m_Animator.SetTrigger("Reload");
+            }
 
             if(isAim)
             {
-                float m = 2.5f;
+                float m = 2f;
                 aimAngleY += Input.GetAxisRaw("Mouse Y")*5;
                 if (aimAngleY > 90f / m)
                     aimAngleY = 90f / m;
@@ -80,27 +87,6 @@ namespace OurCity
             }
             
         }
-
-        public void SetRelaxed()
-        {
-            isRelaxed = true;
-        }
-
-        public void SetNormal()
-        {
-            isRelaxed = false;
-        }
-        public Transform lookAtTarget;  // 你想让角色上半身朝向的目标
-        public float lookAtWeight = 1.0f;  // 朝向的强度，可以在运行时调整
-        //void OnAnimatorIK(int layerIndex)
-        //{
-        //    if (lookAtTarget != null)
-        //    {
-        //        Debug.Log("执行朝向");
-        //        m_Animator.SetLookAtWeight(lookAtWeight);
-        //        m_Animator.SetLookAtPosition(lookAtTarget.position);
-        //    }
-        //}
 
     }
 

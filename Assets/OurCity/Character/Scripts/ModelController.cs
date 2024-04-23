@@ -6,6 +6,7 @@ public class ModelController : MonoBehaviour
 {
     public Transform rightHand, fireEffect;
 
+
     public void SetWeapon(bool value)
     {
         rightHand.gameObject.SetActive(value);
@@ -34,4 +35,6 @@ public class ModelController : MonoBehaviour
     {
         fireEffect.gameObject.SetActive(false);
     }
+
+
 }
