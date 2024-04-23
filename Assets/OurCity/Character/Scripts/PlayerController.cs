@@ -12,14 +12,13 @@ namespace OurCity
 
         private bool isAim=false;
         private bool isRelaxed = false;
-
-        private Vector3 aimAngle=Vector3.zero;
-        private Quaternion startAimAngle=Quaternion.identity;
+        private float aimAngleY = 0;
+        private Quaternion aimCameraOriginRotation=Quaternion.identity;
 
         private new void Start()
         {
             base.Start();
-            startAimAngle = aimCamera.transform.localRotation;
+            aimCameraOriginRotation = aimCamera.transform.localRotation;
         }
 
         private new void Update()
@@ -68,15 +67,15 @@ namespace OurCity
 
             if(isAim)
             {
-                float m = 1.7f;
-                aimAngle += new Vector3(Input.GetAxisRaw("Mouse X") * 5, Input.GetAxisRaw("Mouse Y") * 5, 0);
-                if (aimAngle.y > 90f/m)
-                    aimAngle.y = 90f / m;
-                if (aimAngle.y < -90f / m)
-                    aimAngle.y = -90f / m;
-                aimCamera.transform.localRotation = startAimAngle * Quaternion.AngleAxis(aimAngle.y, Vector3.left);
-                m_Animator.SetFloat("AimAngle", aimAngle.y*m);
-                //transform.rotation*= Quaternion.AngleAxis(aimAngle.x, Vector3.up);
+                float m = 2.5f;
+                aimAngleY += Input.GetAxisRaw("Mouse Y")*5;
+                if (aimAngleY > 90f / m)
+                    aimAngleY = 90f / m;
+                if (aimAngleY < -90f / m)
+                    aimAngleY = -90f / m;
+                aimCamera.transform.localRotation =aimCameraOriginRotation * Quaternion.AngleAxis(aimAngleY, Vector3.left);
+                m_Animator.SetFloat("AimAngle", aimAngleY * m);
+                transform.localRotation *= Quaternion.AngleAxis(Input.GetAxis("Mouse X")*5f, Vector3.up);
 
             }
             
@@ -91,6 +90,19 @@ namespace OurCity
         {
             isRelaxed = false;
         }
+        public Transform lookAtTarget;  // 你想让角色上半身朝向的目标
+        public float lookAtWeight = 1.0f;  // 朝向的强度，可以在运行时调整
+        //void OnAnimatorIK(int layerIndex)
+        //{
+        //    if (lookAtTarget != null)
+        //    {
+        //        Debug.Log("执行朝向");
+        //        m_Animator.SetLookAtWeight(lookAtWeight);
+        //        m_Animator.SetLookAtPosition(lookAtTarget.position);
+        //    }
+        //}
+
     }
+
 }
 
