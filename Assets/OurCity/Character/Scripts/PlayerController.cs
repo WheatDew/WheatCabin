@@ -51,6 +51,8 @@ namespace OurCity
             if (Input.GetMouseButtonDown(0)&& animatorStateInfos[1].IsTag("Relaxed"))
             {
                 m_Animator.SetTrigger("Fire");
+                model.SetGunFireDisplay();
+                aimAngleY += 5;
             }
 
             if (Input.GetMouseButtonDown(1)&& animatorStateInfos[1].IsTag("Relaxed"))

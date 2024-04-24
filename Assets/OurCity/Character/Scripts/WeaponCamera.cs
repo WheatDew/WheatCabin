@@ -5,9 +5,12 @@ using UnityEngine;
 public class WeaponCamera : MonoBehaviour
 {
     public Transform target;
+    public RectTransform bead;
+    public float speed = 1;
 
     private void OnEnable()
     {
+        transform.parent = null;
         transform.position = target.position;
         transform.rotation = target.rotation;
     }
@@ -16,8 +19,15 @@ public class WeaponCamera : MonoBehaviour
     {
         if (target != null)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position, 0.05f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, 0.05f);
+            float step = speed * Time.deltaTime; // 计算这一帧要移动的步长
+            transform.position = Vector3.Lerp(transform.position, target.position, step);
+            transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, step);
+            SetBead(Vector3.Distance(transform.position, target.position)*5+1);
         }
+    }
+
+    public void SetBead(float size)
+    {
+        bead.sizeDelta = Vector2.one * size * 100;
     }
 }
