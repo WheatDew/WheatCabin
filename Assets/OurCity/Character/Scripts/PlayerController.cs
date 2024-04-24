@@ -9,6 +9,7 @@ namespace OurCity
     {
         public ModelController model;
         public GameObject normalCamera, aimCamera;
+        public Camera realAimCamera;
 
         private bool isAim=false;
         private float aimAngleY = 0;
@@ -51,6 +52,18 @@ namespace OurCity
             if (Input.GetMouseButtonDown(0)&& animatorStateInfos[1].IsTag("Relaxed"))
             {
                 m_Animator.SetTrigger("Fire");
+                Ray ray = realAimCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                RaycastHit[] result = Physics.RaycastAll(ray);
+
+                for(int i=0;i<result.Length;i++)
+                {
+                    if (i >= 2)
+                        break;
+                    if (result[i].collider.tag == "Character"&&result[i].collider.gameObject!=gameObject)
+                    {
+                        result[i].collider.GetComponent<OurCityEnemy>().Death();
+                    }
+                }
                 model.SetGunFireDisplay();
                 aimAngleY += 5;
             }
@@ -60,13 +73,16 @@ namespace OurCity
                 m_Animator.SetBool("Aim", true);
                 normalCamera.gameObject.SetActive(false);
                 aimCamera.gameObject.SetActive(true);
+                isMove = false;
                 isAim = true;
+                m_Animator.SetFloat("Speed", 0);
             }
             if (Input.GetMouseButtonUp(1)&& animatorStateInfos[1].IsTag("Relaxed"))
             {
                 m_Animator.SetBool("Aim", false);
                 normalCamera.SetActive(true);
                 aimCamera.SetActive(false);
+                isMove = true;
                 isAim = false;
             }
             if (Input.GetKeyDown(KeyCode.R)&& animatorStateInfos[1].IsTag("Relaxed")&&animatorStateInfos[2].IsTag("Relaxed"))

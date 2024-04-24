@@ -54,6 +54,8 @@ namespace OurCity
 
 		bool m_HasAnimator;
 
+		protected bool isMove=true;
+
 		protected void Awake()
 		{
 			if (m_Camera == null)
@@ -79,7 +81,8 @@ namespace OurCity
 
 			JumpAndGravity();
 			GroundedCheck();
-			Move();
+			if (isMove)
+				Move();
 		}
 
 		void AssignAnimationIDs()
@@ -132,7 +135,7 @@ namespace OurCity
 
 			if (InputHandler.Instance.Move != Vector2.zero)
 			{
-				m_TargetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + m_Camera.transform.eulerAngles.y;
+				m_TargetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + (m_Camera ==null? 0:m_Camera.transform.eulerAngles.y);
 				float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, m_TargetRotation, ref m_RotationVelocity, m_RotationSmoothTime);
 
 				transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);

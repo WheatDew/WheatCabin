@@ -21,7 +21,7 @@ public class QuarterViewAIController : MonoBehaviour
 
     private UnityAction update;
 
-    
+    private bool isDeath = false;
 
     void Start()
     {
@@ -31,12 +31,12 @@ public class QuarterViewAIController : MonoBehaviour
         agent = gameObject.AddComponent<NavMeshAgent>();
         agent.angularSpeed = 720;
         _rigidbody.drag = 10;
-        //agent.stoppingDistance = 1;
         SetWander();
     }
 
     private void Update()
     {
+        _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         update.Invoke();
 
         //Vector3 localVelocity = transform.InverseTransformDirection(agent.velocity);
@@ -55,8 +55,7 @@ public class QuarterViewAIController : MonoBehaviour
     public void WanderAction()
     {
 
-
-        if (!isMoving)
+        if (!isMoving&&!_animatorStateInfo.IsTag("Death"))
         {
             target = new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y, transform.position.z + Random.Range(-5, 5));
 
