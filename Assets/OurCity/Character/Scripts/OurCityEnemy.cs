@@ -15,7 +15,6 @@ namespace OurCity
         AnimatorStateInfo _animatorStateInfo;
         NavMeshAgent agent;
         Terrain terrain;
-
         public float timer = 0;
 
         [HideInInspector] public Vector3 target = Vector3.zero;
@@ -23,7 +22,10 @@ namespace OurCity
         private UnityAction update;
 
         private bool isDeath = false;
-
+        public EnemyRange range;
+        public EnemyRange attackRange;
+        private GameObject targetEntity;
+        private HashSet<string> currentStatus = new HashSet<string>();
 
         void Start()
         {
@@ -35,10 +37,12 @@ namespace OurCity
             _rigidbody.drag = 10;
             //agent.stoppingDistance = 1;
             SetWander();
+            SetSearch();
         }
 
         private void Update()
         {
+            _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
             update?.Invoke();
 
             //Vector3 localVelocity = transform.InverseTransformDirection(agent.velocity);
@@ -56,8 +60,6 @@ namespace OurCity
         //随机漫游
         public void WanderAction()
         {
-
-
             if (!isMoving)
             {
                 target = new Vector3(transform.position.x + Random.Range(-5, 5), transform.position.y, transform.position.z + Random.Range(-5, 5));
@@ -94,9 +96,80 @@ namespace OurCity
             }
         }
 
+        private void SearchAction()
+        {
+            if (range.entities.Count > 0&&targetEntity==null)
+            {
+                foreach (var item in range.entities)
+                {
+                    targetEntity = item;
+                }
+                update -= WanderAction;
+                
+            }
+
+            if (targetEntity != null)
+            {
+                agent.SetDestination(targetEntity.transform.position);
+            }
+
+
+            if (targetEntity != null && targetEntity.layer == 0)
+            {
+                targetEntity = null;
+                update += WanderAction;
+            }
+
+        }
+
+        private float attackInterval = 6;
+        private bool isAttack = false;
+        private void AttackAction()
+        {
+            attackInterval += Time.deltaTime;
+            if (targetEntity != null&&Vector3.Distance(targetEntity.transform.position,transform.position)<1.5f)
+            {
+                if (attackInterval > 1)
+                {
+
+                    Vector3 directionToTarget = targetEntity.transform.position - transform.position;  // 计算目标方向
+                    directionToTarget.y = 0;  // 移除Y轴分量，确保只在XZ平面内旋转
+
+                    // 使用Quaternion.LookRotation创建旋转，使物体的前方朝向计算出的方向
+                    Quaternion rotation = Quaternion.LookRotation(directionToTarget);
+                    transform.rotation = rotation;  // 应用旋转
+                    _animator.SetTrigger("Attack");
+                    isAttack = true;
+                    attackInterval = 0;
+                    agent.isStopped = true;
+                }
+            }
+
+            if (targetEntity != null && _animatorStateInfo.IsTag("Move") && isAttack&&attackInterval>2)
+            {
+                isAttack = false;
+                agent.isStopped = false;
+                attackInterval = 0;
+            }
+
+            if (targetEntity!=null&&attackRange.entities.Contains(targetEntity))
+            {
+                targetEntity.GetComponent<PlayerController>().Death();
+                targetEntity = null;
+            }
+
+
+        }
+
         public void SetWander()
         {
             update += WanderAction;
+        }
+
+        public void SetSearch()
+        {
+            update += SearchAction;
+            update += AttackAction;
         }
 
         public void Death()
@@ -105,10 +178,13 @@ namespace OurCity
             {
                 _animator.SetTrigger("Death");
                 isDeath = true;
+                agent.isStopped = true;
                 update -= WanderAction;
             }
 
         }
+
+        
 
     }
 }

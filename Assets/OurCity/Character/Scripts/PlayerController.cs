@@ -15,7 +15,9 @@ namespace OurCity
         private float aimAngleY = 0;
         private Quaternion aimCameraOriginRotation=Quaternion.identity;
 
-        private AnimatorStateInfo[] animatorStateInfos = new AnimatorStateInfo[4]; 
+        private AnimatorStateInfo[] animatorStateInfos = new AnimatorStateInfo[4];
+
+        public UnityEvent onDeath;
 
         private new void Start()
         {
@@ -104,6 +106,15 @@ namespace OurCity
 
             }
             
+        }
+
+        public void Death()
+        {
+            m_Animator.SetTrigger("Death");
+            gameObject.layer = 0;
+            onDeath.Invoke();
+            GetComponent<InputHandler>().enabled = false;
+            this.enabled = false;
         }
 
     }
