@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PropertyEditor : MonoBehaviour
 {
-    [HideInInspector] public Entity currentTarget;
+    [HideInInspector] public WDEntity currentTarget;
     [HideInInspector] public NyaMap bufferData;
     [HideInInspector] public PropertyEditorItem currentItem;
     public PropertyEditorItem itemPrefab;
@@ -20,7 +20,7 @@ public class PropertyEditor : MonoBehaviour
     public Text title;
 
 
-    public void SetCurrentTarget(Entity target,string currentName)
+    public void SetCurrentTarget(WDEntity target,string currentName)
     {
         title.text = currentName;
         this.currentTarget = target;

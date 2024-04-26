@@ -41,8 +41,8 @@ namespace OurCity
         {
             base.Start();
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
         }
 
         protected void Update()

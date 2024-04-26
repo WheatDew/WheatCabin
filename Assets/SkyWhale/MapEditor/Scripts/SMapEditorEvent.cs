@@ -34,7 +34,7 @@ public class SMapEditorEvent : MonoBehaviour
             mapEditorPage.SetActive(false);
             stopRunningButton.SetActive(true);
             FindObjectOfType<RTEBase>().gameObject.SetActive(false);
-            foreach(var item in FindObjectsOfType<Entity>())
+            foreach(var item in FindObjectsOfType<WDEntity>())
             {
                 editorTimeTransformData.Add(item.gameObject,new EditorTimeTransformData(item.transform.position,item.transform.rotation));
             }
@@ -75,7 +75,7 @@ public class SMapEditorEvent : MonoBehaviour
 
     public void NewScene()
     {
-        var sceneObjects = FindObjectsOfType<Entity>();
+        var sceneObjects = FindObjectsOfType<WDEntity>();
         foreach(var item in sceneObjects)
         {
             Destroy(item.gameObject);

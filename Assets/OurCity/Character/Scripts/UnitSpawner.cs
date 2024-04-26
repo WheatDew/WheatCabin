@@ -9,6 +9,11 @@ public class UnitSpawner : MonoBehaviour
     public float interval = 5;
     private float timer = 5;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Update()
     {

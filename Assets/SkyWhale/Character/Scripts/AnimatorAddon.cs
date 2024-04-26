@@ -33,7 +33,7 @@ public class AnimatorAddon : MonoBehaviour
     #region 变量定义
     private Animator animator;
     private AnimationClip[] clips;
-    private Entity self;
+    private WDEntity self;
 
     List<INya> animationEventDatas = new List<INya>();
 
@@ -45,7 +45,7 @@ public class AnimatorAddon : MonoBehaviour
     #region 系统函数
     private void Start()
     {
-        self = GetComponent<Entity>();
+        self = GetComponent<WDEntity>();
         animator = this.GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
 

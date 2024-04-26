@@ -15,7 +15,7 @@ public class LifeBar : MonoBehaviour
 
     private Vector3 barSize=new Vector3(300,20);
 
-    private Entity entity;
+    private WDEntity entity;
     private Vector3 positionOffset;
 
     private void Start()

@@ -14,7 +14,7 @@ namespace OurCity
     public class TPSController : MonoBehaviour
     {
 		[Header("Movement Settings")]
-		[SerializeField] float m_MoveSpeed = 2.0f;
+		protected float m_MoveSpeed = 2.0f;
 		[SerializeField] float m_SprintSpeed = 5.335f;
 		[Range(0.0f, 0.3f)]
 		[SerializeField] float m_RotationSmoothTime = 0.12f;

@@ -37,7 +37,7 @@ public class QuarterViewController : MonoBehaviour
 
     NavMeshAgent agent;
     public CharacterEntity entity;
-    public HashSet<Entity> inRangeEntities;
+    public HashSet<WDEntity> inRangeEntities;
 
     //÷∏¡Óª∫¥Ê
     public string commandBuffer;

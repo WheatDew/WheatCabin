@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UnityEngine;
 
-public class CharacterEntity : Entity
+public class CharacterEntity : WDEntity
 {
 
     public Transform weaponPoint;

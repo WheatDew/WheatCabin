@@ -34,6 +34,7 @@ namespace OurCity
             _animator = GetComponent<Animator>();
             agent = gameObject.AddComponent<NavMeshAgent>();
             agent.angularSpeed = 720;
+            agent.baseOffset = -0.1f;
             _rigidbody.drag = 10;
             //agent.stoppingDistance = 1;
             SetWander();
@@ -70,6 +71,8 @@ namespace OurCity
                 target.y = terrainHeight;
 
                 agent.SetDestination(target);
+                if (agent.isStopped)
+                    agent.isStopped = false;
 
                 isMoving = true;
 
@@ -158,7 +161,11 @@ namespace OurCity
                 targetEntity = null;
             }
 
-
+            if (targetEntity == null && isAttack)
+            {
+                agent.isStopped = true;
+                isAttack = false;
+            }
         }
 
         public void SetWander()
@@ -180,6 +187,8 @@ namespace OurCity
                 isDeath = true;
                 agent.isStopped = true;
                 update -= WanderAction;
+                GamePlaySystem.s.ScoreGain();
+                this.enabled = false;
             }
 
         }

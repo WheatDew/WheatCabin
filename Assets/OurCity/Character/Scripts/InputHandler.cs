@@ -166,7 +166,6 @@ namespace OurCity
 
             Jump = newJumpState;
         }
-
 #endif
     }
 }

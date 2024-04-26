@@ -30,7 +30,7 @@ public class BattleSystem : MonoBehaviour
 
     public void SetWeapon(INya data)
     {
-        Entity target = PropertyMap.s.entityMap[data.List[1].Int];
+        WDEntity target = PropertyMap.s.entityMap[data.List[1].Int];
         var character = (CharacterEntity)target;
         Transform parent = FindChild(target.transform,data.List[2].String);
         character.weaponPoint = parent;
@@ -47,7 +47,7 @@ public class BattleSystem : MonoBehaviour
     public void WeaponDispaly(INya data)
     {
         Debug.Log("调用WeaponDisplay");
-        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
+        WDEntity target = PropertyMap.s.entityMap[data.List[0].Int];
         var character = (CharacterEntity)target;
 
         character.weaponPoint.gameObject.SetActive(true);
@@ -56,7 +56,7 @@ public class BattleSystem : MonoBehaviour
     public void WeaponHidden(INya data)
     {
         Debug.Log("调用WeaponHidden");
-        Entity target = PropertyMap.s.entityMap[data.List[0].Int];
+        WDEntity target = PropertyMap.s.entityMap[data.List[0].Int];
         var character = (CharacterEntity)target;
 
         character.weaponPoint.gameObject.SetActive(false);

@@ -31,7 +31,7 @@ public class PropertyMap : MonoBehaviour
 
     //数据模板
     public Dictionary<string, INya> map = new Dictionary<string, INya>();
-    public Dictionary<int, Entity> entityMap = new Dictionary<int, Entity>();
+    public Dictionary<int, WDEntity> entityMap = new Dictionary<int, WDEntity>();
     public static Dictionary<int, GameObject> gameObjectMap = new Dictionary<int, GameObject>();
 
     //载入数据模板
@@ -142,7 +142,7 @@ public class PropertyMap : MonoBehaviour
     #endregion
 
     #region 设置和获取实体
-    public void SetEntity(int id,Entity entity)
+    public void SetEntity(int id,WDEntity entity)
     {
 
         if (entityMap.ContainsKey(id))
@@ -157,7 +157,7 @@ public class PropertyMap : MonoBehaviour
         entity.data.Set("EntityID", 0,new NyaInt(id));
     }
 
-    public Entity GetEntity(int id)
+    public WDEntity GetEntity(int id)
     {
         return entityMap[id];
     }
@@ -180,7 +180,7 @@ public class PropertyMap : MonoBehaviour
         return gameObjectMap[id];
     }
 
-    public T GetEntity<T>(int id) where T:Entity
+    public T GetEntity<T>(int id) where T:WDEntity
     {
         if (PropertyMap.s.entityMap[id] is T obj)
         {

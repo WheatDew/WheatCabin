@@ -14,9 +14,9 @@ public class RangeCalculateSystem : MonoBehaviour
     }
 
     public HashSet<DistenceCalculate> distencePairs = new HashSet<DistenceCalculate>();
-    public Dictionary<Entity, HashSet<DistenceCalculate>> data = new Dictionary<Entity, HashSet<DistenceCalculate>>();
+    public Dictionary<WDEntity, HashSet<DistenceCalculate>> data = new Dictionary<WDEntity, HashSet<DistenceCalculate>>();
 
-    public void Add(Entity entity)
+    public void Add(WDEntity entity)
     {
 
         if (!data.ContainsKey(entity))
@@ -32,9 +32,9 @@ public class RangeCalculateSystem : MonoBehaviour
         }
     }
 
-    public HashSet<Entity> Calculate(Entity entity,float targetDistence)
+    public HashSet<WDEntity> Calculate(WDEntity entity,float targetDistence)
     {
-        HashSet<Entity> result = new HashSet<Entity>();
+        HashSet<WDEntity> result = new HashSet<WDEntity>();
         foreach(var item in data[entity])
         {
             if (item.distence < targetDistence)
@@ -57,11 +57,11 @@ public class RangeCalculateSystem : MonoBehaviour
 
 public class DistenceCalculate
 {
-    public Entity entity1;
-    public Entity entity2;
+    public WDEntity entity1;
+    public WDEntity entity2;
     public float distence;
 
-    public DistenceCalculate(Entity entity1,Entity entity2)
+    public DistenceCalculate(WDEntity entity1,WDEntity entity2)
     {
         this.entity1 = entity1;
         this.entity2 = entity2;

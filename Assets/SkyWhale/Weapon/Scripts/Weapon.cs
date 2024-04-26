@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Entity
+public class Weapon : WDEntity
 {
     public GameObject start,end;
 

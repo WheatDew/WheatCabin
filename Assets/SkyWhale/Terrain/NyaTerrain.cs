@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NyaTerrain : Entity
+public class NyaTerrain : WDEntity
 {
     [HideInInspector]public NavMeshSurface meshSurface;
 
